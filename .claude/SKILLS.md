@@ -42,3 +42,11 @@ dashboard with animated charts and transitions
 ## Shadcn
 
 `npx skills add shadcn/ui`
+
+## Vercel skills
+
+`npx skills add vercel-labs/agent-skills`
+
+## Next best practices
+
+`npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices`
