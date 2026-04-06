@@ -1,36 +1,54 @@
 # Found at
 
-`~/.claude.json`
+```sh
+~/.claude.json
+```
 
 # List all configured servers
 
-`claude mcp list`
+```sh
+claude mcp list
+```
 
 # Get details for a specific server
 
-`claude mcp get github`
+```sh
+claude mcp get github
+```
 
 # Remove a server
 
-`claude mcp remove github`
+```sh
+claude mcp remove github
+```
 
 # (within Claude Code) Check server status
 
-`/mcp`
+```sh
+/mcp
+```
 
 # Add a local-scoped server (default)
 
-`claude mcp add --transport http stripe https://mcp.stripe.com`
+```sh
+claude mcp add --transport http stripe https://mcp.stripe.com
+```
 
 # Explicitly specify local scope
 
-`claude mcp add --transport http stripe --scope local https://mcp.stripe.com`
+```sh
+claude mcp add --transport http stripe --scope local https://mcp.stripe.com
+```
 
 # MCPs
 
 _IMPORTANT_
 
-After adding each MCP, authenticate using `claude /mcp`
+After adding each MCP, authenticate using
+
+```sh
+/mcp
+```
 
 ## Figma
 
@@ -38,19 +56,27 @@ After adding each MCP, authenticate using `claude /mcp`
 
 ## Notion
 
-`claude mcp add --transport http notion https://mcp.notion.com/mcp`
+```sh
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+```
 
 ## Stripe
 
-`claude mcp add --transport http stripe https://mcp.stripe.com/`
+```sh
+claude mcp add --transport http stripe https://mcp.stripe.com/
+```
 
 ## Supabase
 
-`claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp"`
+```sh
+claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp"
+```
 
 ## Vercel
 
-`claude mcp add --transport http vercel https://mcp.vercel.com`
+```sh
+claude mcp add --transport http vercel https://mcp.vercel.com
+```
 
 ## Convex
 
@@ -61,7 +87,9 @@ claude mcp get convex
 
 ## Playwright
 
-`claude mcp add playwright npx @playwright/mcp@latest`
+```sh
+claude mcp add playwright npx @playwright/mcp@latest
+```
 
 ## Astro
 
