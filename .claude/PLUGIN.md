@@ -1,5 +1,11 @@
 # Plugin list
 
+## Add marketplaces
+
+```sh
+/plugin marketplace add anthropics/skills
+```
+
 ## Install
 
 ```sh

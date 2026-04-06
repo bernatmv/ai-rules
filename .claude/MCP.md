@@ -62,3 +62,9 @@ claude mcp get convex
 ## Playwright
 
 `claude mcp add playwright npx @playwright/mcp@latest`
+
+## Astro
+
+```sh
+claude mcp add --transport http "Astro docs" https://mcp.docs.astro.build/mcp
+```

@@ -83,3 +83,9 @@ Cursor Settings → MCP → Add new global MCP server
   }
 }
 ```
+
+## Astro
+
+```sh
+cursor://anysphere.cursor-deeplink/mcp/install?name=Astro%20docs&config=eyJ1cmwiOiJodHRwczovL21jcC5kb2NzLmFzdHJvLmJ1aWxkL21jcCJ9
+```

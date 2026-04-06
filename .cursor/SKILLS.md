@@ -16,6 +16,18 @@
 
 `npx skills add anthropics/claude-code - skill skill-creator`
 
+## Web artifacts builder
+
+`npx skills add anthropics/claude-code - skill web-artifacts-builder`
+
+## Web asset generator
+
+`npx skills add anthropics/claude-code - skill web-asset-generator`
+
+## Webapp testing
+
+`npx skills add anthropics/claude-code - skill webapp-testing`
+
 ## Browser use
 
 `npx skills add https://github.com/browser-use/browser-use --skill browser-use`
