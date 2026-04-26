@@ -6,7 +6,8 @@ Personal configuration for AI-assisted coding: shared instructions for agents, C
 
 | Path | Role |
 |------|------|
-| [`AGENTS.md`](AGENTS.md) | Agent instructions (code review checklist and quality bar). Cursor and compatible tools load this from the repo root. |
+| [`AGENTS.md`](AGENTS.md) | Agent instructions (code review checklist and quality bar). Edit substantive rules here. |
+| [`CURSOR.md`](CURSOR.md) | Short pointer to [`AGENTS.md`](AGENTS.md) for Cursor when it uses this root-level file. |
 | [`CLAUDE.md`](CLAUDE.md) | Short pointer to [`AGENTS.md`](AGENTS.md) so Claude Code loads a root file while you edit rules only in `AGENTS.md`. |
 | [`.cursor/skills/`](.cursor/skills/) | Cursor skills: `frontend-design`, `launch-playbook`, `pdf`, `prd`, `ralph`, `skill-creator`, `test-driven-development`. |
 | [`.cursor/SKILLS.md`](.cursor/SKILLS.md) | Notes on where skills live and parity with Claude Code plugins. |
