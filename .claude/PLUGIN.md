@@ -7,7 +7,7 @@ claude
 /plugin
 # select from list
 frontend-design
-* superpowers
+superpowers
 code-review
 code-simplifier
 github
@@ -15,12 +15,12 @@ playwright
 ralph-loop
 figma
 supabase
-* atlassian
+atlassian
 vercel
-* gitlab
+gitlab
 chrome-devtools-mcp
-* stripe
-* huggingface-skills
+stripe
+huggingface-skills
 notion
 ```
 
