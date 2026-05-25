@@ -1,0 +1,33 @@
+name: New Skill Proposal
+description: Propose a new skill for the marketplace
+labels: ["component:new-skill", "plugin-feedback"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Target Plugin
+      description: Which plugin should this skill belong to?
+      options:
+        - core-plugin
+        - devops-plugin
+        - code-plugin
+        - spec-workflow-plugin
+        - Other / Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this skill solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-skill
+    attributes:
+      label: Proposed skill
+      description: Purpose and key capabilities of the proposed skill.
+    validations:
+      required: true

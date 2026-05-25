@@ -1,0 +1,63 @@
+name: Bug Report
+description: Something isn't working correctly
+labels: ["bug", "plugin-feedback"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      description: Which plugin is affected?
+      options:
+        - core-plugin
+        - devops-plugin
+        - obra-superpowers-plugin
+        - code-plugin
+        - spec-workflow-plugin
+        - Other / Unknown
+    validations:
+      required: true
+
+  - type: input
+    id: skill
+    attributes:
+      label: Skill Name
+      description: Which specific skill is affected?
+      placeholder: e.g. code-review
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened? Include observed vs expected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: root-cause
+    attributes:
+      label: Root causes
+      description: Why does this happen? (if known)
+    validations:
+      required: false
+
+  - type: textarea
+    id: proposed-fix
+    attributes:
+      label: Proposed fix
+      description: Specific change or approach to fix it.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "priority:critical"
+        - "priority:high"
+        - "priority:medium"
+        - "priority:low"
+    validations:
+      required: false
