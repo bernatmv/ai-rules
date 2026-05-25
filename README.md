@@ -1,6 +1,20 @@
 # ai-rules
 
+A curated marketplace of Claude Code plugins with skills for various tools and workflows.
+
+**Guide:** [MARKETPLACE-GUIDE.md](MARKETPLACE-GUIDE.md) — how to use and contribute to the marketplace
+
 Personal configuration for AI-assisted coding: shared instructions for agents, Cursor skills, and Claude Code setup in one place.
+
+## Plugins
+
+| Plugin                                               | Description                                                                                    |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [core-plugin](./core-plugin)                         | Core skills and MCP integrations (Jira, Confluence, PR Reviews and anything code-adjacent)     |
+| [devops-plugin](./devops-plugin)                     | CI/CD, Kubernetes                                                                              |
+| [obra-superpowers-plugin](./obra-superpowers-plugin) | Development workflows (TDD, code review, debugging, planning)                                  |
+| [code-plugin](./code-plugin)                         | Base code skills for a TS/JS stack                                                             |
+| [spec-workflow-plugin](./spec-workflow-plugin)       | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management |
 
 ## What lives here
 
@@ -18,8 +32,40 @@ Personal configuration for AI-assisted coding: shared instructions for agents, C
 
 ## Using this repo
 
-1. **Clone or copy** the tree where you want your global or project rules to live.
-2. **Point your editor** at this folder, or copy only the pieces you need (for example `.cursor/skills` into `~/.cursor/skills/` per `.cursor/SKILLS.md`).
-3. **Rules in one place**: put (or keep) substantive instructions in `AGENTS.md`. `CLAUDE.md` links to it for Claude Code; on Unix you can replace `CLAUDE.md` with a symlink to `AGENTS.md` if you prefer identical bytes on disk.
+1. **Point your editor** at this folder, or copy only the pieces you need (for example `.claude/skills` into `~/.claude/skills/` per `.claude/SKILLS.md`). Or use install commands:
 
-There is no install script or package manager step; treat this as a dotfiles-style ruleset you version and sync yourself.
+```
+# Skills (works now)
+npx skills add bernatmv/ai-rules -a cursor -g -y
+npx skills add bernatmv/ai-rules -a claude-code -g -y
+
+# Claude Code marketplace
+/plugin marketplace add bernatmv/ai-rules
+/plugin install core-plugin@ai-rules
+
+# List what's available
+npx skills add bernatmv/ai-rules --list
+
+# Install all skills to Cursor globally
+npx skills add bernatmv/ai-rules -a cursor -g -y
+
+# Install all skills to Claude Code globally
+npx skills add bernatmv/ai-rules -a claude-code -g -y
+
+# Install one skill
+npx skills add bernatmv/ai-rules --skill frontend-design -a cursor -g -y
+```
+
+2. **Rules in one place**: put (or keep) instructions in `CLAUDE.md` links to it for Cursor or other agents; on Unix you can replace `AGENTS.md` with a symlink to `CLAUDE.md` if you prefer identical bytes on disk.
+
+## Creating a New Plugin
+
+```bash
+./scripts/init-plugin.sh <plugin-name>
+```
+
+## Creating a New Skill
+
+```bash
+./scripts/create-skill.sh <plugin-name> <skill-name>
+```

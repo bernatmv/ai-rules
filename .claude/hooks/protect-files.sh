@@ -4,9 +4,6 @@ file=$(jq -r '.tool_input.file_path // .tool_input.path // ""')
 
 protected=(
   ".env*"
-  ".git/*"
-  "package-lock.json"
-  "yarn.lock"
   "*.pem"
   "*.key"
   "secrets/*"
