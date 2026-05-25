@@ -23,7 +23,3 @@ Personal configuration for AI-assisted coding: shared instructions for agents, C
 3. **Rules in one place**: put (or keep) substantive instructions in `AGENTS.md`. `CLAUDE.md` links to it for Claude Code; on Unix you can replace `CLAUDE.md` with a symlink to `AGENTS.md` if you prefer identical bytes on disk.
 
 There is no install script or package manager step; treat this as a dotfiles-style ruleset you version and sync yourself.
-
-## License
-
-No license file is present in the root of this repository. Add one if you intend to share or publish the contents.
