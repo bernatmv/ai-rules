@@ -28,71 +28,80 @@ claude mcp remove github
 /mcp
 ```
 
-# Add a local-scoped server (default)
+# MCPs in core-plugin
 
-```sh
-claude mcp add --transport http stripe https://mcp.stripe.com
-```
+`core-plugin@ai-rules` bundles MCP servers two ways:
 
-# Explicitly specify local scope
+1. **Plugin dependencies** — service MCPs ship with official and third-party plugins
+   (Notion, Stripe, Supabase, Vercel, Playwright, Figma, GitHub, GitLab, Atlassian,
+   Chrome DevTools, Hugging Face, etc.). See [PLUGIN.md](./PLUGIN.md).
+2. **`.mcp.json` in core-plugin** — MCPs with no matching plugin dependency:
 
-```sh
-claude mcp add --transport http stripe --scope local https://mcp.stripe.com
-```
+| Server | Transport | Notes |
+| --- | --- | --- |
+| `convex` | stdio | `npx convex mcp start` |
+| `astro-docs` | http | Astro documentation search |
 
-# MCPs
-
-_IMPORTANT_
-
-After adding each MCP, authenticate using
+After installing core-plugin, authenticate all MCP servers:
 
 ```sh
 /mcp
 ```
 
-## Figma
-
-- Through Plugin
-
-## Notion
-
-```sh
-claude mcp add --transport http notion https://mcp.notion.com/mcp
-```
-
-## Stripe
-
-```sh
-claude mcp add --transport http stripe https://mcp.stripe.com/
-```
-
-## Supabase
-
-```sh
-claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp"
-```
-
-## Vercel
-
-```sh
-claude mcp add --transport http vercel https://mcp.vercel.com
-```
-
 ## Convex
+
+Bundled in `core-plugin/.mcp.json`. Manual add:
 
 ```sh
 claude mcp add-json convex '{"type":"stdio","command":"npx","args":["convex","mcp","start"]}'
 claude mcp get convex
 ```
 
-## Playwright
-
-```sh
-claude mcp add playwright npx @playwright/mcp@latest
-```
-
 ## Astro
+
+Bundled in `core-plugin/.mcp.json`. Manual add:
 
 ```sh
 claude mcp add --transport http "Astro docs" https://mcp.docs.astro.build/mcp
+```
+
+## Service MCPs (via plugin dependencies)
+
+These are **not** duplicated in `core-plugin/.mcp.json`. Install `core-plugin@ai-rules`
+or the individual plugin from `claude-plugins-official`:
+
+| Service | Plugin dependency |
+| --- | --- |
+| Figma | `figma@claude-plugins-official` |
+| Notion | `notion@claude-plugins-official` |
+| Stripe | `stripe@claude-plugins-official` |
+| Supabase | `supabase@claude-plugins-official` |
+| Vercel | `vercel@claude-plugins-official` |
+| Playwright | `playwright@claude-plugins-official` |
+| GitHub | `github@claude-plugins-official` |
+| GitLab | `gitlab@claude-plugins-official` |
+| Atlassian | `atlassian@claude-plugins-official` |
+| Chrome DevTools | `chrome-devtools-mcp@claude-plugins-official` |
+| Hugging Face | `huggingface-skills@claude-plugins-official` |
+
+Manual MCP add (without plugins):
+
+```sh
+claude mcp add --transport http notion https://mcp.notion.com/mcp
+claude mcp add --transport http stripe https://mcp.stripe.com/
+claude mcp add --scope project --transport http supabase "https://mcp.supabase.com/mcp"
+claude mcp add --transport http vercel https://mcp.vercel.com
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+## Add a local-scoped server (default)
+
+```sh
+claude mcp add --transport http stripe https://mcp.stripe.com
+```
+
+## Explicitly specify local scope
+
+```sh
+claude mcp add --transport http stripe --scope local https://mcp.stripe.com
 ```

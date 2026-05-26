@@ -10,8 +10,7 @@ body:
       options:
         - core-plugin
         - devops-plugin
-        - obra-superpowers-plugin
-        - code-plugin
+        - frontend-plugin
         - spec-workflow-plugin
         - Other / Unknown
     validations:

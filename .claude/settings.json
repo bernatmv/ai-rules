@@ -1,4 +1,30 @@
 {
+  "extraKnownMarketplaces": {
+    "web-asset-generator-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "alonw0/web-asset-generator"
+      }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "visual-explainer-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "nicobailon/visual-explainer"
+      }
+    }
+  },
   "hooks": {
     "PostToolUse": [
       {

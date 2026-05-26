@@ -1,22 +1,23 @@
 {
   "name": "ai-rules",
   "owner": { "name": "bernatmv" },
+  "allowCrossMarketplaceDependenciesOn": [
+    "claude-plugins-official",
+    "web-asset-generator-marketplace",
+    "anthropic-agent-skills",
+    "thedotmack",
+    "visual-explainer-marketplace"
+  ],
   "plugins": [
     {
       "name": "core-plugin",
-      "description": "Core skills and MCP integrations for everyday engineering workflows",
+      "description": "Core skills and bundled plugin dependencies for everyday engineering workflows",
       "source": "./core-plugin"
     },
     {
       "name": "devops-plugin",
       "description": "Devops skills and MCP integrations for CI/CD, Kubernetes, and other devops workflows",
       "source": "./devops-plugin"
-    },
-    {
-      "name": "obra-superpowers-plugin",
-      "description": "Superpowers plugin for Claude Code",
-      "source": "./obra-superpowers-plugin",
-      "tags": ["external"]
     },
     {
       "name": "frontend-plugin",
