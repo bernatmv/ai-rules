@@ -47,6 +47,12 @@
         "source": "github",
         "repo": "heygen-com/hyperframes"
       }
+    },
+    "heygen": {
+      "source": {
+        "source": "github",
+        "repo": "heygen-com/skills"
+      }
     }
   },
   "hooks": {

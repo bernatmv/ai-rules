@@ -10,7 +10,8 @@
     "jean-claude",
     "marketingskills",
     "agent-browser",
-    "hyperframes"
+    "hyperframes",
+    "heygen"
   ],
   "plugins": [
     {
@@ -34,8 +35,13 @@
       "source": "./remotion-plugin"
     },
     {
+      "name": "ai-tools-plugin",
+      "description": "HeyGen AI video skills — avatars, TTS, translation, and video generation",
+      "source": "./ai-tools-plugin"
+    },
+    {
       "name": "fullstack-plugin",
-      "description": "Full stack bundle — core, frontend, and devops plugins in one install",
+      "description": "Full stack bundle — core, frontend, devops, and ai-tools plugins in one install",
       "source": "./fullstack-plugin"
     },
     {

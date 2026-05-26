@@ -1,13 +1,14 @@
 {
   "name": "fullstack-plugin",
   "version": "1.0.0",
-  "description": "Full stack bundle — core, frontend, and devops plugins in one install",
+  "description": "Full stack bundle — core, frontend, devops, and ai-tools plugins in one install",
   "author": {
     "name": "bernatmv"
   },
   "dependencies": [
     "core-plugin",
     "frontend-plugin",
-    "devops-plugin"
+    "devops-plugin",
+    "ai-tools-plugin"
   ]
 }

@@ -6,10 +6,11 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 | Plugin                                 | Description                                                                                     |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`                 |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
+| [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -17,7 +18,7 @@ See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md
 
 ### fullstack-plugin
 
-Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` — one install for the full stack.
+Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` — one install for the full stack.
 
 ### core-plugin
 
@@ -107,6 +108,16 @@ Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marke
 | `supabase` | Supabase MCP integration                                         |
 | `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
+### ai-tools-plugin
+
+#### Dependencies (1)
+
+| Plugin   | Purpose                                                                                          |
+| -------- | ------------------------------------------------------------------------------------------------ |
+| `heygen` | HeyGen avatar videos, TTS, translation, video generation, and editing ([heygen-com/skills](https://github.com/heygen-com/skills)) |
+
+The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com/skills) lists 11 skill entry points. The Claude plugin bundles them via `heygen@heygen` — use `/heygen:avatar`, `/heygen:video`, and `/heygen:translate`. Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
+
 ## What lives here
 
 | Path                                                                         | Role                                                     |
@@ -139,6 +150,7 @@ Run once from any directory:
 /plugin marketplace add coreyhaines31/marketingskills   # frontend-plugin
 /plugin marketplace add vercel-labs/agent-browser     # frontend-plugin
 /plugin marketplace add heygen-com/hyperframes        # frontend-plugin
+/plugin marketplace add heygen-com/skills             # ai-tools-plugin
 
 # 2. ai-rules marketplace
 /plugin marketplace add bernatmv/ai-rules
@@ -167,6 +179,7 @@ claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add coreyhaines31/marketingskills
 claude plugin marketplace add vercel-labs/agent-browser
 claude plugin marketplace add heygen-com/hyperframes
+claude plugin marketplace add heygen-com/skills
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install fullstack-plugin@ai-rules
 ```
@@ -179,6 +192,7 @@ Install only what you need:
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
 | UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
+| HeyGen avatars, TTS, video translation & generation     | `ai-tools-plugin@ai-rules`  |
 
 ### Project / local install
 
@@ -210,11 +224,12 @@ claude plugin list
 In Claude Code:
 
 1. `/plugin` → **Installed** — confirm enabled plugins:
-   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops plugins)
+   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops/ai-tools plugins)
 2. Confirm key dependencies, for example:
    - `superpowers@claude-plugins-official` (core)
    - `figma@claude-plugins-official` (frontend)
    - `vercel@claude-plugins-official` (devops)
+   - `heygen@heygen` (ai-tools)
 3. `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace and reinstall.
 4. `/reload-plugins` — check skill and MCP server counts.
 5. `/mcp` — authenticate MCP services you use (Figma, GitHub, Vercel, Supabase, etc.).
@@ -233,6 +248,7 @@ Spot-check skills:
 - TDD: `/superpowers:test-driven-development`
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
+- AI tools: `/heygen:avatar` or `/heygen:video` (requires HeyGen API key)
 
 ### Uninstall / cleanup
 
@@ -247,6 +263,7 @@ To uninstall individual plugins instead of the bundle:
 claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
+claude plugin uninstall ai-tools-plugin@ai-rules --prune
 ```
 
 ## Creating a New Plugin

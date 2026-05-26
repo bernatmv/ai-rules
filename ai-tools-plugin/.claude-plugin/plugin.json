@@ -1,0 +1,11 @@
+{
+  "name": "ai-tools-plugin",
+  "version": "1.0.0",
+  "description": "HeyGen AI video skills — avatars, TTS, translation, video generation, and editing",
+  "author": {
+    "name": "bernatmv"
+  },
+  "dependencies": [
+    { "name": "heygen", "marketplace": "heygen" }
+  ]
+}

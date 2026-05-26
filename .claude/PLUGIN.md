@@ -16,6 +16,7 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
+/plugin marketplace add heygen-com/skills
 ```
 
 Then install the plugins you need:
@@ -33,6 +34,7 @@ Or install individual plugins:
 /plugin install core-plugin@ai-rules
 /plugin install frontend-plugin@ai-rules
 /plugin install devops-plugin@ai-rules
+/plugin install ai-tools-plugin@ai-rules
 /reload-plugins
 /mcp
 ```
@@ -45,7 +47,7 @@ Authenticate MCP-backed plugins after install:
 
 ## fullstack-plugin
 
-Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` from this marketplace.
+Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` from this marketplace.
 
 ```sh
 /plugin install fullstack-plugin@ai-rules
@@ -158,7 +160,27 @@ Cloud deployment and backend infrastructure.
 | `supabase` | Supabase MCP integration                                         |
 | `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
-Manual install of any official dependency (without ai-rules plugins):
+## ai-tools-plugin
+
+HeyGen AI video — avatars, TTS, translation, and video generation.
+
+### Third-party
+
+| Plugin   | Marketplace | Add marketplace                            |
+| -------- | ----------- | ------------------------------------------ |
+| `heygen` | `heygen`    | `/plugin marketplace add heygen-com/skills` |
+
+[`heygen`](https://claudemarketplaces.com/skills/heygen-com/skills) ([heygen-com/skills](https://github.com/heygen-com/skills)) ships 11 skill entry points in the [claudemarketplaces catalog](https://claudemarketplaces.com/skills/heygen-com/skills). The Claude plugin bundles them via `heygen@heygen`:
+
+- `/heygen:avatar` — digital identity and avatar creation
+- `/heygen:video` — presenter-led video generation
+- `/heygen:translate` — video translation / dubbing (175+ languages)
+
+Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
+
+See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
+
+### Manual install (official plugins, without ai-rules)
 
 ```sh
 /plugin install <plugin-name>@claude-plugins-official
@@ -298,4 +320,5 @@ claude plugin uninstall fullstack-plugin@ai-rules --prune
 claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
+claude plugin uninstall ai-tools-plugin@ai-rules --prune
 ```
