@@ -24,11 +24,14 @@ See [Installation](#installation) below (global install recommended for most dev
 | Skill                     | Purpose                                                           |
 | ------------------------- | ----------------------------------------------------------------- |
 | `babysit-pr`              | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI |
+| `launch-playbook`         | Multi-platform product launch campaigns (56 platforms)            |
 | `plugin-advisor`          | Recommend Claude Code plugins for a codebase                      |
 | `prd`                     | Generate product requirements documents                           |
+| `ralph`                   | Convert PRDs to `prd.json` for Ralph autonomous runs              |
 | `test-driven-development` | TDD workflow and anti-patterns                                    |
 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
+Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
 #### Dependencies (15)
 
@@ -90,9 +93,6 @@ PDF and skill authoring come from dependency plugins (`document-skills`, `skill-
 | [`AGENTS.md`](AGENTS.md)                 | Duplicate of CLAUDE.md, use only if not using Claude Code one.                                                                                   |
 | [`CURSOR.md`](CURSOR.md)                 | Short pointer to [`AGENTS.md`](AGENTS.md) for Cursor when it uses this root-level file.                                                          |
 | [`CLAUDE.md`](CLAUDE.md)                 | Claude instructions based on Andrej Karpathy's rules                                                                                             |
-| [`.cursor/skills/`](.cursor/skills/)     | Cursor skills: `frontend-design`, `launch-playbook`, `pdf`, `prd`, `ralph`, `skill-creator`, `test-driven-development`.                          |
-| [`.cursor/SKILLS.md`](.cursor/SKILLS.md) | Notes on where skills live and parity with Claude Code plugins.                                                                                  |
-| [`.cursor/MCP.md`](.cursor/MCP.md)       | MCP-related notes for Cursor.                                                                                                                    |
 | [`.claude/`](.claude/)                   | Claude Code hooks, settings, and plugin notes.                                                                                                   |
 | [`docs/`](docs/)                         | Reference material (e.g. Claude layout diagrams); listed in [`.cursorignore`](.cursorignore) so it is not indexed as project context by default. |
 | [`agents/`](agents/), [`rules/`](rules/) | Reserved for future agent definitions or rule packs (currently empty).                                                                           |
@@ -214,7 +214,8 @@ claude plugin list --json | jq '.[] | select(.marketplace=="ai-rules") | {name, 
 
 Spot-check skills:
 
-- Core: `/core-plugin:babysit-pr`
+- Core: `/core-plugin:babysit-pr` or `/core-plugin:launch-playbook`
+- Ralph PRD converter: `/core-plugin:ralph`
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 

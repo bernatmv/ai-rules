@@ -67,6 +67,17 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | -------- | ------------------------------------------- |
 | `convex` | Convex backend MCP (`npx convex mcp start`) |
 
+### Bundled skills (not available as plugin dependencies)
+
+| Skill | Purpose |
+| --- | --- |
+| `babysit-pr` | Keep PRs merge-ready |
+| `launch-playbook` | Multi-platform product launch campaigns |
+| `plugin-advisor` | Recommend Claude Code plugins |
+| `prd` | Generate PRDs |
+| `ralph` | Convert PRDs to `prd.json` for Ralph runs |
+| `test-driven-development` | TDD workflow and anti-patterns |
+
 ## frontend-plugin
 
 Frontend design, browser testing, Figma, and UI debugging.
@@ -168,7 +179,14 @@ Also includes iMessage on macOS (optional).
 
 ## Ralph Wiggum
 
-Provided by `core-plugin` → `ralph-loop`. Usage:
+Two complementary pieces:
+
+| Piece | Source | Purpose |
+| --- | --- | --- |
+| `ralph` skill | Bundled in `core-plugin/skills/` | Convert PRDs to `prd.json` (`/core-plugin:ralph`) |
+| `ralph-loop` plugin | Dependency on `claude-plugins-official` | Autonomous iteration loop (`/ralph-loop`) |
+
+`ralph-loop` usage:
 
 `/ralph-loop "<prompt>" --max-iterations <n> --completion-promise "<text>"`
 
@@ -179,9 +197,6 @@ Example:
 Cancel with `/cancel-ralph`.
 
 Good task definitions:
-
-```
-Build a REST API for todos.
 
 When complete:
 - All CRUD endpoints working
