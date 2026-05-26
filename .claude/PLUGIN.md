@@ -1,7 +1,7 @@
 # Plugin list
 
-`core-plugin@ai-rules` declares all plugins below as dependencies in
-`core-plugin/.claude-plugin/plugin.json`. Installing core-plugin auto-installs them.
+Plugins in the `ai-rules` marketplace declare dependencies in each plugin's
+`.claude-plugin/plugin.json`. Installing a plugin auto-installs its dependencies.
 
 Third-party marketplaces are registered in `.claude/settings.json` via
 `extraKnownMarketplaces` when you use this repo as a project. For a global install
@@ -15,12 +15,15 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add max-sixty/jean-claude
 ```
 
-Then install core-plugin:
+Then install the plugins you need:
 
 ```sh
 /plugin marketplace add bernatmv/ai-rules
 /plugin install core-plugin@ai-rules
+/plugin install frontend-plugin@ai-rules
+/plugin install devops-plugin@ai-rules
 /reload-plugins
+/mcp
 ```
 
 Authenticate MCP-backed plugins after install:
@@ -29,57 +32,94 @@ Authenticate MCP-backed plugins after install:
 /mcp
 ```
 
-## Official (`claude-plugins-official`)
+## core-plugin
 
-Auto-installed as dependencies of `core-plugin`:
+Everyday engineering workflows, PR tooling, documents, and third-party productivity plugins.
 
-| Plugin                | Provides                                                      |
-| --------------------- | ------------------------------------------------------------- |
-| `frontend-design`     | Frontend UI design guidance                                   |
-| `superpowers`         | Development workflows (TDD, planning, debugging, code review) |
-| `code-review`         | PR and code review agents                                     |
-| `code-simplifier`     | Code simplification workflows                                 |
-| `github`              | GitHub MCP integration                                        |
-| `playwright`          | Playwright MCP for browser automation                         |
-| `ralph-loop`          | Autonomous iteration loop (`/ralph-loop`)                     |
-| `figma`               | Figma MCP integration                                         |
-| `supabase`            | Supabase MCP integration                                      |
-| `atlassian`           | Jira and Confluence MCP integration                           |
-| `vercel`              | Vercel MCP integration                                        |
-| `gitlab`              | GitLab MCP integration                                        |
-| `chrome-devtools-mcp` | Chrome DevTools MCP                                           |
-| `stripe`              | Stripe MCP integration                                        |
-| `huggingface-skills`  | Hugging Face Hub skills and MCP                               |
-| `skill-creator`       | Create, evaluate, and improve agent skills                    |
-| `notion`              | Notion MCP integration                                        |
+### Official (`claude-plugins-official`)
 
-Manual install (if not using core-plugin):
+| Plugin               | Provides                                                      |
+| -------------------- | ------------------------------------------------------------- |
+| `superpowers`        | Development workflows (TDD, planning, debugging, code review) |
+| `code-review`        | PR and code review agents                                     |
+| `code-simplifier`    | Code simplification workflows                                 |
+| `github`             | GitHub MCP integration                                        |
+| `ralph-loop`         | Autonomous iteration loop (`/ralph-loop`)                     |
+| `atlassian`          | Jira and Confluence MCP integration                           |
+| `gitlab`             | GitLab MCP integration                                        |
+| `stripe`             | Stripe MCP integration                                        |
+| `huggingface-skills` | Hugging Face Hub skills and MCP                               |
+| `skill-creator`      | Create, evaluate, and improve agent skills                    |
+| `notion`             | Notion MCP integration                                        |
+
+### Third-party
+
+| Plugin             | Marketplace                    | Add marketplace                                       |
+| ------------------ | ------------------------------ | ----------------------------------------------------- |
+| `document-skills`  | `anthropic-agent-skills`       | `/plugin marketplace add anthropics/skills`           |
+| `claude-mem`       | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`       |
+| `visual-explainer` | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer` |
+| `jean-claude`      | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`       |
+
+### MCP in core-plugin
+
+| Server   | Notes                                       |
+| -------- | ------------------------------------------- |
+| `convex` | Convex backend MCP (`npx convex mcp start`) |
+
+## frontend-plugin
+
+Frontend design, browser testing, Figma, and UI debugging.
+
+### Official (`claude-plugins-official`)
+
+| Plugin                | Provides                              |
+| --------------------- | ------------------------------------- |
+| `frontend-design`     | Frontend UI design guidance           |
+| `playwright`          | Playwright MCP for browser automation |
+| `figma`               | Figma MCP and design workflow skills  |
+| `chrome-devtools-mcp` | Chrome DevTools MCP                   |
+
+### Third-party
+
+| Plugin                | Marketplace                       | Add marketplace                                      |
+| --------------------- | --------------------------------- | ---------------------------------------------------- |
+| `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
+
+### MCP in frontend-plugin
+
+| Server       | Notes                      |
+| ------------ | -------------------------- |
+| `astro-docs` | Astro documentation search |
+
+## devops-plugin
+
+Cloud deployment and backend infrastructure.
+
+### Official (`claude-plugins-official`)
+
+| Plugin     | Provides                 |
+| ---------- | ------------------------ |
+| `supabase` | Supabase MCP integration |
+| `vercel`   | Vercel MCP integration   |
+
+Manual install of any official dependency (without ai-rules plugins):
 
 ```sh
 /plugin install <plugin-name>@claude-plugins-official
 ```
 
-## Third-party (auto-installed with core-plugin)
-
-| Plugin                | Marketplace                       | Add marketplace                                       |
-| --------------------- | --------------------------------- | ----------------------------------------------------- |
-| `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator`  |
-| `document-skills`     | `anthropic-agent-skills`          | `/plugin marketplace add anthropics/skills`           |
-| `claude-mem`          | `thedotmack`                      | `/plugin marketplace add thedotmack/claude-mem`       |
-| `visual-explainer`    | `visual-explainer-marketplace`    | `/plugin marketplace add nicobailon/visual-explainer` |
-| `jean-claude`         | `jean-claude`                     | `/plugin marketplace add max-sixty/jean-claude`       |
-
 ### Web asset generator
 
-Favicons, app icons, and social sharing images.
+Favicons, app icons, and social sharing images (via `frontend-plugin` → `web-asset-generator`).
 
 ### Document skills
 
-Excel, Word, PowerPoint, and PDF processing from Anthropic's example skills catalog (includes the `pdf` skill).
+Excel, Word, PowerPoint, and PDF processing (via `core-plugin` → `document-skills`; includes the `pdf` skill).
 
 ### Claude MEM
 
-Persistent memory across sessions. Data lives in `~/.claude-mem`.
+Persistent memory across sessions (via `core-plugin` → `claude-mem`). Data lives in `~/.claude-mem`.
 
 Alternative install:
 
@@ -89,7 +129,7 @@ npx claude-mem install
 
 ### Visual explainer
 
-HTML diagrams, diff reviews, and plan reviews. Examples:
+HTML diagrams, diff reviews, and plan reviews (via `core-plugin` → `visual-explainer`). Examples:
 
 > draw a diagram of our authentication flow
 > /diff-review
@@ -97,7 +137,7 @@ HTML diagrams, diff reviews, and plan reviews. Examples:
 
 ### Google Workspace (Gmail, Drive, Calendar)
 
-Provided by the `jean-claude` dependency — a skill/CLI plugin, not an MCP server.
+Provided by `core-plugin` → `jean-claude` — a skill/CLI plugin, not an MCP server.
 Requires [uv](https://docs.astral.sh/uv/) (Python 3.11+).
 
 After install, authenticate once:
@@ -128,7 +168,7 @@ Also includes iMessage on macOS (optional).
 
 ## Ralph Wiggum
 
-Provided by the `ralph-loop` dependency. Usage:
+Provided by `core-plugin` → `ralph-loop`. Usage:
 
 `/ralph-loop "<prompt>" --max-iterations <n> --completion-promise "<text>"`
 
@@ -185,8 +225,10 @@ Remove orphaned auto-installed dependencies:
 claude plugin prune
 ```
 
-Uninstall core-plugin and clean up its dependencies:
+Uninstall a plugin and clean up its dependencies:
 
 ```sh
 claude plugin uninstall core-plugin@ai-rules --prune
+claude plugin uninstall frontend-plugin@ai-rules --prune
+claude plugin uninstall devops-plugin@ai-rules --prune
 ```

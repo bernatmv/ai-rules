@@ -4,10 +4,6 @@
       "type": "stdio",
       "command": "npx",
       "args": ["convex", "mcp", "start"]
-    },
-    "astro-docs": {
-      "type": "http",
-      "url": "https://mcp.docs.astro.build/mcp"
     }
   }
 }

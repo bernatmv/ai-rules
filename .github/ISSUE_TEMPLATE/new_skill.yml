@@ -10,7 +10,7 @@ body:
       options:
         - core-plugin
         - devops-plugin
-        - code-plugin
+        - frontend-plugin
         - spec-workflow-plugin
         - Other / Unknown
     validations:

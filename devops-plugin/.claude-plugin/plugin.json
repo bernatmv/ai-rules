@@ -1,0 +1,12 @@
+{
+  "name": "devops-plugin",
+  "version": "1.0.0",
+  "description": "Cloud deployment and backend infrastructure MCP integrations",
+  "author": {
+    "name": "bernatmv"
+  },
+  "dependencies": [
+    { "name": "supabase", "marketplace": "claude-plugins-official" },
+    { "name": "vercel", "marketplace": "claude-plugins-official" }
+  ]
+}

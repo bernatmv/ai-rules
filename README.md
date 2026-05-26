@@ -6,20 +6,20 @@ Personal configuration for AI-assisted coding: shared instructions for agents, C
 
 ## Plugins
 
-| Plugin                                         | Description                                                                                          |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [core-plugin](./core-plugin)                   | Core skills plus bundled plugin dependencies (MCP integrations, Github, JIRA, and third-party tools) |
-| [devops-plugin](./devops-plugin)               | CI/CD, Kubernetes                                                                                    |
-| [frontend-plugin](./frontend-plugin)           | Base code skills for a Frontend TS/JS stack                                                          |
-| [spec-workflow-plugin](./spec-workflow-plugin) | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management       |
+| Plugin                                         | Description                                                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [core-plugin](./core-plugin)                   | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
+| [frontend-plugin](./frontend-plugin)           | Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP             |
+| [devops-plugin](./devops-plugin)               | Supabase and Vercel MCP integrations                                                            |
+| [spec-workflow-plugin](./spec-workflow-plugin) | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management  |
 
 See [Installation](#installation) below (global install recommended for most devs), [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
-## core-plugin contents
+## Plugin contents
 
-### Bundled skills
+### core-plugin
 
-Skills shipped directly in `core-plugin/skills/`:
+#### Bundled skills
 
 | Skill                     | Purpose                                                           |
 | ------------------------- | ----------------------------------------------------------------- |
@@ -28,55 +28,60 @@ Skills shipped directly in `core-plugin/skills/`:
 | `prd`                     | Generate product requirements documents                           |
 | `test-driven-development` | TDD workflow and anti-patterns                                    |
 
-PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`) instead of bundled copies.
+PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 
-### Auto-installed plugin dependencies
+#### Dependencies (15)
 
-Installing `core-plugin@ai-rules` also installs these plugins via
-`core-plugin/.claude-plugin/plugin.json`.
+| Plugin               | Purpose                                                       |
+| -------------------- | ------------------------------------------------------------- |
+| `superpowers`        | Development workflows (TDD, planning, debugging, code review) |
+| `code-review`        | PR and code review agents                                     |
+| `code-simplifier`    | Code simplification workflows                                 |
+| `github`             | GitHub MCP                                                    |
+| `ralph-loop`         | Autonomous iteration loop (`/ralph-loop`)                     |
+| `atlassian`          | Jira and Confluence MCP                                       |
+| `gitlab`             | GitLab MCP                                                    |
+| `stripe`             | Stripe MCP                                                    |
+| `huggingface-skills` | Hugging Face Hub skills and MCP                               |
+| `skill-creator`      | Create and improve agent skills                               |
+| `notion`             | Notion MCP                                                    |
+| `document-skills`    | Excel, Word, PowerPoint, PDF processing                       |
+| `claude-mem`         | Persistent memory across sessions                             |
+| `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
+| `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
 
-#### Official (`claude-plugins-official`)
+#### MCP in core-plugin
 
-| Plugin                | Purpose                                                       |
-| --------------------- | ------------------------------------------------------------- |
-| `frontend-design`     | Frontend UI design guidance                                   |
-| `superpowers`         | Development workflows (TDD, planning, debugging, code review) |
-| `code-review`         | PR and code review agents                                     |
-| `code-simplifier`     | Code simplification workflows                                 |
-| `github`              | GitHub MCP integration                                        |
-| `playwright`          | Playwright MCP for browser automation                         |
-| `ralph-loop`          | Autonomous iteration loop (`/ralph-loop`)                     |
-| `figma`               | Figma MCP integration                                         |
-| `supabase`            | Supabase MCP integration                                      |
-| `atlassian`           | Jira and Confluence MCP integration                           |
-| `vercel`              | Vercel MCP integration                                        |
-| `gitlab`              | GitLab MCP integration                                        |
-| `chrome-devtools-mcp` | Chrome DevTools MCP                                           |
-| `stripe`              | Stripe MCP integration                                        |
-| `huggingface-skills`  | Hugging Face Hub skills and MCP                               |
-| `skill-creator`       | Create, evaluate, and improve agent skills                    |
-| `notion`              | Notion MCP integration                                        |
+| Server   | Purpose            |
+| -------- | ------------------ |
+| `convex` | Convex backend MCP |
 
-#### Third-party
+### frontend-plugin
 
-| Plugin                | Marketplace                       | Purpose                                          |
-| --------------------- | --------------------------------- | ------------------------------------------------ |
-| `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images           |
-| `document-skills`     | `anthropic-agent-skills`          | Excel, Word, PowerPoint, PDF processing          |
-| `claude-mem`          | `thedotmack`                      | Persistent memory across sessions                |
-| `visual-explainer`    | `visual-explainer-marketplace`    | HTML diagrams, diff reviews, plan reviews        |
-| `jean-claude`         | `jean-claude`                     | Gmail, Google Drive, and Google Calendar (OAuth) |
+#### Dependencies (5)
 
-### MCP servers in core-plugin
+| Plugin                | Purpose                                |
+| --------------------- | -------------------------------------- |
+| `frontend-design`     | Frontend UI design guidance            |
+| `playwright`          | Playwright MCP for browser automation  |
+| `figma`               | Figma MCP and design workflow skills   |
+| `chrome-devtools-mcp` | Chrome DevTools MCP                    |
+| `web-asset-generator` | Favicons, app icons, Open Graph images |
 
-Service MCPs (Notion, Stripe, GitHub, etc.) come from the plugin dependencies above.
-Google Workspace (Gmail, Drive, Calendar) comes from the `jean-claude` plugin (OAuth, not MCP).
-`core-plugin/.mcp.json` only adds MCPs without a matching plugin:
+#### MCP in frontend-plugin
 
 | Server       | Purpose                    |
 | ------------ | -------------------------- |
-| `convex`     | Convex backend MCP         |
 | `astro-docs` | Astro documentation search |
+
+### devops-plugin
+
+#### Dependencies (2)
+
+| Plugin     | Purpose                  |
+| ---------- | ------------------------ |
+| `supabase` | Supabase MCP integration |
+| `vercel`   | Vercel MCP integration   |
 
 ## What lives here
 
@@ -94,36 +99,38 @@ Google Workspace (Gmail, Drive, Calendar) comes from the `jean-claude` plugin (O
 
 ## Installation
 
-Requires **Claude Code v2.1.110+** (plugin dependencies). **v2.1.143+** recommended so dependency plugins enable automatically with `core-plugin`.
+Requires **Claude Code v2.1.110+** (plugin dependencies). **v2.1.143+** recommended so dependency plugins enable automatically.
 
-Installing `core-plugin@ai-rules` pulls in all bundled skills and the 22 dependency plugins listed above.
-
-**Prerequisite for Google Workspace:** install [uv](https://docs.astral.sh/uv/) before using the `jean-claude` dependency (Gmail, Drive, Calendar).
+**Prerequisite for Google Workspace:** install [uv](https://docs.astral.sh/uv/) before using the `jean-claude` dependency (via `core-plugin`).
 
 ### Global install (recommended)
 
-Use this when you want plugins available in **every project** on your machine. This is the default install scope (user scope).
+Use this when you want plugins available in **every project** on your machine (user scope).
 
-Run once from any directory — inside or outside this repo:
+Run once from any directory:
 
 ```sh
-# 1. Third-party marketplaces (one-time; required for dependency resolution)
-/plugin marketplace add alonw0/web-asset-generator
-/plugin marketplace add anthropics/skills
-/plugin marketplace add thedotmack/claude-mem
-/plugin marketplace add nicobailon/visual-explainer
-/plugin marketplace add max-sixty/jean-claude
+# 1. Third-party marketplaces (one-time; add only what your plugins need)
+/plugin marketplace add alonw0/web-asset-generator   # frontend-plugin
+/plugin marketplace add anthropics/skills            # core-plugin
+/plugin marketplace add thedotmack/claude-mem        # core-plugin
+/plugin marketplace add nicobailon/visual-explainer  # core-plugin
+/plugin marketplace add max-sixty/jean-claude        # core-plugin
 
-# 2. ai-rules marketplace and core-plugin (installs all dependencies)
+# 2. ai-rules marketplace
 /plugin marketplace add bernatmv/ai-rules
-/plugin install core-plugin@ai-rules
 
-# 3. Activate and authenticate
+# 3. Install plugins (pick all three for the full stack, or install individually)
+/plugin install core-plugin@ai-rules
+/plugin install frontend-plugin@ai-rules
+/plugin install devops-plugin@ai-rules
+
+# 4. Activate and authenticate
 /reload-plugins
 /mcp
 ```
 
-Equivalent CLI (same user/global scope):
+Equivalent CLI:
 
 ```sh
 claude plugin marketplace add alonw0/web-asset-generator
@@ -133,15 +140,24 @@ claude plugin marketplace add nicobailon/visual-explainer
 claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install core-plugin@ai-rules
+claude plugin install frontend-plugin@ai-rules
+claude plugin install devops-plugin@ai-rules
 ```
 
-Official plugins (`superpowers`, `github`, `figma`, etc.) resolve automatically — `claude-plugins-official` is built into Claude Code.
+Official plugins (`superpowers`, `figma`, `vercel`, etc.) resolve automatically — `claude-plugins-official` is built into Claude Code.
 
-Install other marketplace plugins globally the same way:
+Install only what you need:
+
+| Need                                                    | Install                    |
+| ------------------------------------------------------- | -------------------------- |
+| PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`     |
+| UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules` |
+| Supabase, Vercel                                        | `devops-plugin@ai-rules`   |
+| Full stack                                              | all three                  |
+
+Optional:
 
 ```sh
-/plugin install devops-plugin@ai-rules
-/plugin install frontend-plugin@ai-rules
 /plugin install spec-workflow-plugin@ai-rules
 /reload-plugins
 ```
@@ -150,87 +166,68 @@ Install other marketplace plugins globally the same way:
 
 Use this when plugins should be tied to **this repository** — for team defaults or when developing the marketplace itself.
 
-| Scope       | Who gets it                                        | When to use                                                 |
-| ----------- | -------------------------------------------------- | ----------------------------------------------------------- |
-| **Project** | Everyone who clones the repo and trusts the folder | Team-shared plugin set checked into `.claude/settings.json` |
-| **Local**   | Only you, only in this repo checkout               | Personal overrides while working in ai-rules                |
+| Scope       | Who gets it                                        | When to use                                       |
+| ----------- | -------------------------------------------------- | ------------------------------------------------- |
+| **Project** | Everyone who clones the repo and trusts the folder | Team-shared plugin set in `.claude/settings.json` |
+| **Local**   | Only you, only in this repo checkout               | Personal overrides while working in ai-rules      |
 
-If you clone this repo and trust the project folder, [`.claude/settings.json`](.claude/settings.json) already registers third-party marketplaces via `extraKnownMarketplaces` — you can skip the third-party marketplace steps from the global install section above.
+If you clone this repo and trust the project folder, [`.claude/settings.json`](.claude/settings.json) registers third-party marketplaces via `extraKnownMarketplaces` — skip the third-party marketplace steps from the global install section above.
 
 ```sh
-# From the ai-rules repo root (or any trusted project checkout)
 /plugin marketplace add bernatmv/ai-rules
-
-# Project scope — shared with teammates via .claude/settings.json
 /plugin install core-plugin@ai-rules --scope project
-
-# OR local scope — only you, only in this checkout
-/plugin install core-plugin@ai-rules --scope local
-
+/plugin install frontend-plugin@ai-rules --scope project
+/plugin install devops-plugin@ai-rules --scope project
 /reload-plugins
 /mcp
 ```
 
-CLI equivalent:
-
-```sh
-claude plugin install core-plugin@ai-rules --scope project
-# or
-claude plugin install core-plugin@ai-rules --scope local
-```
+Use `--scope local` instead of `--scope project` for a personal-only install in this checkout.
 
 ### Post-install validation
 
-After install, confirm everything loaded correctly:
-
 ```sh
-# Version check
 claude --version
-
-# List installed plugins and dependency errors
 claude plugin list
 ```
 
 In Claude Code:
 
-1. Run `/plugin` → **Installed** — confirm `core-plugin@ai-rules` is enabled.
-2. Confirm key dependencies are present and enabled, for example:
-   - `superpowers@claude-plugins-official`
-   - `document-skills@anthropic-agent-skills`
-   - `skill-creator@claude-plugins-official`
-   - `github@claude-plugins-official`
-   - `jean-claude@jean-claude`
-3. Run `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace from the global install steps above and run `/plugin install core-plugin@ai-rules` again.
-4. Run `/reload-plugins` — note the skill and MCP server counts in the output.
-5. Run `/mcp` — authenticate the MCP services you use (GitHub, Notion, Figma, etc.). Skills work without this step; MCP tools do not.
-6. Authenticate Google Workspace — ask Claude to `Set up Google authentication for jean-claude`, or run `uv run jean-claude auth` from the installed plugin. Requires [uv](https://docs.astral.sh/uv/).
+1. `/plugin` → **Installed** — confirm enabled plugins:
+   - `core-plugin@ai-rules`
+   - `frontend-plugin@ai-rules` (if installed)
+   - `devops-plugin@ai-rules` (if installed)
+2. Confirm key dependencies, for example:
+   - `superpowers@claude-plugins-official` (core)
+   - `figma@claude-plugins-official` (frontend)
+   - `vercel@claude-plugins-official` (devops)
+3. `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace and reinstall.
+4. `/reload-plugins` — check skill and MCP server counts.
+5. `/mcp` — authenticate MCP services you use (Figma, GitHub, Vercel, Supabase, etc.).
+6. Google Workspace — ask Claude to `Set up Google authentication for jean-claude` (requires [uv](https://docs.astral.sh/uv/)).
 
 Optional JSON check:
 
 ```sh
-claude plugin list --json | jq '.[] | select(.name=="core-plugin") | {name, enabled, errors}'
+claude plugin list --json | jq '.[] | select(.marketplace=="ai-rules") | {name, enabled, errors}'
 ```
 
-Spot-check that skills are recognized:
+Spot-check skills:
 
-- Core: `/core-plugin:babysit-pr` (or ask Claude to babysit a PR — skill triggers from description)
-- Superpowers: `/superpowers:brainstorming` (or similar superpowers skill)
-- Document skills: `/document-skills:pdf`
-- Google Workspace: ask Claude to check your inbox or search Drive (uses `jean-claude` after OAuth)
+- Core: `/core-plugin:babysit-pr`
+- Superpowers: `/superpowers:brainstorming`
+- Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 
 ### Uninstall / cleanup
 
 ```sh
-# Remove core-plugin and orphaned auto-installed dependencies
 claude plugin uninstall core-plugin@ai-rules --prune
-
-# Preview orphans without removing
+claude plugin uninstall frontend-plugin@ai-rules --prune
+claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin prune --dry-run
 ```
 
 ### Cursor skills (separate from Claude Code plugins)
-
-Cursor skills in [`.cursor/skills/`](.cursor/skills/) are installed independently:
 
 ```sh
 npx skills add bernatmv/ai-rules -a cursor -g -y
@@ -240,7 +237,7 @@ npx skills add bernatmv/ai-rules --skill frontend-design -a cursor -g -y
 
 ### Rules in one place
 
-Put (or keep) instructions in [`CLAUDE.md`](CLAUDE.md) and link to it for Cursor or other agents. On Unix you can replace `AGENTS.md` with a symlink to `CLAUDE.md` if you prefer identical bytes on disk.
+Put (or keep) instructions in [`CLAUDE.md`](CLAUDE.md) and link to it for Cursor or other agents. On Unix you can replace `AGENTS.md` with a symlink to `CLAUDE.md`.
 
 ## Creating a New Plugin
 

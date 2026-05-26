@@ -28,22 +28,37 @@ claude mcp remove github
 /mcp
 ```
 
-# MCPs in core-plugin
+# MCPs by ai-rules plugin
 
-`core-plugin@ai-rules` bundles external integrations three ways:
+External integrations are split across marketplace plugins. See [PLUGIN.md](./PLUGIN.md).
 
-1. **Plugin dependencies (MCP)** — Notion, Stripe, Supabase, Vercel, Playwright, Figma,
-   GitHub, GitLab, Atlassian, Chrome DevTools, Hugging Face, etc. See [PLUGIN.md](./PLUGIN.md).
-2. **`.mcp.json` in core-plugin (MCP)** — integrations without a matching plugin:
-3. **Google Workspace (Gmail, Drive, Calendar)** — via the `jean-claude` plugin dependency
-   (skill/CLI + OAuth, not MCP). See [PLUGIN.md](./PLUGIN.md#google-workspace-gmail-drive-calendar).
+## core-plugin
+
+1. **Plugin dependencies (MCP)** — GitHub, GitLab, Notion, Stripe, Atlassian, Hugging Face, etc.
+2. **`.mcp.json`** — MCPs without a matching official plugin:
+
+| Server   | Transport | Notes                  |
+| -------- | --------- | ---------------------- |
+| `convex` | stdio     | `npx convex mcp start` |
+
+3. **Google Workspace** — via `jean-claude` dependency (OAuth, not MCP). See [PLUGIN.md](./PLUGIN.md#google-workspace-gmail-drive-calendar).
+
+## frontend-plugin
+
+1. **Plugin dependencies (MCP)** — Figma, Playwright, Chrome DevTools
+2. **`.mcp.json`**:
 
 | Server       | Transport | Notes                      |
 | ------------ | --------- | -------------------------- |
-| `convex`     | stdio     | `npx convex mcp start`     |
 | `astro-docs` | http      | Astro documentation search |
 
-After installing core-plugin, authenticate MCP servers with `/mcp`. Google Workspace uses
+## devops-plugin
+
+**Plugin dependencies (MCP)** — Supabase, Vercel (no local `.mcp.json`).
+
+---
+
+After installing plugins, authenticate MCP servers with `/mcp`. Google Workspace uses
 separate OAuth via `jean-claude` (see PLUGIN.md).
 
 ## Convex
@@ -57,7 +72,7 @@ claude mcp get convex
 
 ## Astro
 
-Bundled in `core-plugin/.mcp.json`. Manual add:
+Bundled in `frontend-plugin/.mcp.json`. Manual add:
 
 ```sh
 claude mcp add --transport http "Astro docs" https://mcp.docs.astro.build/mcp
@@ -65,22 +80,22 @@ claude mcp add --transport http "Astro docs" https://mcp.docs.astro.build/mcp
 
 ## Service MCPs (via plugin dependencies)
 
-These are **not** duplicated in `core-plugin/.mcp.json`. Install `core-plugin@ai-rules`
-or the individual plugin from `claude-plugins-official`:
+These are **not** duplicated in local `.mcp.json` files. Install the matching
+ai-rules plugin or the individual official plugin:
 
-| Service         | Plugin dependency                             |
-| --------------- | --------------------------------------------- |
-| Figma           | `figma@claude-plugins-official`               |
-| Notion          | `notion@claude-plugins-official`              |
-| Stripe          | `stripe@claude-plugins-official`              |
-| Supabase        | `supabase@claude-plugins-official`            |
-| Vercel          | `vercel@claude-plugins-official`              |
-| Playwright      | `playwright@claude-plugins-official`          |
-| GitHub          | `github@claude-plugins-official`              |
-| GitLab          | `gitlab@claude-plugins-official`              |
-| Atlassian       | `atlassian@claude-plugins-official`           |
-| Chrome DevTools | `chrome-devtools-mcp@claude-plugins-official` |
-| Hugging Face    | `huggingface-skills@claude-plugins-official`  |
+| Service         | ai-rules plugin   | Official dependency                           |
+| --------------- | ----------------- | --------------------------------------------- |
+| Figma           | `frontend-plugin` | `figma@claude-plugins-official`               |
+| Playwright      | `frontend-plugin` | `playwright@claude-plugins-official`          |
+| Chrome DevTools | `frontend-plugin` | `chrome-devtools-mcp@claude-plugins-official` |
+| Supabase        | `devops-plugin`   | `supabase@claude-plugins-official`            |
+| Vercel          | `devops-plugin`   | `vercel@claude-plugins-official`              |
+| Notion          | `core-plugin`     | `notion@claude-plugins-official`              |
+| Stripe          | `core-plugin`     | `stripe@claude-plugins-official`              |
+| GitHub          | `core-plugin`     | `github@claude-plugins-official`              |
+| GitLab          | `core-plugin`     | `gitlab@claude-plugins-official`              |
+| Atlassian       | `core-plugin`     | `atlassian@claude-plugins-official`           |
+| Hugging Face    | `core-plugin`     | `huggingface-skills@claude-plugins-official`  |
 
 ## Google Workspace (Gmail, Drive, Calendar)
 

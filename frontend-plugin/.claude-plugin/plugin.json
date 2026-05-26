@@ -1,0 +1,15 @@
+{
+  "name": "frontend-plugin",
+  "version": "1.0.0",
+  "description": "Frontend design, browser automation, and UI tooling for TS/JS workflows",
+  "author": {
+    "name": "bernatmv"
+  },
+  "dependencies": [
+    { "name": "frontend-design", "marketplace": "claude-plugins-official" },
+    { "name": "playwright", "marketplace": "claude-plugins-official" },
+    { "name": "figma", "marketplace": "claude-plugins-official" },
+    { "name": "chrome-devtools-mcp", "marketplace": "claude-plugins-official" },
+    { "name": "web-asset-generator", "marketplace": "web-asset-generator-marketplace" }
+  ]
+}

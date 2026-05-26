@@ -17,12 +17,12 @@
     },
     {
       "name": "devops-plugin",
-      "description": "Devops skills and MCP integrations for CI/CD, Kubernetes, and other devops workflows",
+      "description": "Supabase and Vercel MCP integrations for cloud and backend workflows",
       "source": "./devops-plugin"
     },
     {
       "name": "frontend-plugin",
-      "description": "Code skills for a Frontend TS/JS stack",
+      "description": "Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP",
       "source": "./frontend-plugin"
     },
     {
