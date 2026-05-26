@@ -18,54 +18,40 @@ Spec-Driven Development (SDD) workflow skills for Claude Code and Cursor. Provid
 /reload-plugins
 ```
 
-### From agent-central-plugins (upstream)
-
-```
-/plugin marketplace add org-174376620@github.com:yahoo-common/agent-central-plugins.git
-/plugin install spec-workflow-plugin@agent-central-plugins
-/reload-plugins
-```
-
-### Alternative: CLI install
-
-```bash
-claude plugin add --from org-174376620@github.com:yahoo-common/agent-central-plugins.git --path spec-workflow-plugin
-```
-
 ## Skills
 
 ### Development
 
-| Skill | Description |
-|-------|-------------|
-| `sdd-create-discovery` | Scaffolds discovery projects and manifest metadata for the pre-spec phase |
-| `sdd-create-prd` | Conversational PRD authoring with readiness gates, stress testing, and approval |
-| `sdd-create-spec` | Phased spec creation (requirements, UI design, design, tasks) with template-guided authoring |
-| `sdd-create-steering` | Authors project steering documents (product, tech, structure) with approval gates |
-| `sdd-implement-spec` | Executes approved spec tasks with implementation logging and artifact tracking |
+| Skill                  | Description                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| `sdd-create-discovery` | Scaffolds discovery projects and manifest metadata for the pre-spec phase                    |
+| `sdd-create-prd`       | Conversational PRD authoring with readiness gates, stress testing, and approval              |
+| `sdd-create-spec`      | Phased spec creation (requirements, UI design, design, tasks) with template-guided authoring |
+| `sdd-create-steering`  | Authors project steering documents (product, tech, structure) with approval gates            |
+| `sdd-implement-spec`   | Executes approved spec tasks with implementation logging and artifact tracking               |
 
 ### Review
 
-| Skill | Description |
-|-------|-------------|
-| `sdd-review-code` | Reviews code for quality, security, performance, conventions, and spec compliance |
-| `sdd-review-prd` | Reviews PRD quality for problem clarity, goal measurability, and SDD readiness |
-| `sdd-review-spec-docs` | Reviews spec documents for completeness, testing coverage, and cross-document consistency |
-| `sdd-review-steering-docs` | Reviews steering documents for completeness, consistency, and project drift |
+| Skill                      | Description                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| `sdd-review-code`          | Reviews code for quality, security, performance, conventions, and spec compliance         |
+| `sdd-review-prd`           | Reviews PRD quality for problem clarity, goal measurability, and SDD readiness            |
+| `sdd-review-spec-docs`     | Reviews spec documents for completeness, testing coverage, and cross-document consistency |
+| `sdd-review-steering-docs` | Reviews steering documents for completeness, consistency, and project drift               |
 
 ### Workflow
 
-| Skill | Description |
-|-------|-------------|
-| `sdd-archive-spec` | Archives completed or abandoned specs with metadata |
-| `sdd-manage-status` | Status dashboards, approval transitions, and task regeneration |
-| `sdd-manage-template` | Template CRUD operations (list, preview, customize, validate, reset, diff, sync) |
-| `sdd-workspace-create-spec` | Multi-repo spec coordination with central workspace tracking |
+| Skill                       | Description                                                                      |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| `sdd-archive-spec`          | Archives completed or abandoned specs with metadata                              |
+| `sdd-manage-status`         | Status dashboards, approval transitions, and task regeneration                   |
+| `sdd-manage-template`       | Template CRUD operations (list, preview, customize, validate, reset, diff, sync) |
+| `sdd-workspace-create-spec` | Multi-repo spec coordination with central workspace tracking                     |
 
 ### Shared
 
-| Skill | Description |
-|-------|-------------|
+| Skill        | Description                                                                              |
+| ------------ | ---------------------------------------------------------------------------------------- |
 | `sdd-common` | Internal dependency hub — shared references, scripts, and templates (not user-invocable) |
 
 ## Development
@@ -92,6 +78,7 @@ The `plugin.json` version must match — enforced by `scripts/util/check-version
 ### Skill structure
 
 Each skill contains:
+
 - `SKILL.md` — Skill definition with YAML frontmatter and workflow instructions
 - `references/` — Supporting documentation loaded on demand
 - `scripts/` — Python scripts (in `sdd-common` only, invoked via `.spec-workflow/sdd`)
