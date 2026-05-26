@@ -9,6 +9,8 @@ via plugin dependencies:
 - `figma` — Figma MCP and design workflow skills
 - `chrome-devtools-mcp` — Chrome DevTools MCP
 - `web-asset-generator` — favicons, app icons, Open Graph images
+- `hyperframes` — HTML-to-video, GSAP/Lottie/Three.js/WAAI adapters, Remotion bridge (15 skills)
+- `remotion-plugin` — programmatic video with Remotion (`/remotion-plugin:remotion`)
 - `vercel` — shadcn (`/vercel:shadcn`), Next.js best practices, Vercel agent skills
 - `marketing-skills` — includes `seo-audit`, `copywriting`, and 39 other marketing skills (upstream)
 

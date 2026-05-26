@@ -15,6 +15,7 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add max-sixty/jean-claude
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
+/plugin marketplace add heygen-com/hyperframes
 ```
 
 Then install the plugins you need:
@@ -125,6 +126,7 @@ Frontend design, browser testing, Figma, and UI debugging.
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
 | `vercel`                       | `claude-plugins-official`         | built-in — [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js, Vercel agent skills |
 | `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
+| `hyperframes`                  | `hyperframes`                     | `/plugin marketplace add heygen-com/hyperframes`     |
 | `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `marketing-skills`             | `marketingskills`                 | `/plugin marketplace add coreyhaines31/marketingskills` |
@@ -134,6 +136,8 @@ Frontend design, browser testing, Figma, and UI debugging.
 `marketing-skills` includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting) plus 39 other marketing skills. Complements `frontend-design`, core `prd`, and core `launch-playbook`.
 
 [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) is installed via `vercel@claude-plugins-official` — use `/vercel:shadcn`. Upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design` (creative UI design vs component management).
+
+[`hyperframes`](https://claudemarketplaces.com/skills/heygen-com/hyperframes) ([heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)) ships 15 skills: HTML-to-video compositions, GSAP/Lottie/Three.js/WAAI/CSS animation adapters, website capture, captions, voiceovers, and `remotion-to-hyperframes` for bridging Remotion projects. Complements `remotion-plugin` — not a replacement.
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 

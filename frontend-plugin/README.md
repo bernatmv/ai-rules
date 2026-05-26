@@ -15,6 +15,7 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images |
 | `vercel` | `claude-plugins-official` | [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js best practices, Vercel agent skills |
 | `agent-browser` | `agent-browser` | Browser automation CLI via Chrome DevTools Protocol |
+| `hyperframes` | `hyperframes` | HyperFrames HTML-to-video + 15 animation/adapter skills ([catalog](https://claudemarketplaces.com/skills/heygen-com/hyperframes)) |
 | `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
 | `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
 | `marketing-skills` | `marketingskills` | SEO audit, copywriting, CRO, paid ads, etc. (41 skills) |
@@ -24,6 +25,8 @@ Key marketing skills: `/marketing-skills:seo-audit`, `/marketing-skills:copywrit
 Browser automation: use `agent-browser` CLI by default (`/agent-browser:agent-browser`, or `agent-browser skills get core`). `playwright` MCP complements it for MCP-native flows; `chrome-devtools-mcp` covers debugging and performance.
 
 shadcn/ui: use `/vercel:shadcn` (via `vercel@claude-plugins-official`). Upstream: [shadcn-ui/ui](https://github.com/shadcn-ui/ui) — [claudemarketplaces](https://claudemarketplaces.com/skills/shadcn/ui/shadcn). Complements `frontend-design`.
+
+Video: `remotion-plugin` for React/Remotion (`/remotion-plugin:remotion`); `hyperframes` for HTML/GSAP video (`/hyperframes:hyperframes`). Bridge Remotion → HyperFrames with `/hyperframes:remotion-to-hyperframes`. Animation adapters: `/hyperframes:gsap`, `/hyperframes:lottie`, `/hyperframes:three`, and others — see [claudemarketplaces catalog](https://claudemarketplaces.com/skills/heygen-com/hyperframes).
 
 ## MCP servers
 
@@ -38,6 +41,7 @@ Authenticate MCP servers after install with `/mcp`.
 ```sh
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
+/plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add bernatmv/ai-rules
 /plugin install frontend-plugin@ai-rules
 /reload-plugins

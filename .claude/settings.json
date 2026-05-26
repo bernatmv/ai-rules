@@ -41,6 +41,12 @@
         "source": "github",
         "repo": "vercel-labs/agent-browser"
       }
+    },
+    "hyperframes": {
+      "source": {
+        "source": "github",
+        "repo": "heygen-com/hyperframes"
+      }
     }
   },
   "hooks": {

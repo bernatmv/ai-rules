@@ -9,7 +9,8 @@
     "visual-explainer-marketplace",
     "jean-claude",
     "marketingskills",
-    "agent-browser"
+    "agent-browser",
+    "hyperframes"
   ],
   "plugins": [
     {
@@ -49,7 +50,7 @@
     },
     {
       "name": "frontend-plugin",
-      "description": "Frontend design, Figma, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
+      "description": "Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
       "source": "./frontend-plugin"
     }
   ]
