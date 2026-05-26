@@ -122,6 +122,9 @@ Frontend design, browser testing, Figma, and UI debugging.
 | `browser-use-plugin` | `ai-rules` | bundled with `frontend-plugin` |
 | `remotion-plugin` | `ai-rules` | bundled with `frontend-plugin` |
 | `app-store-screenshots-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+| `seo-audit-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+
+`seo-audit` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) runs systematic SEO audits. Does not duplicate `web-asset-generator`, core `launch-playbook`, or `vercel` framework skills.
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 

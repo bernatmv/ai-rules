@@ -65,7 +65,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 
 ### frontend-plugin
 
-#### Dependencies (9)
+#### Dependencies (10)
 
 | Plugin                         | Purpose                                             |
 | ------------------------------ | --------------------------------------------------- |
@@ -78,6 +78,9 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `browser-use-plugin`           | Browser automation CLI (ai-rules)                   |
 | `remotion-plugin`              | Programmatic video creation (ai-rules)              |
 | `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)          |
+| `seo-audit-plugin`             | SEO audit — crawlability, technical, on-page (ai-rules) |
+
+No overlap with `web-asset-generator` (assets), `launch-playbook` in core (launch campaigns), or `vercel` (deploy/framework skills).
 
 #### MCP in frontend-plugin
 

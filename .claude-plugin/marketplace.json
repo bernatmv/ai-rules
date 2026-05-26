@@ -31,6 +31,11 @@
       "source": "./remotion-plugin"
     },
     {
+      "name": "seo-audit-plugin",
+      "description": "SEO audit — crawlability, technical foundations, on-page optimization, content quality",
+      "source": "./seo-audit-plugin"
+    },
+    {
       "name": "fullstack-plugin",
       "description": "Full stack bundle — core, frontend, and devops plugins in one install",
       "source": "./fullstack-plugin"

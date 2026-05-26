@@ -17,6 +17,7 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `browser-use-plugin` | `ai-rules` | Browser automation via browser-use CLI |
 | `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
 | `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
+| `seo-audit-plugin` | `ai-rules` | SEO audit — crawlability, technical, on-page |
 
 See [`.claude/SKILLS.md`](../.claude/SKILLS.md) for slash commands.
 
