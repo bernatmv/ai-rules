@@ -36,6 +36,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 **Overlap check:** `copywriting` and `seo-audit` complement `frontend-design` (UI implementation), core `prd` (requirements), and core `launch-playbook` (launch ops) — they do not duplicate them.
 
+**Overlap check:** [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) (component management via `/vercel:shadcn`) complements `frontend-design` (creative UI design) — not duplicated.
+
 ## Upstream sources
 
 | Skill                           | Source                                                                                               |
@@ -45,7 +47,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `excalidraw-diagram`            | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)            |
 | `find-skills`                   | [vercel-labs/skills](https://github.com/vercel-labs/skills) via `find-skills-plugin@ai-rules`        |
 | `skill-creator`                 | [anthropics/skills](https://github.com/anthropics/skills) via `skill-creator@claude-plugins-official` ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
-| `shadcn`, Next.js, Vercel stack | [vercel/vercel-plugin](https://github.com/vercel/vercel-plugin) via `vercel@claude-plugins-official` |
+| `shadcn`                        | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) via `vercel@claude-plugins-official` ([claudemarketplaces](https://claudemarketplaces.com/skills/shadcn/ui/shadcn)) |
+| Next.js, Vercel agent stack     | [vercel/vercel-plugin](https://github.com/vercel/vercel-plugin) via `vercel@claude-plugins-official` |
 | `app-store-screenshots`         | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots)            |
 | `seo-audit`, `copywriting`, …   | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) via `marketing-skills@marketingskills` |
 
@@ -57,7 +60,7 @@ npx skills add remotion/agent-skills
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
 npx skills add https://github.com/anthropics/skills --skill skill-creator
-npx skills add shadcn/ui
+npx skills add https://github.com/shadcn/ui --skill shadcn
 npx skills add vercel-labs/agent-skills
 npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices
 npx skills add ParthJadhav/app-store-screenshots

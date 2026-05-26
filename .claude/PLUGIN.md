@@ -123,7 +123,7 @@ Frontend design, browser testing, Figma, and UI debugging.
 | Plugin                         | Marketplace                       | Add marketplace                                      |
 | ------------------------------ | --------------------------------- | ---------------------------------------------------- |
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
-| `vercel`                       | `claude-plugins-official`         | built-in — shadcn, Next.js, Vercel agent skills      |
+| `vercel`                       | `claude-plugins-official`         | built-in — [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js, Vercel agent skills |
 | `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
 | `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
@@ -132,6 +132,8 @@ Frontend design, browser testing, Figma, and UI debugging.
 `agent-browser` ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) is the default CLI for browser automation — compact accessibility-tree snapshots with `@eN` refs. Load runtime instructions via `agent-browser skills get core`. Complements `playwright` MCP (tool-calling) and `chrome-devtools-mcp` (debugging). Replaces the former `browser-use-plugin` dependency.
 
 `marketing-skills` includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting) plus 39 other marketing skills. Complements `frontend-design`, core `prd`, and core `launch-playbook`.
+
+[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) is installed via `vercel@claude-plugins-official` — use `/vercel:shadcn`. Upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design` (creative UI design vs component management).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 

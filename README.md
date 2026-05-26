@@ -77,7 +77,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `figma`                        | Figma MCP and design workflow skills                    |
 | `chrome-devtools-mcp`          | Chrome DevTools MCP                                     |
 | `web-asset-generator`          | Favicons, app icons, Open Graph images                  |
-| `vercel`                       | shadcn, Next.js best practices, Vercel agent skills     |
+| `vercel`                       | shadcn ([claudemarketplaces](https://claudemarketplaces.com/skills/shadcn/ui/shadcn)), Next.js best practices, Vercel agent skills |
 | `agent-browser`                | Browser automation CLI ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) |
 | `remotion-plugin`              | Programmatic video creation (ai-rules)                  |
 | `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)              |
@@ -86,6 +86,8 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marketingskills) — includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting). Complements (does not duplicate) `frontend-design`, core `prd`, and core `launch-playbook`.
 
 [`agent-browser`](https://claudemarketplaces.com/skills/vercel-labs/agent-browser/agent-browser) is the default CLI for browser automation. Complements `playwright` MCP and `chrome-devtools-mcp` — replaces the former `browser-use-plugin`.
+
+[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) installs via `vercel@claude-plugins-official` (`/vercel:shadcn`); upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design`.
 
 #### MCP in frontend-plugin
 

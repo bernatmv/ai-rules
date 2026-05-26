@@ -13,7 +13,7 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `figma` | `claude-plugins-official` | Figma MCP and design workflow skills |
 | `chrome-devtools-mcp` | `claude-plugins-official` | Chrome DevTools MCP |
 | `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images |
-| `vercel` | `claude-plugins-official` | shadcn, Next.js best practices, Vercel agent skills |
+| `vercel` | `claude-plugins-official` | [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js best practices, Vercel agent skills |
 | `agent-browser` | `agent-browser` | Browser automation CLI via Chrome DevTools Protocol |
 | `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
 | `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
@@ -22,6 +22,8 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 Key marketing skills: `/marketing-skills:seo-audit`, `/marketing-skills:copywriting`. See [`.claude/SKILLS.md`](../.claude/SKILLS.md).
 
 Browser automation: use `agent-browser` CLI by default (`/agent-browser:agent-browser`, or `agent-browser skills get core`). `playwright` MCP complements it for MCP-native flows; `chrome-devtools-mcp` covers debugging and performance.
+
+shadcn/ui: use `/vercel:shadcn` (via `vercel@claude-plugins-official`). Upstream: [shadcn-ui/ui](https://github.com/shadcn-ui/ui) — [claudemarketplaces](https://claudemarketplaces.com/skills/shadcn/ui/shadcn). Complements `frontend-design`.
 
 ## MCP servers
 
