@@ -1,0 +1,228 @@
+# Source of truth for requirements.md antipattern rules.
+#
+# Loaded by: sdd_core.requirements_validation
+# Documented at: ../../../references/requirements-antipatterns.md
+# Schema CI guard: tests/_support/antipattern_data_validator.py
+#
+# Groups use a single semantic vocabulary shared across YAML, JSON output,
+# suppression tags, and validation-criteria §7 prose:
+#   path, code, tech-stack, api-config, architecture, structural
+#
+# Severities are Severity enum members: error, warning, info.
+# `bug_fix_override` per-group or per-rule lowers severity in bug-fix mode
+# (see sdd_core.specs.is_bug_fix_spec).
+
+version: 1
+
+# PRD problem-statement anti-patterns. Loaded by
+# ``prd.session_validators.load_problem_statement_markers`` and
+# surfaced as ``warn`` advisories by ``prd/validate-readiness.py
+# --gate pre-requirements`` when the session state embeds solution
+# vocabulary in the problem statement. Human mirror:
+# ``sdd-common/references/requirements-antipatterns.md``.
+problem_statement:
+  solution_markers:
+    severity: warn
+    literals:
+      - "static html dashboard"
+      - "periodic job"
+      - "use redis"
+      - "use postgres"
+      - "add a service"
+
+groups:
+  path:
+    default_severity: error
+    bug_fix_override:
+      severity: info
+    message_template: "Path/source reference '{match}' — belongs in design.md or tasks.md"
+    rules:
+      - id: path-literal
+        # Matches paths distinguished by at least one path-literal
+        # signal so English slash-triples like "request/update/delete"
+        # or "pub/sub" no longer fire false positives.
+        #
+        # Signals (any of):
+        #   1. Leading ``./`` / ``../`` (relative path prefix).
+        #   2. Leading ``/`` with 2+ internal segments
+        #      (e.g. ``/src/components/Upload/``) — two-segment leaves
+        #      like ``/api/login`` are still handled by ``http-route``.
+        #   3. 2+ slash-segments followed by a trailing ``/`` or end-of-
+        #      string (directory reference like ``path/to/dir/``).
+        #   4. Any slash-joined token chain ending in a file extension
+        #      (``src/utils/helpers.py``), covering the common "paste the
+        #      file path into the spec" antipattern.
+        # Pure English verb triples satisfy none of these signals.
+        pattern: '(?:^|\s)(?:\.{1,2}/(?:[\w.-]+/?)+|/(?:[\w.-]+/){2,}[\w.-]*|(?:[\w.-]+/){2,}(?=\s|$)|(?:[\w.-]+/)+[\w.-]*\.[\w]{1,8}\b)'
+        suggestion: "Drop the path reference; describe the user-facing behavior."
+        # Mechanical replacement: drop the path token entirely, leaving the
+        # surrounding prose for the agent to re-frame around behaviour.
+        # ``{match}`` is the matched literal — used here only to prove the
+        # template renders against the finding it accompanies.
+        replacement_template: "[describe the user-facing behaviour, drop {match}]"
+      - id: import-statement
+        pattern: '^\s*(?:import\s+[\w.{}*, ]+(?:\s+from\s+[''"][^''"]+[''"])?|from\s+[\w.]+\s+import\s+|const\s+[\w{}, ]+\s*=\s*require\([''"][^''"]+[''"]\))'
+        suggestion: "Imports belong in design.md or tasks.md; drop from requirements."
+      - id: source-extension
+        pattern: '\b[\w-]+\.(?:py|ts|tsx|js|jsx|vue|go|rs|java|rb|kt|swift)\b'
+        suggestion: "Drop file extension; describe what the user does, not where code lives."
+
+  code:
+    default_severity: warning
+    message_template: "Code syntax '{match}' in requirements ({rule})"
+    rules:
+      - id: function-call
+        pattern: '\b[a-z_][\w]*\([^)]*\)'
+        suggestion: null
+      - id: method-access
+        pattern: '\b[A-Za-z_][\w]*\.[a-z_][\w]*\('
+        suggestion: null
+      - id: class-declaration
+        pattern: '\b(?:class\s+[A-Z]\w*\s*[:{(]|interface\s+I[A-Z]\w*)'
+        suggestion: null
+        bug_fix_override:
+          severity: info
+      - id: function-declaration
+        pattern: '\b(?:def\s+[a-z_]\w*\s*\(|function\s+[A-Za-z_]\w*\s*\(|const\s+[A-Za-z_]\w*\s*=\s*\([^)]*\)\s*=>|=>\s*\{)'
+        suggestion: null
+        bug_fix_override:
+          severity: info
+      - id: type-annotation
+        pattern: '(?::\s*(?:string|number|boolean)(?:\[\])?\b|\bOptional\[[^\]]+\]|\bDict\[[^\]]+\]|\bPromise<[^>]+>|\bObservable<[^>]+>)'
+        suggestion: null
+
+  tech-stack:
+    default_severity: warning
+    match_strategy: word-matcher
+    case_sensitive: true
+    section_aware:
+      "Non-Functional Requirements": info
+    message_template: "Tech stack reference '{match}' — rephrase as user-facing behavior"
+    words:
+      - Redis
+      - PostgreSQL
+      - MySQL
+      - MongoDB
+      - DynamoDB
+      - Elasticsearch
+      - Cassandra
+      - Docker
+      - Kubernetes
+      - Lambda
+      - Nginx
+      - Terraform
+    package_managers:
+      # Matched only when co-occurring with install/package/dependency
+      # in the same line (second WordMatcher gates these).
+      words:
+        - npm
+        - pip
+        - cargo
+        - maven
+      co_occurrence:
+        - install
+        - package
+        - dependency
+        - dependencies
+
+  api-config:
+    default_severity: warning
+    message_template: "API/config literal '{match}' — describe behavior, not wire format"
+    rules:
+      - id: http-route
+        pattern: '\b(?:GET|POST|PUT|DELETE|PATCH)\s+/[\w/:{}.-]+'
+        suggestion: "Replace route with behavior: 'WHEN user submits … THEN system SHALL …'"
+        replacement_template: "[describe the user action, drop {match}]"
+      - id: status-code-literal
+        pattern: '\b(?:200\s+OK|201\s+Created|204\s+No Content|301\s+Moved Permanently|400\s+Bad Request|401\s+Unauthorized|403\s+Forbidden|404\s+Not Found|409\s+Conflict|429\s+Too Many Requests|500\s+Internal Server Error|503\s+Service Unavailable)\b'
+        suggestion: "Describe the observable outcome, not the status code."
+        replacement_template: "[describe the observable outcome, drop {match}]"
+      - id: env-var-shape
+        pattern: '(?:\$\{[A-Z][A-Z0-9_]+\}|\$[A-Z][A-Z0-9_]+)'
+        suggestion: "Configuration belongs in design.md; express the requirement as a user-visible constraint."
+      - id: connection-string
+        pattern: '\b(?:postgres|postgresql|mysql|mongodb|redis|amqp|kafka|sqlite|mssql|oracle)://[^\s]+'
+        suggestion: "Connection details belong in design.md."
+    env_var_literals:
+      # Matched via WordMatcher with case_sensitive=true.
+      match_strategy: word-matcher
+      case_sensitive: true
+      words:
+        - DATABASE_URL
+        - DATABASE_URI
+        - API_KEY
+        - API_SECRET
+        - NODE_ENV
+        - AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY
+        - SECRET_KEY
+        - JWT_SECRET
+
+  architecture-concepts:
+    # Engineering principles that belong in design.md, not requirements.md.
+    # NFR-section mentions are the common leakage vector → escalate to warning
+    # so the reviewer gate catches them deterministically instead of waiting
+    # on sub-agent judgment.
+    default_severity: info
+    match_strategy: word-matcher
+    case_sensitive: false
+    section_aware:
+      "Non-Functional Requirements": warning
+    message_template: "Architecture/engineering-principle jargon '{match}' — belongs in design.md; describe user-facing behavior here."
+    words:
+      - SRP
+      - SOLID
+      - dependency injection
+      - interface segregation
+      - inversion of control
+      - single responsibility
+      - open/closed principle
+      - liskov substitution
+      - factory pattern
+      - observer pattern
+      - strategy pattern
+      - decorator pattern
+      - repository pattern
+      - singleton
+
+  architecture-impl:
+    # Implementation-layer vocabulary that frequently appears in legitimate
+    # NFR constraints ("must run behind middleware", "scale via sharding").
+    # Left at info everywhere — the reviewer sub-agent catches egregious
+    # cases; blanket-escalating would over-fire on normal NFR prose.
+    default_severity: info
+    match_strategy: word-matcher
+    case_sensitive: false
+    message_template: "Implementation-layer term '{match}' — prefer user-facing framing or move to design.md."
+    words:
+      - middleware
+      - microservice
+      - monolith
+      - event bus
+      - pub/sub
+      - message queue
+      - CQRS
+      - event sourcing
+      - saga
+      - ORM
+      - schema migration
+      - foreign key
+      - sharding
+      - replication
+
+  structural:
+    default_severity: error
+    # Structural rules are coded in requirements_validation/structural.py
+    # (complex enough that YAML patterns would be unwieldy). The id list
+    # is kept here for introspection and tests.
+    #
+    # ``message_template`` is not consumed by the structural rules
+    # (their messages are context-specific — e.g. "Missing required
+    # heading") but is emitted anyway so the per-group parity check
+    # covers every canonical group uniformly.
+    message_template: "Structural violation: {rule} — {match}"
+    rule_ids:
+      - headings-required
+      - user-story-present
+      - acceptance-criterion-present
+      - no-empty-requirement-sections

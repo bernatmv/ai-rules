@@ -1,0 +1,246 @@
+{
+  "$schema": "./internal_lints_baselines.schema.json",
+  "schemaVersion": "1.0.0",
+  "_doc": "Canonical workflow graph. One declarative source for what phases each workflow runs, what context each phase needs, what gate prompt fires, what handoffs the success envelope carries, and how transitions advance/reject. Strict: every value is a literal; preconditions/validations resolve to registered Validator functions in sdd_core/validators; gate_prompt_id and handoff_ids are foreign keys into prompt-registry.json and handoff-registry.json.",
+  "workflows": {
+    "sdd-create-spec": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace"],
+      "phases": [
+        {
+          "id": "requirements",
+          "produces": ["requirements.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["requirements"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": "ui-design",
+            "reject": "requirements",
+            "back": null
+          }
+        },
+        {
+          "id": "ui-design",
+          "produces": ["ui-design.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["ui-design"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": "design",
+            "reject": "ui-design",
+            "back": "requirements"
+          }
+        },
+        {
+          "id": "design",
+          "produces": ["design.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["design"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": "tasks",
+            "reject": "design",
+            "back": "ui-design"
+          }
+        },
+        {
+          "id": "tasks",
+          "produces": ["tasks.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["tasks"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": "tasks",
+            "back": "design"
+          }
+        }
+      ]
+    },
+    "sdd-workspace-create-spec": {
+      "extends": "sdd-create-spec",
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace", "repo_id"],
+      "phase_overrides": {
+        "requirements": {
+          "gate_prompt_id": "workspace-batch-review-phase",
+          "handoff_ids": [
+            "workspace/check-spec-shape.py",
+            "workspace/phase-approve.py"
+          ]
+        },
+        "ui-design": {
+          "gate_prompt_id": "workspace-batch-review-phase",
+          "handoff_ids": [
+            "workspace/check-spec-shape.py",
+            "workspace/phase-approve.py"
+          ]
+        },
+        "design": {
+          "gate_prompt_id": "workspace-batch-review-phase",
+          "handoff_ids": [
+            "workspace/check-spec-shape.py",
+            "workspace/phase-approve.py"
+          ]
+        },
+        "tasks": {
+          "gate_prompt_id": "workspace-batch-review-phase",
+          "handoff_ids": [
+            "workspace/check-spec-shape.py",
+            "workspace/phase-approve.py"
+          ]
+        }
+      },
+      "phases_appended": []
+    },
+    "sdd-create-prd": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace"],
+      "phases": [
+        {
+          "id": "prd",
+          "produces": ["prd.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["prd"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": "prd",
+            "back": null
+          }
+        }
+      ]
+    },
+    "sdd-create-discovery": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace"],
+      "phases": [
+        {
+          "id": "discovery",
+          "produces": ["discovery.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["discovery"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": "discovery",
+            "back": null
+          }
+        }
+      ]
+    },
+    "sdd-create-steering": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace", "category"],
+      "phases": [
+        {
+          "id": "product",
+          "produces": ["product.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["product"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": "tech",
+            "reject": "product",
+            "back": null
+          }
+        },
+        {
+          "id": "tech",
+          "produces": ["tech.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["tech"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": "structure",
+            "reject": "tech",
+            "back": "product"
+          }
+        },
+        {
+          "id": "structure",
+          "produces": ["structure.md"],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": ["structure"],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": "structure",
+            "back": "tech"
+          }
+        }
+      ]
+    },
+    "sdd-archive-spec": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace"],
+      "phases": [
+        {
+          "id": "archive",
+          "produces": [],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": [],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": null,
+            "back": null
+          }
+        }
+      ]
+    },
+    "sdd-implement-spec": {
+      "version": "1.0.0",
+      "context_needs": ["target", "workspace"],
+      "phases": [
+        {
+          "id": "implement",
+          "produces": [],
+          "preconditions": [],
+          "validations": [],
+          "gate_prompt_id": "",
+          "review_artifacts": [],
+          "handoff_ids": [],
+          "transitions": {
+            "approve": null,
+            "reject": "implement",
+            "back": null
+          }
+        }
+      ]
+    }
+  },
+  "advisories": {
+    "_doc": "Advisory placement metadata. Each entry declares where the advisory fires, which workflow phase naturally refreshes the underlying state, and the severity for the phase-mismatch case. The advisory_phase_placement lint reads this block to enforce that fires_at_phase < refresh_handled_by_phase implies no next_action_command and the declared severity.",
+    "review_quality_stale": {
+      "fires_at_phase": "pre-flight",
+      "refresh_handled_by_phase": "post-review",
+      "severity_when_phase_mismatch": "info"
+    },
+    "unstaged_spec_edits_without_approval": {
+      "fires_at_phase": "pre-flight",
+      "refresh_handled_by_phase": "update-launch",
+      "severity_when_phase_mismatch": "warn"
+    }
+  }
+}

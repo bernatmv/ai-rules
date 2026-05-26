@@ -30,7 +30,7 @@ claude mcp remove github
 
 # MCPs by ai-rules plugin
 
-External integrations are split across marketplace plugins. See [PLUGIN.md](./PLUGIN.md).
+External integrations are split across marketplace plugins. Install `fullstack-plugin@ai-rules` for core + frontend + devops MCPs in one step, or install plugins individually. See [PLUGIN.md](./PLUGIN.md).
 
 ## core-plugin
 

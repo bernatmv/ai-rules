@@ -1,0 +1,36 @@
+# Facet promotion rules used by ``review_quality.promotion``.
+#
+# Promotion is data-driven: when a Tier 2 facet's ``cited_issues_history``
+# satisfies a rule's ``preconditions``, the consequence's ``new_score``
+# replaces the facet's score and the rule's ``new_issues_severity_cap``
+# clips any new soft angles surfaced in the latest review cycle.
+#
+# ``match_kind`` selects the precondition matcher in
+# ``review_quality.promotion`` — adding a new rule with an existing
+# ``match_kind`` is a YAML-only edit; a new ``match_kind`` requires one
+# matcher function in Python.
+schema_version: 1
+rules:
+  partial_to_pass:
+    match_kind: addressed_count_equals_open
+    description: |-
+      A facet at "partial" promotes to "pass" when every cited issue
+      from the previous cycle is addressed by the latest diff. New
+      angles cited in the current cycle are filed as suggestions, not
+      blockers.
+    preconditions:
+      previous_score: "partial"
+      previous_open_issues_count_min: 1
+    consequence:
+      new_score: "pass"
+      new_issues_severity_cap: "suggestion"
+  loop_breaker:
+    match_kind: consecutive_cycles_with_new
+    description: |-
+      Three consecutive cycles with new findings cap promotion: if the
+      reviewer keeps finding new things, the facet stays at "partial"
+      until the agent runs --user-choice proceed (manual override).
+    preconditions:
+      consecutive_cycles_with_new_findings_min: 3
+    consequence:
+      block_promotion: true

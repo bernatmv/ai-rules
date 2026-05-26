@@ -1,0 +1,164 @@
+{
+  "$schema": "../../sdd_core/data/internal_lints_baselines.schema.json",
+  "schemaVersion": "1.0.0",
+  "_doc": "Set-membership baselines for internal_lints. Regenerate via .spec-workflow/sdd internal_lints/baseline-refresh.py [--rule <id>] [--all] [--prune].",
+  "rules": {
+    "approve-ceremony-wired": {
+      "entries": []
+    },
+    "cli-argument-conventions": {
+      "entries": []
+    },
+    "emitted-commands-parse": {
+      "entries": []
+    },
+    "error-envelopes": {
+      "entries": []
+    },
+    "import-paths-resolve": {
+      "entries": []
+    },
+    "name-type-wired": {
+      "entries": []
+    },
+    "no-bare-subprocess-dispatch": {
+      "entries": []
+    },
+    "no-dataclass-slots": {
+      "entries": []
+    },
+    "no-inline-state-dir-literal": {
+      "entries": []
+    },
+    "skill-md-handoff-table": {
+      "entries": []
+    },
+    "skill-md-legacy-flags": {
+      "entries": []
+    },
+    "with-context-coverage": {
+      "entries": []
+    },
+    "workflow-graph-cross-refs": {
+      "entries": []
+    },
+    "workspace-state-layout": {
+      "entries": [
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/session.py",
+          "line": 1,
+          "reason": "no rationale"
+        }
+      ]
+    },
+    "no-shell-true": {
+      "entries": []
+    },
+    "no-validate-for-lint": {
+      "entries": []
+    },
+    "no-harness-name-collision": {
+      "entries": []
+    },
+    "prose-invocation-via-emitter": {
+      "entries": []
+    },
+    "result-class-exit": {
+      "entries": []
+    },
+    "required-tool-calls-schema": {
+      "entries": []
+    },
+    "security-concrete-import": {
+      "entries": [
+        {
+          "file": ".cursor/skills/sdd-common/scripts/approval/update-status.py",
+          "line": 36,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/internal_lints/baseline.py",
+          "line": 17,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/harness/state.py",
+          "line": 17,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/output.py",
+          "line": 480,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/reference_acks.py",
+          "line": 283,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/reference_ledger.py",
+          "line": 158,
+          "reason": "no rationale"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/util/check-pre-existing.py",
+          "line": 20,
+          "reason": "no rationale"
+        }
+      ]
+    },
+    "skill-md-size-and-disclosure": {
+      "entries": []
+    },
+    "flag-envelope-consistency": {
+      "entries": []
+    },
+    "tracker-update-doc-code-parity": {
+      "entries": []
+    },
+    "review-skill-no-string-default": {
+      "entries": []
+    },
+    "advisory-phase-placement": {
+      "entries": []
+    },
+    "no-plan-trace-in-references": {
+      "entries": []
+    },
+    "orphan-sdd-core-modules": {
+      "entries": [
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/exit_classes.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/required_tool_calls.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/security/_decorators.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/sub_agent_prompts.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/testing.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        },
+        {
+          "file": ".cursor/skills/sdd-common/scripts/sdd_core/workspace_edit_ledger.py",
+          "line": 1,
+          "reason": "orphan-sdd-core-module"
+        }
+      ]
+    }
+  }
+}

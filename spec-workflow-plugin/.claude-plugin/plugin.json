@@ -1,0 +1,9 @@
+{
+  "name": "spec-workflow-plugin",
+  "version": "3.3.1",
+  "description": "Spec-Driven Development (SDD) workflow skills for requirements, design, implementation, and review",
+  "author": {
+    "name": "Membership Platforms - SDD Guild Team"
+  },
+  "license": "Apache-2.0"
+}

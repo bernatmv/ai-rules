@@ -11,6 +11,11 @@
   ],
   "plugins": [
     {
+      "name": "fullstack-plugin",
+      "description": "Full stack bundle — core, frontend, and devops plugins in one install",
+      "source": "./fullstack-plugin"
+    },
+    {
       "name": "core-plugin",
       "description": "Core skills and bundled plugin dependencies for everyday engineering workflows",
       "source": "./core-plugin"

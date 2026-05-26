@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://sdd.core/schemas/approval-response.json",
+  "title": "Approval Response Envelope",
+  "description": "Fields carried by approval requests, list-pending rows, and update-status responses. Consumers should migrate to `filePaths`; `filePath` remains for single-file readers.",
+  "type": "object",
+  "required": ["approvalId", "status"],
+  "properties": {
+    "approvalId": {
+      "type": "string",
+      "description": "Stable identifier assigned on creation."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "approved", "rejected", "needs-revision"],
+      "description": "Current review state."
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "categoryName": {
+      "type": "string"
+    },
+    "filePaths": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "All files under review. Use this field in new consumers."
+    },
+    "filePath": {
+      "type": "string",
+      "deprecated": true,
+      "description": "Deprecated: primary document path retained for legacy single-file consumers. Prefer `filePaths`."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approvalFilePath": {
+      "type": "string"
+    },
+    "snapshotVersion": {
+      "type": ["integer", "string"]
+    }
+  },
+  "additionalProperties": true
+}

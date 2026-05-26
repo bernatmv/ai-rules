@@ -1,0 +1,255 @@
+# SKILL.md compliance rules — single source of truth.
+#
+# ``check-template-compliance.py --skill-md`` reads this file via
+# ``sdd_core.skill_md_rules`` so adding a new forbidden literal or a new
+# per-skill positive rule is a YAML edit, not a Python edit.
+#
+# Schema:
+#   forbidden:               # applies to every SKILL.md
+#     - literal: <string>
+#       remediation: <string>
+#   per_skill:
+#     <skill-name>:
+#       max_lines: <int>            # SKILL.md budget cap
+#       require_freedom_column: <bool>  # Dependencies table must include "| Freedom |"
+#       required_literals:
+#         - literal: <string>
+#           remediation: <string>
+
+forbidden:
+  - literal: "--status approved"
+    remediation: "Use the canonical value 'approve' (see sdd_core.approval.status_choices)."
+  - literal: "template/resolve.py"
+    remediation: "Use util/resolve-template.py (the pipeline emits phase_commands.template_resolve)."
+  - literal: "approval_command"
+    remediation: "Use approval_commands emitted by pre-approval (see sdd_core.command_templates)."
+  # Shim invocation anti-patterns — every literal below produces exit
+  # code 2 on macOS / Linux. See
+  # $SKILLS/sdd-common/references/tool-patterns.md § Invocation.
+  - literal: "python3 .spec-workflow/sdd"
+    remediation: |-
+      Invoke the shim directly: `.spec-workflow/sdd {group}/{script}.py`.
+      Prefixing python3 treats the shim as a script argument — on most
+      macOS shells it fails with `Errno 20: Not a directory`. See
+      $SKILLS/sdd-common/references/tool-patterns.md § Invocation.
+  - literal: ".spec-workflow/sdd/spec/"
+    remediation: |-
+      Path is space-separated, not slash-separated. Correct form:
+      `.spec-workflow/sdd spec/check-status.py ...`.
+  - literal: ".spec-workflow/sdd/approval/"
+    remediation: |-
+      Path is space-separated, not slash-separated. Correct form:
+      `.spec-workflow/sdd approval/...`.
+  - literal: ".spec-workflow/sdd/review/"
+    remediation: |-
+      Path is space-separated, not slash-separated. Correct form:
+      `.spec-workflow/sdd review/...`.
+  - literal: ".spec-workflow/sdd/util/"
+    remediation: |-
+      Path is space-separated, not slash-separated. Correct form:
+      `.spec-workflow/sdd util/...`.
+  - literal: ".spec-workflow/sdd/workspace/"
+    remediation: |-
+      Path is space-separated, not slash-separated. Correct form:
+      `.spec-workflow/sdd workspace/...`.
+  - literal: "MAX_PROMPT_OPTIONS = 5"
+    remediation: |-
+      The canonical cap is 4 (Claude Code AskUserQuestion schema).
+      Do not edit the constant; see sdd_core/prompts.py::MAX_PROMPT_OPTIONS.
+  - literal: "ls -la &&"
+    remediation: |-
+      Chained `ls` masks the first call's output on the second's
+      non-existence. Use `test -d <path>` or two separate Bash calls.
+      See $SKILLS/sdd-common/references/tool-patterns.md § Tool Choice
+      for Common Needs.
+  - literal: "PromptOptionCountError"
+    remediation: |-
+      This exception class was removed alongside the render-time
+      auto-trim guard. The render-time advisory is emitted by
+      `sdd_core.prompts._enforce_option_bounds`; the pre-flight advisory
+      by `sdd_core.workspace_health_checks.check_prompt_registry_option_bounds`.
+      See $SKILLS/sdd-common/references/prompt-conventions.md
+      § When You See The Advisory.
+  - literal: "--tracker-root ."
+    remediation: |-
+      Bare `.` is rejected at parse time — the value silently
+      re-interprets across the `--workspace` chdir boundary. Use an
+      absolute path or one of the sentinels `coordinator` / `workspace`.
+      See $SKILLS/sdd-common/references/script-conventions.md § Canonical
+      CLI Flags.
+  - literal: "coordinator:.:"
+    remediation: |-
+      `.` produces an invalid repo-id. Use an absolute path or a
+      placeholder that resolves to one (e.g. `{ctx.workspace}` or
+      `{coordinator-path}`). See $SKILLS/sdd-workspace-create-spec/
+      references/manifest-schema.md.
+
+# Global rule: absolute ``/Users/.../.cursor/skills/...`` style
+# references are rejected in favour of the ``$SKILLS/`` prefix. The
+# ``allow`` list carries whitelisted substrings (literal ``$SKILLS/``
+# references that incidentally match the regex should not fire).
+# Enforced by internal_lints/skill_md_abs_paths.py.
+absolute_skill_paths:
+  severity: error
+  allow:
+    - "$SKILLS/"
+    - "$SCRIPTS/"
+    - ".spec-workflow/sdd"
+
+# Contents-TOC completeness + title-case check. Each ``## heading``
+# must be represented in the TOC list between ``## Contents`` and the
+# next ``## `` heading. Allowed suffixes are the literal parenthetical
+# qualifiers used for optional / deferred sections.
+toc_completeness:
+  severity: error
+  case: title
+  allow_suffixes:
+    - "(optional)"
+    - "(deferred)"
+  # Reject en-dash / em-dash in TOC labels — the hyphen-minus is the
+  # canonical separator so rendered anchors stay portable across
+  # markdown viewers.
+  forbidden_characters:
+    - char: "\u2013"
+    - char: "\u2014"
+
+# Flag hand-crafted lettered options that appear within
+# ``max_distance_lines`` of a ``generate-prompt.py --type <id>``
+# reference. Forces skills through the registry rather than
+# hand-rolling an ``AskUserQuestion`` body when the adapter renders
+# JSON natively.
+hand_rendered_options:
+  max_distance_lines: 20
+  severity: error
+
+# Global rule: any SKILL.md mention of a prompt ID from the registry
+# must have an adjacent .spec-workflow/sdd util/generate-prompt.py
+# invocation. Enforced by internal_lints/skill_md_prompt_refs.py.
+prompt_invocation_adjacency:
+  max_distance_lines: 20
+  accepted_commands:
+    - ".spec-workflow/sdd util/generate-prompt.py --type {prompt_id}"
+    - "util/generate-prompt.py --type {prompt_id}"
+  ignore_phrases:
+    - "prompt-conventions"
+    - "prompt registry"
+  violation_message: |-
+    SKILL.md mentions prompt id {prompt_id!r} without an adjacent
+    `.spec-workflow/sdd util/generate-prompt.py --type {prompt_id}`
+    fenced code block. Add the exact shim command within
+    {max_distance_lines} lines of the mention.
+
+# Reject legacy ``<doc>_md__<doc>_md`` pair keys in reference docs —
+# the canonical shape is ``<doc>_md_x_<doc>_md`` (see
+# ``review_quality/canonical_cross_validation_keys``). Reference docs
+# must quote the emitting script rather than restating the list.
+pair_key_literals:
+  severity: error
+  forbidden_regex: "[a-z_]+_md__[a-z_]+_md"
+  replacement_command: "review_quality/print-pair-keys.py --type {review_type}"
+
+# Reject /tmp/<name>-assessment.json literals. Canonical staging path is
+# owned by sdd_core.transient_state.STAGING_FILENAME and
+# review.pipeline_phases.resolvers.resolve_staging_path().
+assessment_staging_literals:
+  severity: error
+  forbidden_regex: "/tmp/[a-z0-9-]*assessment[a-z0-9_.-]*\\.json"
+  replacement_reference: |-
+    Use <doc-dir>/.sdd-state/review-assessment-staging.json. See
+    $SKILLS/sdd-common/references/quality-artifact-base.md § Run
+    Command for the canonical recipe.
+
+# Dependencies-table ordering — every ``read`` row must precede every
+# ``run`` row inside a single Step group. Load-the-contract-then-run
+# is the invariant; inverting the order costs one round-trip when the
+# run call surfaces a flag the read-row's doc explains.
+dependency_table_read_before_run:
+  severity: error
+  description: |-
+    Within any single Step group, every row with Kind: read MUST precede
+    every row with Kind: run. Enforces the "load the contract, then run
+    the tool" invariant — a read-row's file is the invocation contract
+    for the run-row below it.
+
+# Parallel-batch hygiene — surfaces cascade-cancel pitfalls in bash
+# examples embedded in SKILL.md / reference docs. See
+# $SKILLS/sdd-common/references/parallel-batch-hygiene.md.
+batch_hygiene:
+  severity: warning
+  test_chain_requires_or_true: true
+  forbid_example_cat: true
+
+# Forbidden Bash first-word tokens — ``cat``/``head``/``tail``/``sed``/
+# ``awk``/``echo`` must not lead a bash line in SKILL.md / reference
+# examples. The native tool (``Read`` / ``Grep`` / ``StrReplace`` / ...)
+# is always preferable.
+forbidden_bash_tools:
+  severity: warning
+  tokens:
+    - cat
+    - head
+    - tail
+    - sed
+    - awk
+    - echo
+
+per_skill:
+  sdd-create-spec:
+    max_lines: 360
+    require_freedom_column: true
+    required_literals:
+      - literal: "--reconcile-git-status"
+        remediation: |-
+          Wire spec/check-status.py --reconcile-git-status into § Step 1
+          so phantom/orphan advisories reach the agent.
+      - literal: "--suggest-name"
+        remediation: |-
+          Wire spec/check-status.py --suggest-name into § Edge Cases so
+          free-text requests go through slug suggestions.
+      - literal: "--target"
+        remediation: |-
+          The canonical feature/spec flag is --target. Use it in shim
+          examples even when the underlying script also accepts the
+          legacy --target-name alias.
+  sdd-workspace-create-spec:
+    require_freedom_column: true
+    required_literals:
+      - literal: "--target"
+        remediation: |-
+          The canonical feature flag is --target across every workspace
+          shim.
+      - literal: "--workspace"
+        remediation: |-
+          The canonical workspace-path flag is --workspace; --project-path
+          is the legacy alias and is rejected at parse time.
+      - literal: "next_action_command"
+        remediation: |-
+          Workspace skills must point the agent at the literal
+          next_action_command on every emitted envelope.
+  sdd-create-steering:
+    max_lines: 320
+    require_freedom_column: true
+  sdd-manage-status:
+    max_lines: 340
+    require_freedom_column: true
+  sdd-archive-spec:
+    max_lines: 220
+    require_freedom_column: true
+  sdd-review-code:
+    max_lines: 360
+    require_freedom_column: true
+  sdd-implement-spec:
+    max_lines: 320
+    require_freedom_column: true
+  sdd-create-discovery:
+    require_freedom_column: true
+  sdd-create-prd:
+    require_freedom_column: true
+  sdd-manage-template:
+    require_freedom_column: true
+  sdd-review-prd:
+    require_freedom_column: true
+  sdd-review-spec-docs:
+    require_freedom_column: true
+  sdd-review-steering-docs:
+    require_freedom_column: true
