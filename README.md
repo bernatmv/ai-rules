@@ -59,16 +59,18 @@ Installing `core-plugin@ai-rules` also installs these plugins via
 
 #### Third-party
 
-| Plugin                | Marketplace                       | Purpose                                   |
-| --------------------- | --------------------------------- | ----------------------------------------- |
-| `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images    |
-| `document-skills`     | `anthropic-agent-skills`          | Excel, Word, PowerPoint, PDF processing   |
-| `claude-mem`          | `thedotmack`                      | Persistent memory across sessions         |
-| `visual-explainer`    | `visual-explainer-marketplace`    | HTML diagrams, diff reviews, plan reviews |
+| Plugin                | Marketplace                       | Purpose                                          |
+| --------------------- | --------------------------------- | ------------------------------------------------ |
+| `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images           |
+| `document-skills`     | `anthropic-agent-skills`          | Excel, Word, PowerPoint, PDF processing          |
+| `claude-mem`          | `thedotmack`                      | Persistent memory across sessions                |
+| `visual-explainer`    | `visual-explainer-marketplace`    | HTML diagrams, diff reviews, plan reviews        |
+| `jean-claude`         | `jean-claude`                     | Gmail, Google Drive, and Google Calendar (OAuth) |
 
 ### MCP servers in core-plugin
 
 Service MCPs (Notion, Stripe, GitHub, etc.) come from the plugin dependencies above.
+Google Workspace (Gmail, Drive, Calendar) comes from the `jean-claude` plugin (OAuth, not MCP).
 `core-plugin/.mcp.json` only adds MCPs without a matching plugin:
 
 | Server       | Purpose                    |
@@ -94,7 +96,9 @@ Service MCPs (Notion, Stripe, GitHub, etc.) come from the plugin dependencies ab
 
 Requires **Claude Code v2.1.110+** (plugin dependencies). **v2.1.143+** recommended so dependency plugins enable automatically with `core-plugin`.
 
-Installing `core-plugin@ai-rules` pulls in all bundled skills and the 21 dependency plugins listed above.
+Installing `core-plugin@ai-rules` pulls in all bundled skills and the 22 dependency plugins listed above.
+
+**Prerequisite for Google Workspace:** install [uv](https://docs.astral.sh/uv/) before using the `jean-claude` dependency (Gmail, Drive, Calendar).
 
 ### Global install (recommended)
 
@@ -108,6 +112,7 @@ Run once from any directory — inside or outside this repo:
 /plugin marketplace add anthropics/skills
 /plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
+/plugin marketplace add max-sixty/jean-claude
 
 # 2. ai-rules marketplace and core-plugin (installs all dependencies)
 /plugin marketplace add bernatmv/ai-rules
@@ -125,6 +130,7 @@ claude plugin marketplace add alonw0/web-asset-generator
 claude plugin marketplace add anthropics/skills
 claude plugin marketplace add thedotmack/claude-mem
 claude plugin marketplace add nicobailon/visual-explainer
+claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install core-plugin@ai-rules
 ```
@@ -193,9 +199,11 @@ In Claude Code:
    - `document-skills@anthropic-agent-skills`
    - `skill-creator@claude-plugins-official`
    - `github@claude-plugins-official`
+   - `jean-claude@jean-claude`
 3. Run `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace from the global install steps above and run `/plugin install core-plugin@ai-rules` again.
 4. Run `/reload-plugins` — note the skill and MCP server counts in the output.
-5. Run `/mcp` — authenticate the services you use (GitHub, Notion, Figma, etc.). Skills work without this step; MCP tools do not.
+5. Run `/mcp` — authenticate the MCP services you use (GitHub, Notion, Figma, etc.). Skills work without this step; MCP tools do not.
+6. Authenticate Google Workspace — ask Claude to `Set up Google authentication for jean-claude`, or run `uv run jean-claude auth` from the installed plugin. Requires [uv](https://docs.astral.sh/uv/).
 
 Optional JSON check:
 
@@ -208,6 +216,7 @@ Spot-check that skills are recognized:
 - Core: `/core-plugin:babysit-pr` (or ask Claude to babysit a PR — skill triggers from description)
 - Superpowers: `/superpowers:brainstorming` (or similar superpowers skill)
 - Document skills: `/document-skills:pdf`
+- Google Workspace: ask Claude to check your inbox or search Drive (uses `jean-claude` after OAuth)
 
 ### Uninstall / cleanup
 

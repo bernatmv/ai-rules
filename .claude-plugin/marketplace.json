@@ -6,7 +6,8 @@
     "web-asset-generator-marketplace",
     "anthropic-agent-skills",
     "thedotmack",
-    "visual-explainer-marketplace"
+    "visual-explainer-marketplace",
+    "jean-claude"
   ],
   "plugins": [
     {

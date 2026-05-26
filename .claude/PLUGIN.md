@@ -12,6 +12,7 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add anthropics/skills
 /plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
+/plugin marketplace add max-sixty/jean-claude
 ```
 
 Then install core-plugin:
@@ -66,6 +67,7 @@ Manual install (if not using core-plugin):
 | `document-skills` | `anthropic-agent-skills` | `/plugin marketplace add anthropics/skills` |
 | `claude-mem` | `thedotmack` | `/plugin marketplace add thedotmack/claude-mem` |
 | `visual-explainer` | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer` |
+| `jean-claude` | `jean-claude` | `/plugin marketplace add max-sixty/jean-claude` |
 
 ### Web asset generator
 
@@ -92,6 +94,37 @@ HTML diagrams, diff reviews, and plan reviews. Examples:
 > draw a diagram of our authentication flow
 > /diff-review
 > /plan-review ~/docs/refactor-plan.md
+
+### Google Workspace (Gmail, Drive, Calendar)
+
+Provided by the `jean-claude` dependency — a skill/CLI plugin, not an MCP server.
+Requires [uv](https://docs.astral.sh/uv/) (Python 3.11+).
+
+After install, authenticate once:
+
+```
+Set up Google authentication for jean-claude
+```
+
+Or manually from the installed plugin directory:
+
+```sh
+uv run jean-claude auth
+uv run jean-claude status
+```
+
+Credentials are stored in `~/.config/jean-claude/token.json`. You may see Google's
+"unverified app" warning — use Advanced → Continue to proceed.
+
+Example prompts:
+
+```
+Check my inbox for unread emails
+Search Drive for quarterly reports
+What's on my calendar today?
+```
+
+Also includes iMessage on macOS (optional).
 
 ## Ralph Wiggum
 

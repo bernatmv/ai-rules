@@ -30,23 +30,21 @@ claude mcp remove github
 
 # MCPs in core-plugin
 
-`core-plugin@ai-rules` bundles MCP servers two ways:
+`core-plugin@ai-rules` bundles external integrations three ways:
 
-1. **Plugin dependencies** — service MCPs ship with official and third-party plugins
-   (Notion, Stripe, Supabase, Vercel, Playwright, Figma, GitHub, GitLab, Atlassian,
-   Chrome DevTools, Hugging Face, etc.). See [PLUGIN.md](./PLUGIN.md).
-2. **`.mcp.json` in core-plugin** — MCPs with no matching plugin dependency:
+1. **Plugin dependencies (MCP)** — Notion, Stripe, Supabase, Vercel, Playwright, Figma,
+   GitHub, GitLab, Atlassian, Chrome DevTools, Hugging Face, etc. See [PLUGIN.md](./PLUGIN.md).
+2. **`.mcp.json` in core-plugin (MCP)** — integrations without a matching plugin:
+3. **Google Workspace (Gmail, Drive, Calendar)** — via the `jean-claude` plugin dependency
+   (skill/CLI + OAuth, not MCP). See [PLUGIN.md](./PLUGIN.md#google-workspace-gmail-drive-calendar).
 
 | Server | Transport | Notes |
 | --- | --- | --- |
 | `convex` | stdio | `npx convex mcp start` |
 | `astro-docs` | http | Astro documentation search |
 
-After installing core-plugin, authenticate all MCP servers:
-
-```sh
-/mcp
-```
+After installing core-plugin, authenticate MCP servers with `/mcp`. Google Workspace uses
+separate OAuth via `jean-claude` (see PLUGIN.md).
 
 ## Convex
 
@@ -83,6 +81,19 @@ or the individual plugin from `claude-plugins-official`:
 | Atlassian | `atlassian@claude-plugins-official` |
 | Chrome DevTools | `chrome-devtools-mcp@claude-plugins-official` |
 | Hugging Face | `huggingface-skills@claude-plugins-official` |
+
+## Google Workspace (Gmail, Drive, Calendar)
+
+There is no official Google MCP in `claude-plugins-official`. `core-plugin` depends on
+`jean-claude@jean-claude` instead — a skill/CLI plugin with OAuth, not an MCP server.
+
+After install, authenticate once:
+
+```
+Set up Google authentication for jean-claude
+```
+
+Requires [uv](https://docs.astral.sh/uv/). Credentials: `~/.config/jean-claude/token.json`.
 
 Manual MCP add (without plugins):
 
