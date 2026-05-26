@@ -35,6 +35,7 @@ Or install individual plugins:
 /plugin install frontend-plugin@ai-rules
 /plugin install devops-plugin@ai-rules
 /plugin install ai-tools-plugin@ai-rules
+/plugin install gamedev-plugin@ai-rules
 /reload-plugins
 /mcp
 ```
@@ -47,7 +48,7 @@ Authenticate MCP-backed plugins after install:
 
 ## fullstack-plugin
 
-Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` from this marketplace.
+Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` from this marketplace.
 
 ```sh
 /plugin install fullstack-plugin@ai-rules
@@ -177,6 +178,18 @@ HeyGen AI video — avatars, TTS, translation, and video generation.
 - `/heygen:translate` — video translation / dubbing (175+ languages)
 
 Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
+
+## gamedev-plugin
+
+Three.js game and 3D development skills bundled from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills).
+
+### ai-rules bundled
+
+| Plugin           | Provides                                                                 |
+| ---------------- | ------------------------------------------------------------------------ |
+| `gamedev-plugin` | 10 Three.js skills — fundamentals, geometry, materials, shaders, animation, interaction ([catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) |
+
+Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:threejs-shaders`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
@@ -321,4 +334,5 @@ claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
+claude plugin uninstall gamedev-plugin@ai-rules --prune
 ```

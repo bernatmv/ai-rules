@@ -40,8 +40,13 @@
       "source": "./ai-tools-plugin"
     },
     {
+      "name": "gamedev-plugin",
+      "description": "Three.js game and 3D development skills from cloudai-x/threejs-skills",
+      "source": "./gamedev-plugin"
+    },
+    {
       "name": "fullstack-plugin",
-      "description": "Full stack bundle — core, frontend, devops, and ai-tools plugins in one install",
+      "description": "Full stack bundle — core, frontend, devops, ai-tools, and gamedev plugins in one install",
       "source": "./fullstack-plugin"
     },
     {

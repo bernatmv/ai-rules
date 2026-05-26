@@ -1,0 +1,10 @@
+{
+  "name": "gamedev-plugin",
+  "version": "1.0.0",
+  "description": "Three.js game and 3D development skills — fundamentals, geometry, materials, shaders, animation, and more",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/cloudai-x/threejs-skills",
+  "license": "MIT"
+}

@@ -6,11 +6,12 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 | Plugin                                 | Description                                                                                     |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
+| [gamedev-plugin](./gamedev-plugin)     | Three.js game and 3D development skills ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills)) |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -18,7 +19,7 @@ See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md
 
 ### fullstack-plugin
 
-Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `ai-tools-plugin` — one install for the full stack.
+Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` — one install for the full stack.
 
 ### core-plugin
 
@@ -118,6 +119,27 @@ Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marke
 
 The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com/skills) lists 11 skill entry points. The Claude plugin bundles them via `heygen@heygen` — use `/heygen:avatar`, `/heygen:video`, and `/heygen:translate`. Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
+### gamedev-plugin
+
+#### Bundled skills (10)
+
+From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)):
+
+| Skill | Purpose |
+| ----- | ------- |
+| `threejs-fundamentals` | Scene, camera, renderer, Object3D hierarchy |
+| `threejs-geometry` | Shapes, BufferGeometry, instancing |
+| `threejs-materials` | PBR, standard/phong materials, shaders |
+| `threejs-lighting` | Lights, shadows, environment lighting |
+| `threejs-textures` | Textures, UV mapping, render targets |
+| `threejs-animation` | Keyframe, skeletal, morph target animation |
+| `threejs-loaders` | GLTF/GLB, async loading, caching |
+| `threejs-shaders` | GLSL, ShaderMaterial, custom effects |
+| `threejs-postprocessing` | EffectComposer, bloom, DOF, custom passes |
+| `threejs-interaction` | Raycasting, controls, user input |
+
+Use `/gamedev-plugin:threejs-fundamentals` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+
 ## What lives here
 
 | Path                                                                         | Role                                                     |
@@ -193,6 +215,7 @@ Install only what you need:
 | UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
 | HeyGen avatars, TTS, video translation & generation     | `ai-tools-plugin@ai-rules`  |
+| Three.js game and 3D development                        | `gamedev-plugin@ai-rules`   |
 
 ### Project / local install
 
@@ -224,7 +247,7 @@ claude plugin list
 In Claude Code:
 
 1. `/plugin` → **Installed** — confirm enabled plugins:
-   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops/ai-tools plugins)
+   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops/ai-tools/gamedev plugins)
 2. Confirm key dependencies, for example:
    - `superpowers@claude-plugins-official` (core)
    - `figma@claude-plugins-official` (frontend)
@@ -249,6 +272,7 @@ Spot-check skills:
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 - AI tools: `/heygen:avatar` or `/heygen:video` (requires HeyGen API key)
+- Gamedev: `/gamedev-plugin:threejs-fundamentals`
 
 ### Uninstall / cleanup
 
@@ -264,6 +288,7 @@ claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
+claude plugin uninstall gamedev-plugin@ai-rules --prune
 ```
 
 ## Creating a New Plugin
