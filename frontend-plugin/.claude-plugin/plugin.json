@@ -15,6 +15,6 @@
     "browser-use-plugin",
     "remotion-plugin",
     "app-store-screenshots-plugin",
-    "seo-audit-plugin"
+    { "name": "marketing-skills", "marketplace": "marketingskills" }
   ]
 }

@@ -5,7 +5,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | Plugin | Provides |
 | --- | --- |
 | `core-plugin` | Engineering workflows, GitHub/Jira/Notion, documents, Google Workspace, productivity plugins |
-| `frontend-plugin` | Frontend design, Figma, Playwright, Chrome DevTools, web assets, Astro docs MCP |
+| `frontend-plugin` | Frontend design, Figma, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
 
 ## Install
@@ -17,6 +17,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 /plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
+/plugin marketplace add coreyhaines31/marketingskills
 
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules

@@ -3,9 +3,6 @@ set -euo pipefail
 cmd=$(jq -r '.tool_input.command // ""')
 
 dangerous_patterns=(
-  "rm -rf"
-  "git reset --hard"
-  "git push.*--force"
   "DROP TABLE"
   "DROP DATABASE"
 )

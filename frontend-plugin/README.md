@@ -17,9 +17,9 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `browser-use-plugin` | `ai-rules` | Browser automation via browser-use CLI |
 | `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
 | `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
-| `seo-audit-plugin` | `ai-rules` | SEO audit — crawlability, technical, on-page |
+| `marketing-skills` | `marketingskills` | SEO audit, copywriting, CRO, paid ads, etc. (41 skills) |
 
-See [`.claude/SKILLS.md`](../.claude/SKILLS.md) for slash commands.
+Key marketing skills: `/marketing-skills:seo-audit`, `/marketing-skills:copywriting`. See [`.claude/SKILLS.md`](../.claude/SKILLS.md).
 
 ## MCP servers
 
@@ -32,6 +32,7 @@ Authenticate MCP servers after install with `/mcp`.
 ## Install
 
 ```sh
+/plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add bernatmv/ai-rules
 /plugin install frontend-plugin@ai-rules
 /reload-plugins

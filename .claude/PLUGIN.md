@@ -13,6 +13,7 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
+/plugin marketplace add coreyhaines31/marketingskills
 ```
 
 Then install the plugins you need:
@@ -74,13 +75,13 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 
 ### Third-party
 
-| Plugin             | Marketplace                    | Add marketplace                                       |
-| ------------------ | ------------------------------ | ----------------------------------------------------- |
-| `document-skills`  | `anthropic-agent-skills`       | `/plugin marketplace add anthropics/skills`           |
-| `claude-mem`       | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`       |
-| `visual-explainer` | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer` |
-| `jean-claude`      | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`       |
-| `excalidraw-plugin` | `ai-rules`                    | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
+| Plugin              | Marketplace                    | Add marketplace                                                          |
+| ------------------- | ------------------------------ | ------------------------------------------------------------------------ |
+| `document-skills`   | `anthropic-agent-skills`       | `/plugin marketplace add anthropics/skills`                              |
+| `claude-mem`        | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`                          |
+| `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
+| `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
+| `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 
 ### MCP in core-plugin
 
@@ -90,13 +91,13 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 
 ### Bundled skills (not available as plugin dependencies)
 
-| Skill | Purpose |
-| --- | --- |
-| `babysit-pr` | Keep PRs merge-ready |
-| `launch-playbook` | Multi-platform product launch campaigns |
-| `plugin-advisor` | Recommend Claude Code plugins |
-| `prd` | Generate PRDs |
-| `ralph` | Convert PRDs to `prd.json` for Ralph runs |
+| Skill             | Purpose                                   |
+| ----------------- | ----------------------------------------- |
+| `babysit-pr`      | Keep PRs merge-ready                      |
+| `launch-playbook` | Multi-platform product launch campaigns   |
+| `plugin-advisor`  | Recommend Claude Code plugins             |
+| `prd`             | Generate PRDs                             |
+| `ralph`           | Convert PRDs to `prd.json` for Ralph runs |
 
 TDD comes from the `superpowers` dependency — use `/superpowers:test-driven-development`. The bundled `test-driven-development` skill was removed to avoid duplicating superpowers.
 
@@ -115,16 +116,16 @@ Frontend design, browser testing, Figma, and UI debugging.
 
 ### Third-party and ai-rules
 
-| Plugin | Marketplace | Add marketplace |
-| --- | --- | --- |
-| `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
-| `vercel` | `claude-plugins-official` | built-in — shadcn, Next.js, Vercel agent skills |
-| `browser-use-plugin` | `ai-rules` | bundled with `frontend-plugin` |
-| `remotion-plugin` | `ai-rules` | bundled with `frontend-plugin` |
-| `app-store-screenshots-plugin` | `ai-rules` | bundled with `frontend-plugin` |
-| `seo-audit-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+| Plugin                         | Marketplace                       | Add marketplace                                      |
+| ------------------------------ | --------------------------------- | ---------------------------------------------------- |
+| `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
+| `vercel`                       | `claude-plugins-official`         | built-in — shadcn, Next.js, Vercel agent skills      |
+| `browser-use-plugin`           | `ai-rules`                        | bundled with `frontend-plugin`                       |
+| `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
+| `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
+| `marketing-skills`             | `marketingskills`                 | `/plugin marketplace add coreyhaines31/marketingskills` |
 
-`seo-audit` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) runs systematic SEO audits. Does not duplicate `web-asset-generator`, core `launch-playbook`, or `vercel` framework skills.
+`marketing-skills` includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting) plus 39 other marketing skills. Complements `frontend-design`, core `prd`, and core `launch-playbook`.
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
@@ -140,9 +141,9 @@ Cloud deployment and backend infrastructure.
 
 ### Official (`claude-plugins-official`)
 
-| Plugin     | Provides                 |
-| ---------- | ------------------------ |
-| `supabase` | Supabase MCP integration |
+| Plugin     | Provides                                                         |
+| ---------- | ---------------------------------------------------------------- |
+| `supabase` | Supabase MCP integration                                         |
 | `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
 Manual install of any official dependency (without ai-rules plugins):
@@ -212,10 +213,10 @@ Also includes iMessage on macOS (optional).
 
 Two complementary pieces:
 
-| Piece | Source | Purpose |
-| --- | --- | --- |
-| `ralph` skill | Bundled in `core-plugin/skills/` | Convert PRDs to `prd.json` (`/core-plugin:ralph`) |
-| `ralph-loop` plugin | Dependency on `claude-plugins-official` | Autonomous iteration loop (`/ralph-loop`) |
+| Piece               | Source                                  | Purpose                                           |
+| ------------------- | --------------------------------------- | ------------------------------------------------- |
+| `ralph` skill       | Bundled in `core-plugin/skills/`        | Convert PRDs to `prd.json` (`/core-plugin:ralph`) |
+| `ralph-loop` plugin | Dependency on `claude-plugins-official` | Autonomous iteration loop (`/ralph-loop`)         |
 
 `ralph-loop` usage:
 
@@ -230,23 +231,29 @@ Cancel with `/cancel-ralph`.
 Good task definitions:
 
 When complete:
+
 - All CRUD endpoints working
 - Input validation in place
 - Tests passing (coverage > 80%)
 - README with API docs
 - Output: <promise>COMPLETE</promise>
+
 ```
 
 ```
+
 Phase 1: User authentication (JWT, tests)
 Phase 2: Product catalog (list/search, tests)
 Phase 3: Shopping cart (add/remove, tests)
 
 Output <promise>COMPLETE</promise> when all phases done.
+
 ```
 
 ```
+
 Implement feature X following TDD:
+
 1. Write failing tests
 2. Implement feature
 3. Run tests
@@ -254,7 +261,8 @@ Implement feature X following TDD:
 5. Refactor if needed
 6. Repeat until all green
 7. Output: <promise>COMPLETE</promise>
-```
+
+````
 
 ## Manage dependencies
 
@@ -263,7 +271,7 @@ List installed plugins and dependency errors:
 ```sh
 claude plugin list
 /plugin
-```
+````
 
 Remove orphaned auto-installed dependencies:
 

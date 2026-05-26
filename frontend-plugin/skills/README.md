@@ -8,6 +8,6 @@ via plugin dependencies:
 - `figma` — Figma MCP and design workflow skills
 - `chrome-devtools-mcp` — Chrome DevTools MCP
 - `web-asset-generator` — favicons, app icons, Open Graph images
-- `seo-audit` — SEO audit (crawlability, technical, on-page, content)
+- `marketing-skills` — includes `seo-audit`, `copywriting`, and 39 other marketing skills (upstream)
 
 See [README.md](../README.md) for install and MCP auth.

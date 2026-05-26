@@ -7,7 +7,8 @@
     "anthropic-agent-skills",
     "thedotmack",
     "visual-explainer-marketplace",
-    "jean-claude"
+    "jean-claude",
+    "marketingskills"
   ],
   "plugins": [
     {
@@ -31,11 +32,6 @@
       "source": "./remotion-plugin"
     },
     {
-      "name": "seo-audit-plugin",
-      "description": "SEO audit — crawlability, technical foundations, on-page optimization, content quality",
-      "source": "./seo-audit-plugin"
-    },
-    {
       "name": "fullstack-plugin",
       "description": "Full stack bundle — core, frontend, and devops plugins in one install",
       "source": "./fullstack-plugin"
@@ -52,7 +48,7 @@
     },
     {
       "name": "frontend-plugin",
-      "description": "Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP",
+      "description": "Frontend design, Figma, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
       "source": "./frontend-plugin"
     }
   ]

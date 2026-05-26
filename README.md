@@ -4,12 +4,12 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 ## Plugins
 
-| Plugin                                         | Description                                                                                     |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin)         | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`                 |
-| [core-plugin](./core-plugin)                   | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
-| [frontend-plugin](./frontend-plugin)           | Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP             |
-| [devops-plugin](./devops-plugin)               | Supabase and Vercel MCP integrations                                                            |
+| Plugin                                 | Description                                                                                     |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`                 |
+| [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
+| [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
+| [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -67,20 +67,20 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 
 #### Dependencies (10)
 
-| Plugin                         | Purpose                                             |
-| ------------------------------ | --------------------------------------------------- |
-| `frontend-design`              | Frontend UI design guidance                         |
-| `playwright`                   | Playwright MCP for browser automation               |
-| `figma`                        | Figma MCP and design workflow skills                |
-| `chrome-devtools-mcp`          | Chrome DevTools MCP                                 |
-| `web-asset-generator`          | Favicons, app icons, Open Graph images              |
-| `vercel`                       | shadcn, Next.js best practices, Vercel agent skills |
-| `browser-use-plugin`           | Browser automation CLI (ai-rules)                   |
-| `remotion-plugin`              | Programmatic video creation (ai-rules)              |
-| `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)          |
-| `seo-audit-plugin`             | SEO audit — crawlability, technical, on-page (ai-rules) |
+| Plugin                         | Purpose                                                 |
+| ------------------------------ | ------------------------------------------------------- |
+| `frontend-design`              | Frontend UI design guidance                             |
+| `playwright`                   | Playwright MCP for browser automation                   |
+| `figma`                        | Figma MCP and design workflow skills                    |
+| `chrome-devtools-mcp`          | Chrome DevTools MCP                                     |
+| `web-asset-generator`          | Favicons, app icons, Open Graph images                  |
+| `vercel`                       | shadcn, Next.js best practices, Vercel agent skills     |
+| `browser-use-plugin`           | Browser automation CLI (ai-rules)                       |
+| `remotion-plugin`              | Programmatic video creation (ai-rules)                  |
+| `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)              |
+| `marketing-skills`             | SEO audit, copywriting, CRO, paid ads, etc. (41 skills) |
 
-No overlap with `web-asset-generator` (assets), `launch-playbook` in core (launch campaigns), or `vercel` (deploy/framework skills).
+Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marketingskills) — includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting). Complements (does not duplicate) `frontend-design`, core `prd`, and core `launch-playbook`.
 
 #### MCP in frontend-plugin
 
@@ -126,6 +126,7 @@ Run once from any directory:
 /plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
+/plugin marketplace add coreyhaines31/marketingskills   # frontend-plugin
 
 # 2. ai-rules marketplace
 /plugin marketplace add bernatmv/ai-rules
@@ -151,18 +152,19 @@ claude plugin marketplace add anthropics/skills
 claude plugin marketplace add thedotmack/claude-mem
 claude plugin marketplace add nicobailon/visual-explainer
 claude plugin marketplace add max-sixty/jean-claude
+claude plugin marketplace add coreyhaines31/marketingskills
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install fullstack-plugin@ai-rules
 ```
 
 Install only what you need:
 
-| Need                                                    | Install                         |
-| ------------------------------------------------------- | ------------------------------- |
-| Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules`     |
-| PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`          |
-| UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules`      |
-| Supabase, Vercel                                        | `devops-plugin@ai-rules`        |
+| Need                                                    | Install                     |
+| ------------------------------------------------------- | --------------------------- |
+| Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules` |
+| PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
+| UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
+| Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
 
 ### Project / local install
 
