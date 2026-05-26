@@ -49,7 +49,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `gitlab`             | GitLab MCP                                                    |
 | `stripe`             | Stripe MCP                                                    |
 | `huggingface-skills` | Hugging Face Hub skills and MCP                               |
-| `skill-creator`      | Create and improve agent skills                               |
+| `skill-creator`      | Create and improve agent skills ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
 | `notion`             | Notion MCP                                                    |
 | `document-skills`    | Excel, Word, PowerPoint, PDF processing                       |
 | `claude-mem`         | Persistent memory across sessions                             |
@@ -58,7 +58,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
 | `find-skills-plugin` | Discover and install skills from skills.sh (ai-rules)         |
 
-`find-skills` complements `plugin-advisor` (marketplace plugins) and `skill-creator` (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/).
+`find-skills` complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/). `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
 
 #### MCP in core-plugin
 

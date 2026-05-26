@@ -20,6 +20,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `remotion`              | `frontend-plugin` → `remotion-plugin`              | `/remotion-plugin:remotion`      |
 | `excalidraw-diagram`    | `core-plugin` → `excalidraw-plugin`                | `/excalidraw-plugin:excalidraw-diagram` |
 | `find-skills`           | `core-plugin` → `find-skills-plugin`               | `/find-skills-plugin:find-skills`       |
+| `skill-creator`         | `core-plugin` → `skill-creator`                    | `/skill-creator:skill-creator`          |
 | `shadcn`                | `frontend-plugin` → `vercel`                       | `/vercel:shadcn`                 |
 | `next-best-practices`   | `frontend-plugin` → `vercel` (`nextjs` skill)      | `/vercel:nextjs`                 |
 | Vercel agent skills     | `devops-plugin` → `vercel`                         | `/vercel:*`                      |
@@ -43,6 +44,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `remotion`                      | [remotion-dev/skills](https://github.com/remotion-dev/skills)                                        |
 | `excalidraw-diagram`            | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)            |
 | `find-skills`                   | [vercel-labs/skills](https://github.com/vercel-labs/skills) via `find-skills-plugin@ai-rules`        |
+| `skill-creator`                 | [anthropics/skills](https://github.com/anthropics/skills) via `skill-creator@claude-plugins-official` ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
 | `shadcn`, Next.js, Vercel stack | [vercel/vercel-plugin](https://github.com/vercel/vercel-plugin) via `vercel@claude-plugins-official` |
 | `app-store-screenshots`         | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots)            |
 | `seo-audit`, `copywriting`, …   | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) via `marketing-skills@marketingskills` |
@@ -54,6 +56,7 @@ npx skills add vercel-labs/agent-browser
 npx skills add remotion/agent-skills
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
+npx skills add https://github.com/anthropics/skills --skill skill-creator
 npx skills add shadcn/ui
 npx skills add vercel-labs/agent-skills
 npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices

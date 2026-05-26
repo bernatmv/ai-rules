@@ -71,7 +71,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `gitlab`             | GitLab MCP integration                                        |
 | `stripe`             | Stripe MCP integration                                        |
 | `huggingface-skills` | Hugging Face Hub skills and MCP                               |
-| `skill-creator`      | Create, evaluate, and improve agent skills                    |
+| `skill-creator`      | Create, evaluate, and improve agent skills ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
 | `notion`             | Notion MCP integration                                        |
 
 ### Third-party
@@ -85,7 +85,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 | `find-skills-plugin` | `ai-rules`                  | bundled with `core-plugin` |
 
-`find-skills` ([vercel-labs/skills](https://github.com/vercel-labs/skills)) searches [skills.sh](https://skills.sh/) for installable agent skills. Complements `plugin-advisor` (marketplace plugins) and `skill-creator` (authoring) — no overlap.
+`find-skills` ([vercel-labs/skills](https://github.com/vercel-labs/skills)) searches [skills.sh](https://skills.sh/) for installable agent skills. Complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — no overlap. `skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).
 
 ### MCP in core-plugin
 
