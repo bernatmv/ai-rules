@@ -33,25 +33,25 @@ Authenticate MCP-backed plugins after install:
 
 Auto-installed as dependencies of `core-plugin`:
 
-| Plugin | Provides |
-| --- | --- |
-| `frontend-design` | Frontend UI design guidance |
-| `superpowers` | Development workflows (TDD, planning, debugging, code review) |
-| `code-review` | PR and code review agents |
-| `code-simplifier` | Code simplification workflows |
-| `github` | GitHub MCP integration |
-| `playwright` | Playwright MCP for browser automation |
-| `ralph-loop` | Autonomous iteration loop (`/ralph-loop`) |
-| `figma` | Figma MCP integration |
-| `supabase` | Supabase MCP integration |
-| `atlassian` | Jira and Confluence MCP integration |
-| `vercel` | Vercel MCP integration |
-| `gitlab` | GitLab MCP integration |
-| `chrome-devtools-mcp` | Chrome DevTools MCP |
-| `stripe` | Stripe MCP integration |
-| `huggingface-skills` | Hugging Face Hub skills and MCP |
-| `skill-creator` | Create, evaluate, and improve agent skills |
-| `notion` | Notion MCP integration |
+| Plugin                | Provides                                                      |
+| --------------------- | ------------------------------------------------------------- |
+| `frontend-design`     | Frontend UI design guidance                                   |
+| `superpowers`         | Development workflows (TDD, planning, debugging, code review) |
+| `code-review`         | PR and code review agents                                     |
+| `code-simplifier`     | Code simplification workflows                                 |
+| `github`              | GitHub MCP integration                                        |
+| `playwright`          | Playwright MCP for browser automation                         |
+| `ralph-loop`          | Autonomous iteration loop (`/ralph-loop`)                     |
+| `figma`               | Figma MCP integration                                         |
+| `supabase`            | Supabase MCP integration                                      |
+| `atlassian`           | Jira and Confluence MCP integration                           |
+| `vercel`              | Vercel MCP integration                                        |
+| `gitlab`              | GitLab MCP integration                                        |
+| `chrome-devtools-mcp` | Chrome DevTools MCP                                           |
+| `stripe`              | Stripe MCP integration                                        |
+| `huggingface-skills`  | Hugging Face Hub skills and MCP                               |
+| `skill-creator`       | Create, evaluate, and improve agent skills                    |
+| `notion`              | Notion MCP integration                                        |
 
 Manual install (if not using core-plugin):
 
@@ -61,13 +61,13 @@ Manual install (if not using core-plugin):
 
 ## Third-party (auto-installed with core-plugin)
 
-| Plugin | Marketplace | Add marketplace |
-| --- | --- | --- |
-| `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
-| `document-skills` | `anthropic-agent-skills` | `/plugin marketplace add anthropics/skills` |
-| `claude-mem` | `thedotmack` | `/plugin marketplace add thedotmack/claude-mem` |
-| `visual-explainer` | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer` |
-| `jean-claude` | `jean-claude` | `/plugin marketplace add max-sixty/jean-claude` |
+| Plugin                | Marketplace                       | Add marketplace                                       |
+| --------------------- | --------------------------------- | ----------------------------------------------------- |
+| `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator`  |
+| `document-skills`     | `anthropic-agent-skills`          | `/plugin marketplace add anthropics/skills`           |
+| `claude-mem`          | `thedotmack`                      | `/plugin marketplace add thedotmack/claude-mem`       |
+| `visual-explainer`    | `visual-explainer-marketplace`    | `/plugin marketplace add nicobailon/visual-explainer` |
+| `jean-claude`         | `jean-claude`                     | `/plugin marketplace add max-sixty/jean-claude`       |
 
 ### Web asset generator
 

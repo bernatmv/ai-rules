@@ -38,10 +38,10 @@ claude mcp remove github
 3. **Google Workspace (Gmail, Drive, Calendar)** — via the `jean-claude` plugin dependency
    (skill/CLI + OAuth, not MCP). See [PLUGIN.md](./PLUGIN.md#google-workspace-gmail-drive-calendar).
 
-| Server | Transport | Notes |
-| --- | --- | --- |
-| `convex` | stdio | `npx convex mcp start` |
-| `astro-docs` | http | Astro documentation search |
+| Server       | Transport | Notes                      |
+| ------------ | --------- | -------------------------- |
+| `convex`     | stdio     | `npx convex mcp start`     |
+| `astro-docs` | http      | Astro documentation search |
 
 After installing core-plugin, authenticate MCP servers with `/mcp`. Google Workspace uses
 separate OAuth via `jean-claude` (see PLUGIN.md).
@@ -68,19 +68,19 @@ claude mcp add --transport http "Astro docs" https://mcp.docs.astro.build/mcp
 These are **not** duplicated in `core-plugin/.mcp.json`. Install `core-plugin@ai-rules`
 or the individual plugin from `claude-plugins-official`:
 
-| Service | Plugin dependency |
-| --- | --- |
-| Figma | `figma@claude-plugins-official` |
-| Notion | `notion@claude-plugins-official` |
-| Stripe | `stripe@claude-plugins-official` |
-| Supabase | `supabase@claude-plugins-official` |
-| Vercel | `vercel@claude-plugins-official` |
-| Playwright | `playwright@claude-plugins-official` |
-| GitHub | `github@claude-plugins-official` |
-| GitLab | `gitlab@claude-plugins-official` |
-| Atlassian | `atlassian@claude-plugins-official` |
+| Service         | Plugin dependency                             |
+| --------------- | --------------------------------------------- |
+| Figma           | `figma@claude-plugins-official`               |
+| Notion          | `notion@claude-plugins-official`              |
+| Stripe          | `stripe@claude-plugins-official`              |
+| Supabase        | `supabase@claude-plugins-official`            |
+| Vercel          | `vercel@claude-plugins-official`              |
+| Playwright      | `playwright@claude-plugins-official`          |
+| GitHub          | `github@claude-plugins-official`              |
+| GitLab          | `gitlab@claude-plugins-official`              |
+| Atlassian       | `atlassian@claude-plugins-official`           |
 | Chrome DevTools | `chrome-devtools-mcp@claude-plugins-official` |
-| Hugging Face | `huggingface-skills@claude-plugins-official` |
+| Hugging Face    | `huggingface-skills@claude-plugins-official`  |
 
 ## Google Workspace (Gmail, Drive, Calendar)
 
