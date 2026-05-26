@@ -12,7 +12,6 @@ body:
         - core-plugin
         - devops-plugin
         - frontend-plugin
-        - spec-workflow-plugin
         - Other / Unknown
     validations:
       required: true

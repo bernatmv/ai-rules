@@ -49,11 +49,6 @@
       "name": "frontend-plugin",
       "description": "Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP",
       "source": "./frontend-plugin"
-    },
-    {
-      "name": "spec-workflow-plugin",
-      "description": "Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management",
-      "source": "./spec-workflow-plugin"
     }
   ]
 }

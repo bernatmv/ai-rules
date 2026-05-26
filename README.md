@@ -10,7 +10,6 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [core-plugin](./core-plugin)                   | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)           | Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP             |
 | [devops-plugin](./devops-plugin)               | Supabase and Vercel MCP integrations                                                            |
-| [spec-workflow-plugin](./spec-workflow-plugin) | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management  |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -95,17 +94,6 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `supabase` | Supabase MCP integration                                         |
 | `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
-### spec-workflow-plugin
-
-Spec-Driven Development (SDD) lifecycle skills. Requires **Python 3.9+** and a `.spec-workflow/` workspace with the SDD runtime shim — see [spec-workflow-plugin/README.md](./spec-workflow-plugin/README.md).
-
-| Category    | Skills                                                                                                   |
-| ----------- | -------------------------------------------------------------------------------------------------------- |
-| Development | `sdd-create-discovery`, `sdd-create-prd`, `sdd-create-spec`, `sdd-create-steering`, `sdd-implement-spec` |
-| Review      | `sdd-review-code`, `sdd-review-prd`, `sdd-review-spec-docs`, `sdd-review-steering-docs`                  |
-| Workflow    | `sdd-archive-spec`, `sdd-manage-status`, `sdd-manage-template`, `sdd-workspace-create-spec`              |
-| Shared      | `sdd-common` (internal reference hub, not user-invocable)                                                |
-
 ## What lives here
 
 | Path                                                                         | Role                                                     |
@@ -121,8 +109,6 @@ Spec-Driven Development (SDD) lifecycle skills. Requires **Python 3.9+** and a `
 Requires **Claude Code v2.1.110+** (plugin dependencies). **v2.1.143+** recommended so dependency plugins enable automatically.
 
 **Prerequisite for Google Workspace:** install [uv](https://docs.astral.sh/uv/) before using the `jean-claude` dependency (via `core-plugin` or `fullstack-plugin`).
-
-**Prerequisite for SDD:** Python 3.9+ and `.spec-workflow/` workspace setup (via `spec-workflow-plugin`).
 
 ### Global install (recommended)
 
@@ -143,7 +129,6 @@ Run once from any directory:
 
 # 3. Install (pick one approach)
 /plugin install fullstack-plugin@ai-rules          # full stack — recommended
-/plugin install spec-workflow-plugin@ai-rules      # optional: SDD workflow
 
 # Or install individual plugins instead of fullstack-plugin:
 # /plugin install core-plugin@ai-rules
@@ -165,7 +150,6 @@ claude plugin marketplace add nicobailon/visual-explainer
 claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install fullstack-plugin@ai-rules
-claude plugin install spec-workflow-plugin@ai-rules   # optional
 ```
 
 Install only what you need:
@@ -176,7 +160,6 @@ Install only what you need:
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`          |
 | UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules`      |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`        |
-| Spec-Driven Development                                 | `spec-workflow-plugin@ai-rules` |
 
 ### Project / local install
 
@@ -192,7 +175,6 @@ If you clone this repo and trust the project folder, [`.claude/settings.json`](.
 ```sh
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules --scope project
-/plugin install spec-workflow-plugin@ai-rules --scope project   # optional
 /reload-plugins
 /mcp
 ```
@@ -210,7 +192,6 @@ In Claude Code:
 
 1. `/plugin` → **Installed** — confirm enabled plugins:
    - `fullstack-plugin@ai-rules` (or individual core/frontend/devops plugins)
-   - `spec-workflow-plugin@ai-rules` (if installed)
 2. Confirm key dependencies, for example:
    - `superpowers@claude-plugins-official` (core)
    - `figma@claude-plugins-official` (frontend)
@@ -233,13 +214,11 @@ Spot-check skills:
 - TDD: `/superpowers:test-driven-development`
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
-- SDD: `/spec-workflow-plugin:sdd-create-prd` (after workspace setup)
 
 ### Uninstall / cleanup
 
 ```sh
 claude plugin uninstall fullstack-plugin@ai-rules --prune
-claude plugin uninstall spec-workflow-plugin@ai-rules --prune
 claude plugin prune --dry-run
 ```
 

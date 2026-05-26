@@ -20,7 +20,6 @@ Then install the plugins you need:
 ```sh
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules          # recommended — core + frontend + devops
-/plugin install spec-workflow-plugin@ai-rules      # optional — SDD workflow
 /reload-plugins
 /mcp
 ```
@@ -142,24 +141,6 @@ Cloud deployment and backend infrastructure.
 | ---------- | ------------------------ |
 | `supabase` | Supabase MCP integration |
 | `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
-
-## spec-workflow-plugin
-
-Spec-Driven Development (SDD) lifecycle skills. No plugin dependencies — skills and Python scripts ship in the plugin.
-
-**Prerequisites:** Python 3.9+, `.spec-workflow/` workspace with SDD runtime shim. See [spec-workflow-plugin/README.md](../spec-workflow-plugin/README.md).
-
-| Category | Skills |
-| --- | --- |
-| Development | `sdd-create-discovery`, `sdd-create-prd`, `sdd-create-spec`, `sdd-create-steering`, `sdd-implement-spec` |
-| Review | `sdd-review-code`, `sdd-review-prd`, `sdd-review-spec-docs`, `sdd-review-steering-docs` |
-| Workflow | `sdd-archive-spec`, `sdd-manage-status`, `sdd-manage-template`, `sdd-workspace-create-spec` |
-| Shared | `sdd-common` (internal, not user-invocable) |
-
-```sh
-/plugin install spec-workflow-plugin@ai-rules
-/reload-plugins
-```
 
 Manual install of any official dependency (without ai-rules plugins):
 
@@ -291,7 +272,6 @@ Uninstall a plugin and clean up its dependencies:
 
 ```sh
 claude plugin uninstall fullstack-plugin@ai-rules --prune
-claude plugin uninstall spec-workflow-plugin@ai-rules --prune
 claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
