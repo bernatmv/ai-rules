@@ -14,6 +14,7 @@ outside this repo, add those marketplaces once:
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
 /plugin marketplace add coreyhaines31/marketingskills
+/plugin marketplace add vercel-labs/agent-browser
 ```
 
 Then install the plugins you need:
@@ -123,10 +124,12 @@ Frontend design, browser testing, Figma, and UI debugging.
 | ------------------------------ | --------------------------------- | ---------------------------------------------------- |
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
 | `vercel`                       | `claude-plugins-official`         | built-in — shadcn, Next.js, Vercel agent skills      |
-| `browser-use-plugin`           | `ai-rules`                        | bundled with `frontend-plugin`                       |
+| `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
 | `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `marketing-skills`             | `marketingskills`                 | `/plugin marketplace add coreyhaines31/marketingskills` |
+
+`agent-browser` ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) is the default CLI for browser automation — compact accessibility-tree snapshots with `@eN` refs. Load runtime instructions via `agent-browser skills get core`. Complements `playwright` MCP (tool-calling) and `chrome-devtools-mcp` (debugging). Replaces the former `browser-use-plugin` dependency.
 
 `marketing-skills` includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting) plus 39 other marketing skills. Complements `frontend-design`, core `prd`, and core `launch-playbook`.
 

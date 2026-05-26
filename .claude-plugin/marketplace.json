@@ -8,18 +8,14 @@
     "thedotmack",
     "visual-explainer-marketplace",
     "jean-claude",
-    "marketingskills"
+    "marketingskills",
+    "agent-browser"
   ],
   "plugins": [
     {
       "name": "app-store-screenshots-plugin",
       "description": "App Store screenshot pages and exportable iOS marketing screenshots",
       "source": "./app-store-screenshots-plugin"
-    },
-    {
-      "name": "browser-use-plugin",
-      "description": "Browser automation via the browser-use CLI",
-      "source": "./browser-use-plugin"
     },
     {
       "name": "excalidraw-plugin",
@@ -53,7 +49,7 @@
     },
     {
       "name": "frontend-plugin",
-      "description": "Frontend design, Figma, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
+      "description": "Frontend design, Figma, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
       "source": "./frontend-plugin"
     }
   ]

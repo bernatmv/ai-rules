@@ -6,6 +6,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 ```sh
 /plugin marketplace add coreyhaines31/marketingskills   # frontend-plugin (marketing skills)
+/plugin marketplace add vercel-labs/agent-browser       # frontend-plugin (browser automation CLI)
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules    # or core-plugin / frontend-plugin individually
 /reload-plugins
@@ -15,7 +16,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 | Skill                   | Installed via                                      | Slash command                    |
 | ----------------------- | -------------------------------------------------- | -------------------------------- |
-| `browser-use`           | `frontend-plugin` → `browser-use-plugin`           | `/browser-use-plugin:browser-use` |
+| `agent-browser`         | `frontend-plugin` → `agent-browser`                | `/agent-browser:agent-browser`    |
 | `remotion`              | `frontend-plugin` → `remotion-plugin`              | `/remotion-plugin:remotion`      |
 | `excalidraw-diagram`    | `core-plugin` → `excalidraw-plugin`                | `/excalidraw-plugin:excalidraw-diagram` |
 | `find-skills`           | `core-plugin` → `find-skills-plugin`               | `/find-skills-plugin:find-skills`       |
@@ -28,6 +29,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 `marketing-skills` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) ships 41 skills; `frontend-plugin` depends on the whole plugin. Highlighted above: `seo-audit` and `copywriting`.
 
+**Overlap check:** `agent-browser` is the default CLI for browser automation (snapshot + `@eN` refs, low token cost). `playwright` MCP complements it for MCP-native tool-calling flows. `chrome-devtools-mcp` covers debugging and performance — not duplicated.
+
 **Overlap check:** `find-skills` searches the open skills ecosystem (`skills.sh`); `plugin-advisor` recommends Claude Code marketplace plugins; `skill-creator` authors skills — complementary, not duplicated.
 
 **Overlap check:** `copywriting` and `seo-audit` complement `frontend-design` (UI implementation), core `prd` (requirements), and core `launch-playbook` (launch ops) — they do not duplicate them.
@@ -36,7 +39,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 | Skill                           | Source                                                                                               |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `browser-use`                   | [browser-use/browser-use](https://github.com/browser-use/browser-use)                                |
+| `agent-browser`                 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) via `agent-browser@agent-browser` |
 | `remotion`                      | [remotion-dev/skills](https://github.com/remotion-dev/skills)                                        |
 | `excalidraw-diagram`            | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)            |
 | `find-skills`                   | [vercel-labs/skills](https://github.com/vercel-labs/skills) via `find-skills-plugin@ai-rules`        |
@@ -47,7 +50,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 ## Manual install (without ai-rules plugins)
 
 ```sh
-npx skills add https://github.com/browser-use/browser-use --skill browser-use
+npx skills add vercel-labs/agent-browser
 npx skills add remotion/agent-skills
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
 npx skills add https://github.com/vercel-labs/skills --skill find-skills

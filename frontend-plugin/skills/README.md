@@ -4,6 +4,7 @@ Add project-specific frontend skills here. Official frontend tooling is pulled i
 via plugin dependencies:
 
 - `frontend-design` — UI design guidance
+- `agent-browser` — browser automation CLI (snapshot + `@eN` refs)
 - `playwright` — browser automation MCP
 - `figma` — Figma MCP and design workflow skills
 - `chrome-devtools-mcp` — Chrome DevTools MCP

@@ -12,7 +12,7 @@
     { "name": "chrome-devtools-mcp", "marketplace": "claude-plugins-official" },
     { "name": "web-asset-generator", "marketplace": "web-asset-generator-marketplace" },
     { "name": "vercel", "marketplace": "claude-plugins-official" },
-    "browser-use-plugin",
+    { "name": "agent-browser", "marketplace": "agent-browser" },
     "remotion-plugin",
     "app-store-screenshots-plugin",
     { "name": "marketing-skills", "marketplace": "marketingskills" }
