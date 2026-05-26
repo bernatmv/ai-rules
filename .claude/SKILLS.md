@@ -18,6 +18,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `browser-use`           | `frontend-plugin` → `browser-use-plugin`           | `/browser-use-plugin:browser-use` |
 | `remotion`              | `frontend-plugin` → `remotion-plugin`              | `/remotion-plugin:remotion`      |
 | `excalidraw-diagram`    | `core-plugin` → `excalidraw-plugin`                | `/excalidraw-plugin:excalidraw-diagram` |
+| `find-skills`           | `core-plugin` → `find-skills-plugin`               | `/find-skills-plugin:find-skills`       |
 | `shadcn`                | `frontend-plugin` → `vercel`                       | `/vercel:shadcn`                 |
 | `next-best-practices`   | `frontend-plugin` → `vercel` (`nextjs` skill)      | `/vercel:nextjs`                 |
 | Vercel agent skills     | `devops-plugin` → `vercel`                         | `/vercel:*`                      |
@@ -26,6 +27,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `copywriting`           | `frontend-plugin` → `marketing-skills`             | `/marketing-skills:copywriting`  |
 
 `marketing-skills` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) ships 41 skills; `frontend-plugin` depends on the whole plugin. Highlighted above: `seo-audit` and `copywriting`.
+
+**Overlap check:** `find-skills` searches the open skills ecosystem (`skills.sh`); `plugin-advisor` recommends Claude Code marketplace plugins; `skill-creator` authors skills — complementary, not duplicated.
 
 **Overlap check:** `copywriting` and `seo-audit` complement `frontend-design` (UI implementation), core `prd` (requirements), and core `launch-playbook` (launch ops) — they do not duplicate them.
 
@@ -36,6 +39,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `browser-use`                   | [browser-use/browser-use](https://github.com/browser-use/browser-use)                                |
 | `remotion`                      | [remotion-dev/skills](https://github.com/remotion-dev/skills)                                        |
 | `excalidraw-diagram`            | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)            |
+| `find-skills`                   | [vercel-labs/skills](https://github.com/vercel-labs/skills) via `find-skills-plugin@ai-rules`        |
 | `shadcn`, Next.js, Vercel stack | [vercel/vercel-plugin](https://github.com/vercel/vercel-plugin) via `vercel@claude-plugins-official` |
 | `app-store-screenshots`         | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots)            |
 | `seo-audit`, `copywriting`, …   | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) via `marketing-skills@marketingskills` |
@@ -46,6 +50,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 npx skills add https://github.com/browser-use/browser-use --skill browser-use
 npx skills add remotion/agent-skills
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
+npx skills add https://github.com/vercel-labs/skills --skill find-skills
 npx skills add shadcn/ui
 npx skills add vercel-labs/agent-skills
 npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices

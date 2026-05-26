@@ -21,6 +21,7 @@
     { "name": "claude-mem", "marketplace": "thedotmack" },
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
     { "name": "jean-claude", "marketplace": "jean-claude" },
-    "excalidraw-plugin"
+    "excalidraw-plugin",
+    "find-skills-plugin"
   ]
 }

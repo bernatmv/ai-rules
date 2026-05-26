@@ -36,7 +36,7 @@ TDD, planning, debugging, and code review workflows come from the `superpowers` 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
-#### Dependencies (16)
+#### Dependencies (17)
 
 | Plugin               | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
@@ -56,6 +56,9 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
+| `find-skills-plugin` | Discover and install skills from skills.sh (ai-rules)         |
+
+`find-skills` complements `plugin-advisor` (marketplace plugins) and `skill-creator` (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/).
 
 #### MCP in core-plugin
 

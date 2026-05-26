@@ -82,6 +82,9 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
+| `find-skills-plugin` | `ai-rules`                  | bundled with `core-plugin` |
+
+`find-skills` ([vercel-labs/skills](https://github.com/vercel-labs/skills)) searches [skills.sh](https://skills.sh/) for installable agent skills. Complements `plugin-advisor` (marketplace plugins) and `skill-creator` (authoring) — no overlap.
 
 ### MCP in core-plugin
 
