@@ -1,0 +1,10 @@
+{
+  "name": "excalidraw-plugin",
+  "version": "1.0.0",
+  "description": "Create Excalidraw diagram JSON files for workflows, architectures, and visual explanations",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/coleam00/excalidraw-diagram-skill",
+  "license": "MIT"
+}

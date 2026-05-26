@@ -13,6 +13,12 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `figma` | `claude-plugins-official` | Figma MCP and design workflow skills |
 | `chrome-devtools-mcp` | `claude-plugins-official` | Chrome DevTools MCP |
 | `web-asset-generator` | `web-asset-generator-marketplace` | Favicons, app icons, Open Graph images |
+| `vercel` | `claude-plugins-official` | shadcn, Next.js best practices, Vercel agent skills |
+| `browser-use-plugin` | `ai-rules` | Browser automation via browser-use CLI |
+| `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
+| `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
+
+See [`.claude/SKILLS.md`](../.claude/SKILLS.md) for slash commands.
 
 ## MCP servers
 

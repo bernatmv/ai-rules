@@ -81,6 +81,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `claude-mem`       | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`       |
 | `visual-explainer` | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer` |
 | `jean-claude`      | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`       |
+| `excalidraw-plugin` | `ai-rules`                    | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 
 ### MCP in core-plugin
 
@@ -113,11 +114,17 @@ Frontend design, browser testing, Figma, and UI debugging.
 | `figma`               | Figma MCP and design workflow skills  |
 | `chrome-devtools-mcp` | Chrome DevTools MCP                   |
 
-### Third-party
+### Third-party and ai-rules
 
-| Plugin                | Marketplace                       | Add marketplace                                      |
-| --------------------- | --------------------------------- | ---------------------------------------------------- |
+| Plugin | Marketplace | Add marketplace |
+| --- | --- | --- |
 | `web-asset-generator` | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
+| `vercel` | `claude-plugins-official` | built-in — shadcn, Next.js, Vercel agent skills |
+| `browser-use-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+| `remotion-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+| `app-store-screenshots-plugin` | `ai-rules` | bundled with `frontend-plugin` |
+
+See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
 ### MCP in frontend-plugin
 
@@ -134,7 +141,7 @@ Cloud deployment and backend infrastructure.
 | Plugin     | Provides                 |
 | ---------- | ------------------------ |
 | `supabase` | Supabase MCP integration |
-| `vercel`   | Vercel MCP integration   |
+| `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
 ## spec-workflow-plugin
 

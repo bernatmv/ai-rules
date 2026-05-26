@@ -10,6 +10,10 @@
     { "name": "playwright", "marketplace": "claude-plugins-official" },
     { "name": "figma", "marketplace": "claude-plugins-official" },
     { "name": "chrome-devtools-mcp", "marketplace": "claude-plugins-official" },
-    { "name": "web-asset-generator", "marketplace": "web-asset-generator-marketplace" }
+    { "name": "web-asset-generator", "marketplace": "web-asset-generator-marketplace" },
+    { "name": "vercel", "marketplace": "claude-plugins-official" },
+    "browser-use-plugin",
+    "remotion-plugin",
+    "app-store-screenshots-plugin"
   ]
 }

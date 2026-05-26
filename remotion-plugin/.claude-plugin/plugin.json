@@ -1,0 +1,10 @@
+{
+  "name": "remotion-plugin",
+  "version": "1.0.0",
+  "description": "Remotion video creation — compositions, animations, captions, and programmatic video workflows",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/remotion-dev/skills",
+  "license": "MIT"
+}

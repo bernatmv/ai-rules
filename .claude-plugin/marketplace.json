@@ -11,6 +11,26 @@
   ],
   "plugins": [
     {
+      "name": "app-store-screenshots-plugin",
+      "description": "App Store screenshot pages and exportable iOS marketing screenshots",
+      "source": "./app-store-screenshots-plugin"
+    },
+    {
+      "name": "browser-use-plugin",
+      "description": "Browser automation via the browser-use CLI",
+      "source": "./browser-use-plugin"
+    },
+    {
+      "name": "excalidraw-plugin",
+      "description": "Excalidraw diagram JSON for workflows and architecture visuals",
+      "source": "./excalidraw-plugin"
+    },
+    {
+      "name": "remotion-plugin",
+      "description": "Remotion programmatic video creation skills",
+      "source": "./remotion-plugin"
+    },
+    {
       "name": "fullstack-plugin",
       "description": "Full stack bundle — core, frontend, and devops plugins in one install",
       "source": "./fullstack-plugin"

@@ -4,13 +4,13 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 ## Plugins
 
-| Plugin | Description |
-| --- | --- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin` |
-| [core-plugin](./core-plugin) | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
-| [frontend-plugin](./frontend-plugin) | Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP |
-| [devops-plugin](./devops-plugin) | Supabase and Vercel MCP integrations |
-| [spec-workflow-plugin](./spec-workflow-plugin) | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management |
+| Plugin                                         | Description                                                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [fullstack-plugin](./fullstack-plugin)         | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`                 |
+| [core-plugin](./core-plugin)                   | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
+| [frontend-plugin](./frontend-plugin)           | Frontend design, Figma, Playwright, Chrome DevTools, web assets, and Astro docs MCP             |
+| [devops-plugin](./devops-plugin)               | Supabase and Vercel MCP integrations                                                            |
+| [spec-workflow-plugin](./spec-workflow-plugin) | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management  |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -24,92 +24,97 @@ Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`,
 
 #### Bundled skills
 
-| Skill | Purpose |
-| --- | --- |
-| `babysit-pr` | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI |
-| `launch-playbook` | Multi-platform product launch campaigns (56 platforms) |
-| `plugin-advisor` | Recommend Claude Code plugins for a codebase |
-| `prd` | Generate product requirements documents |
-| `ralph` | Convert PRDs to `prd.json` for Ralph autonomous runs |
+| Skill             | Purpose                                                           |
+| ----------------- | ----------------------------------------------------------------- |
+| `babysit-pr`      | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI |
+| `launch-playbook` | Multi-platform product launch campaigns (56 platforms)            |
+| `plugin-advisor`  | Recommend Claude Code plugins for a codebase                      |
+| `prd`             | Generate product requirements documents                           |
+| `ralph`           | Convert PRDs to `prd.json` for Ralph autonomous runs              |
 
 TDD, planning, debugging, and code review workflows come from the `superpowers` dependency (`/superpowers:test-driven-development`, etc.) — not duplicated in this repo.
 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
-#### Dependencies (15)
+#### Dependencies (16)
 
-| Plugin | Purpose |
-| --- | --- |
-| `superpowers` | Development workflows (TDD, planning, debugging, code review) |
-| `code-review` | PR and code review agents |
-| `code-simplifier` | Code simplification workflows |
-| `github` | GitHub MCP |
-| `ralph-loop` | Autonomous iteration loop (`/ralph-loop`) |
-| `atlassian` | Jira and Confluence MCP |
-| `gitlab` | GitLab MCP |
-| `stripe` | Stripe MCP |
-| `huggingface-skills` | Hugging Face Hub skills and MCP |
-| `skill-creator` | Create and improve agent skills |
-| `notion` | Notion MCP |
-| `document-skills` | Excel, Word, PowerPoint, PDF processing |
-| `claude-mem` | Persistent memory across sessions |
-| `visual-explainer` | HTML diagrams, diff reviews, plan reviews |
-| `jean-claude` | Gmail, Google Drive, and Google Calendar (OAuth) |
+| Plugin               | Purpose                                                       |
+| -------------------- | ------------------------------------------------------------- |
+| `superpowers`        | Development workflows (TDD, planning, debugging, code review) |
+| `code-review`        | PR and code review agents                                     |
+| `code-simplifier`    | Code simplification workflows                                 |
+| `github`             | GitHub MCP                                                    |
+| `ralph-loop`         | Autonomous iteration loop (`/ralph-loop`)                     |
+| `atlassian`          | Jira and Confluence MCP                                       |
+| `gitlab`             | GitLab MCP                                                    |
+| `stripe`             | Stripe MCP                                                    |
+| `huggingface-skills` | Hugging Face Hub skills and MCP                               |
+| `skill-creator`      | Create and improve agent skills                               |
+| `notion`             | Notion MCP                                                    |
+| `document-skills`    | Excel, Word, PowerPoint, PDF processing                       |
+| `claude-mem`         | Persistent memory across sessions                             |
+| `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
+| `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
+| `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
 
 #### MCP in core-plugin
 
-| Server | Purpose |
-| --- | --- |
+| Server   | Purpose            |
+| -------- | ------------------ |
 | `convex` | Convex backend MCP |
 
 ### frontend-plugin
 
-#### Dependencies (5)
+#### Dependencies (9)
 
-| Plugin | Purpose |
-| --- | --- |
-| `frontend-design` | Frontend UI design guidance |
-| `playwright` | Playwright MCP for browser automation |
-| `figma` | Figma MCP and design workflow skills |
-| `chrome-devtools-mcp` | Chrome DevTools MCP |
-| `web-asset-generator` | Favicons, app icons, Open Graph images |
+| Plugin                         | Purpose                                             |
+| ------------------------------ | --------------------------------------------------- |
+| `frontend-design`              | Frontend UI design guidance                         |
+| `playwright`                   | Playwright MCP for browser automation               |
+| `figma`                        | Figma MCP and design workflow skills                |
+| `chrome-devtools-mcp`          | Chrome DevTools MCP                                 |
+| `web-asset-generator`          | Favicons, app icons, Open Graph images              |
+| `vercel`                       | shadcn, Next.js best practices, Vercel agent skills |
+| `browser-use-plugin`           | Browser automation CLI (ai-rules)                   |
+| `remotion-plugin`              | Programmatic video creation (ai-rules)              |
+| `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)          |
 
 #### MCP in frontend-plugin
 
-| Server | Purpose |
-| --- | --- |
+| Server       | Purpose                    |
+| ------------ | -------------------------- |
 | `astro-docs` | Astro documentation search |
 
 ### devops-plugin
 
 #### Dependencies (2)
 
-| Plugin | Purpose |
-| --- | --- |
-| `supabase` | Supabase MCP integration |
-| `vercel` | Vercel MCP integration |
+| Plugin     | Purpose                                                          |
+| ---------- | ---------------------------------------------------------------- |
+| `supabase` | Supabase MCP integration                                         |
+| `vercel`   | Vercel MCP plus Vercel agent skills (`vercel-labs/agent-skills`) |
 
 ### spec-workflow-plugin
 
 Spec-Driven Development (SDD) lifecycle skills. Requires **Python 3.9+** and a `.spec-workflow/` workspace with the SDD runtime shim — see [spec-workflow-plugin/README.md](./spec-workflow-plugin/README.md).
 
-| Category | Skills |
-| --- | --- |
+| Category    | Skills                                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------------------------- |
 | Development | `sdd-create-discovery`, `sdd-create-prd`, `sdd-create-spec`, `sdd-create-steering`, `sdd-implement-spec` |
-| Review | `sdd-review-code`, `sdd-review-prd`, `sdd-review-spec-docs`, `sdd-review-steering-docs` |
-| Workflow | `sdd-archive-spec`, `sdd-manage-status`, `sdd-manage-template`, `sdd-workspace-create-spec` |
-| Shared | `sdd-common` (internal reference hub, not user-invocable) |
+| Review      | `sdd-review-code`, `sdd-review-prd`, `sdd-review-spec-docs`, `sdd-review-steering-docs`                  |
+| Workflow    | `sdd-archive-spec`, `sdd-manage-status`, `sdd-manage-template`, `sdd-workspace-create-spec`              |
+| Shared      | `sdd-common` (internal reference hub, not user-invocable)                                                |
 
 ## What lives here
 
-| Path | Role |
-| --- | --- |
-| [`CLAUDE.md`](CLAUDE.md) | Agent behavioral guidelines (Karpathy-style rules) |
-| [`AGENTS.md`](AGENTS.md) | Duplicate of `CLAUDE.md` for tools that read `AGENTS.md` |
-| [`.claude/`](.claude/) | Claude Code hooks, settings, and plugin notes |
-| [`docs/`](docs/) | Reference material (e.g. Claude layout diagrams) |
-| [`core-plugin/`](core-plugin/), [`frontend-plugin/`](frontend-plugin/), etc. | Plugin packages published via this marketplace |
+| Path                                                                         | Role                                                     |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------- |
+| [`CLAUDE.md`](CLAUDE.md)                                                     | Agent behavioral guidelines (Karpathy-style rules)       |
+| [`AGENTS.md`](AGENTS.md)                                                     | Duplicate of `CLAUDE.md` for tools that read `AGENTS.md` |
+| [`.claude/`](.claude/)                                                       | Claude Code hooks, settings, and plugin notes            |
+| [`docs/`](docs/)                                                             | Reference material (e.g. Claude layout diagrams)         |
+| [`core-plugin/`](core-plugin/), [`frontend-plugin/`](frontend-plugin/), etc. | Plugin packages published via this marketplace           |
 
 ## Installation
 
@@ -165,22 +170,22 @@ claude plugin install spec-workflow-plugin@ai-rules   # optional
 
 Install only what you need:
 
-| Need | Install |
-| --- | --- |
-| Full stack (core + frontend + devops) | `fullstack-plugin@ai-rules` |
-| PR workflows, GitHub, Notion, documents, Google | `core-plugin@ai-rules` |
-| UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules` |
-| Supabase, Vercel | `devops-plugin@ai-rules` |
-| Spec-Driven Development | `spec-workflow-plugin@ai-rules` |
+| Need                                                    | Install                         |
+| ------------------------------------------------------- | ------------------------------- |
+| Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules`     |
+| PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`          |
+| UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules`      |
+| Supabase, Vercel                                        | `devops-plugin@ai-rules`        |
+| Spec-Driven Development                                 | `spec-workflow-plugin@ai-rules` |
 
 ### Project / local install
 
 Use this when plugins should be tied to **this repository** — for team defaults or when developing the marketplace itself.
 
-| Scope | Who gets it | When to use |
-| --- | --- | --- |
+| Scope       | Who gets it                                        | When to use                                       |
+| ----------- | -------------------------------------------------- | ------------------------------------------------- |
 | **Project** | Everyone who clones the repo and trusts the folder | Team-shared plugin set in `.claude/settings.json` |
-| **Local** | Only you, only in this repo checkout | Personal overrides while working in ai-rules |
+| **Local**   | Only you, only in this repo checkout               | Personal overrides while working in ai-rules      |
 
 If you clone this repo and trust the project folder, [`.claude/settings.json`](.claude/settings.json) registers third-party marketplaces via `extraKnownMarketplaces` — skip the third-party marketplace steps from the global install section above.
 

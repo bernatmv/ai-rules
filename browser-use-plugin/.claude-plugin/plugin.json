@@ -1,0 +1,10 @@
+{
+  "name": "browser-use-plugin",
+  "version": "1.0.0",
+  "description": "Browser automation via the browser-use CLI — navigate, interact, screenshot, and extract data",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/browser-use/browser-use",
+  "license": "MIT"
+}

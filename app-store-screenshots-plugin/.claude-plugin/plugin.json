@@ -1,0 +1,10 @@
+{
+  "name": "app-store-screenshots-plugin",
+  "version": "1.0.0",
+  "description": "Build App Store screenshot pages and exportable marketing screenshots for iOS apps",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/ParthJadhav/app-store-screenshots",
+  "license": "MIT"
+}

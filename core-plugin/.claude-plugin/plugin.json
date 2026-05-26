@@ -20,6 +20,7 @@
     { "name": "document-skills", "marketplace": "anthropic-agent-skills" },
     { "name": "claude-mem", "marketplace": "thedotmack" },
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
-    { "name": "jean-claude", "marketplace": "jean-claude" }
+    { "name": "jean-claude", "marketplace": "jean-claude" },
+    "excalidraw-plugin"
   ]
 }

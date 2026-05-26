@@ -9,7 +9,7 @@ Installing `devops-plugin@ai-rules` auto-installs:
 | Plugin | Marketplace | Provides |
 | --- | --- | --- |
 | `supabase` | `claude-plugins-official` | Supabase MCP integration |
-| `vercel` | `claude-plugins-official` | Vercel MCP integration |
+| `vercel` | `claude-plugins-official` | Vercel MCP plus Vercel agent skills |
 
 Authenticate MCP servers after install with `/mcp`.
 
