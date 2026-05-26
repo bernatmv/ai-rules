@@ -1,0 +1,8 @@
+{
+  "name": "core-plugin",
+  "version": "1.0.0",
+  "description": "Core skills and MCP integrations for everyday engineering workflows",
+  "author": {
+    "name": "bernatmv"
+  }
+}

@@ -13,7 +13,7 @@ Personal configuration for AI-assisted coding: shared instructions for agents, C
 | [core-plugin](./core-plugin)                         | Core skills and MCP integrations (Jira, Confluence, PR Reviews and anything code-adjacent)     |
 | [devops-plugin](./devops-plugin)                     | CI/CD, Kubernetes                                                                              |
 | [obra-superpowers-plugin](./obra-superpowers-plugin) | Development workflows (TDD, code review, debugging, planning)                                  |
-| [code-plugin](./code-plugin)                         | Base code skills for a TS/JS stack                                                             |
+| [frontend-plugin](./frontend-plugin)                 | Base code skills for a Frontend TS/JS stack                                                    |
 | [spec-workflow-plugin](./spec-workflow-plugin)       | Spec-Driven Development (SDD) — spec creation, review, implementation, and workflow management |
 
 ## What lives here
