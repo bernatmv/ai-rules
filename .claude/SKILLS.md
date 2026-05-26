@@ -36,6 +36,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `heygen` (video)        | `ai-tools-plugin` → `heygen`                       | `/heygen:video`                  |
 | `heygen` (translate)    | `ai-tools-plugin` → `heygen`                       | `/heygen:translate`              |
 | `threejs-fundamentals`  | `gamedev-plugin`                                   | `/gamedev-plugin:threejs-fundamentals` |
+| `webgpu-threejs-tsl`    | `gamedev-plugin`                                   | `/gamedev-plugin:webgpu-threejs-tsl`   |
 | `threejs-geometry`, …   | `gamedev-plugin`                                   | `/gamedev-plugin:<skill-name>`   |
 
 `marketing-skills` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) ships 41 skills; `frontend-plugin` depends on the whole plugin. Highlighted above: `seo-audit` and `copywriting`.
@@ -44,7 +45,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 `heygen` ([heygen-com/skills](https://github.com/heygen-com/skills)) ships 11 skill entry points in the [claudemarketplaces catalog](https://claudemarketplaces.com/skills/heygen-com/skills) (`heygen`, `text-to-speech`, `video-translate`, `video-understand`, `video-edit`, `avatar-video`, `ai-video-gen`, `create-video`, `video-download`, `visual-style`, `faceswap`). The Claude plugin bundles them via `heygen@heygen` — highlighted above: `/heygen:avatar`, `/heygen:video`, `/heygen:translate`.
 
-`gamedev-plugin` bundles 10 Three.js skills from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)). Highlighted above: `threejs-fundamentals`. Full set: `threejs-geometry`, `threejs-materials`, `threejs-lighting`, `threejs-textures`, `threejs-animation`, `threejs-loaders`, `threejs-shaders`, `threejs-postprocessing`, `threejs-interaction`.
+`gamedev-plugin` bundles 11 Three.js skills: 10 from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) plus `webgpu-threejs-tsl` from [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill). Highlighted above: `threejs-fundamentals`, `webgpu-threejs-tsl`. Full cloudai-x set: `threejs-geometry`, `threejs-materials`, `threejs-lighting`, `threejs-textures`, `threejs-animation`, `threejs-loaders`, `threejs-shaders`, `threejs-postprocessing`, `threejs-interaction`.
 
 **Overlap check:** `agent-browser` is the default CLI for browser automation (snapshot + `@eN` refs, low token cost). `playwright` MCP complements it for MCP-native tool-calling flows. `chrome-devtools-mcp` covers debugging and performance — not duplicated.
 
@@ -58,7 +59,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 
 **Overlap check:** `heygen` (avatar/TTS/translation via HeyGen API) complements `hyperframes` and `remotion-plugin` (programmatic video authoring) — not duplicated.
 
-**Overlap check:** `gamedev-plugin` Three.js skills complement `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video) — general game/3D dev vs video-composition context.
+**Overlap check:** `gamedev-plugin` Three.js skills complement `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video) — general game/3D dev vs video-composition context. `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL) — not duplicated.
 
 ## Upstream sources
 
@@ -69,6 +70,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `hyperframes`, `gsap`, `lottie`, … | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) via `hyperframes@hyperframes` ([claudemarketplaces](https://claudemarketplaces.com/skills/heygen-com/hyperframes)) |
 | `heygen`, `text-to-speech`, …   | [heygen-com/skills](https://github.com/heygen-com/skills) via `heygen@heygen` ([claudemarketplaces](https://claudemarketplaces.com/skills/heygen-com/skills)) |
 | `threejs-fundamentals`, …       | [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) via `gamedev-plugin@ai-rules` ([claudemarketplaces](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) |
+| `webgpu-threejs-tsl`            | [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill) via `gamedev-plugin@ai-rules` |
 | `excalidraw-diagram`            | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)            |
 | `find-skills`                   | [vercel-labs/skills](https://github.com/vercel-labs/skills) via `find-skills-plugin@ai-rules`        |
 | `skill-creator`                 | [anthropics/skills](https://github.com/anthropics/skills) via `skill-creator@claude-plugins-official` ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
@@ -85,6 +87,7 @@ npx skills add remotion/agent-skills
 npx skills add https://github.com/heygen-com/hyperframes
 npx skills add https://github.com/heygen-com/skills
 npx skills add https://github.com/cloudai-x/threejs-skills
+npx skills add https://github.com/dgreenheck/webgpu-claude-skill --skill webgpu-threejs-tsl
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
 npx skills add https://github.com/anthropics/skills --skill skill-creator

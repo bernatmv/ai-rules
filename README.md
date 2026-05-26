@@ -11,7 +11,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
-| [gamedev-plugin](./gamedev-plugin)     | Three.js game and 3D development skills ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills)) |
+| [gamedev-plugin](./gamedev-plugin)     | Three.js and WebGPU 3D skills ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -121,9 +121,9 @@ The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com
 
 ### gamedev-plugin
 
-#### Bundled skills (10)
+#### Bundled skills (11)
 
-From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)):
+From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) and [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill):
 
 | Skill | Purpose |
 | ----- | ------- |
@@ -137,8 +137,9 @@ From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([c
 | `threejs-shaders` | GLSL, ShaderMaterial, custom effects |
 | `threejs-postprocessing` | EffectComposer, bloom, DOF, custom passes |
 | `threejs-interaction` | Raycasting, controls, user input |
+| `webgpu-threejs-tsl` | WebGPU renderer, TSL node materials, compute shaders |
 
-Use `/gamedev-plugin:threejs-fundamentals` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+Use `/gamedev-plugin:threejs-fundamentals` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
 
 ## What lives here
 
@@ -272,7 +273,7 @@ Spot-check skills:
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 - AI tools: `/heygen:avatar` or `/heygen:video` (requires HeyGen API key)
-- Gamedev: `/gamedev-plugin:threejs-fundamentals`
+- Gamedev: `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:webgpu-threejs-tsl`
 
 ### Uninstall / cleanup
 

@@ -41,7 +41,7 @@
     },
     {
       "name": "gamedev-plugin",
-      "description": "Three.js game and 3D development skills from cloudai-x/threejs-skills",
+      "description": "Three.js and WebGPU 3D development skills",
       "source": "./gamedev-plugin"
     },
     {

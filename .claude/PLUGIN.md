@@ -187,9 +187,9 @@ Three.js game and 3D development skills bundled from [cloudai-x/threejs-skills](
 
 | Plugin           | Provides                                                                 |
 | ---------------- | ------------------------------------------------------------------------ |
-| `gamedev-plugin` | 10 Three.js skills — fundamentals, geometry, materials, shaders, animation, interaction ([catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) |
+| `gamedev-plugin` | 11 Three.js skills — fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) |
 
-Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:threejs-shaders`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:webgpu-threejs-tsl`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 

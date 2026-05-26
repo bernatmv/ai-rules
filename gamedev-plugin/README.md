@@ -18,8 +18,9 @@ From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([c
 | `threejs-shaders` | `/gamedev-plugin:threejs-shaders` | GLSL, ShaderMaterial, custom effects |
 | `threejs-postprocessing` | `/gamedev-plugin:threejs-postprocessing` | EffectComposer, bloom, DOF, custom passes |
 | `threejs-interaction` | `/gamedev-plugin:threejs-interaction` | Raycasting, controls, user input |
+| `webgpu-threejs-tsl` | `/gamedev-plugin:webgpu-threejs-tsl` | WebGPU renderer, TSL node materials, compute shaders ([dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill)) |
 
-Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts) — these skills target general Three.js game and interactive 3D development.
+Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts) — these skills target general Three.js game and interactive 3D development. `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL ShaderMaterial).
 
 See [`.claude/SKILLS.md`](../.claude/SKILLS.md).
 

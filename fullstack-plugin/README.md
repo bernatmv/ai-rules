@@ -8,7 +8,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | `frontend-plugin` | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
 | `ai-tools-plugin` | HeyGen AI video — avatars, TTS, translation, video generation, and editing |
-| `gamedev-plugin` | Three.js game and 3D development skills (cloudai-x/threejs-skills) |
+| `gamedev-plugin` | Three.js and WebGPU 3D skills (cloudai-x/threejs-skills, webgpu-threejs-tsl) |
 
 ## Install
 

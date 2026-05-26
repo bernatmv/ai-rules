@@ -1,7 +1,7 @@
 {
   "name": "gamedev-plugin",
   "version": "1.0.0",
-  "description": "Three.js game and 3D development skills — fundamentals, geometry, materials, shaders, animation, and more",
+  "description": "Three.js and WebGPU game development — fundamentals, geometry, materials, GLSL/TSL shaders, animation, and interaction",
   "author": {
     "name": "bernatmv"
   },
