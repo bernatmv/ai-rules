@@ -170,34 +170,58 @@ Use this when you want plugins available in **every project** on your machine (u
 Run once from any directory:
 
 ```sh
-# 0. Official Anthropic marketplace — provides superpowers, github, figma, vercel, supabase, etc.
-#    Usually built in; add it explicitly if those deps fail with "not found in marketplace".
 /plugin marketplace add anthropics/claude-plugins-official
+```
 
-# 1. Third-party marketplaces (one-time; required by core-plugin and frontend-plugin)
+```sh
 /plugin marketplace add alonw0/web-asset-generator
+```
+
+```sh
 /plugin marketplace add anthropics/skills
+```
+
+```sh
 /plugin marketplace add thedotmack/claude-mem
+```
+
+```sh
 /plugin marketplace add nicobailon/visual-explainer
+```
+
+```sh
 /plugin marketplace add max-sixty/jean-claude
-/plugin marketplace add coreyhaines31/marketingskills   # frontend-plugin
-/plugin marketplace add vercel-labs/agent-browser     # frontend-plugin
-/plugin marketplace add heygen-com/hyperframes        # frontend-plugin (needs Git LFS)
-/plugin marketplace add heygen-com/skills             # ai-tools-plugin (optional — see note above)
+```
 
-# 2. ai-rules marketplace
+```sh
+/plugin marketplace add coreyhaines31/marketingskills
+```
+
+```sh
+/plugin marketplace add vercel-labs/agent-browser
+```
+
+```sh
+/plugin marketplace add heygen-com/hyperframes
+```
+
+```sh
+/plugin marketplace add heygen-com/skills
+```
+
+```sh
 /plugin marketplace add bernatmv/ai-rules
+```
 
-# 3. Install (pick one approach)
-/plugin install fullstack-plugin@ai-rules          # full stack — recommended
+```sh
+/plugin install fullstack-plugin@ai-rules
+```
 
-# Or install individual plugins instead of fullstack-plugin:
-# /plugin install core-plugin@ai-rules
-# /plugin install frontend-plugin@ai-rules
-# /plugin install devops-plugin@ai-rules
-
-# 4. Activate and authenticate
+```sh
 /reload-plugins
+```
+
+```sh
 /mcp
 ```
 
@@ -205,16 +229,49 @@ Equivalent CLI:
 
 ```sh
 claude plugin marketplace add anthropics/claude-plugins-official
+```
+
+```sh
 claude plugin marketplace add alonw0/web-asset-generator
+```
+
+```sh
 claude plugin marketplace add anthropics/skills
+```
+
+```sh
 claude plugin marketplace add thedotmack/claude-mem
+```
+
+```sh
 claude plugin marketplace add nicobailon/visual-explainer
+```
+
+```sh
 claude plugin marketplace add max-sixty/jean-claude
+```
+
+```sh
 claude plugin marketplace add coreyhaines31/marketingskills
+```
+
+```sh
 claude plugin marketplace add vercel-labs/agent-browser
+```
+
+```sh
 claude plugin marketplace add heygen-com/hyperframes
+```
+
+```sh
 claude plugin marketplace add heygen-com/skills
+```
+
+```sh
 claude plugin marketplace add bernatmv/ai-rules
+```
+
+```sh
 claude plugin install fullstack-plugin@ai-rules
 ```
 
@@ -242,8 +299,17 @@ If you clone this repo and trust the project folder, [`.claude/settings.json`](.
 
 ```sh
 /plugin marketplace add bernatmv/ai-rules
+```
+
+```sh
 /plugin install fullstack-plugin@ai-rules --scope project
+```
+
+```sh
 /reload-plugins
+```
+
+```sh
 /mcp
 ```
 
@@ -253,6 +319,9 @@ Use `--scope local` instead of `--scope project` for a personal-only install in 
 
 ```sh
 claude --version
+```
+
+```sh
 claude plugin list
 ```
 
@@ -290,6 +359,9 @@ Spot-check skills:
 
 ```sh
 claude plugin uninstall fullstack-plugin@ai-rules --prune
+```
+
+```sh
 claude plugin prune --dry-run
 ```
 
@@ -297,9 +369,21 @@ To uninstall individual plugins instead of the bundle:
 
 ```sh
 claude plugin uninstall core-plugin@ai-rules --prune
+```
+
+```sh
 claude plugin uninstall frontend-plugin@ai-rules --prune
+```
+
+```sh
 claude plugin uninstall devops-plugin@ai-rules --prune
+```
+
+```sh
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
+```
+
+```sh
 claude plugin uninstall gamedev-plugin@ai-rules --prune
 ```
 
