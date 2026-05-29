@@ -4,10 +4,18 @@ Plugins in the `ai-rules` marketplace declare dependencies in each plugin's
 `.claude-plugin/plugin.json`. Installing a plugin auto-installs its dependencies.
 
 Third-party marketplaces are registered in `.claude/settings.json` via
-`extraKnownMarketplaces` when you use this repo as a project. For a global install
-outside this repo, add those marketplaces once:
+`extraKnownMarketplaces` (including `claude-plugins-official`) when you use this repo
+as a project. For a global install outside this repo, add those marketplaces once.
+
+> The official `claude-plugins-official` marketplace supplies most dependencies
+> (`superpowers`, `github`, `figma`, `vercel`, `supabase`, …). It is usually built in,
+> but add it explicitly if those deps fail with "not found in marketplace".
+>
+> `heygen-com/hyperframes` stores assets via **Git LFS** — install `git-lfs`
+> (`brew install git-lfs && git lfs install`) first, or its marketplace clone fails.
 
 ```sh
+/plugin marketplace add anthropics/claude-plugins-official
 /plugin marketplace add alonw0/web-asset-generator
 /plugin marketplace add anthropics/skills
 /plugin marketplace add thedotmack/claude-mem
@@ -48,7 +56,12 @@ Authenticate MCP-backed plugins after install:
 
 ## fullstack-plugin
 
-Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` from this marketplace.
+Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin` from this marketplace.
+
+> `ai-tools-plugin` is **not** bundled: its `heygen@heygen` dependency uses a marketplace
+> source type current Claude Code releases cannot install (`source type your Claude Code
+> version does not support`), which would block the whole bundle. Install `ai-tools-plugin`
+> separately once supported.
 
 ```sh
 /plugin install fullstack-plugin@ai-rules
@@ -164,6 +177,12 @@ Cloud deployment and backend infrastructure.
 ## ai-tools-plugin
 
 HeyGen AI video — avatars, TTS, translation, and video generation.
+
+> **Known limitation:** `heygen@heygen` currently fails to install — `This plugin uses a
+> source type your Claude Code version does not support` (reproduced on Claude Code 2.1.156).
+> The `heygen-com/skills` marketplace declares the plugin via an inline `skills` array with
+> no `plugin.json`, which current CLI releases cannot install. Until that's supported,
+> `ai-tools-plugin` can't be installed and is excluded from `fullstack-plugin`.
 
 ### Third-party
 

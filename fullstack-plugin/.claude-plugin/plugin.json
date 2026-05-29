@@ -1,7 +1,7 @@
 {
   "name": "fullstack-plugin",
   "version": "1.0.0",
-  "description": "Full stack bundle — core, frontend, devops, ai-tools, and gamedev plugins in one install",
+  "description": "Full stack bundle — core, frontend, devops, and gamedev plugins in one install",
   "author": {
     "name": "bernatmv"
   },
@@ -9,7 +9,6 @@
     "core-plugin",
     "frontend-plugin",
     "devops-plugin",
-    "ai-tools-plugin",
     "gamedev-plugin"
   ]
 }
