@@ -1,4 +1,7 @@
 {
+  "enabledPlugins": {
+    "core-plugin@ai-rules": true
+  },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
