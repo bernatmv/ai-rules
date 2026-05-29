@@ -6,7 +6,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 | Plugin                                 | Description                                                                                     |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin`. `ai-tools-plugin` is installed separately (see [note](#ai-tools-plugin)) |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
@@ -19,7 +19,9 @@ See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md
 
 ### fullstack-plugin
 
-Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, `ai-tools-plugin`, and `gamedev-plugin` — one install for the full stack.
+Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin` — one install for the full stack.
+
+> **Note:** `ai-tools-plugin` (HeyGen) is intentionally **not** bundled here. Its `heygen@heygen` dependency uses a marketplace source type that current Claude Code releases cannot install (`This plugin uses a source type your Claude Code version does not support`), which would otherwise block the whole `fullstack-plugin` install. Install it on its own once your Claude Code version supports it — see [ai-tools-plugin](#ai-tools-plugin).
 
 ### core-plugin
 
@@ -119,6 +121,8 @@ Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marke
 
 The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com/skills) lists 11 skill entry points. The Claude plugin bundles them via `heygen@heygen` — use `/heygen:avatar`, `/heygen:video`, and `/heygen:translate`. Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
+> **Known limitation:** the `heygen@heygen` plugin currently fails to install with `This plugin uses a source type your Claude Code version does not support` (reproduced on Claude Code 2.1.156 — the `heygen-com/skills` marketplace declares the plugin via an inline `skills` array with no `plugin.json`). Until a Claude Code release supports that format, `ai-tools-plugin` cannot be installed, so it is **not** part of `fullstack-plugin`. The rest of the stack (`core`, `frontend`, `devops`, `gamedev`) is unaffected.
+
 ### gamedev-plugin
 
 #### Bundled skills (11)
@@ -155,6 +159,8 @@ Use `/gamedev-plugin:threejs-fundamentals` (and other skill names). Complements 
 
 Requires **Claude Code v2.1.110+** (plugin dependencies). **v2.1.143+** recommended so dependency plugins enable automatically.
 
+**Prerequisite for HyperFrames:** install [Git LFS](https://git-lfs.com/) and run `git lfs install` **before** adding the `heygen-com/hyperframes` marketplace. That repo stores assets via Git LFS; without it the clone fails with `git-lfs: command not found` and `frontend-plugin` / `fullstack-plugin` cannot be satisfied. On macOS: `brew install git-lfs && git lfs install`.
+
 **Prerequisite for Google Workspace:** install [uv](https://docs.astral.sh/uv/) before using the `jean-claude` dependency (via `core-plugin` or `fullstack-plugin`).
 
 ### Global install (recommended)
@@ -164,6 +170,10 @@ Use this when you want plugins available in **every project** on your machine (u
 Run once from any directory:
 
 ```sh
+# 0. Official Anthropic marketplace — provides superpowers, github, figma, vercel, supabase, etc.
+#    Usually built in; add it explicitly if those deps fail with "not found in marketplace".
+/plugin marketplace add anthropics/claude-plugins-official
+
 # 1. Third-party marketplaces (one-time; required by core-plugin and frontend-plugin)
 /plugin marketplace add alonw0/web-asset-generator
 /plugin marketplace add anthropics/skills
@@ -172,8 +182,8 @@ Run once from any directory:
 /plugin marketplace add max-sixty/jean-claude
 /plugin marketplace add coreyhaines31/marketingskills   # frontend-plugin
 /plugin marketplace add vercel-labs/agent-browser     # frontend-plugin
-/plugin marketplace add heygen-com/hyperframes        # frontend-plugin
-/plugin marketplace add heygen-com/skills             # ai-tools-plugin
+/plugin marketplace add heygen-com/hyperframes        # frontend-plugin (needs Git LFS)
+/plugin marketplace add heygen-com/skills             # ai-tools-plugin (optional — see note above)
 
 # 2. ai-rules marketplace
 /plugin marketplace add bernatmv/ai-rules
@@ -194,6 +204,7 @@ Run once from any directory:
 Equivalent CLI:
 
 ```sh
+claude plugin marketplace add anthropics/claude-plugins-official
 claude plugin marketplace add alonw0/web-asset-generator
 claude plugin marketplace add anthropics/skills
 claude plugin marketplace add thedotmack/claude-mem
@@ -211,7 +222,7 @@ Install only what you need:
 
 | Need                                                    | Install                     |
 | ------------------------------------------------------- | --------------------------- |
-| Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules` |
+| Full stack (core + frontend + devops + gamedev)         | `fullstack-plugin@ai-rules` |
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
 | UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
@@ -253,7 +264,7 @@ In Claude Code:
    - `superpowers@claude-plugins-official` (core)
    - `figma@claude-plugins-official` (frontend)
    - `vercel@claude-plugins-official` (devops)
-   - `heygen@heygen` (ai-tools)
+   - `heygen@heygen` (ai-tools — only if you installed `ai-tools-plugin` separately)
 3. `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace and reinstall.
 4. `/reload-plugins` — check skill and MCP server counts.
 5. `/mcp` — authenticate MCP services you use (Figma, GitHub, Vercel, Supabase, etc.).
@@ -272,7 +283,7 @@ Spot-check skills:
 - TDD: `/superpowers:test-driven-development`
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
-- AI tools: `/heygen:avatar` or `/heygen:video` (requires HeyGen API key)
+- AI tools: `/heygen:avatar` or `/heygen:video` (requires `ai-tools-plugin` + HeyGen API key)
 - Gamedev: `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:webgpu-threejs-tsl`
 
 ### Uninstall / cleanup

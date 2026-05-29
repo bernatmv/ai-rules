@@ -1,5 +1,11 @@
 {
   "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
     "web-asset-generator-marketplace": {
       "source": {
         "source": "github",

@@ -7,13 +7,18 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | `core-plugin` | Engineering workflows, GitHub/Jira/Notion, documents, Google Workspace, productivity plugins |
 | `frontend-plugin` | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
-| `ai-tools-plugin` | HeyGen AI video — avatars, TTS, translation, video generation, and editing |
 | `gamedev-plugin` | Three.js and WebGPU 3D skills (cloudai-x/threejs-skills, webgpu-threejs-tsl) |
+
+> `ai-tools-plugin` (HeyGen) is **not** bundled — its `heygen@heygen` dependency uses a source type current Claude Code releases cannot install, which would block the whole bundle. Install it separately once supported: `/plugin install ai-tools-plugin@ai-rules`.
 
 ## Install
 
 ```sh
-# Third-party marketplaces required by core-plugin, frontend-plugin, and ai-tools-plugin (one-time)
+# Official marketplace (usually built in; add if superpowers/figma/etc. fail with "not found")
+/plugin marketplace add anthropics/claude-plugins-official
+
+# Third-party marketplaces required by core-plugin and frontend-plugin (one-time)
+# heygen-com/hyperframes needs Git LFS: brew install git-lfs && git lfs install
 /plugin marketplace add alonw0/web-asset-generator
 /plugin marketplace add anthropics/skills
 /plugin marketplace add thedotmack/claude-mem
@@ -22,7 +27,6 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
-/plugin marketplace add heygen-com/skills
 
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules

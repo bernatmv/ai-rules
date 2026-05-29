@@ -46,7 +46,7 @@
     },
     {
       "name": "fullstack-plugin",
-      "description": "Full stack bundle — core, frontend, devops, ai-tools, and gamedev plugins in one install",
+      "description": "Full stack bundle — core, frontend, devops, and gamedev plugins in one install",
       "source": "./fullstack-plugin"
     },
     {
