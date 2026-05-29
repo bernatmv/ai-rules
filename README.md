@@ -229,49 +229,16 @@ Equivalent CLI:
 
 ```sh
 claude plugin marketplace add anthropics/claude-plugins-official
-```
-
-```sh
 claude plugin marketplace add alonw0/web-asset-generator
-```
-
-```sh
 claude plugin marketplace add anthropics/skills
-```
-
-```sh
 claude plugin marketplace add thedotmack/claude-mem
-```
-
-```sh
 claude plugin marketplace add nicobailon/visual-explainer
-```
-
-```sh
 claude plugin marketplace add max-sixty/jean-claude
-```
-
-```sh
 claude plugin marketplace add coreyhaines31/marketingskills
-```
-
-```sh
 claude plugin marketplace add vercel-labs/agent-browser
-```
-
-```sh
 claude plugin marketplace add heygen-com/hyperframes
-```
-
-```sh
 claude plugin marketplace add heygen-com/skills
-```
-
-```sh
 claude plugin marketplace add bernatmv/ai-rules
-```
-
-```sh
 claude plugin install fullstack-plugin@ai-rules
 ```
 
@@ -319,9 +286,6 @@ Use `--scope local` instead of `--scope project` for a personal-only install in 
 
 ```sh
 claude --version
-```
-
-```sh
 claude plugin list
 ```
 
@@ -359,9 +323,6 @@ Spot-check skills:
 
 ```sh
 claude plugin uninstall fullstack-plugin@ai-rules --prune
-```
-
-```sh
 claude plugin prune --dry-run
 ```
 
@@ -369,21 +330,9 @@ To uninstall individual plugins instead of the bundle:
 
 ```sh
 claude plugin uninstall core-plugin@ai-rules --prune
-```
-
-```sh
 claude plugin uninstall frontend-plugin@ai-rules --prune
-```
-
-```sh
 claude plugin uninstall devops-plugin@ai-rules --prune
-```
-
-```sh
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
-```
-
-```sh
 claude plugin uninstall gamedev-plugin@ai-rules --prune
 ```
 
