@@ -206,9 +206,9 @@ Three.js game and 3D development skills bundled from [cloudai-x/threejs-skills](
 
 | Plugin           | Provides                                                                 |
 | ---------------- | ------------------------------------------------------------------------ |
-| `gamedev-plugin` | 11 Three.js skills — fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) |
+| `gamedev-plugin` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + a 9-skill game-building suite (director, gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 
-Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:webgpu-threejs-tsl`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:webgpu-threejs-tsl`, `/gamedev-plugin:threejs-game-director`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
