@@ -93,7 +93,7 @@ npx skills add https://github.com/heygen-com/hyperframes
 npx skills add https://github.com/heygen-com/skills
 npx skills add https://github.com/cloudai-x/threejs-skills
 npx skills add https://github.com/dgreenheck/webgpu-claude-skill --skill webgpu-threejs-tsl
-npx skills add majidmanzarpour/threejs-game-skills --skill '*'
+npx skills add https://github.com/majidmanzarpour/threejs-game-skills --skill '*'
 npx skills add https://github.com/coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
 npx skills add https://github.com/anthropics/skills --skill skill-creator

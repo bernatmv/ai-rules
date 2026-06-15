@@ -11,7 +11,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
-| [gamedev-plugin](./gamedev-plugin)     | Three.js and WebGPU 3D skills ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) |
+| [gamedev-plugin](./gamedev-plugin)     | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -125,9 +125,9 @@ The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com
 
 ### gamedev-plugin
 
-#### Bundled skills (11)
+#### Bundled skills (20)
 
-From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) and [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill):
+**Low-level primitives (11)** — from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) and [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill):
 
 | Skill | Purpose |
 | ----- | ------- |
@@ -143,7 +143,23 @@ From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([c
 | `threejs-interaction` | Raycasting, controls, user input |
 | `webgpu-threejs-tsl` | WebGPU renderer, TSL node materials, compute shaders |
 
-Use `/gamedev-plugin:threejs-fundamentals` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
+**Game-building suite (9)** — from [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills); start with `threejs-game-director`, which routes to the specialists:
+
+| Skill | Purpose |
+| ----- | ------- |
+| `threejs-game-director` | Entrypoint — orchestrates full game builds, premium iteration, phase routing |
+| `threejs-gameplay-systems` | Playable slices, Vite/TS scaffold, loop, entities, input, physics, game feel |
+| `threejs-aaa-graphics-builder` | Prototype→AAA visuals, models, materials, lighting, VFX, visual scorecard |
+| `threejs-game-ui-designer` | HUDs, menus, overlays, responsive layout, safe areas, touch UI |
+| `threejs-debug-profiler` | Runtime/loading/resize/mobile bugs, draw calls, triangles, memory, perf |
+| `threejs-qa-release` | Production builds, browser/mobile verification, canvas pixels, release reports |
+| `threejs-3d-generator` | Tripo text/image→3D, GLB/FBX, rigging, animation (optional `TRIPO_API_KEY`) |
+| `threejs-image-generator` | Gemini concepts, textures, skies, decals, icons, GUI art (optional `GEMINI_API_KEY`) |
+| `threejs-audio-generator` | ElevenLabs SFX, ambience, UI sounds, voice/TTS (optional `ELEVENLABS_API_KEY`) |
+
+The core game skills work without API keys. **Plugin caveat:** the generators and director reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (upstream assumes a global `npx skills add -g` install); bundled as a plugin those resolve only if also installed globally, otherwise invoke the scripts from the plugin's skill folders.
+
+Use `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:threejs-game-director` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
 
 ## What lives here
 
