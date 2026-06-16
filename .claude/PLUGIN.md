@@ -44,6 +44,7 @@ Or install individual plugins:
 /plugin install devops-plugin@ai-rules
 /plugin install ai-tools-plugin@ai-rules
 /plugin install gamedev-plugin@ai-rules
+/plugin install marketing-plugin@ai-rules
 /reload-plugins
 /mcp
 ```
@@ -274,6 +275,26 @@ What's on my calendar today?
 ```
 
 Also includes iMessage on macOS (optional).
+
+## marketing-plugin
+
+Marketing and go-to-market skills. Bundles `first-100-customers` — a YC-style brute-force GTM playbook (based on [@fin465's thread](https://x.com/fin465/status/2066589201085370482)) that runs as a repeatable **weekly** engine across 7 acquisition channels (launch-max ×3, competitor backlinks, warm outbound, UGC creators, build-in-public video, communities/shoutouts, weekly X trends).
+
+### ai-rules bundled
+
+| Plugin             | Provides                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| `marketing-plugin` | `first-100-customers` — 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100) that generates assets, runs live web research, and flags every manual step |
+
+### Dependency
+
+| Plugin             | Marketplace       | Add marketplace                                         |
+| ------------------ | ----------------- | ------------------------------------------------------- |
+| `marketing-skills` | `marketingskills` | `/plugin marketplace add coreyhaines31/marketingskills` |
+
+Install via `marketing-plugin@ai-rules` — use `/marketing-plugin:first-100-customers`. The engine works standalone and cross-references `core-plugin:launch-playbook`, `marketing-skills:*`, and optionally `ai-tools-plugin`/`frontend-plugin` video tooling when installed. Standalone — not part of `fullstack-plugin`.
+
+See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
 ## Ralph Wiggum
 

@@ -40,6 +40,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `threejs-geometry`, …   | `gamedev-plugin`                                   | `/gamedev-plugin:<skill-name>`   |
 | `threejs-game-director` | `gamedev-plugin`                                   | `/gamedev-plugin:threejs-game-director` |
 | `threejs-gameplay-systems`, … | `gamedev-plugin`                             | `/gamedev-plugin:<skill-name>`   |
+| `first-100-customers`   | `marketing-plugin`                                 | `/marketing-plugin:first-100-customers` |
 
 `marketing-skills` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) ships 41 skills; `frontend-plugin` depends on the whole plugin. Highlighted above: `seo-audit` and `copywriting`.
 
@@ -56,6 +57,8 @@ Game-building suite — 9 skills from [majidmanzarpour/threejs-game-skills](http
 **Overlap check:** `find-skills` searches the open skills ecosystem (`skills.sh`); `plugin-advisor` recommends Claude Code marketplace plugins; `skill-creator` authors skills — complementary, not duplicated.
 
 **Overlap check:** `copywriting` and `seo-audit` complement `frontend-design` (UI implementation), core `prd` (requirements), and core `launch-playbook` (launch ops) — they do not duplicate them.
+
+**Overlap check:** `first-100-customers` (`marketing-plugin`) is the GTM *orchestrator* — a 7-channel weekly acquisition engine. It hands off to `core-plugin:launch-playbook` (platform-by-platform launch ops) and `marketing-skills:*` (`launch`, `cold-email`, `prospecting`, `social`, `community-marketing`, `onboarding`, `referrals`, …) for per-channel depth — sequencing layer over them, not a duplicate.
 
 **Overlap check:** [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) (component management via `/vercel:shadcn`) complements `frontend-design` (creative UI design) — not duplicated.
 
@@ -83,6 +86,7 @@ Game-building suite — 9 skills from [majidmanzarpour/threejs-game-skills](http
 | Next.js, Vercel agent stack     | [vercel/vercel-plugin](https://github.com/vercel/vercel-plugin) via `vercel@claude-plugins-official` |
 | `app-store-screenshots`         | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots)            |
 | `seo-audit`, `copywriting`, …   | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) via `marketing-skills@marketingskills` |
+| `first-100-customers`           | Authored in-repo via `marketing-plugin@ai-rules`; playbook adapted from [@fin465's thread](https://x.com/fin465/status/2066589201085370482) |
 
 ## Manual install (without ai-rules plugins)
 

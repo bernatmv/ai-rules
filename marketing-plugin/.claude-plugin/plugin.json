@@ -1,0 +1,11 @@
+{
+  "name": "marketing-plugin",
+  "version": "1.0.0",
+  "description": "Marketing and go-to-market skills. Home of first-100-customers — a YC-style brute-force GTM playbook that runs as a repeatable weekly engine across 7 acquisition channels.",
+  "author": {
+    "name": "bernatmv"
+  },
+  "dependencies": [
+    { "name": "marketing-skills", "marketplace": "marketingskills" }
+  ]
+}
