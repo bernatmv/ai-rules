@@ -12,6 +12,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
 | [gamedev-plugin](./gamedev-plugin)     | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -161,6 +162,22 @@ The core game skills work without API keys. **Plugin caveat:** the generators an
 
 Use `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:threejs-game-director` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
 
+### marketing-plugin
+
+#### Bundled skills (1)
+
+| Skill | Purpose |
+| ----- | ------- |
+| `first-100-customers` | YC-style brute-force GTM playbook (based on [@fin465's thread](https://x.com/fin465/status/2066589201085370482)) — a repeatable **weekly** engine across 7 acquisition channels: launch-max (3×), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Runs as a 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100), generating assets and live web research while flagging every manual step. |
+
+#### Dependencies (1)
+
+| Plugin | Marketplace | Purpose |
+| ------ | ----------- | ------- |
+| `marketing-skills` | `marketingskills` | Deep-dive channel skills the playbook hands off to (`launch`, `cold-email`, `prospecting`, `social`, `community-marketing`, `onboarding`, `referrals`, …) |
+
+Use `/marketing-plugin:first-100-customers`. The engine works standalone; it cross-references `core-plugin:launch-playbook`, `marketing-skills:*`, and (optionally) `ai-tools-plugin`/`frontend-plugin` video tooling when those are installed. Standalone — not bundled into `fullstack-plugin`.
+
 ## What lives here
 
 | Path                                                                         | Role                                                     |
@@ -268,6 +285,7 @@ Install only what you need:
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
 | HeyGen avatars, TTS, video translation & generation     | `ai-tools-plugin@ai-rules`  |
 | Three.js game and 3D development                        | `gamedev-plugin@ai-rules`   |
+| First 100 customers / go-to-market playbook             | `marketing-plugin@ai-rules` |
 
 ### Project / local install
 
@@ -334,6 +352,7 @@ Spot-check skills:
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 - AI tools: `/heygen:avatar` or `/heygen:video` (requires `ai-tools-plugin` + HeyGen API key)
 - Gamedev: `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:webgpu-threejs-tsl`
+- Marketing: `/marketing-plugin:first-100-customers`
 
 ### Uninstall / cleanup
 
@@ -350,6 +369,7 @@ claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
 claude plugin uninstall gamedev-plugin@ai-rules --prune
+claude plugin uninstall marketing-plugin@ai-rules --prune
 ```
 
 ## Creating a New Plugin

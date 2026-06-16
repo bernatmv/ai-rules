@@ -63,6 +63,11 @@
       "name": "frontend-plugin",
       "description": "Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
       "source": "./frontend-plugin"
+    },
+    {
+      "name": "marketing-plugin",
+      "description": "Marketing and go-to-market skills — first-100-customers, a YC-style weekly GTM playbook across 7 acquisition channels",
+      "source": "./marketing-plugin"
     }
   ]
 }
