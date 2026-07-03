@@ -25,6 +25,7 @@ as a project. For a global install outside this repo, add those marketplaces onc
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add heygen-com/skills
+/plugin marketplace add DietrichGebert/ponytail
 ```
 
 Then install the plugins you need:
@@ -100,10 +101,13 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `claude-mem`        | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`                          |
 | `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
+| `ponytail`          | `ponytail`                     | `/plugin marketplace add DietrichGebert/ponytail`                        |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 | `find-skills-plugin` | `ai-rules`                  | bundled with `core-plugin` |
 
 `find-skills` ([vercel-labs/skills](https://github.com/vercel-labs/skills)) searches [skills.sh](https://skills.sh/) for installable agent skills. Complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — no overlap. `skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).
+
+[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) is a ruleset that guides the agent through a decision ladder (existing patterns → stdlib → native features → installed deps → one-liners → minimal new code) before writing code, aiming to avoid speculative/unnecessary code. Ships `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt` in lite/full/ultra intensity modes.
 
 ### MCP in core-plugin
 

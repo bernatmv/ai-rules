@@ -41,7 +41,7 @@ TDD, planning, debugging, and code review workflows come from the `superpowers` 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
-#### Dependencies (17)
+#### Dependencies (18)
 
 | Plugin               | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
@@ -60,10 +60,13 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `claude-mem`         | Persistent memory across sessions                             |
 | `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
+| `ponytail`           | Minimal-code ruleset — decision ladder before writing code ([ponytail.dev](https://ponytail.dev/)) |
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
 | `find-skills-plugin` | Discover and install skills from skills.sh (ai-rules)         |
 
 `find-skills` complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/). `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
+
+[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) installs via `ponytail@ponytail` and adds `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt`. Complements `code-simplifier` and `code-review` — pushes toward not writing code in the first place, rather than simplifying or reviewing it after the fact.
 
 #### MCP in core-plugin
 
@@ -243,6 +246,10 @@ Run once from any directory:
 ```
 
 ```sh
+/plugin marketplace add DietrichGebert/ponytail
+```
+
+```sh
 /plugin marketplace add bernatmv/ai-rules
 ```
 
@@ -271,6 +278,7 @@ claude plugin marketplace add coreyhaines31/marketingskills
 claude plugin marketplace add vercel-labs/agent-browser
 claude plugin marketplace add heygen-com/hyperframes
 claude plugin marketplace add heygen-com/skills
+claude plugin marketplace add DietrichGebert/ponytail
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install fullstack-plugin@ai-rules
 ```
@@ -332,6 +340,7 @@ In Claude Code:
    - `figma@claude-plugins-official` (frontend)
    - `vercel@claude-plugins-official` (devops)
    - `heygen@heygen` (ai-tools — only if you installed `ai-tools-plugin` separately)
+   - `ponytail@ponytail` (core)
 3. `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace and reinstall.
 4. `/reload-plugins` — check skill and MCP server counts.
 5. `/mcp` — authenticate MCP services you use (Figma, GitHub, Vercel, Supabase, etc.).
@@ -353,6 +362,7 @@ Spot-check skills:
 - AI tools: `/heygen:avatar` or `/heygen:video` (requires `ai-tools-plugin` + HeyGen API key)
 - Gamedev: `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:webgpu-threejs-tsl`
 - Marketing: `/marketing-plugin:first-100-customers`
+- Ponytail: `/ponytail-review`, `/ponytail-audit`, or `/ponytail-debt`
 
 ### Uninstall / cleanup
 
