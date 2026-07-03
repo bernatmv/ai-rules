@@ -62,6 +62,12 @@
         "source": "github",
         "repo": "heygen-com/skills"
       }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
     }
   },
   "hooks": {
