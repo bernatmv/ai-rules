@@ -64,7 +64,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
 | `find-skills-plugin` | Discover and install skills from skills.sh (ai-rules)         |
 
-`find-skills` complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/). `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
+`find-skills` complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/). [Remote OpenClaw](https://www.remoteopenclaw.com/) is another browsable directory of 13,000+ MCP servers, skills and plugins for Claude Code, Codex and OpenClaw. `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
 
 [`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) installs via `ponytail@ponytail` and adds `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt`. Complements `code-simplifier` and `code-review` — pushes toward not writing code in the first place, rather than simplifying or reviewing it after the fact.
 
