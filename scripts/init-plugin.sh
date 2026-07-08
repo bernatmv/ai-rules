@@ -114,7 +114,7 @@ if [[ "$SKIP_CONFIRM" == "0" ]]; then
 fi
 
 # Create directory structure
-mkdir -p skills docs tests commands hooks agents mcp-servers .claude-plugin
+mkdir -p skills docs tests commands agents mcp-servers .claude-plugin
 
 # Plugin metadata (only if it doesn't exist)
 if [[ ! -f .claude-plugin/plugin.json ]]; then

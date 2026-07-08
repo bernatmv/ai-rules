@@ -77,12 +77,6 @@ argument-hint: "[environment]"
 metadata:
   author: platform-team
   version: "2.0"
-hooks:
-  PreToolUse:
-    - matcher: "Bash"
-      hooks:
-        - type: command
-          command: "./skills/deploy/scripts/validate-command.sh"
 ---
 
 Deploy the application to $ARGUMENTS (default: staging).
@@ -111,31 +105,31 @@ If smoke tests fail, immediately roll back to the previous version.
 
 ### Required by Agent Skills Spec
 
-| Field         | Required | Constraints                                                                          |
-|---------------|----------|--------------------------------------------------------------------------------------|
-| `name`        | Yes      | 1-64 chars. Lowercase letters, numbers, hyphens only. Must match directory name.     |
-| `description` | Yes      | 1-1024 chars. Describes what the skill does and when to use it.                      |
+| Field         | Required | Constraints                                                                      |
+| ------------- | -------- | -------------------------------------------------------------------------------- |
+| `name`        | Yes      | 1-64 chars. Lowercase letters, numbers, hyphens only. Must match directory name. |
+| `description` | Yes      | 1-1024 chars. Describes what the skill does and when to use it.                  |
 
 ### Optional (Agent Skills Spec)
 
-| Field           | Description                                                                    |
-|-----------------|--------------------------------------------------------------------------------|
-| `license`       | License name or reference to a bundled license file                            |
-| `compatibility` | Environment requirements (max 500 chars)                                       |
-| `metadata`      | Arbitrary key-value mapping for additional metadata                            |
-| `allowed-tools` | Space-delimited list of pre-approved tools the skill may use                   |
+| Field           | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `license`       | License name or reference to a bundled license file          |
+| `compatibility` | Environment requirements (max 500 chars)                     |
+| `metadata`      | Arbitrary key-value mapping for additional metadata          |
+| `allowed-tools` | Space-delimited list of pre-approved tools the skill may use |
 
 ### Claude Code Extensions
 
-| Field                      | Description                                                                       |
-|----------------------------|-----------------------------------------------------------------------------------|
-| `disable-model-invocation` | `true` to prevent Claude from auto-loading this skill (manual `/name` only)       |
-| `user-invocable`           | `false` to hide from the `/` menu (Claude-only background knowledge)              |
-| `context`                  | `fork` to run in an isolated subagent context                                     |
-| `agent`                    | Subagent type when `context: fork` is set (`Explore`, `Plan`, `general-purpose`)  |
-| `model`                    | Model to use when this skill is active                                            |
-| `argument-hint`            | Hint shown during autocomplete (e.g., `[issue-number]`)                           |
-| `hooks`                    | Lifecycle hooks scoped to this skill                                              |
+| Field                      | Description                                                                      |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| `disable-model-invocation` | `true` to prevent Claude from auto-loading this skill (manual `/name` only)      |
+| `user-invocable`           | `false` to hide from the `/` menu (Claude-only background knowledge)             |
+| `context`                  | `fork` to run in an isolated subagent context                                    |
+| `agent`                    | Subagent type when `context: fork` is set (`Explore`, `Plan`, `general-purpose`) |
+| `model`                    | Model to use when this skill is active                                           |
+| `argument-hint`            | Hint shown during autocomplete (e.g., `[issue-number]`)                          |
+| `hooks`                    | Lifecycle hooks scoped to this skill                                             |
 
 ### Name Validation Rules
 
@@ -158,8 +152,8 @@ name: code--review     # consecutive hyphens
 
 ## Invocation Control
 
-| Configuration                    | User can invoke | Claude can invoke | When loaded into context           |
-|----------------------------------|-----------------|-------------------|------------------------------------|
+| Configuration                    | User can invoke | Claude can invoke | When loaded into context               |
+| -------------------------------- | --------------- | ----------------- | -------------------------------------- |
 | (default)                        | Yes             | Yes               | Description at startup, full on invoke |
 | `disable-model-invocation: true` | Yes             | No                | Only when user invokes with `/name`    |
 | `user-invocable: false`          | No              | Yes               | Description at startup, full on invoke |
@@ -168,12 +162,12 @@ name: code--review     # consecutive hyphens
 
 Skills support dynamic values in content:
 
-| Variable               | Description                                      |
-|------------------------|--------------------------------------------------|
-| `$ARGUMENTS`           | All arguments passed when invoking the skill     |
-| `$ARGUMENTS[N]`        | Specific argument by 0-based index               |
-| `$N`                   | Shorthand for `$ARGUMENTS[N]`                    |
-| `${CLAUDE_SESSION_ID}` | Current session ID                               |
+| Variable               | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `$ARGUMENTS`           | All arguments passed when invoking the skill |
+| `$ARGUMENTS[N]`        | Specific argument by 0-based index           |
+| `$N`                   | Shorthand for `$ARGUMENTS[N]`                |
+| `${CLAUDE_SESSION_ID}` | Current session ID                           |
 
 ### Example with Arguments
 
@@ -260,7 +254,7 @@ assets/
 
 ### API Conventions (Background Knowledge)
 
-```yaml
+````yaml
 ---
 name: api-conventions
 description: API design patterns and conventions for this codebase. Loaded when implementing or modifying API endpoints.
@@ -282,13 +276,15 @@ All responses use this envelope:
   "meta": { "request_id": "..." },
   "errors": []
 }
-```
+````
 
 ## Error handling
+
 - Use standard HTTP status codes
 - Include machine-readable error codes
 - For details, see [references/error-codes.md](references/error-codes.md)
-```
+
+````
 
 ### Commit Skill (User-Only)
 
@@ -313,7 +309,7 @@ Create a commit for the current changes:
    - `chore:` for maintenance
 4. Keep the subject line under 72 characters
 5. Add a body if the change needs explanation
-```
+````
 
 ### Deep Research (Forked Context)
 
@@ -335,12 +331,12 @@ Research $ARGUMENTS thoroughly:
 
 ## Skill Locations and Priority
 
-| Priority  | Location                                         | Scope                          |
-|-----------|--------------------------------------------------|--------------------------------|
-| Highest   | Enterprise managed settings                      | All users in organization      |
-| High      | `~/.claude/skills/<name>/SKILL.md`               | All your projects              |
-| Medium    | `.claude/skills/<name>/SKILL.md`                 | Current project only           |
-| Low       | Plugin `skills/<name>/SKILL.md`                  | Where plugin is enabled        |
+| Priority | Location                           | Scope                     |
+| -------- | ---------------------------------- | ------------------------- |
+| Highest  | Enterprise managed settings        | All users in organization |
+| High     | `~/.claude/skills/<name>/SKILL.md` | All your projects         |
+| Medium   | `.claude/skills/<name>/SKILL.md`   | Current project only      |
+| Low      | Plugin `skills/<name>/SKILL.md`    | Where plugin is enabled   |
 
 ## Validation
 
