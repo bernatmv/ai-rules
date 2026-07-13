@@ -1,0 +1,9 @@
+{
+  "name": "gamedev-core",
+  "version": "1.0.0",
+  "description": "Engine-agnostic game development — the game loop, design patterns, ECS, AI, physics/collision, performance budgeting, plus platform routing (2D/3D, web, mobile, PC, VR/AR) and craft areas (design, art, audio, multiplayer)",
+  "author": {
+    "name": "bernatmv"
+  },
+  "license": "MIT"
+}

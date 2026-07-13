@@ -1,0 +1,9 @@
+{
+  "name": "gamedev-unity",
+  "version": "1.0.0",
+  "description": "Unity game development — agent-facing skill docs for driving the Unity Editor (scripts, scenes, prefabs, assets, tests, and hundreds of Editor operations) via the UnitySkills REST bridge or unity-mcp. Requires Unity-side setup (see README)",
+  "author": {
+    "name": "bernatmv"
+  },
+  "license": "MIT"
+}

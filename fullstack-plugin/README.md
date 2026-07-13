@@ -7,8 +7,9 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | `core-plugin` | Engineering workflows, GitHub/Jira/Notion, documents, Google Workspace, productivity plugins |
 | `frontend-plugin` | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
-| `gamedev-plugin` | Three.js and WebGPU 3D skills plus a game-building suite (cloudai-x/threejs-skills, webgpu-threejs-tsl, majidmanzarpour/threejs-game-skills) |
 
+> The `gamedev-*` plugins (`gamedev-core`, `gamedev-threejs`, `gamedev-godot`, `gamedev-unity`) are **not** bundled — install per engine, e.g. `/plugin install gamedev-threejs@ai-rules`.
+>
 > `ai-tools-plugin` (HeyGen) is **not** bundled — its `heygen@heygen` dependency uses a source type current Claude Code releases cannot install, which would block the whole bundle. Install it separately once supported: `/plugin install ai-tools-plugin@ai-rules`.
 
 ## Install

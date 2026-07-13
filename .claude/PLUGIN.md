@@ -44,7 +44,10 @@ Or install individual plugins:
 /plugin install frontend-plugin@ai-rules
 /plugin install devops-plugin@ai-rules
 /plugin install ai-tools-plugin@ai-rules
-/plugin install gamedev-plugin@ai-rules
+/plugin install gamedev-core@ai-rules
+/plugin install gamedev-threejs@ai-rules
+/plugin install gamedev-godot@ai-rules
+/plugin install gamedev-unity@ai-rules
 /plugin install marketing-plugin@ai-rules
 /reload-plugins
 /mcp
@@ -58,7 +61,7 @@ Authenticate MCP-backed plugins after install:
 
 ## fullstack-plugin
 
-Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin` from this marketplace.
+Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` from this marketplace. The `gamedev-*` plugins are installed separately, per engine.
 
 > `ai-tools-plugin` is **not** bundled: its `heygen@heygen` dependency uses a marketplace
 > source type current Claude Code releases cannot install (`source type your Claude Code
@@ -203,17 +206,20 @@ HeyGen AI video — avatars, TTS, translation, and video generation.
 
 Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
-## gamedev-plugin
+## gamedev-* (core / threejs / godot / unity)
 
-Three.js game and 3D development skills bundled from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills).
+Game development split by engine: an engine-agnostic core plus three engine-specific plugins. Install only the engines you use.
 
 ### ai-rules bundled
 
-| Plugin           | Provides                                                                 |
-| ---------------- | ------------------------------------------------------------------------ |
-| `gamedev-plugin` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + a 9-skill game-building suite (director, gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| Plugin            | Provides                                                                 |
+| ----------------- | ------------------------------------------------------------------------ |
+| `gamedev-core`    | 2 engine-agnostic skills — `game-development` (orchestrator: game loop, patterns, AI, collision, performance budget; routes to 2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) + `game-developer` (ECS, physics, netcode, optimization); [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) |
+| `gamedev-threejs` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + a 9-skill game-building suite (director, gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| `gamedev-godot`   | `godot` skill + `/godot` command + `godot-mcp` server (`.mcp.json`, needs `GODOT_PATH`); [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills), [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) |
+| `gamedev-unity`   | `unity-skills` Editor-automation docs (UnitySkills REST bridge / unity-mcp); requires Unity-side setup, no `.mcp.json`; [Besty0728/Unity-Skills](https://github.com/Besty0728/Unity-Skills), [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp) |
 
-Skills install via `gamedev-plugin@ai-rules` — use `/gamedev-plugin:threejs-fundamentals`, `/gamedev-plugin:webgpu-threejs-tsl`, `/gamedev-plugin:threejs-game-director`, etc. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+Install per engine, e.g. `/gamedev-core:game-development`, `/gamedev-threejs:threejs-game-director`, `/gamedev-godot:godot`. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
@@ -378,5 +384,8 @@ claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
-claude plugin uninstall gamedev-plugin@ai-rules --prune
+claude plugin uninstall gamedev-core@ai-rules --prune
+claude plugin uninstall gamedev-threejs@ai-rules --prune
+claude plugin uninstall gamedev-godot@ai-rules --prune
+claude plugin uninstall gamedev-unity@ai-rules --prune
 ```

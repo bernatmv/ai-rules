@@ -1,0 +1,9 @@
+{
+  "name": "gamedev-godot",
+  "version": "1.0.0",
+  "description": "Godot 4.x game development — GDScript, GdUnit4 unit testing, PlayGodot automation, web/desktop exports, CI/CD, and deployment, plus the godot-mcp server for driving the Godot editor from chat",
+  "author": {
+    "name": "bernatmv"
+  },
+  "license": "MIT"
+}

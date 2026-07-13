@@ -1,0 +1,10 @@
+{
+  "name": "gamedev-threejs",
+  "version": "1.0.0",
+  "description": "Three.js and WebGPU game development — fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction, plus a full game-building suite (director, gameplay systems, AAA graphics, UI, debug/profiler, QA/release, and 3D/image/audio asset generators)",
+  "author": {
+    "name": "bernatmv"
+  },
+  "repository": "https://github.com/cloudai-x/threejs-skills",
+  "license": "MIT"
+}
