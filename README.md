@@ -6,12 +6,15 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 | Plugin                                 | Description                                                                                     |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin`. `ai-tools-plugin` is installed separately (see [note](#ai-tools-plugin)) |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`. `gamedev-*` and `ai-tools-plugin` are installed separately (see notes) |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
-| [gamedev-plugin](./gamedev-plugin)     | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — game loop, patterns, ECS, AI, performance budgeting, platform routing ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
+| [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
+| [gamedev-unity](./gamedev-unity)       | Unity Editor automation docs — [UnitySkills](https://github.com/Besty0728/Unity-Skills) REST bridge / [unity-mcp](https://github.com/CoplayDev/unity-mcp); requires Unity-side setup |
 | [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
@@ -20,7 +23,7 @@ See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md
 
 ### fullstack-plugin
 
-Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, `devops-plugin`, and `gamedev-plugin` — one install for the full stack.
+Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` — one install for the full stack. The `gamedev-*` plugins are installed separately, per engine.
 
 > **Note:** `ai-tools-plugin` (HeyGen) is intentionally **not** bundled here. Its `heygen@heygen` dependency uses a marketplace source type that current Claude Code releases cannot install (`This plugin uses a source type your Claude Code version does not support`), which would otherwise block the whole `fullstack-plugin` install. Install it on its own once your Claude Code version supports it — see [ai-tools-plugin](#ai-tools-plugin).
 
@@ -125,9 +128,22 @@ Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marke
 
 The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com/skills) lists 11 skill entry points. The Claude plugin bundles them via `heygen@heygen` — use `/heygen:avatar`, `/heygen:video`, and `/heygen:translate`. Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
-> **Known limitation:** the `heygen@heygen` plugin currently fails to install with `This plugin uses a source type your Claude Code version does not support` (reproduced on Claude Code 2.1.156 — the `heygen-com/skills` marketplace declares the plugin via an inline `skills` array with no `plugin.json`). Until a Claude Code release supports that format, `ai-tools-plugin` cannot be installed, so it is **not** part of `fullstack-plugin`. The rest of the stack (`core`, `frontend`, `devops`, `gamedev`) is unaffected.
+> **Known limitation:** the `heygen@heygen` plugin currently fails to install with `This plugin uses a source type your Claude Code version does not support` (reproduced on Claude Code 2.1.156 — the `heygen-com/skills` marketplace declares the plugin via an inline `skills` array with no `plugin.json`). Until a Claude Code release supports that format, `ai-tools-plugin` cannot be installed, so it is **not** part of `fullstack-plugin`. The rest of the stack (`core`, `frontend`, `devops`) is unaffected.
 
-### gamedev-plugin
+### gamedev-core
+
+#### Bundled skills (2)
+
+Engine-agnostic game development — the transferable fundamentals that apply before you pick an engine.
+
+| Skill | Purpose |
+| ----- | ------- |
+| `game-development` | Orchestrator — game loop, pattern/AI/collision selection, performance budget; routes to platform sub-skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) |
+| `game-developer` | Implementation patterns — ECS, physics/colliders, multiplayer netcode, 60+ FPS optimization, shaders, object pooling, state machines |
+
+The `game-development` orchestrator bundles ten sub-skill docs it routes to by relative path. Vendored from [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) and [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) (both MIT). Use `/gamedev-core:game-development` or `/gamedev-core:game-developer`.
+
+### gamedev-threejs
 
 #### Bundled skills (20)
 
@@ -163,7 +179,27 @@ The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com
 
 The core game skills work without API keys. **Plugin caveat:** the generators and director reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (upstream assumes a global `npx skills add -g` install); bundled as a plugin those resolve only if also installed globally, otherwise invoke the scripts from the plugin's skill folders.
 
-Use `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:threejs-game-director` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
+Use `/gamedev-threejs:threejs-fundamentals` or `/gamedev-threejs:threejs-game-director` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
+
+### gamedev-godot
+
+#### Bundled skill (1)
+
+| Skill | Purpose |
+| ----- | ------- |
+| `godot` | Develop, test, build, and deploy Godot 4.x games — GDScript, GdUnit4 unit testing, PlayGodot automation, web/desktop exports, CI/CD, deployment to Vercel/GitHub Pages/itch.io |
+
+Also ships the `/gamedev-godot:godot` command and Python helper scripts. `.mcp.json` wires up the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server (via `npx @coding-solo/godot-mcp`) — set `GODOT_PATH` to your Godot executable. Vendored from [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills) and [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) (both MIT).
+
+### gamedev-unity
+
+#### Bundled skill (1)
+
+| Skill | Purpose |
+| ----- | ------- |
+| `unity-skills` | Automate the Unity Editor via the local UnitySkills REST bridge — scripts, scenes, prefabs, assets, tests, and hundreds of Editor operations across ~70 module docs |
+
+Unlike Godot, Unity automation runs **inside the Unity Editor** and needs Unity-side setup: install [Besty0728/Unity-Skills](https://github.com/Besty0728/Unity-Skills) (the REST bridge these docs target) and/or [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp), configured from Unity's own UI. This plugin ships the agent-facing docs only — no `.mcp.json`. Both upstreams MIT. See [`gamedev-unity/README.md`](./gamedev-unity/README.md).
 
 ### marketing-plugin
 
@@ -287,12 +323,15 @@ Install only what you need:
 
 | Need                                                    | Install                     |
 | ------------------------------------------------------- | --------------------------- |
-| Full stack (core + frontend + devops + gamedev)         | `fullstack-plugin@ai-rules` |
+| Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules` |
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
 | UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
 | HeyGen avatars, TTS, video translation & generation     | `ai-tools-plugin@ai-rules`  |
-| Three.js game and 3D development                        | `gamedev-plugin@ai-rules`   |
+| Engine-agnostic game dev fundamentals                   | `gamedev-core@ai-rules`     |
+| Three.js game and 3D development                        | `gamedev-threejs@ai-rules`  |
+| Godot 4.x development + godot-mcp                        | `gamedev-godot@ai-rules`    |
+| Unity Editor automation docs (needs Unity-side setup)   | `gamedev-unity@ai-rules`    |
 | First 100 customers / go-to-market playbook             | `marketing-plugin@ai-rules` |
 
 ### Project / local install
@@ -360,7 +399,7 @@ Spot-check skills:
 - Superpowers: `/superpowers:brainstorming`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 - AI tools: `/heygen:avatar` or `/heygen:video` (requires `ai-tools-plugin` + HeyGen API key)
-- Gamedev: `/gamedev-plugin:threejs-fundamentals` or `/gamedev-plugin:webgpu-threejs-tsl`
+- Gamedev: `/gamedev-core:game-development`, `/gamedev-threejs:threejs-fundamentals`, or `/gamedev-godot:godot`
 - Marketing: `/marketing-plugin:first-100-customers`
 - Ponytail: `/ponytail-review`, `/ponytail-audit`, or `/ponytail-debt`
 
@@ -378,7 +417,10 @@ claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall ai-tools-plugin@ai-rules --prune
-claude plugin uninstall gamedev-plugin@ai-rules --prune
+claude plugin uninstall gamedev-core@ai-rules --prune
+claude plugin uninstall gamedev-threejs@ai-rules --prune
+claude plugin uninstall gamedev-godot@ai-rules --prune
+claude plugin uninstall gamedev-unity@ai-rules --prune
 claude plugin uninstall marketing-plugin@ai-rules --prune
 ```
 

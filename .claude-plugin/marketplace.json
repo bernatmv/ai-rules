@@ -41,9 +41,24 @@
       "source": "./ai-tools-plugin"
     },
     {
-      "name": "gamedev-plugin",
-      "description": "Three.js and WebGPU 3D development skills",
-      "source": "./gamedev-plugin"
+      "name": "gamedev-core",
+      "description": "Engine-agnostic game development — game loop, patterns, ECS, AI, performance budgeting, and platform routing (2D/3D, web, mobile, PC, VR/AR)",
+      "source": "./gamedev-core"
+    },
+    {
+      "name": "gamedev-threejs",
+      "description": "Three.js and WebGPU 3D development skills — fundamentals through a full browser-game suite",
+      "source": "./gamedev-threejs"
+    },
+    {
+      "name": "gamedev-godot",
+      "description": "Godot 4.x development — GDScript, testing, exports, deployment, plus the godot-mcp server",
+      "source": "./gamedev-godot"
+    },
+    {
+      "name": "gamedev-unity",
+      "description": "Unity Editor automation docs (UnitySkills REST bridge / unity-mcp) — requires Unity-side setup",
+      "source": "./gamedev-unity"
     },
     {
       "name": "fullstack-plugin",
