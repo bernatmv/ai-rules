@@ -45,6 +45,13 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `godot`                 | `gamedev-godot`                                    | `/gamedev-godot:godot`            |
 | `unity-skills`          | `gamedev-unity`                                    | `/gamedev-unity:unity-skills`     |
 | `first-100-customers`   | `marketing-plugin`                                 | `/marketing-plugin:first-100-customers` |
+| `ai-video-storyboard`   | `ai-video`                                         | `/ai-video:ai-video-storyboard`   |
+| `ai-video-prompt-enhancer` | `ai-video`                                      | `/ai-video:ai-video-prompt-enhancer` |
+| `tiktok-reel-hook-generator` | `ai-video`                                    | `/ai-video:tiktok-reel-hook-generator` |
+| `video-prompting`       | `ai-video`                                         | `/ai-video:video-prompting`       |
+| `visual-video`          | `ai-video`                                         | `/ai-video:visual-video`          |
+| `visual-image`          | `ai-video`                                         | `/ai-video:visual-image`          |
+| `character-design-sheet` | `ai-video`                                        | `/ai-video:character-design-sheet` |
 
 `marketing-skills` ([marketingskills](https://github.com/coreyhaines31/marketingskills)) ships 41 skills; `frontend-plugin` depends on the whole plugin. Highlighted above: `seo-audit` and `copywriting`.
 
@@ -101,6 +108,10 @@ Game-building suite — 9 skills from [majidmanzarpour/threejs-game-skills](http
 | `app-store-screenshots`         | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots)            |
 | `seo-audit`, `copywriting`, …   | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) via `marketing-skills@marketingskills` |
 | `first-100-customers`           | Authored in-repo via `marketing-plugin@ai-rules`; playbook adapted from [@fin465's thread](https://x.com/fin465/status/2066589201085370482) |
+| `ai-video-storyboard`, `ai-video-prompt-enhancer`, `tiktok-reel-hook-generator` | [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) via `ai-video@ai-rules` (no upstream LICENSE) |
+| `video-prompting`               | [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) via `ai-video@ai-rules` (Apache-2.0) |
+| `visual-video`, `visual-image`  | [smixs/visual-skills](https://github.com/smixs/visual-skills) via `ai-video@ai-rules` (MIT; upstream `video`/`image`) |
+| `character-design-sheet`        | [inference-sh/skills](https://github.com/inference-sh/skills) via `ai-video@ai-rules` (MIT) |
 
 ## Manual install (without ai-rules plugins)
 
@@ -121,6 +132,12 @@ npx skills add https://github.com/vercel-labs/next-skills --skill next-best-prac
 npx skills add ParthJadhav/app-store-screenshots
 npx skills add https://github.com/coreyhaines31/marketingskills --skill seo-audit
 npx skills add https://github.com/coreyhaines31/marketingskills --skill copywriting
+npx skills add https://github.com/aicontentskills/ai-video-storyboard-skill
+npx skills add https://github.com/aicontentskills/ai-video-prompt-enhancer
+npx skills add https://github.com/aicontentskills/tiktok-reel-hook-generator
+npx skills add https://github.com/Square-Zero-Labs/video-prompting-skill --skill video-prompting
+npx skills add https://github.com/smixs/visual-skills --skill '*'
+npx skills add inferen-sh/skills --skill character-design-sheet --agent claude-code
 ```
 
 Skills are loaded from `~/.claude/skills/` when installed manually.

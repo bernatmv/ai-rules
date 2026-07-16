@@ -206,6 +206,21 @@ HeyGen AI video — avatars, TTS, translation, and video generation.
 
 Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
+## ai-video
+
+AI video creation — storyboarding, prompting, hooks, image prompting, and character-consistency sheets. All skills are vendored in-repo (no plugin dependencies, no MCP), so `ai-video@ai-rules` installs standalone.
+
+### ai-rules bundled
+
+| Skill | Source |
+| ----- | ------ |
+| `ai-video-storyboard`, `ai-video-prompt-enhancer`, `tiktok-reel-hook-generator` | [aicontentskills](https://github.com/aicontentskills) (three repos; no upstream LICENSE) |
+| `video-prompting` | [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0) — Seedance 2.0, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 |
+| `visual-video`, `visual-image` | [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT) — vendored from upstream `video`/`image` under clearer names |
+| `character-design-sheet` | [inference-sh/skills](https://github.com/inference-sh/skills) (MIT) |
+
+`character-design-sheet` declares `allowed-tools: Bash(belt *)`; its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`), but it works as a reference guide without it. Use `/ai-video:<skill>`. Complements `ai-tools-plugin`, `frontend-plugin` video tooling, and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
+
 ## gamedev-* (core / threejs / godot / unity)
 
 Game development split by engine: an engine-agnostic core plus three engine-specific plugins. Install only the engines you use.
