@@ -41,6 +41,11 @@
       "source": "./ai-tools-plugin"
     },
     {
+      "name": "ai-video",
+      "description": "AI video creation skills — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, and character-consistency sheets",
+      "source": "./ai-video"
+    },
+    {
       "name": "gamedev-core",
       "description": "Engine-agnostic game development — game loop, patterns, ECS, AI, performance budgeting, and platform routing (2D/3D, web, mobile, PC, VR/AR)",
       "source": "./gamedev-core"

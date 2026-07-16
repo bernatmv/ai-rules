@@ -11,6 +11,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
+| [ai-video](./ai-video)                 | AI video creation — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, character sheets |
 | [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — game loop, patterns, ECS, AI, performance budgeting, platform routing ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
 | [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
@@ -129,6 +130,24 @@ Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marke
 The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com/skills) lists 11 skill entry points. The Claude plugin bundles them via `heygen@heygen` — use `/heygen:avatar`, `/heygen:video`, and `/heygen:translate`. Requires a [HeyGen API key](https://app.heygen.com/api). Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`).
 
 > **Known limitation:** the `heygen@heygen` plugin currently fails to install with `This plugin uses a source type your Claude Code version does not support` (reproduced on Claude Code 2.1.156 — the `heygen-com/skills` marketplace declares the plugin via an inline `skills` array with no `plugin.json`). Until a Claude Code release supports that format, `ai-tools-plugin` cannot be installed, so it is **not** part of `fullstack-plugin`. The rest of the stack (`core`, `frontend`, `devops`) is unaffected.
+
+### ai-video
+
+#### Bundled skills (7)
+
+AI video creation — plan, prompt, and hook short-form and cinematic AI video, plus the image and character-consistency skills that feed it. Vendored from several upstreams (attribution below); use `/ai-video:<skill>`.
+
+| Skill | Purpose |
+| ----- | ------- |
+| `ai-video-storyboard` | Plan a multi-shot AI video (>15s) as a coordinated shot list with visually consistent per-segment prompts |
+| `ai-video-prompt-enhancer` | Turn a rough idea into one detailed, cinematic single-clip prompt |
+| `tiktok-reel-hook-generator` | Scroll-stopping 1–3s visual hooks with ready-to-copy prompts for TikTok / Reels / Shorts |
+| `video-prompting` | Model-specific prompts — Seedance 2.0, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 — plus character-sheet prompts for image-to-video consistency |
+| `visual-video` | AI director/screenwriter/editor prompting — Seedance, Kling, Veo, Runway, Luma, Pika, Sora; storyboards, camera/lighting/pacing, continuity |
+| `visual-image` | Image prompting for Nano Banana (NBP/NB2) and GPT Image 2 — storyboards, character sheets, product/UI shots |
+| `character-design-sheet` | Character consistency across AI images — turnarounds, expression sheets, palettes, LoRA techniques |
+
+Sources: [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) (no upstream LICENSE); [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0); [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT — its generic `image`/`video` skills are vendored as `visual-image`/`visual-video`); [inference-sh/skills](https://github.com/inference-sh/skills) (MIT). **Caveat:** `character-design-sheet` declares `allowed-tools: Bash(belt *)` and its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`); as a reference guide it works without it. Complements `ai-tools-plugin`, `frontend-plugin` video tooling, and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
 
 ### gamedev-core
 

@@ -1,0 +1,8 @@
+{
+  "name": "ai-video",
+  "version": "1.0.0",
+  "description": "AI video creation skills — multi-shot storyboarding, single-clip prompt enhancement, model-specific video prompting (Seedance/Kling/Veo/Sora/Runway/Wan/LTX), scroll-stopping TikTok/Reel hooks, image prompting, and character-consistency sheets",
+  "author": {
+    "name": "bernatmv"
+  }
+}
