@@ -30,16 +30,16 @@ Never store API keys in skill files or browser/game code. The script checks:
 1. `--api-key`
 2. `GEMINI_API_KEY`
 
-Before declaring the key unavailable in a `threejs-game-director` or `threejs-aaa-graphics-builder` workflow, run the director credential probe and paste its literal SET/MISSING output:
+Before declaring the key unavailable in a `threejs-aaa-graphics-builder` workflow, run the credential probe and paste its literal SET/MISSING output:
 
 ```bash
-bash ~/.codex/skills/threejs-game-director/scripts/probe_asset_credentials.sh
+bash ~/.codex/skills/threejs-3d-generator/scripts/probe_asset_credentials.sh
 ```
 
 For Claude installs:
 
 ```bash
-bash ~/.claude/skills/threejs-game-director/scripts/probe_asset_credentials.sh
+bash ~/.claude/skills/threejs-3d-generator/scripts/probe_asset_credentials.sh
 ```
 
 If the probe says `GEMINI_API_KEY=SET` but the script sees no key, run through a shell that sources the user's profile:

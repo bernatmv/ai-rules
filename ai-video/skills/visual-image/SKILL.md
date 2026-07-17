@@ -7,7 +7,7 @@ description: >
   product shots, UI mockups, storyboards, character sheets, edit/colorize, style transfer,
   vision analysis, image-to-prompt, nb, NBP, NB2, gpt-image-2, multi-panel grids,
   ecommerce product photography, fashion editorial, food/beverage ads, cinematic portraits.
-  Do NOT use for: video (use visual-video skill), 3D models, audio, non-image tasks.
+  Do NOT use for: video (use video-prompting skill), 3D models, audio, non-image tasks.
 ---
 
 # Image Prompting — Nano Banana & GPT Image 2

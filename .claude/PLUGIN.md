@@ -85,8 +85,6 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | Plugin               | Provides                                                      |
 | -------------------- | ------------------------------------------------------------- |
 | `superpowers`        | Development workflows (TDD, planning, debugging, code review) |
-| `code-review`        | PR and code review agents                                     |
-| `code-simplifier`    | Code simplification workflows                                 |
 | `github`             | GitHub MCP integration                                        |
 | `ralph-loop`         | Autonomous iteration loop (`/ralph-loop`)                     |
 | `atlassian`          | Jira and Confluence MCP integration                           |
@@ -106,9 +104,10 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
 | `ponytail`          | `ponytail`                     | `/plugin marketplace add DietrichGebert/ponytail`                        |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
-| `find-skills-plugin` | `ai-rules`                  | bundled with `core-plugin` |
 
-`find-skills` ([vercel-labs/skills](https://github.com/vercel-labs/skills)) searches [skills.sh](https://skills.sh/) for installable agent skills. Complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — no overlap. `skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).
+`skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).
+
+Code review comes from `superpowers` (`/superpowers:requesting-code-review`, `/superpowers:receiving-code-review`); code simplification comes from `ponytail` (`/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`). The official `code-review` and `code-simplifier` dependencies were removed to avoid overlapping entry points.
 
 [`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) is a ruleset that guides the agent through a decision ladder (existing patterns → stdlib → native features → installed deps → one-liners → minimal new code) before writing code, aiming to avoid speculative/unnecessary code. Ships `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt` in lite/full/ultra intensity modes.
 
@@ -123,7 +122,6 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | Skill             | Purpose                                   |
 | ----------------- | ----------------------------------------- |
 | `babysit-pr`      | Keep PRs merge-ready                      |
-| `launch-playbook` | Multi-platform product launch campaigns   |
 | `plugin-advisor`  | Recommend Claude Code plugins             |
 | `prd`             | Generate PRDs                             |
 | `ralph`           | Convert PRDs to `prd.json` for Ralph runs |
@@ -148,18 +146,14 @@ Frontend design, browser testing, Figma, and UI debugging.
 | Plugin                         | Marketplace                       | Add marketplace                                      |
 | ------------------------------ | --------------------------------- | ---------------------------------------------------- |
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
-| `vercel`                       | `claude-plugins-official`         | built-in — [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js, Vercel agent skills |
 | `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
 | `hyperframes`                  | `hyperframes`                     | `/plugin marketplace add heygen-com/hyperframes`     |
 | `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
-| `marketing-skills`             | `marketingskills`                 | `/plugin marketplace add coreyhaines31/marketingskills` |
 
 `agent-browser` ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) is the default CLI for browser automation — compact accessibility-tree snapshots with `@eN` refs. Load runtime instructions via `agent-browser skills get core`. Complements `playwright` MCP (tool-calling) and `chrome-devtools-mcp` (debugging). Replaces the former `browser-use-plugin` dependency.
 
-`marketing-skills` includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting) plus 39 other marketing skills. Complements `frontend-design`, core `prd`, and core `launch-playbook`.
-
-[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) is installed via `vercel@claude-plugins-official` — use `/vercel:shadcn`. Upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design` (creative UI design vs component management).
+[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) is installed via `vercel@claude-plugins-official` (a `devops-plugin` dependency) — use `/vercel:shadcn`. Upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design` (creative UI design vs component management).
 
 [`hyperframes`](https://claudemarketplaces.com/skills/heygen-com/hyperframes) ([heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)) ships 15 skills: HTML-to-video compositions, GSAP/Lottie/Three.js/WAAI/CSS animation adapters, website capture, captions, voiceovers, and `remotion-to-hyperframes` for bridging Remotion projects. Complements `remotion-plugin` — not a replacement.
 
@@ -215,8 +209,8 @@ AI video creation — storyboarding, prompting, hooks, image prompting, and char
 | Skill | Source |
 | ----- | ------ |
 | `ai-video-storyboard`, `ai-video-prompt-enhancer`, `tiktok-reel-hook-generator` | [aicontentskills](https://github.com/aicontentskills) (three repos; no upstream LICENSE) |
-| `video-prompting` | [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0) — Seedance 2.0, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 |
-| `visual-video`, `visual-image` | [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT) — vendored from upstream `video`/`image` under clearer names |
+| `video-prompting` | [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0) — Seedance 2.0, Kling, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 (Kling reference from [smixs/visual-skills](https://github.com/smixs/visual-skills), MIT) |
+| `visual-image` | [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT) — vendored from upstream `image` under a clearer name |
 | `character-design-sheet` | [inference-sh/skills](https://github.com/inference-sh/skills) (MIT) |
 
 `character-design-sheet` declares `allowed-tools: Bash(belt *)`; its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`), but it works as a reference guide without it. Use `/ai-video:<skill>`. Complements `ai-tools-plugin`, `frontend-plugin` video tooling, and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
@@ -230,11 +224,11 @@ Game development split by engine: an engine-agnostic core plus three engine-spec
 | Plugin            | Provides                                                                 |
 | ----------------- | ------------------------------------------------------------------------ |
 | `gamedev-core`    | 2 engine-agnostic skills — `game-development` (orchestrator: game loop, patterns, AI, collision, performance budget; routes to 2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) + `game-developer` (ECS, physics, netcode, optimization); [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) |
-| `gamedev-threejs` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + a 9-skill game-building suite (director, gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| `gamedev-threejs` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + an 8-skill game-building suite (gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | `gamedev-godot`   | `godot` skill + `/godot` command + `godot-mcp` server (`.mcp.json`, needs `GODOT_PATH`); [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills), [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) |
 | `gamedev-unity`   | `unity-skills` Editor-automation docs (UnitySkills REST bridge / unity-mcp); requires Unity-side setup, no `.mcp.json`; [Besty0728/Unity-Skills](https://github.com/Besty0728/Unity-Skills), [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp) |
 
-Install per engine, e.g. `/gamedev-core:game-development`, `/gamedev-threejs:threejs-game-director`, `/gamedev-godot:godot`. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+Install per engine, e.g. `/gamedev-core:game-development`, `/gamedev-threejs:threejs-fundamentals`, `/gamedev-godot:godot`. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
@@ -309,7 +303,7 @@ Marketing and go-to-market skills. Bundles `first-100-customers` — a YC-style 
 
 | Plugin             | Provides                                                                                  |
 | ------------------ | ----------------------------------------------------------------------------------------- |
-| `marketing-plugin` | `first-100-customers` — 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100) that generates assets, runs live web research, and flags every manual step |
+| `marketing-plugin` | `first-100-customers` — 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100) that generates assets, runs live web research, and flags every manual step; bundles the 56-platform launch playbook (`references/launch-playbook/`) |
 
 ### Dependency
 
@@ -317,7 +311,7 @@ Marketing and go-to-market skills. Bundles `first-100-customers` — a YC-style 
 | ------------------ | ----------------- | ------------------------------------------------------- |
 | `marketing-skills` | `marketingskills` | `/plugin marketplace add coreyhaines31/marketingskills` |
 
-Install via `marketing-plugin@ai-rules` — use `/marketing-plugin:first-100-customers`. The engine works standalone and cross-references `core-plugin:launch-playbook`, `marketing-skills:*`, and optionally `ai-tools-plugin`/`frontend-plugin` video tooling when installed. Standalone — not part of `fullstack-plugin`.
+Install via `marketing-plugin@ai-rules` — use `/marketing-plugin:first-100-customers`. The engine works standalone — the 56-platform launch playbook is bundled in — and cross-references `marketing-skills:*` and optionally `ai-tools-plugin`/`frontend-plugin` video tooling when installed. Standalone — not part of `fullstack-plugin`.
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 

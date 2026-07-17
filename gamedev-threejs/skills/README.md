@@ -8,7 +8,7 @@ Three.js skills bundled from [cloudai-x/threejs-skills](https://github.com/cloud
 
 Game-building suite bundled from [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills):
 
-- `threejs-game-director` (entrypoint), `threejs-gameplay-systems`, `threejs-aaa-graphics-builder`, `threejs-game-ui-designer`
+- `threejs-gameplay-systems`, `threejs-aaa-graphics-builder`, `threejs-game-ui-designer`
 - `threejs-debug-profiler`, `threejs-qa-release`
 - `threejs-3d-generator` (Tripo), `threejs-image-generator` (Gemini), `threejs-audio-generator` (ElevenLabs) — optional API keys
 

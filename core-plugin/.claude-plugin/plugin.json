@@ -7,8 +7,6 @@
   },
   "dependencies": [
     { "name": "superpowers", "marketplace": "claude-plugins-official" },
-    { "name": "code-review", "marketplace": "claude-plugins-official" },
-    { "name": "code-simplifier", "marketplace": "claude-plugins-official" },
     { "name": "github", "marketplace": "claude-plugins-official" },
     { "name": "ralph-loop", "marketplace": "claude-plugins-official" },
     { "name": "atlassian", "marketplace": "claude-plugins-official" },
@@ -22,7 +20,6 @@
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
     { "name": "jean-claude", "marketplace": "jean-claude" },
     { "name": "ponytail", "marketplace": "ponytail" },
-    "excalidraw-plugin",
-    "find-skills-plugin"
+    "excalidraw-plugin"
   ]
 }
