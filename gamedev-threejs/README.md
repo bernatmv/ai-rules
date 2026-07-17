@@ -22,11 +22,10 @@ From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([c
 
 ### Game-building suite
 
-From [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) — higher-level, end-to-end skills for shipping playable browser games. Start with `threejs-game-director`; it routes to the specialists below.
+From [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) — higher-level, end-to-end skills for shipping playable browser games. (The upstream `threejs-game-director` orchestrator was dropped — `gamedev-core`'s `game-development` is the single orchestrator.)
 
 | Skill | Slash command | Focus |
 | --- | --- | --- |
-| `threejs-game-director` | `/gamedev-threejs:threejs-game-director` | Primary entrypoint — orchestrates full game builds, premium iteration, and phase routing |
 | `threejs-gameplay-systems` | `/gamedev-threejs:threejs-gameplay-systems` | Playable slices, Vite/TS scaffold, game loop, entities, input, physics, scoring, game feel |
 | `threejs-aaa-graphics-builder` | `/gamedev-threejs:threejs-aaa-graphics-builder` | Prototype→AAA visual upgrades, models, materials, lighting, VFX, render polish, visual scorecard |
 | `threejs-game-ui-designer` | `/gamedev-threejs:threejs-game-ui-designer` | HUDs, menus, overlays, responsive layout, safe areas, touch UI, text fit |
@@ -36,7 +35,7 @@ From [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/th
 | `threejs-image-generator` | `/gamedev-threejs:threejs-image-generator` | Gemini concept art, textures, skies, decals, icons, logos, GUI/title art (needs `GEMINI_API_KEY`) |
 | `threejs-audio-generator` | `/gamedev-threejs:threejs-audio-generator` | ElevenLabs SFX, ambience, UI sounds, voice/TTS, audio manifests (needs `ELEVENLABS_API_KEY`) |
 
-The three asset generators are optional and only needed when generating external assets — the core game skills work without API keys. **Plugin caveat:** these generators and the director reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (they assume a global `npx skills add -g` install). When run as a bundled plugin those paths only resolve if the skills are also installed globally; otherwise invoke the scripts from this plugin's skill folders instead.
+The three asset generators are optional and only needed when generating external assets — the core game skills work without API keys. **Plugin caveat:** these generators reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (they assume a global `npx skills add -g` install). When run as a bundled plugin those paths only resolve if the skills are also installed globally; otherwise invoke the scripts from this plugin's skill folders instead (the shared credential probe lives in `threejs-3d-generator/scripts/`).
 
 Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts) — these skills target general Three.js game and interactive 3D development. `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL ShaderMaterial). The game-building suite layers on top of the low-level primitives above — primitives teach the API, the suite ships complete games.
 

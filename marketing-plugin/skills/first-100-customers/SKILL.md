@@ -1,6 +1,6 @@
 ---
 name: first-100-customers
-description: "Get your first 100 customers with a YC-style brute-force go-to-market playbook (based on @fin465's viral thread). Runs as a repeatable WEEKLY engine across 7 acquisition channels: launch-max (3x minimum), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Activates when: getting your first customers/users, 'first 100 customers', early traction, go-to-market, GTM, customer acquisition, distribution, growth hacking, or 'how do I get customers/users'. Operates as a 3-layer system — Growth Brief (one-time intake), the 7-step Engine (generated assets + live web research + explicit manual-step guidance), and a Tracker that counts toward 100 and enforces the weekly loop."
+description: "Get your first 100 customers with a YC-style brute-force go-to-market playbook (based on @fin465's viral thread). Runs as a repeatable WEEKLY engine across 7 acquisition channels: launch-max (3x minimum), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Includes the full 56-platform launch playbook (launch directories, deal/LTD marketplaces, software directories) with per-platform assets, sequencing, and launch-day ops. Activates when: getting your first customers/users, 'first 100 customers', early traction, go-to-market, GTM, customer acquisition, distribution, growth hacking, 'how do I get customers/users', launching a product/startup/SaaS/tool/app, submitting to launch directories, preparing launch assets, planning a multi-platform launch campaign, or needing launch day support. Operates as a 3-layer system — Growth Brief (one-time intake), the 7-step Engine (generated assets + live web research + explicit manual-step guidance), and a Tracker that counts toward 100 and enforces the weekly loop."
 user-invocable: true
 ---
 
@@ -63,7 +63,7 @@ Recommend a starting subset based on the brief: low budget → emphasize 1, 2, 3
 - **✍️ Generate:** from the brief — a 60-char tagline, 100-char tagline, short/medium/long descriptions, a Show HN title, and a maker's first-comment. (Reuse `references/templates.md` → *Launch first comment*.)
 - **✍️ Generate:** a **3-wave launch schedule** so "launch 3×" is concrete, e.g. Wave 1 (now): BetaList + Peerlist + Indie Hackers + smaller directories; Wave 2 (PH-ready): Product Hunt + DevHunt; Wave 3 (milestone): Show HN + relaunch on traction/new feature.
 - **🙋 Manual:** creating accounts, scheduling the Product Hunt hunter, hitting submit, and being present to reply on launch day. Give the user the per-platform submission link + the exact copy to paste for each.
-- **→ Go deeper:** if installed, hand off to `core-plugin:launch-playbook` (56-platform sequencing + per-platform assets) and `marketing-skills:launch` / `marketing-skills:directory-submissions`. This step is the spine; those skills do the deep platform work.
+- **→ Go deeper:** load `references/launch-playbook/playbook.md` (56-platform sequencing + per-platform assets + launch-day ops; per-platform files in `references/launch-playbook/references/platforms/`). If installed, `marketing-skills:launch` / `marketing-skills:directory-submissions` add further depth. This step is the spine; the playbook does the deep platform work.
 - **Track:** launches submitted this week, by platform + status.
 
 ### Step 2 — Steal your competitor's strongest backlinks
@@ -153,7 +153,7 @@ Once the user is consistently adding customers and nearing 100, flag that acquis
 
 | Step | Hand off to (if installed) |
 | ---- | -------------------------- |
-| 1 Launch-max | `core-plugin:launch-playbook`, `marketing-skills:launch`, `marketing-skills:directory-submissions` |
+| 1 Launch-max | `references/launch-playbook/playbook.md` (bundled), `marketing-skills:launch`, `marketing-skills:directory-submissions` |
 | 2 Backlinks | `marketing-skills:cold-email`, `marketing-skills:competitor-profiling`, `marketing-skills:seo-audit` |
 | 3 Warm outbound | `marketing-skills:prospecting`, `marketing-skills:cold-email` |
 | 4 UGC creators | `marketing-skills:social`, `marketing-skills:ad-creative` |

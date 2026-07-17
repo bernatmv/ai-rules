@@ -26,11 +26,6 @@
       "source": "./excalidraw-plugin"
     },
     {
-      "name": "find-skills-plugin",
-      "description": "Discover and install agent skills from the open skills ecosystem (skills.sh)",
-      "source": "./find-skills-plugin"
-    },
-    {
       "name": "remotion-plugin",
       "description": "Remotion programmatic video creation skills",
       "source": "./remotion-plugin"
@@ -52,7 +47,7 @@
     },
     {
       "name": "gamedev-threejs",
-      "description": "Three.js and WebGPU 3D development skills — fundamentals through a full browser-game suite",
+      "description": "Three.js and WebGPU 3D development skills — fundamentals through a browser-game suite (gameplay systems, AAA graphics, UI, debug/profiler, QA/release, asset generators)",
       "source": "./gamedev-threejs"
     },
     {
@@ -82,12 +77,12 @@
     },
     {
       "name": "frontend-plugin",
-      "description": "Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP",
+      "description": "Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP",
       "source": "./frontend-plugin"
     },
     {
       "name": "marketing-plugin",
-      "description": "Marketing and go-to-market skills — first-100-customers, a YC-style weekly GTM playbook across 7 acquisition channels",
+      "description": "Marketing and go-to-market skills — first-100-customers, a YC-style weekly GTM playbook across 7 acquisition channels, with a bundled 56-platform launch playbook",
       "source": "./marketing-plugin"
     }
   ]

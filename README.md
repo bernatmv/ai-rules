@@ -8,15 +8,15 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`. `gamedev-*` and `ai-tools-plugin` are installed separately (see notes) |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
-| [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
+| [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-tools-plugin](./ai-tools-plugin)   | HeyGen AI video — avatars, TTS, translation, video generation, and editing                      |
 | [ai-video](./ai-video)                 | AI video creation — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, character sheets |
 | [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — game loop, patterns, ECS, AI, performance budgeting, platform routing ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
-| [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a full game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
+| [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
 | [gamedev-unity](./gamedev-unity)       | Unity Editor automation docs — [UnitySkills](https://github.com/Besty0728/Unity-Skills) REST bridge / [unity-mcp](https://github.com/CoplayDev/unity-mcp); requires Unity-side setup |
-| [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels |
+| [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels with a bundled 56-platform launch playbook |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
 
@@ -35,7 +35,6 @@ Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`,
 | Skill             | Purpose                                                           |
 | ----------------- | ----------------------------------------------------------------- |
 | `babysit-pr`      | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI |
-| `launch-playbook` | Multi-platform product launch campaigns (56 platforms)            |
 | `plugin-advisor`  | Recommend Claude Code plugins for a codebase                      |
 | `prd`             | Generate product requirements documents                           |
 | `ralph`           | Convert PRDs to `prd.json` for Ralph autonomous runs              |
@@ -45,13 +44,11 @@ TDD, planning, debugging, and code review workflows come from the `superpowers` 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
-#### Dependencies (18)
+#### Dependencies (15)
 
 | Plugin               | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
 | `superpowers`        | Development workflows (TDD, planning, debugging, code review) |
-| `code-review`        | PR and code review agents                                     |
-| `code-simplifier`    | Code simplification workflows                                 |
 | `github`             | GitHub MCP                                                    |
 | `ralph-loop`         | Autonomous iteration loop (`/ralph-loop`)                     |
 | `atlassian`          | Jira and Confluence MCP                                       |
@@ -66,11 +63,10 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
 | `ponytail`           | Minimal-code ruleset — decision ladder before writing code ([ponytail.dev](https://ponytail.dev/)) |
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
-| `find-skills-plugin` | Discover and install skills from skills.sh (ai-rules)         |
 
-`find-skills` complements `plugin-advisor` (marketplace plugins) and [`skill-creator`](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator) (authoring) — it searches the open skills ecosystem via [skills.sh](https://skills.sh/). `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
+`skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
 
-[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) installs via `ponytail@ponytail` and adds `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt`. Complements `code-simplifier` and `code-review` — pushes toward not writing code in the first place, rather than simplifying or reviewing it after the fact.
+[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) installs via `ponytail@ponytail` and adds `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt` — code simplification and minimal-code auditing. Code review comes from `superpowers` (`/superpowers:requesting-code-review`); the official `code-review` and `code-simplifier` plugins were dropped to avoid overlapping entry points.
 
 #### MCP in core-plugin
 
@@ -80,7 +76,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 
 ### frontend-plugin
 
-#### Dependencies (11)
+#### Dependencies (9)
 
 | Plugin                         | Purpose                                                 |
 | ------------------------------ | ------------------------------------------------------- |
@@ -89,18 +85,14 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `figma`                        | Figma MCP and design workflow skills                    |
 | `chrome-devtools-mcp`          | Chrome DevTools MCP                                     |
 | `web-asset-generator`          | Favicons, app icons, Open Graph images                  |
-| `vercel`                       | shadcn ([claudemarketplaces](https://claudemarketplaces.com/skills/shadcn/ui/shadcn)), Next.js best practices, Vercel agent skills |
 | `agent-browser`                | Browser automation CLI ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) |
 | `hyperframes`                  | HTML-to-video, GSAP/Lottie/Three.js animations, Remotion bridge ([heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)) |
 | `remotion-plugin`              | Programmatic video creation (ai-rules)                  |
 | `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)              |
-| `marketing-skills`             | SEO audit, copywriting, CRO, paid ads, etc. (41 skills) |
-
-Marketing skills from [`marketingskills`](https://github.com/coreyhaines31/marketingskills) — includes [`seo-audit`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/seo-audit) and [`copywriting`](https://claudemarketplaces.com/skills/coreyhaines31/marketingskills/copywriting). Complements (does not duplicate) `frontend-design`, core `prd`, and core `launch-playbook`.
 
 [`agent-browser`](https://claudemarketplaces.com/skills/vercel-labs/agent-browser/agent-browser) is the default CLI for browser automation. Complements `playwright` MCP and `chrome-devtools-mcp` — replaces the former `browser-use-plugin`.
 
-[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) installs via `vercel@claude-plugins-official` (`/vercel:shadcn`); upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design`.
+[`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn) installs via `vercel@claude-plugins-official` (a `devops-plugin` dependency; `/vercel:shadcn`); upstream source is [shadcn-ui/ui](https://github.com/shadcn-ui/ui). Complements `frontend-design`.
 
 [`hyperframes`](https://claudemarketplaces.com/skills/heygen-com/hyperframes) ships 15 skills for HTML-to-video (GSAP, Lottie, Three.js, WAAI, captions, voiceovers). Complements `remotion-plugin` — use `/hyperframes:remotion-to-hyperframes` to bridge Remotion projects.
 
@@ -133,7 +125,7 @@ The [heygen-com/skills catalog](https://claudemarketplaces.com/skills/heygen-com
 
 ### ai-video
 
-#### Bundled skills (7)
+#### Bundled skills (6)
 
 AI video creation — plan, prompt, and hook short-form and cinematic AI video, plus the image and character-consistency skills that feed it. Vendored from several upstreams (attribution below); use `/ai-video:<skill>`.
 
@@ -142,12 +134,11 @@ AI video creation — plan, prompt, and hook short-form and cinematic AI video, 
 | `ai-video-storyboard` | Plan a multi-shot AI video (>15s) as a coordinated shot list with visually consistent per-segment prompts |
 | `ai-video-prompt-enhancer` | Turn a rough idea into one detailed, cinematic single-clip prompt |
 | `tiktok-reel-hook-generator` | Scroll-stopping 1–3s visual hooks with ready-to-copy prompts for TikTok / Reels / Shorts |
-| `video-prompting` | Model-specific prompts — Seedance 2.0, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 — plus character-sheet prompts for image-to-video consistency |
-| `visual-video` | AI director/screenwriter/editor prompting — Seedance, Kling, Veo, Runway, Luma, Pika, Sora; storyboards, camera/lighting/pacing, continuity |
+| `video-prompting` | Model-specific prompts — Seedance 2.0, Kling, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 |
 | `visual-image` | Image prompting for Nano Banana (NBP/NB2) and GPT Image 2 — storyboards, character sheets, product/UI shots |
 | `character-design-sheet` | Character consistency across AI images — turnarounds, expression sheets, palettes, LoRA techniques |
 
-Sources: [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) (no upstream LICENSE); [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0); [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT — its generic `image`/`video` skills are vendored as `visual-image`/`visual-video`); [inference-sh/skills](https://github.com/inference-sh/skills) (MIT). **Caveat:** `character-design-sheet` declares `allowed-tools: Bash(belt *)` and its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`); as a reference guide it works without it. Complements `ai-tools-plugin`, `frontend-plugin` video tooling, and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
+Sources: [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) (no upstream LICENSE); [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0); [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT — its generic `image` skill is vendored as `visual-image`; its Kling reference lives in `video-prompting`); [inference-sh/skills](https://github.com/inference-sh/skills) (MIT). **Caveat:** `character-design-sheet` declares `allowed-tools: Bash(belt *)` and its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`); as a reference guide it works without it. Complements `ai-tools-plugin`, `frontend-plugin` video tooling, and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
 
 ### gamedev-core
 
@@ -158,13 +149,13 @@ Engine-agnostic game development — the transferable fundamentals that apply be
 | Skill | Purpose |
 | ----- | ------- |
 | `game-development` | Orchestrator — game loop, pattern/AI/collision selection, performance budget; routes to platform sub-skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) |
-| `game-developer` | Implementation patterns — ECS, physics/colliders, multiplayer netcode, 60+ FPS optimization, shaders, object pooling, state machines |
+| `game-developer` | Engine-agnostic implementation patterns — ECS, physics/colliders, multiplayer netcode, 60+ FPS optimization, object pooling, state machines |
 
 The `game-development` orchestrator bundles ten sub-skill docs it routes to by relative path. Vendored from [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) and [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) (both MIT). Use `/gamedev-core:game-development` or `/gamedev-core:game-developer`.
 
 ### gamedev-threejs
 
-#### Bundled skills (20)
+#### Bundled skills (19)
 
 **Low-level primitives (11)** — from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) and [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill):
 
@@ -182,11 +173,10 @@ The `game-development` orchestrator bundles ten sub-skill docs it routes to by r
 | `threejs-interaction` | Raycasting, controls, user input |
 | `webgpu-threejs-tsl` | WebGPU renderer, TSL node materials, compute shaders |
 
-**Game-building suite (9)** — from [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills); start with `threejs-game-director`, which routes to the specialists:
+**Game-building suite (8)** — from [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) (the upstream `threejs-game-director` orchestrator was dropped — `gamedev-core`'s `game-development` is the single orchestrator):
 
 | Skill | Purpose |
 | ----- | ------- |
-| `threejs-game-director` | Entrypoint — orchestrates full game builds, premium iteration, phase routing |
 | `threejs-gameplay-systems` | Playable slices, Vite/TS scaffold, loop, entities, input, physics, game feel |
 | `threejs-aaa-graphics-builder` | Prototype→AAA visuals, models, materials, lighting, VFX, visual scorecard |
 | `threejs-game-ui-designer` | HUDs, menus, overlays, responsive layout, safe areas, touch UI |
@@ -196,9 +186,9 @@ The `game-development` orchestrator bundles ten sub-skill docs it routes to by r
 | `threejs-image-generator` | Gemini concepts, textures, skies, decals, icons, GUI art (optional `GEMINI_API_KEY`) |
 | `threejs-audio-generator` | ElevenLabs SFX, ambience, UI sounds, voice/TTS (optional `ELEVENLABS_API_KEY`) |
 
-The core game skills work without API keys. **Plugin caveat:** the generators and director reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (upstream assumes a global `npx skills add -g` install); bundled as a plugin those resolve only if also installed globally, otherwise invoke the scripts from the plugin's skill folders.
+The core game skills work without API keys. **Plugin caveat:** the generators reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (upstream assumes a global `npx skills add -g` install); bundled as a plugin those resolve only if also installed globally, otherwise invoke the scripts from the plugin's skill folders (the shared credential probe lives in `threejs-3d-generator/scripts/`).
 
-Use `/gamedev-threejs:threejs-fundamentals` or `/gamedev-threejs:threejs-game-director` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
+Use `/gamedev-threejs:threejs-fundamentals` or `/gamedev-threejs:threejs-gameplay-systems` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
 
 ### gamedev-godot
 
@@ -226,7 +216,7 @@ Unlike Godot, Unity automation runs **inside the Unity Editor** and needs Unity-
 
 | Skill | Purpose |
 | ----- | ------- |
-| `first-100-customers` | YC-style brute-force GTM playbook (based on [@fin465's thread](https://x.com/fin465/status/2066589201085370482)) — a repeatable **weekly** engine across 7 acquisition channels: launch-max (3×), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Runs as a 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100), generating assets and live web research while flagging every manual step. |
+| `first-100-customers` | YC-style brute-force GTM playbook (based on [@fin465's thread](https://x.com/fin465/status/2066589201085370482)) — a repeatable **weekly** engine across 7 acquisition channels: launch-max (3×), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Runs as a 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100), generating assets and live web research while flagging every manual step. Bundles the 56-platform launch playbook (launch directories, deal/LTD marketplaces, software directories) as its launch-max reference. |
 
 #### Dependencies (1)
 
@@ -234,7 +224,7 @@ Unlike Godot, Unity automation runs **inside the Unity Editor** and needs Unity-
 | ------ | ----------- | ------- |
 | `marketing-skills` | `marketingskills` | Deep-dive channel skills the playbook hands off to (`launch`, `cold-email`, `prospecting`, `social`, `community-marketing`, `onboarding`, `referrals`, …) |
 
-Use `/marketing-plugin:first-100-customers`. The engine works standalone; it cross-references `core-plugin:launch-playbook`, `marketing-skills:*`, and (optionally) `ai-tools-plugin`/`frontend-plugin` video tooling when those are installed. Standalone — not bundled into `fullstack-plugin`.
+Use `/marketing-plugin:first-100-customers`. The engine works standalone — the 56-platform launch playbook is bundled in — and cross-references `marketing-skills:*` and (optionally) `ai-tools-plugin`/`frontend-plugin` video tooling when those are installed. Standalone — not bundled into `fullstack-plugin`.
 
 ## What lives here
 
@@ -344,14 +334,14 @@ Install only what you need:
 | ------------------------------------------------------- | --------------------------- |
 | Full stack (core + frontend + devops)                   | `fullstack-plugin@ai-rules` |
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
-| UI design, Figma, browser testing, DevTools, web assets, marketing copy & SEO | `frontend-plugin@ai-rules`  |
+| UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
 | HeyGen avatars, TTS, video translation & generation     | `ai-tools-plugin@ai-rules`  |
 | Engine-agnostic game dev fundamentals                   | `gamedev-core@ai-rules`     |
 | Three.js game and 3D development                        | `gamedev-threejs@ai-rules`  |
 | Godot 4.x development + godot-mcp                        | `gamedev-godot@ai-rules`    |
 | Unity Editor automation docs (needs Unity-side setup)   | `gamedev-unity@ai-rules`    |
-| First 100 customers / go-to-market playbook             | `marketing-plugin@ai-rules` |
+| First 100 customers / GTM + 56-platform launch playbook | `marketing-plugin@ai-rules` |
 
 ### Project / local install
 
@@ -412,7 +402,7 @@ claude plugin list --json | jq '.[] | select(.marketplace=="ai-rules") | {name, 
 
 Spot-check skills:
 
-- Core: `/core-plugin:babysit-pr` or `/core-plugin:launch-playbook`
+- Core: `/core-plugin:babysit-pr` or `/core-plugin:prd`
 - Ralph PRD converter: `/core-plugin:ralph`
 - TDD: `/superpowers:test-driven-development`
 - Superpowers: `/superpowers:brainstorming`

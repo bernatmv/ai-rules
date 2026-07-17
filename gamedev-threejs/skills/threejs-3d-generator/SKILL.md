@@ -19,13 +19,13 @@ Never store API keys in skill files or client-side game code. The script checks:
 Step 0 before declaring the key unavailable:
 
 ```bash
-bash ~/.claude/skills/threejs-game-director/scripts/probe_asset_credentials.sh
+bash ~/.claude/skills/threejs-3d-generator/scripts/probe_asset_credentials.sh
 ```
 
 For Codex installs:
 
 ```bash
-bash ~/.codex/skills/threejs-game-director/scripts/probe_asset_credentials.sh
+bash ~/.codex/skills/threejs-3d-generator/scripts/probe_asset_credentials.sh
 ```
 
 Paste the literal `TRIPO_API_KEY=SET|MISSING` output in the report. Do not conclude the key is unavailable from a plain non-interactive shell until this probe has sourced the user's shell profiles.
