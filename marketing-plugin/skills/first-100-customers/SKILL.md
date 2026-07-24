@@ -75,7 +75,7 @@ Recommend a starting subset based on the brief: low budget → emphasize 1, 2, 3
   - **🙋 Manual (optional, recommended for depth):** dedicated backlink tools (Ahrefs / SEMrush / similar) give a far more complete backlink profile but need a paid account — if the user has one, ask them to export the competitor's top referring pages and paste them; the agent then qualifies and prioritizes. Free path above works without any tool.
 - **✍️ Generate:** for the top targets, a short "better version" outline (what your entry should say to out-do the competitor's) + a personalized outreach email to the site owner asking to be added/swapped (`references/templates.md` → *Backlink outreach email*).
 - **🙋 Manual:** writing/publishing any content on your own site, and actually emailing the site owners. Hand over the prioritized list + ready-to-send emails.
-- **→ Go deeper:** `marketing-skills:cold-email` (outreach), `marketing-skills:seo-audit` / `marketing-skills:competitor-profiling` if installed.
+- **→ Go deeper:** `marketing-plugin:seo-keyword-research` to validate the category/anchor language you pitch with real search-demand data; `marketing-skills:cold-email` (outreach), `marketing-skills:seo-audit` / `marketing-skills:competitor-profiling` if installed.
 - **Track:** backlink targets identified, outreach emails sent, placements won.
 
 ### Step 3 — Warm outbound (capitalize on the 99%)
@@ -154,7 +154,7 @@ Once the user is consistently adding customers and nearing 100, flag that acquis
 | Step | Hand off to (if installed) |
 | ---- | -------------------------- |
 | 1 Launch-max | `references/launch-playbook/playbook.md` (bundled), `marketing-skills:launch`, `marketing-skills:directory-submissions` |
-| 2 Backlinks | `marketing-skills:cold-email`, `marketing-skills:competitor-profiling`, `marketing-skills:seo-audit` |
+| 2 Backlinks | `marketing-plugin:seo-keyword-research`, `marketing-skills:cold-email`, `marketing-skills:competitor-profiling`, `marketing-skills:seo-audit` |
 | 3 Warm outbound | `marketing-skills:prospecting`, `marketing-skills:cold-email` |
 | 4 UGC creators | `marketing-skills:social`, `marketing-skills:ad-creative` |
 | 5 Video | `marketing-skills:video`, `marketing-skills:social`, `ai-tools-plugin:heygen`, `frontend-plugin` video tools |

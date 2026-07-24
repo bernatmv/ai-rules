@@ -1,7 +1,7 @@
 {
   "name": "marketing-plugin",
   "version": "1.0.0",
-  "description": "Marketing and go-to-market skills. Home of first-100-customers — a YC-style brute-force GTM playbook that runs as a repeatable weekly engine across 7 acquisition channels.",
+  "description": "Marketing and go-to-market skills. Home of first-100-customers — a YC-style brute-force GTM playbook that runs as a repeatable weekly engine across 7 acquisition channels — and seo-keyword-research, which validates every keyword against real search-demand data (autocomplete probing, SERP winnability, volume tools).",
   "author": {
     "name": "bernatmv"
   },
