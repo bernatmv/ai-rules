@@ -12,7 +12,8 @@
     "agent-browser",
     "hyperframes",
     "heygen",
-    "ponytail"
+    "ponytail",
+    "claude-code-warp"
   ],
   "plugins": [
     {

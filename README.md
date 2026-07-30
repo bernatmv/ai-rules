@@ -44,7 +44,7 @@ TDD, planning, debugging, and code review workflows come from the `superpowers` 
 PDF and skill authoring come from dependency plugins (`document-skills`, `skill-creator`).
 Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`).
 
-#### Dependencies (15)
+#### Dependencies (16)
 
 | Plugin               | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
@@ -62,6 +62,7 @@ Autonomous Ralph execution comes from the `ralph-loop` dependency (`/ralph-loop`
 | `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
 | `ponytail`           | Minimal-code ruleset — decision ladder before writing code ([ponytail.dev](https://ponytail.dev/)) |
+| `warp`               | Native Warp terminal notifications when Claude finishes or needs input ([warpdotdev/claude-code-warp](https://github.com/warpdotdev/claude-code-warp)) |
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
 
 `skill-creator` installs via `skill-creator@claude-plugins-official` (same upstream as [anthropics/skills](https://github.com/anthropics/skills)).
@@ -295,6 +296,10 @@ Run once from any directory:
 ```
 
 ```sh
+/plugin marketplace add warpdotdev/claude-code-warp
+```
+
+```sh
 /plugin marketplace add bernatmv/ai-rules
 ```
 
@@ -324,6 +329,7 @@ claude plugin marketplace add vercel-labs/agent-browser
 claude plugin marketplace add heygen-com/hyperframes
 claude plugin marketplace add heygen-com/skills
 claude plugin marketplace add DietrichGebert/ponytail
+claude plugin marketplace add warpdotdev/claude-code-warp
 claude plugin marketplace add bernatmv/ai-rules
 claude plugin install fullstack-plugin@ai-rules
 ```

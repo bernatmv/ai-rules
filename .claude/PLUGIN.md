@@ -26,6 +26,7 @@ as a project. For a global install outside this repo, add those marketplaces onc
 /plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add heygen-com/skills
 /plugin marketplace add DietrichGebert/ponytail
+/plugin marketplace add warpdotdev/claude-code-warp
 ```
 
 Then install the plugins you need:
@@ -103,6 +104,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
 | `ponytail`          | `ponytail`                     | `/plugin marketplace add DietrichGebert/ponytail`                        |
+| `warp`              | `claude-code-warp`             | `/plugin marketplace add warpdotdev/claude-code-warp`                    |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 
 `skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).

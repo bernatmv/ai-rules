@@ -20,6 +20,7 @@
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
     { "name": "jean-claude", "marketplace": "jean-claude" },
     { "name": "ponytail", "marketplace": "ponytail" },
+    { "name": "warp", "marketplace": "claude-code-warp" },
     "excalidraw-plugin"
   ]
 }
