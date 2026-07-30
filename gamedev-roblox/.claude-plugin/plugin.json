@@ -1,0 +1,9 @@
+{
+  "name": "gamedev-roblox",
+  "version": "1.0.0",
+  "description": "Roblox game development — the MCP server built into Roblox Studio for reading and editing scripts, generating meshes and materials, inspecting the data model, running Luau, and driving playtests. Requires Studio-side setup (see README)",
+  "author": {
+    "name": "bernatmv"
+  },
+  "license": "MIT"
+}

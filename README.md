@@ -15,6 +15,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — game loop, patterns, ECS, AI, performance budgeting, platform routing ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
 | [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
+| [gamedev-roblox](./gamedev-roblox)     | Roblox — the MCP server [built into Roblox Studio](https://create.roblox.com/docs/studio/mcp); scripts, asset generation, Luau, playtesting; requires Studio-side setup |
 | [gamedev-unity](./gamedev-unity)       | Unity Editor automation docs — [UnitySkills](https://github.com/Besty0728/Unity-Skills) REST bridge / [unity-mcp](https://github.com/CoplayDev/unity-mcp); requires Unity-side setup |
 | [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels with a bundled 56-platform launch playbook |
 
@@ -201,6 +202,14 @@ Use `/gamedev-threejs:threejs-fundamentals` or `/gamedev-threejs:threejs-gamepla
 
 Also ships the `/gamedev-godot:godot` command and Python helper scripts. `.mcp.json` wires up the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server (via `npx @coding-solo/godot-mcp`) — set `GODOT_PATH` to your Godot executable. Vendored from [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills) and [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) (both MIT).
 
+### gamedev-roblox
+
+MCP-only — no bundled skills. `.mcp.json` wires up the MCP server **built into Roblox Studio**: `script_read` / `multi_edit` / `script_grep`, `generate_mesh` / `generate_material` / `insert_asset`, `search_game_tree` / `inspect_instance`, `execute_luau`, and playtest drivers (`start_stop_play`, `screen_capture`, `user_keyboard_input`).
+
+Like Unity, this needs editor-side setup: in Studio, **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. The config defaults to the macOS binary (`/Applications/RobloxStudio.app/Contents/MacOS/StudioMCP`); set `ROBLOX_STUDIO_MCP` to override on Windows (`%LOCALAPPDATA%\Roblox\mcp.bat`) or for a non-default install.
+
+> Roblox's standalone [studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) was **archived in April 2026** in favour of the built-in server — this plugin targets the built-in one. See [`gamedev-roblox/README.md`](./gamedev-roblox/README.md).
+
 ### gamedev-unity
 
 #### Bundled skill (1)
@@ -346,6 +355,7 @@ Install only what you need:
 | Engine-agnostic game dev fundamentals                   | `gamedev-core@ai-rules`     |
 | Three.js game and 3D development                        | `gamedev-threejs@ai-rules`  |
 | Godot 4.x development + godot-mcp                        | `gamedev-godot@ai-rules`    |
+| Roblox Studio MCP (needs Studio-side setup)             | `gamedev-roblox@ai-rules`   |
 | Unity Editor automation docs (needs Unity-side setup)   | `gamedev-unity@ai-rules`    |
 | First 100 customers / GTM + 56-platform launch playbook | `marketing-plugin@ai-rules` |
 
@@ -435,6 +445,7 @@ claude plugin uninstall ai-tools-plugin@ai-rules --prune
 claude plugin uninstall gamedev-core@ai-rules --prune
 claude plugin uninstall gamedev-threejs@ai-rules --prune
 claude plugin uninstall gamedev-godot@ai-rules --prune
+claude plugin uninstall gamedev-roblox@ai-rules --prune
 claude plugin uninstall gamedev-unity@ai-rules --prune
 claude plugin uninstall marketing-plugin@ai-rules --prune
 ```

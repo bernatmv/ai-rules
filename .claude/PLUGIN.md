@@ -48,6 +48,7 @@ Or install individual plugins:
 /plugin install gamedev-core@ai-rules
 /plugin install gamedev-threejs@ai-rules
 /plugin install gamedev-godot@ai-rules
+/plugin install gamedev-roblox@ai-rules
 /plugin install gamedev-unity@ai-rules
 /plugin install marketing-plugin@ai-rules
 /reload-plugins

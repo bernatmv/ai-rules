@@ -57,6 +57,11 @@
       "source": "./gamedev-godot"
     },
     {
+      "name": "gamedev-roblox",
+      "description": "Roblox development via the MCP server built into Roblox Studio — scripts, mesh/material generation, data model inspection, Luau execution, and playtesting; requires Studio-side setup",
+      "source": "./gamedev-roblox"
+    },
+    {
       "name": "gamedev-unity",
       "description": "Unity Editor automation docs (UnitySkills REST bridge / unity-mcp) — requires Unity-side setup",
       "source": "./gamedev-unity"
