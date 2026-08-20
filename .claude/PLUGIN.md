@@ -8,7 +8,7 @@ Third-party marketplaces are registered in `.claude/settings.json` via
 as a project. For a global install outside this repo, add those marketplaces once.
 
 > The official `claude-plugins-official` marketplace supplies most dependencies
-> (`github`, `figma`, `vercel`, `supabase`, …). It is usually built in,
+> (`figma`, `vercel`, `supabase`, …). It is usually built in,
 > but add it explicitly if those deps fail with "not found in marketplace".
 >
 > `heygen-com/hyperframes` stores assets via **Git LFS** — install `git-lfs`
@@ -77,7 +77,6 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 
 | Plugin               | Provides                                                      |
 | -------------------- | ------------------------------------------------------------- |
-| `github`             | GitHub MCP integration                                        |
 | `atlassian`          | Jira and Confluence MCP integration                           |
 | `gitlab`             | GitLab MCP integration                                        |
 | `stripe`             | Stripe MCP integration                                        |
@@ -139,7 +138,7 @@ Frontend design, browser testing, Figma, and UI debugging.
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
 | `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
 | `hyperframes`                  | `hyperframes`                     | `/plugin marketplace add heygen-com/hyperframes`     |
-| `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin`                       |
+| `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin` (12 Remotion skills)  |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
 
 `agent-browser` ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) is the default CLI for browser automation — compact accessibility-tree snapshots with `@eN` refs. Load runtime instructions via `agent-browser skills get core`. Complements `playwright` MCP (tool-calling) and `chrome-devtools-mcp` (debugging). Replaces the former `browser-use-plugin` dependency.

@@ -18,7 +18,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | Skill                   | Installed via                                      | Slash command                    |
 | ----------------------- | -------------------------------------------------- | -------------------------------- |
 | `agent-browser`         | `frontend-plugin` → `agent-browser`                | `/agent-browser:agent-browser`    |
-| `remotion`              | `frontend-plugin` → `remotion-plugin`              | `/remotion-plugin:remotion`      |
+| `remotion-best-practices` (router) | `frontend-plugin` → `remotion-plugin`   | `/remotion-plugin:remotion-best-practices` |
+| `remotion-create`, `remotion-render`, `remotion-captions`, … | `frontend-plugin` → `remotion-plugin` | `/remotion-plugin:<skill-name>` |
 | `hyperframes`           | `frontend-plugin` → `hyperframes`                  | `/hyperframes:hyperframes`       |
 | `remotion-to-hyperframes` | `frontend-plugin` → `hyperframes`                | `/hyperframes:remotion-to-hyperframes` |
 | `gsap`, `lottie`, …     | `frontend-plugin` → `hyperframes`                  | `/hyperframes:<skill-name>`    |
@@ -69,8 +70,6 @@ Game-building suite — 8 skills from [majidmanzarpour/threejs-game-skills](http
 
 **Overlap check:** `remotion-plugin` (React programmatic video) and `hyperframes` (HTML/GSAP video) complement each other — use `/hyperframes:remotion-to-hyperframes` to bridge Remotion projects into HyperFrames. Animation adapter skills (`gsap`, `lottie`, `three`, `animejs`, `css-animations`, `waapi`, `tailwind`) are HyperFrames-specific, not duplicated by `remotion-plugin`.
 
-**Overlap check:** `heygen` (avatar/TTS/translation via HeyGen API) complements `hyperframes` and `remotion-plugin` (programmatic video authoring) — not duplicated.
-
 **Overlap check:** `gamedev-core` is engine-agnostic (game loop, patterns, netcode, optimization) and sits *below* the engine plugins — it teaches principles the engine plugins then implement, not a duplicate of them. `gamedev-threejs` Three.js skills complement `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video) — general game/3D dev vs video-composition context. `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL) — not duplicated. Within `gamedev-threejs`, the cloudai-x/dgreenheck primitives (fundamentals, geometry, materials, shaders, …) teach the Three.js API, while the majidmanzarpour game-building suite (`threejs-gameplay-systems` + specialists) ships complete playable games on top of them — layered, not duplicated. `gamedev-godot` is a separate engine — no overlap with the Three.js browser stack.
 
 ## Upstream sources
@@ -78,7 +77,7 @@ Game-building suite — 8 skills from [majidmanzarpour/threejs-game-skills](http
 | Skill                           | Source                                                                                               |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `agent-browser`                 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) via `agent-browser@agent-browser` |
-| `remotion`                      | [remotion-dev/skills](https://github.com/remotion-dev/skills) via `remotion-plugin@ai-rules`         |
+| `remotion-*` (12 skills)        | [remotion-dev/skills](https://github.com/remotion-dev/skills) via `remotion-plugin@ai-rules`         |
 | `hyperframes`, `gsap`, `lottie`, … | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) via `hyperframes@hyperframes` ([claudemarketplaces](https://claudemarketplaces.com/skills/heygen-com/hyperframes)) |
 | `2d-games`, `web-games`, `game-design`, … | [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) via `gamedev-core@ai-rules` (MIT) |
 | `game-developer`               | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) via `gamedev-core@ai-rules` (MIT) |
