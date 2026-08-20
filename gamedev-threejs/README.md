@@ -22,7 +22,7 @@ From [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([c
 
 ### Game-building suite
 
-From [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) — higher-level, end-to-end skills for shipping playable browser games. (The upstream `threejs-game-director` orchestrator was dropped — `gamedev-core`'s `game-development` is the single orchestrator.)
+From [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) — higher-level, end-to-end skills for shipping playable browser games. (The upstream `threejs-game-director` orchestrator was dropped — `threejs-gameplay-systems` is the entry point.)
 
 | Skill | Slash command | Focus |
 | --- | --- | --- |
