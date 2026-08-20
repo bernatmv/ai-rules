@@ -11,8 +11,8 @@
     "marketingskills",
     "agent-browser",
     "hyperframes",
-    "heygen",
-    "ponytail"
+    "ponytail",
+    "mattpocock"
   ],
   "plugins": [
     {
@@ -29,11 +29,6 @@
       "name": "remotion-plugin",
       "description": "Remotion programmatic video creation skills",
       "source": "./remotion-plugin"
-    },
-    {
-      "name": "ai-tools-plugin",
-      "description": "HeyGen AI video skills — avatars, TTS, translation, and video generation",
-      "source": "./ai-tools-plugin"
     },
     {
       "name": "ai-video",
@@ -54,11 +49,6 @@
       "name": "gamedev-godot",
       "description": "Godot 4.x development — GDScript, testing, exports, deployment, plus the godot-mcp server",
       "source": "./gamedev-godot"
-    },
-    {
-      "name": "gamedev-unity",
-      "description": "Unity Editor automation docs (UnitySkills REST bridge / unity-mcp) — requires Unity-side setup",
-      "source": "./gamedev-unity"
     },
     {
       "name": "fullstack-plugin",

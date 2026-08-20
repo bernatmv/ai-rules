@@ -8,14 +8,12 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | `frontend-plugin` | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
 
-> The `gamedev-*` plugins (`gamedev-core`, `gamedev-threejs`, `gamedev-godot`, `gamedev-unity`) are **not** bundled — install per engine, e.g. `/plugin install gamedev-threejs@ai-rules`.
->
-> `ai-tools-plugin` (HeyGen) is **not** bundled — its `heygen@heygen` dependency uses a source type current Claude Code releases cannot install, which would block the whole bundle. Install it separately once supported: `/plugin install ai-tools-plugin@ai-rules`.
+> The `gamedev-*` plugins (`gamedev-core`, `gamedev-threejs`, `gamedev-godot`) are **not** bundled — install per engine, e.g. `/plugin install gamedev-threejs@ai-rules`.
 
 ## Install
 
 ```sh
-# Official marketplace (usually built in; add if superpowers/figma/etc. fail with "not found")
+# Official marketplace (usually built in; add if figma/vercel/etc. fail with "not found")
 /plugin marketplace add anthropics/claude-plugins-official
 
 # Third-party marketplaces required by core-plugin and frontend-plugin (one-time)
@@ -29,6 +27,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add DietrichGebert/ponytail
+/plugin marketplace add mattpocock/skills
 
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules

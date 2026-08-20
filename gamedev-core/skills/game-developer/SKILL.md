@@ -1,6 +1,6 @@
 ---
 name: game-developer
-description: "Engine-agnostic game systems guidance. Use when designing game architecture, applying ECS patterns, configuring physics and collision, setting up multiplayer networking with lag compensation, optimizing frame rates to 60+ FPS targets, or applying game design patterns such as object pooling and state machines. For engine-specific work, defer to the dedicated engine plugins (gamedev-unity, gamedev-threejs, gamedev-godot). Trigger keywords: game architecture, ECS architecture, game physics, multiplayer networking, game optimization, game AI, game design patterns."
+description: "Engine-agnostic game systems guidance. Use when designing game architecture, applying ECS patterns, configuring physics and collision, setting up multiplayer networking with lag compensation, optimizing frame rates to 60+ FPS targets, or applying game design patterns such as object pooling and state machines. For engine-specific work, defer to the dedicated engine plugins (gamedev-threejs, gamedev-godot). Trigger keywords: game architecture, ECS architecture, game physics, multiplayer networking, game optimization, game AI, game design patterns."
 license: MIT
 metadata:
   author: https://github.com/Jeffallan
