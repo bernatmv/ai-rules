@@ -38,7 +38,6 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 
 | Plugin               | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
-| `github`             | GitHub MCP                                                    |
 | `atlassian`          | Jira and Confluence MCP                                       |
 | `gitlab`             | GitLab MCP                                                    |
 | `stripe`             | Stripe MCP                                                    |
@@ -78,7 +77,7 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 | `web-asset-generator`          | Favicons, app icons, Open Graph images                  |
 | `agent-browser`                | Browser automation CLI ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) |
 | `hyperframes`                  | HTML-to-video, GSAP/Lottie/Three.js animations, Remotion bridge ([heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)) |
-| `remotion-plugin`              | Programmatic video creation (ai-rules)                  |
+| `remotion-plugin`              | Programmatic video creation — 12 Remotion skills (ai-rules) |
 | `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)              |
 
 [`agent-browser`](https://claudemarketplaces.com/skills/vercel-labs/agent-browser/agent-browser) is the default CLI for browser automation. Complements `playwright` MCP and `chrome-devtools-mcp` — replaces the former `browser-use-plugin`.

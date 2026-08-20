@@ -6,7 +6,6 @@
     "name": "bernatmv"
   },
   "dependencies": [
-    { "name": "github", "marketplace": "claude-plugins-official" },
     { "name": "atlassian", "marketplace": "claude-plugins-official" },
     { "name": "gitlab", "marketplace": "claude-plugins-official" },
     { "name": "stripe", "marketplace": "claude-plugins-official" },

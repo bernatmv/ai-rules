@@ -16,7 +16,7 @@ Installing `frontend-plugin@ai-rules` auto-installs:
 | `vercel` | `claude-plugins-official` | [`shadcn`](https://claudemarketplaces.com/skills/shadcn/ui/shadcn), Next.js best practices, Vercel agent skills |
 | `agent-browser` | `agent-browser` | Browser automation CLI via Chrome DevTools Protocol |
 | `hyperframes` | `hyperframes` | HyperFrames HTML-to-video + 15 animation/adapter skills ([catalog](https://claudemarketplaces.com/skills/heygen-com/hyperframes)) |
-| `remotion-plugin` | `ai-rules` | Programmatic video with Remotion |
+| `remotion-plugin` | `ai-rules` | Programmatic video with Remotion — 12 skills (router, create, render, captions, maps, markup, studio, upgrade, …) |
 | `app-store-screenshots-plugin` | `ai-rules` | App Store marketing screenshots |
 | `marketing-skills` | `marketingskills` | SEO audit, copywriting, CRO, paid ads, etc. (41 skills) |
 
