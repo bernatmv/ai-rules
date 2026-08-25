@@ -65,6 +65,28 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Model selection
+
+Do not run expensive models on cheap work. Stay at **High** effort. Follow only this harness's mapping.
+
+If the session model does not match the task, switch before doing substantial work. When spawning subagents, set the matching model explicitly.
+
+### Codex
+
+- **Sol** (`gpt-5.6-sol`) at High — planning; implementation of complex or critical tasks; any design, creative, or visual work.
+- **Luna** (`gpt-5.6-luna`) at High — coding that is not critical or very complex.
+
+Switch with `/model gpt-5.6-sol` or `/model gpt-5.6-luna`.
+
+### Claude Code
+
+- **Fable 5** (`claude-fable-5`) at High — planning; implementation of complex or critical tasks; any design, creative, or visual work.
+- **Opus 5** (`claude-opus-5`) at High — coding that is not critical or very complex.
+
+Switch with `/model fable` or `/model opus`, and `/effort high`.
+
+When unsure: Sol / Fable 5 for planning, design, visual work, or complex/critical implementation; otherwise Luna / Opus 5. After a plan is settled, drop to Luna / Opus 5 for routine coding.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.

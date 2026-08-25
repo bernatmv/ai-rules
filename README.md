@@ -28,9 +28,10 @@ Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`,
 
 #### Bundled skills
 
-| Skill        | Purpose                                                           |
-| ------------ | ----------------------------------------------------------------- |
-| `babysit-pr` | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI |
+| Skill             | Purpose                                                              |
+| ----------------- | -------------------------------------------------------------------- |
+| `babysit-pr`      | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI    |
+| `model-selection` | Route Codex/Claude Code to Sol/Fable 5 or Luna/Opus 5 at High effort |
 
 Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all come from the `mattpocock-skills` dependency — not duplicated in this repo. PDF and skill authoring come from `document-skills` and `skill-creator`.
 
@@ -200,7 +201,7 @@ Use `/marketing-plugin:first-100-customers`. The engine works standalone — the
 
 | Path                                                                         | Role                                                     |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [`CLAUDE.md`](CLAUDE.md)                                                     | Agent behavioral guidelines (Karpathy-style rules)       |
+| [`CLAUDE.md`](CLAUDE.md)                                                     | Agent behavioral guidelines plus Codex/Claude Code model routing |
 | [`AGENTS.md`](AGENTS.md)                                                     | Duplicate of `CLAUDE.md` for tools that read `AGENTS.md` |
 | [`.claude/`](.claude/)                                                       | Claude Code hooks, settings, and plugin notes            |
 | [`docs/`](docs/)                                                             | Reference material (e.g. Claude layout diagrams)         |
