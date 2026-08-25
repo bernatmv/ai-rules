@@ -10,7 +10,7 @@ Roblox shipped a standalone MCP server, [Roblox/studio-rust-mcp-server](https://
 
 ## Studio-side setup (required)
 
-Like `gamedev-unity`, this needs setup inside the editor. The server is a binary shipped with Studio, and it only answers once Studio is running with MCP enabled:
+This needs setup inside the editor. The server is a binary shipped with Studio, and it only answers once Studio is running with MCP enabled:
 
 1. Open Roblox Studio.
 2. Open the **Assistant** panel → menu (**…**) → **Manage MCP Servers**.

@@ -28,7 +28,7 @@ Use `/ai-video:ai-video-storyboard`, `/ai-video:ai-video-prompt-enhancer`, `/ai-
 - `character-design-sheet` documents an inference.sh workflow and declares `allowed-tools: Bash(belt *)` — the runnable `belt app run …` examples require the `belt` CLI (`npx skills add belt-sh/cli`, then `belt login`). As a prompt/reference guide it works without it.
 - The `aicontentskills/*` upstreams ship no `LICENSE` file; they are vendored as-is with attribution above. `smixs/visual-skills` is MIT, `Square-Zero-Labs/video-prompting-skill` is Apache-2.0, `inference-sh/skills` is MIT.
 
-Complements `ai-tools-plugin` (HeyGen avatar/TTS/translation APIs), `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`), and `gamedev-threejs` asset generators.
+Complements `frontend-plugin` video tooling (`hyperframes`, `remotion-plugin`) and `gamedev-threejs` asset generators.
 
 ## Install
 

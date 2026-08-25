@@ -1,5 +1,6 @@
 ---
 name: visual-image
+license: CC-BY-4.0 (attribution required — Serge Shima, github.com/smixs/visual-skills)
 description: >
   Image prompting skill for Nano Banana (NBP/NB2) and GPT Image 2. Writes ready-to-use
   prompts with model/quality/size recommendations. Use when: "нарисуй", "сгенерируй
@@ -7,7 +8,7 @@ description: >
   product shots, UI mockups, storyboards, character sheets, edit/colorize, style transfer,
   vision analysis, image-to-prompt, nb, NBP, NB2, gpt-image-2, multi-panel grids,
   ecommerce product photography, fashion editorial, food/beverage ads, cinematic portraits.
-  Do NOT use for: video (use video-prompting skill), 3D models, audio, non-image tasks.
+  Do NOT use for: video (use video skill), 3D models, audio, non-image tasks.
 ---
 
 # Image Prompting — Nano Banana & GPT Image 2
@@ -15,6 +16,12 @@ description: >
 This skill writes image prompts. It does not generate images. The output is: model name + quality / size / aspect ratio + the prompt itself.
 
 The body of this SKILL.md is intentionally thin so you cannot fake a result by reading it alone. The actual rules — what the models reward, what they punish, how to phrase a 5-slot template, when to add `quality: high`, when to use image grounding — live only in the reference files.
+
+## Route first — is this actually an image-prompt task?
+
+- **Motion, clips, montage** (Seedance, Kling, Veo, any image-to-video): use the sibling `video` skill. This skill's storyboard and keyframe outputs feed it.
+- **No idea or script yet** (user wants a concept or an ad scenario, not a picture): if the `creative-director` skill is installed, start there — it develops ideas and scripts for commercials and beyond ([github.com/smixs/creative-director-skill](https://github.com/smixs/creative-director-skill)).
+- **A concrete image is needed** — this skill. Continue below.
 
 ---
 
@@ -105,3 +112,7 @@ Constraints: <no extra objects, no drift, ...>
 Prefer: ready-to-copy prompts, hex colors, concrete materials, named compositions, model-specific syntax (5-slot for GPT Image, natural prose for Nano Banana).
 
 Avoid: tag soup ("cool, modern, 4k"), vague praise ("stunning, epic, masterpiece" — actively hurts GPT Image 2), negative framing ("no people, no cars" — invert to positive), external comparisons ("like Apple ad" — describe the visual properties instead), numerical lens parameters in Nano Banana prompts (it ignores them).
+
+---
+
+*Author: Serge Shima ([t.me/aimastersme](https://t.me/aimastersme) · [sergeshima.com](https://sergeshima.com) · [aimasters.me](https://aimasters.me)) · License: CC BY 4.0 — attribution required · Source: [smixs/visual-skills](https://github.com/smixs/visual-skills)*

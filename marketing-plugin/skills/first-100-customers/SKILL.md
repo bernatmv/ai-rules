@@ -108,7 +108,7 @@ Recommend a starting subset based on the brief: low budget → emphasize 1, 2, 3
 - **❓ Ask:** what are the top 3–5 use cases / "wow" moments of the product; can the user screen-record.
 - **✍️ Generate:** a **backlog of 10–20 demo-video ideas**, each with a hook (first 2 seconds), the use case shown, and a CTA; plus a posting cadence (e.g. 3–5 short demos/week) and proven hook formats (`references/templates.md` → *Demo video backlog & hooks*).
 - **🙋 Manual:** recording and posting the videos from the user's accounts.
-- **→ Go deeper:** `marketing-skills:video` and `marketing-skills:social` for scripting/distribution; if installed, `ai-tools-plugin:heygen` (avatar/voiceover), `frontend-plugin` → `hyperframes` / `remotion-plugin` (programmatic demo videos) can help *produce* them.
+- **→ Go deeper:** `marketing-skills:video` and `marketing-skills:social` for scripting/distribution; if installed, `frontend-plugin` → `hyperframes` / `remotion-plugin` (programmatic demo videos) can help *produce* them.
 - **Track:** demos posted this week, views/engagement, best performer.
 
 ### Step 6 — Go where your customers actually spend time
@@ -157,7 +157,7 @@ Once the user is consistently adding customers and nearing 100, flag that acquis
 | 2 Backlinks | `marketing-plugin:seo-keyword-research`, `marketing-skills:cold-email`, `marketing-skills:competitor-profiling`, `marketing-skills:seo-audit` |
 | 3 Warm outbound | `marketing-skills:prospecting`, `marketing-skills:cold-email` |
 | 4 UGC creators | `marketing-skills:social`, `marketing-skills:ad-creative` |
-| 5 Video | `marketing-skills:video`, `marketing-skills:social`, `ai-tools-plugin:heygen`, `frontend-plugin` video tools |
+| 5 Video | `marketing-skills:video`, `marketing-skills:social`, `frontend-plugin` video tools |
 | 6 Communities | `marketing-skills:community-marketing`, `marketing-skills:co-marketing` |
 | 7 X trends | `marketing-skills:social` |
 | Retention | `marketing-skills:onboarding`, `marketing-skills:churn-prevention`, `marketing-skills:referrals` |
