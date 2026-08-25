@@ -115,9 +115,10 @@ Code simplification comes from `ponytail` (`/ponytail-review`, `/ponytail-audit`
 
 ### Bundled skills (not available as plugin dependencies)
 
-| Skill        | Purpose              |
-| ------------ | -------------------- |
-| `babysit-pr` | Keep PRs merge-ready |
+| Skill             | Purpose                                      |
+| ----------------- | -------------------------------------------- |
+| `babysit-pr`      | Keep PRs merge-ready                         |
+| `model-selection` | Route Codex/Claude Code models (High effort) |
 
 TDD, grilling, specs, tickets, debugging, and code review come from the `mattpocock-skills` dependency — `/tdd`, `/grill-me`, `/to-spec`, `/to-tickets`, `/implement`. The bundled `prd`, `ralph`, and `plugin-advisor` skills were removed: the first two duplicated `/to-spec` and `/to-tickets`, and `plugin-advisor` only fired passively.
 
