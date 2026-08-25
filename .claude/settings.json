@@ -68,6 +68,12 @@
         "source": "github",
         "repo": "mattpocock/skills"
       }
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
+      }
     }
   }
 }

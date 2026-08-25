@@ -26,6 +26,7 @@ as a project. For a global install outside this repo, add those marketplaces onc
 /plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add DietrichGebert/ponytail
 /plugin marketplace add mattpocock/skills
+/plugin marketplace add warpdotdev/claude-code-warp
 ```
 
 Then install the plugins you need:
@@ -46,6 +47,7 @@ Or install individual plugins:
 /plugin install gamedev-core@ai-rules
 /plugin install gamedev-threejs@ai-rules
 /plugin install gamedev-godot@ai-rules
+/plugin install gamedev-roblox@ai-rules
 /plugin install marketing-plugin@ai-rules
 /reload-plugins
 /mcp
@@ -94,6 +96,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
 | `ponytail`          | `ponytail`                     | `/plugin marketplace add DietrichGebert/ponytail`                        |
 | `mattpocock-skills` | `mattpocock`                   | `/plugin marketplace add mattpocock/skills`                              |
+| `warp`              | `claude-code-warp`             | `/plugin marketplace add warpdotdev/claude-code-warp`                    |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
 
 `skill-creator` is installed via `skill-creator@claude-plugins-official`; upstream source is [anthropics/skills](https://github.com/anthropics/skills).
@@ -181,9 +184,9 @@ AI video creation — storyboarding, prompting, hooks, image prompting, and char
 
 `character-design-sheet` declares `allowed-tools: Bash(belt *)`; its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`), but it works as a reference guide without it. Use `/ai-video:<skill>`. Complements `frontend-plugin` video tooling and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
 
-## gamedev-* (core / threejs / godot)
+## gamedev-* (core / threejs / godot / roblox)
 
-Game development split by engine: an engine-agnostic core plus two engine-specific plugins. Install only the engines you use.
+Game development split by engine: an engine-agnostic core plus three engine-specific plugins. Install only the engines you use.
 
 ### ai-rules bundled
 
@@ -192,6 +195,7 @@ Game development split by engine: an engine-agnostic core plus two engine-specif
 | `gamedev-core`    | 11 engine-agnostic skills — `game-developer` (ECS, physics, netcode, optimization, patterns) plus per-platform skills `2d-games`, `3d-games`, `web-games`, `mobile-games`, `pc-games`, `vr-ar`, `game-design`, `game-art`, `game-audio`, `multiplayer`; [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills). The upstream `game-development` orchestrator was dropped — it duplicated `game-developer`, and its platform docs are now top-level skills |
 | `gamedev-threejs` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + an 8-skill game-building suite (gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | `gamedev-godot`   | `godot` skill + `/godot` command + `godot-mcp` server (`.mcp.json`, needs `GODOT_PATH`); [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills), [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) |
+| `gamedev-roblox`  | MCP-only — `roblox-studio` server built into Roblox Studio (scripts, asset generation, Luau, playtesting); requires Studio-side setup |
 
 Install per engine, e.g. `/gamedev-core:game-developer`, `/gamedev-threejs:threejs-fundamentals`, `/gamedev-godot:godot`. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
 
@@ -305,4 +309,5 @@ claude plugin uninstall devops-plugin@ai-rules --prune
 claude plugin uninstall gamedev-core@ai-rules --prune
 claude plugin uninstall gamedev-threejs@ai-rules --prune
 claude plugin uninstall gamedev-godot@ai-rules --prune
+claude plugin uninstall gamedev-roblox@ai-rules --prune
 ```

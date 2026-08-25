@@ -8,7 +8,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 | `frontend-plugin` | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, marketing copy & SEO, Astro docs MCP |
 | `devops-plugin` | Supabase and Vercel MCP integrations |
 
-> The `gamedev-*` plugins (`gamedev-core`, `gamedev-threejs`, `gamedev-godot`) are **not** bundled — install per engine, e.g. `/plugin install gamedev-threejs@ai-rules`.
+> The `gamedev-*` plugins (`gamedev-core`, `gamedev-threejs`, `gamedev-godot`, `gamedev-roblox`) are **not** bundled — install per engine, e.g. `/plugin install gamedev-threejs@ai-rules`.
 
 ## Install
 
@@ -28,6 +28,7 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 /plugin marketplace add heygen-com/hyperframes
 /plugin marketplace add DietrichGebert/ponytail
 /plugin marketplace add mattpocock/skills
+/plugin marketplace add warpdotdev/claude-code-warp
 
 /plugin marketplace add bernatmv/ai-rules
 /plugin install fullstack-plugin@ai-rules

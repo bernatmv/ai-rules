@@ -2,7 +2,7 @@
 
 Engine-agnostic game development skills for Claude Code. The transferable fundamentals that apply before you pick Three.js or Godot — architecture, design patterns, performance budgeting, and per-platform guidance.
 
-Pair with `gamedev-threejs` or `gamedev-godot` for engine-specific implementation.
+Pair with `gamedev-threejs`, `gamedev-godot`, or `gamedev-roblox` for engine-specific implementation.
 
 ## Bundled skills
 

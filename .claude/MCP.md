@@ -61,6 +61,22 @@ External integrations are split across marketplace plugins. Install `fullstack-p
 After installing plugins, authenticate MCP servers with `/mcp`. Google Workspace uses
 separate OAuth via `jean-claude` (see PLUGIN.md).
 
+## gamedev-roblox
+
+**`.mcp.json`**:
+
+| Server          | Transport | Notes                                       |
+| --------------- | --------- | ------------------------------------------- |
+| `roblox-studio` | stdio     | Binary shipped inside Roblox Studio         |
+
+Roblox's standalone [studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) was archived in April 2026; this targets the [MCP server built into Studio](https://create.roblox.com/docs/studio/mcp). Enable it in Studio: **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. Manual add:
+
+```sh
+claude mcp add roblox-studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP
+```
+
+Set `ROBLOX_STUDIO_MCP` to override the default macOS path (Windows: `%LOCALAPPDATA%\Roblox\mcp.bat`).
+
 ## Convex
 
 Bundled in `core-plugin/.mcp.json`. Manual add:

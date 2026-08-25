@@ -12,7 +12,8 @@
     "agent-browser",
     "hyperframes",
     "ponytail",
-    "mattpocock"
+    "mattpocock",
+    "claude-code-warp"
   ],
   "plugins": [
     {
@@ -49,6 +50,11 @@
       "name": "gamedev-godot",
       "description": "Godot 4.x development — GDScript, testing, exports, deployment, plus the godot-mcp server",
       "source": "./gamedev-godot"
+    },
+    {
+      "name": "gamedev-roblox",
+      "description": "Roblox development via the MCP server built into Roblox Studio — scripts, mesh/material generation, data model inspection, Luau execution, and playtesting; requires Studio-side setup",
+      "source": "./gamedev-roblox"
     },
     {
       "name": "fullstack-plugin",

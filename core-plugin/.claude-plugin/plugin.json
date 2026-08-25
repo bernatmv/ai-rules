@@ -18,6 +18,7 @@
     { "name": "jean-claude", "marketplace": "jean-claude" },
     { "name": "ponytail", "marketplace": "ponytail" },
     { "name": "mattpocock-skills", "marketplace": "mattpocock" },
+    { "name": "warp", "marketplace": "claude-code-warp" },
     "excalidraw-plugin"
   ]
 }
