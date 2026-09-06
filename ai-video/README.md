@@ -2,10 +2,11 @@
 
 AI video creation skills for Claude Code — plan, prompt, and hook short-form and cinematic AI video, plus the image and character-consistency skills that feed it.
 
-## Bundled skills (6)
+## Bundled skills (7)
 
 | Skill | Purpose | Source |
 | ----- | ------- | ------ |
+| `chroma-key-transparency` | Generate transparent cutouts and game assets using a flat chroma backdrop, background removal, and visual edge checks | Local |
 | `ai-video-storyboard` | Plan a multi-shot AI video (>15s) as a coordinated shot list with visually consistent per-segment prompts | [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill) |
 | `ai-video-prompt-enhancer` | Turn a rough idea into one detailed, cinematic single-clip prompt | [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer) |
 | `tiktok-reel-hook-generator` | Generate scroll-stopping 1–3s visual hooks with ready-to-copy prompts for TikTok / Reels / Shorts | [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) |
@@ -18,6 +19,8 @@ The `smixs/visual-skills` image skill is vendored under a clearer name (`visual-
 Use `/ai-video:ai-video-storyboard`, `/ai-video:ai-video-prompt-enhancer`, `/ai-video:tiktok-reel-hook-generator`, `/ai-video:video-prompting`, `/ai-video:visual-image`, or `/ai-video:character-design-sheet`.
 
 ### Rough → finished flow
+
+- **Transparent images:** `/ai-video:chroma-key-transparency` for chroma-key generation and removal with the bundled Python/Pillow helper. Includes soft edges, optional spill removal, and light/dark/checkerboard QA previews. The skill folder also works as a standalone Codex or Claude personal skill.
 
 - **Single clip:** `ai-video-prompt-enhancer` to shape the idea → `video-prompting` for the model-specific prompt.
 - **Multi-shot / short-form:** `ai-video-storyboard` for the shot list → `tiktok-reel-hook-generator` for the opening hook → `video-prompting` per shot.
