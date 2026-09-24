@@ -39,6 +39,8 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | `threejs-gameplay-systems`, … | `gamedev-threejs`                            | `/gamedev-threejs:<skill-name>`   |
 | `godot`                 | `gamedev-godot`                                    | `/gamedev-godot:godot`            |
 | `first-100-customers`   | `marketing-plugin`                                 | `/marketing-plugin:first-100-customers` |
+| `seo-keyword-research` | `marketing-plugin`                                 | `/marketing-plugin:seo-keyword-research` |
+| `seo-strategy`         | `marketing-plugin`                                 | `/marketing-plugin:seo-strategy`         |
 | `ai-video-storyboard`   | `ai-video`                                         | `/ai-video:ai-video-storyboard`   |
 | `ai-video-prompt-enhancer` | `ai-video`                                      | `/ai-video:ai-video-prompt-enhancer` |
 | `tiktok-reel-hook-generator` | `ai-video`                                    | `/ai-video:tiktok-reel-hook-generator` |

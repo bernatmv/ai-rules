@@ -193,11 +193,13 @@ This needs editor-side setup: in Studio, **Assistant** → **…** → **Manage 
 
 ### marketing-plugin
 
-#### Bundled skills (1)
+#### Bundled skills (3)
 
 | Skill | Purpose |
 | ----- | ------- |
 | `first-100-customers` | YC-style brute-force GTM playbook (based on [@fin465's thread](https://x.com/fin465/status/2066589201085370482)) — a repeatable **weekly** engine across 7 acquisition channels: launch-max (3×), steal competitor backlinks, warm outbound, UGC creators, build-in-public video, go where customers are, and ride weekly X trends. Runs as a 3-layer system (Growth Brief → 7-step Engine → Tracker toward 100), generating assets and live web research while flagging every manual step. Bundles the 56-platform launch playbook (launch directories, deal/LTD marketplaces, software directories) as its launch-max reference. |
+| `seo-keyword-research` | Validates search phrasing, demand, and SERP fit before keywords are used in pages or campaigns. |
+| `seo-strategy` | Turns search, content, technical, and company-trust findings into a prioritized organic search roadmap. |
 
 #### Dependencies (1)
 
