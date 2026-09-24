@@ -18,6 +18,7 @@ These skills install automatically via `ai-rules` plugin dependencies — no man
 | Skill                   | Installed via                                      | Slash command                    |
 | ----------------------- | -------------------------------------------------- | -------------------------------- |
 | `agent-browser`         | `frontend-plugin` → `agent-browser`                | `/agent-browser:agent-browser`    |
+| `ui-character-and-polish` | `frontend-plugin` (bundled)                     | `/frontend-plugin:ui-character-and-polish` |
 | `remotion-best-practices` (router) | `frontend-plugin` → `remotion-plugin`   | `/remotion-plugin:remotion-best-practices` |
 | `remotion-create`, `remotion-render`, `remotion-captions`, … | `frontend-plugin` → `remotion-plugin` | `/remotion-plugin:<skill-name>` |
 | `hyperframes`           | `frontend-plugin` → `hyperframes`                  | `/hyperframes:hyperframes`       |

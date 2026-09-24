@@ -1,6 +1,10 @@
 # frontend-plugin
 
-Frontend design, browser testing, and UI integration plugin for Claude Code.
+Frontend design, UI polish, browser testing, and UI integration plugin for Claude Code.
+
+## Bundled skill
+
+[`ui-character-and-polish`](skills/ui-character-and-polish/SKILL.md) audits user journeys for useful new interface moments and refines them with interaction, depth, motion, and optional sound. It consults the live [Interior](https://www.interior.dev/docs), [Beautiful UI](https://www.beautifului.dev/), and [Cuelume](https://cuelume.dev/docs) catalogs when needed, including future additions; it checks for an official MCP before falling back to docs and registries. Use `/frontend-plugin:ui-character-and-polish` alongside `frontend-design` when building or refining a web UI.
 
 ## Dependencies
 
