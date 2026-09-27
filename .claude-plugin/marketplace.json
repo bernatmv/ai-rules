@@ -78,7 +78,7 @@
     },
     {
       "name": "marketing-plugin",
-      "description": "Marketing and go-to-market skills — first-100-customers (YC-style weekly GTM playbook across 7 acquisition channels, with a bundled 56-platform launch playbook) and seo-keyword-research (search-demand-validated keyword research)",
+      "description": "Marketing and go-to-market skills — first-100-customers for acquisition, seo-keyword-research for demand validation, and seo-strategy for prioritized organic search planning",
       "source": "./marketing-plugin"
     }
   ]
