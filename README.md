@@ -8,7 +8,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`. `gamedev-*` plugins are installed separately, per engine |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
-| [frontend-plugin](./frontend-plugin)   | Frontend design, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP |
+| [frontend-plugin](./frontend-plugin)   | Frontend design and UI polish, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-video](./ai-video)                 | AI video creation — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, character sheets |
 | [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — architecture, ECS, physics, AI, networking, plus per-platform skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
@@ -68,6 +68,8 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 | `convex` | Convex backend MCP |
 
 ### frontend-plugin
+
+Bundled skill: [`ui-character-and-polish`](frontend-plugin/skills/ui-character-and-polish/SKILL.md) — audit user journeys and add fitting interactions, AI UI patterns, and optional sound, drawing on Interior, Beautiful UI, and Cuelume.
 
 #### Dependencies (9)
 

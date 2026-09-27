@@ -1,7 +1,10 @@
 # Frontend plugin skills
 
-Add project-specific frontend skills here. Official frontend tooling is pulled in
-via plugin dependencies:
+Bundled local skill:
+
+- `ui-character-and-polish` — find valuable new UI moments and refine existing ones using the current Interior, Beautiful UI, and Cuelume catalogs.
+
+Official frontend tooling is pulled in via plugin dependencies:
 
 - `frontend-design` — UI design guidance
 - `agent-browser` — browser automation CLI (snapshot + `@eN` refs)
