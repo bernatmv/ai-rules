@@ -61,6 +61,20 @@ External integrations are split across marketplace plugins. Install `fullstack-p
 After installing plugins, authenticate MCP servers with `/mcp`. Google Workspace uses
 separate OAuth via `jean-claude` (see PLUGIN.md).
 
+## gamedev-core
+
+**`.mcp.json`**:
+
+| Server    | Transport | Notes                                               |
+| --------- | --------- | --------------------------------------------------- |
+| `blender` | stdio     | `uvx mcp-for-blender` — needs `uv` + Blender add-on |
+
+Community [MCP for Blender](https://github.com/ahujasid/blender-mcp) (renamed from `blender-mcp` in Sept 2026; the old name still works). Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`). Manual add:
+
+```sh
+claude mcp add blender -- uvx mcp-for-blender
+```
+
 ## gamedev-roblox
 
 **`.mcp.json`**:
