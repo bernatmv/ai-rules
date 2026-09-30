@@ -38,7 +38,7 @@
     },
     {
       "name": "gamedev-core",
-      "description": "Engine-agnostic game development — game loop, patterns, ECS, AI, performance budgeting, and platform routing (2D/3D, web, mobile, PC, VR/AR)",
+      "description": "Engine-agnostic game development — game loop, patterns, ECS, AI, performance budgeting, and platform routing (2D/3D, web, mobile, PC, VR/AR), plus the Blender MCP server",
       "source": "./gamedev-core"
     },
     {

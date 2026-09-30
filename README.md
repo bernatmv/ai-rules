@@ -11,7 +11,7 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 | [frontend-plugin](./frontend-plugin)   | Frontend design and UI polish, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-video](./ai-video)                 | AI video creation — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, character sheets |
-| [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — architecture, ECS, physics, AI, networking, plus per-platform skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer) ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
+| [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — architecture, ECS, physics, AI, networking, plus per-platform skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer), plus the [Blender MCP](https://github.com/ahujasid/blender-mcp) server ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
 | [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
 | [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
 | [gamedev-roblox](./gamedev-roblox)     | Roblox — the MCP server [built into Roblox Studio](https://create.roblox.com/docs/studio/mcp); scripts, asset generation, Luau, playtesting; requires Studio-side setup |
@@ -137,6 +137,10 @@ Engine-agnostic game development — the transferable fundamentals that apply be
 | `game-design` / `game-art` / `game-audio` / `multiplayer` | GDD and balancing; asset pipeline; sound design; netcode |
 
 Vendored from [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) and [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) (both MIT). The upstream `game-development` orchestrator was dropped — it duplicated `game-developer` (game loop, patterns, AI, collision, performance budget) and its ten platform docs are now top-level skills the agent picks directly.
+
+`.mcp.json` wires up the community [MCP for Blender](https://github.com/ahujasid/blender-mcp) server (via `uvx mcp-for-blender`, formerly `blender-mcp`; MIT) — scene inspection and editing, Python execution, Poly Haven / Sketchfab assets, and optional Hyper3D/Hunyuan3D generation. Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`). macOS and Windows notes (Homebrew `uvx` path, add-on folder, old-uv `pywin32` failure): [`gamedev-core/README.md`](./gamedev-core/README.md#mcp-server).
+
+> The server runs LLM-generated Python inside Blender with no sandbox by default. Set `BLENDER_MCP_SAFE_MODE=1` to block file, subprocess, and network access (this also blocks exporting to disk).
 
 ### gamedev-threejs
 

@@ -15,6 +15,28 @@ Pair with `gamedev-threejs`, `gamedev-godot`, or `gamedev-roblox` for engine-spe
 
 The upstream `game-development` orchestrator was dropped — it duplicated `game-developer` (game loop, pattern/AI/collision selection, performance budget), and the ten platform documents it routed to are now top-level skills the agent selects directly.
 
+## MCP server
+
+`.mcp.json` wires up [MCP for Blender](https://github.com/ahujasid/blender-mcp) (`uvx mcp-for-blender`) for modeling, scene editing, and asset work from chat.
+
+Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`).
+
+Per platform:
+
+- **macOS** — install uv with `brew install uv` (or `curl -LsSf https://astral.sh/uv/install.sh | sh`). Apps launched from the Dock don't inherit your shell `PATH`, so if a client reports `uvx` not found, use the absolute path from `which uvx` (`/opt/homebrew/bin/uvx` for Homebrew, `~/.local/bin/uvx` for the installer) in manual adds. `install-addon` targets `~/Library/Application Support/Blender/<version>/scripts/addons`, which only exists after Blender has run once — open Blender first, or pass `--addons-dir`.
+- **Windows** — install uv with `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`. Older uv releases (e.g. 0.11.x) can fail installing the `pywin32` dependency with `os error 32` (file in use) — run `uv self update` first.
+
+Manual add outside the plugin (swap `uvx` for its absolute path if needed):
+
+```sh
+claude mcp add --scope user blender -- uvx mcp-for-blender
+codex mcp add blender -- uvx mcp-for-blender
+```
+
+> The server runs LLM-generated Python inside Blender with no sandbox by default. Set `BLENDER_MCP_SAFE_MODE=1` to block file, subprocess, and network access (this also blocks exporting to disk).
+
+This is the community server, not the official [Blender Lab MCP server](https://www.blender.org/lab/mcp-server/) (Blender 5.1+, GPL, no asset libraries or 3D generation, distributed as an `.mcpb` bundle rather than a package).
+
 ## Attribution
 
 Vendored from these MIT-licensed community repos:
