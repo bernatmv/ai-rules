@@ -72,8 +72,12 @@ separate OAuth via `jean-claude` (see PLUGIN.md).
 Community [MCP for Blender](https://github.com/ahujasid/blender-mcp) (renamed from `blender-mcp` in Sept 2026; the old name still works). Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`). Manual add:
 
 ```sh
-claude mcp add blender -- uvx mcp-for-blender
+claude mcp add --scope user blender -- uvx mcp-for-blender
+codex mcp add blender -- uvx mcp-for-blender
 ```
+
+- **macOS:** `brew install uv`. Dock-launched apps don't inherit your shell `PATH`; if `uvx` isn't found, use the absolute path from `which uvx` (e.g. `/opt/homebrew/bin/uvx`). Open Blender once before `install-addon` so its `~/Library/Application Support/Blender/<version>` folder exists.
+- **Windows:** uv 0.11.x can fail installing `pywin32` (`os error 32`) — `uv self update` first.
 
 ## gamedev-roblox
 
