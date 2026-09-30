@@ -21,6 +21,8 @@ The upstream `game-development` orchestrator was dropped — it duplicated `game
 
 Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`).
 
+On Windows, older uv releases (e.g. 0.11.x) can fail installing the `pywin32` dependency with `os error 32` (file in use) — run `uv self update` first.
+
 > The server runs LLM-generated Python inside Blender with no sandbox by default. Set `BLENDER_MCP_SAFE_MODE=1` to block file, subprocess, and network access (this also blocks exporting to disk).
 
 This is the community server, not the official [Blender Lab MCP server](https://www.blender.org/lab/mcp-server/) (Blender 5.1+, GPL, no asset libraries or 3D generation, distributed as an `.mcpb` bundle rather than a package).
