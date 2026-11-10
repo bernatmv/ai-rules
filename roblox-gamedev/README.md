@@ -46,4 +46,5 @@ Re-apply these after refreshing from upstream:
 - `LOCAL.md` moved to `~/.config/roblox-gamedev/<skill>/`, because the plugin cache is replaced on update.
 - `roblox-build-orchestrator` uses the plugin's `agents/` directly, and its duplicate `agents/` copy was removed.
 - The `roblox-code` scaffold's test runner uses a file-relative require and pins Lune 0.10.5, because newer Lune rejects the upstream path.
+- `calibrate_rig.py`, `anim_render.py` and `r6_clip.py` in `roblox-animation` also run on Blender 5, which removed `Action.fcurves` and renamed the EEVEE engine.
 - `manifest.json` comes from cc-blender-skill and is read by `blender-skill-harmonizer`.

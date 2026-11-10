@@ -207,10 +207,17 @@ if PROPS:
     if prop_bone is None:
         die(f"no pose bone carries all of {list(PROPS)} - check names with calibrate_rig.py")
 
+def fcurve_count(action):
+    """Blender 4.4+ keeps F-curves in layered channelbags; 5.0 removed Action.fcurves."""
+    if hasattr(action, "fcurves"):
+        return len(action.fcurves)
+    return sum(len(bag.fcurves) for layer in action.layers for strip in layer.strips for bag in strip.channelbags)
+
+
 if not (arm.animation_data and arm.animation_data.action):
     die("rig has no action to key into")
 act = arm.animation_data.action
-print(f"=== keying into existing action {act.name!r} ({len(act.fcurves)} fcurves) from frame {START}")
+print(f"=== keying into existing action {act.name!r} ({fcurve_count(act)} fcurves) from frame {START}")
 
 
 def head(b):
@@ -466,7 +473,7 @@ for i in range(n):
         if any(sample(bone, k, t) is not None for k in ("loc", "target", "aim")):
             pb.keyframe_insert("location", frame=f)
 
-print(f"=== baked {n} frames of keys; action now has {len(act.fcurves)} fcurves")
+print(f"=== baked {n} frames of keys; action now has {fcurve_count(act)} fcurves")
 
 # ---- 1a. THE PROP: render the weapon the game will actually put in the hand ----
 #
@@ -922,7 +929,10 @@ if spec.get("dry"):
     os._exit(0)
 
 # ---- 2. render setup ----
-sc.render.engine = "BLENDER_EEVEE_NEXT"
+try:
+    sc.render.engine = "BLENDER_EEVEE"       # Blender 5.0+
+except TypeError:
+    sc.render.engine = "BLENDER_EEVEE_NEXT"  # Blender 4.2 to 4.5
 sc.view_settings.view_transform = "Standard"
 
 # PREVIEW: one view, quarter resolution, minimum samples. The authoring loop is

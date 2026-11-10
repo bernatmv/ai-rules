@@ -52,6 +52,13 @@ if target is None:
     raise SystemExit("no armature carrying R6 or R15 deform bones")
 
 # the CONTROL armature may be a different object (R6 rigs often split them)
+def fcurve_count(action):
+    """Blender 4.4+ keeps F-curves in layered channelbags; 5.0 removed Action.fcurves."""
+    if hasattr(action, "fcurves"):
+        return len(action.fcurves)
+    return sum(len(bag.fcurves) for layer in action.layers for strip in layer.strips for bag in strip.channelbags)
+
+
 ctrl = target
 for o in bpy.data.objects:
     if o.type == "ARMATURE" and o is not target and len(o.data.bones) > len(target.data.bones):
@@ -63,7 +70,7 @@ print("\n" + "=" * 72)
 print("THE ACTION TRAP")
 ad = ctrl.animation_data
 if ad and ad.action:
-    print(f"  !! {ctrl.name!r} has action {ad.action.name!r} with {len(ad.action.fcurves)} fcurves")
+    print(f"  !! {ctrl.name!r} has action {ad.action.name!r} with {fcurve_count(ad.action)} fcurves")
     print("     Blender RE-EVALUATES this during render and will overwrite any pose")
     print("     set from script. DO NOT pose-and-render: insert KEYFRAMES instead.")
     print("     Do NOT simply clear it either - it usually holds the rest pose.")
