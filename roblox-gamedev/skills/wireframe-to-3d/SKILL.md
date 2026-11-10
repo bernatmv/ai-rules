@@ -33,7 +33,7 @@ Before any wireframe work, verify the environment:
 
 2. **Python deps for the analyzer**. Run:
    ```
-   python3 -c "import cv2, numpy, scipy" 2>&1
+   python -c "import cv2, numpy, scipy" 2>&1
    ```
    If it errors, run `pip install opencv-python numpy scipy Pillow` (or instruct the user to).
 
@@ -82,7 +82,7 @@ For repeated motif subjects, create exactly the primary structural components de
 Run the bundled analyzer once per view:
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/wireframe_analyzer.py <input.png> <output.json>
+python "${CLAUDE_SKILL_DIR}/scripts/wireframe_analyzer.py" <input.png> <output.json>
 ```
 
 The script outputs JSON with this shape:

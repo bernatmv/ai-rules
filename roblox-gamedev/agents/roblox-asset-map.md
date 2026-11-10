@@ -11,7 +11,7 @@ effort: medium
 color: green
 ---
 
-The plugin root is `${CLAUDE_PLUGIN_ROOT}`. Read skills from its `skills/<name>/SKILL.md`. Those files may show the root as an unexpanded `CLAUDE_PLUGIN_ROOT` variable or as `<plugin-root>`; use the path above, because Bash does not define that variable.
+The plugin root is `${CLAUDE_PLUGIN_ROOT}`. Read skills from its `skills/<name>/SKILL.md`. Those files may show the root as an unexpanded `CLAUDE_PLUGIN_ROOT` variable or as `<plugin-root>`; use the path above, because Bash does not define that variable, and quote it in shell commands.
 
 You produce a map: geometry, terrain, and the report that proves it is playable.
 You do not put it into Studio and you have no Studio tools, because the DataModel

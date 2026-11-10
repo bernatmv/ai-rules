@@ -90,7 +90,25 @@ $found | ForEach-Object { Write-Output $_ }
 """
 
 
+JXA_NAMES = r"""
+ObjC.import("CoreGraphics");
+ObjC.deepUnwrap(ObjC.castRefToObject($.CGWindowListCopyWindowInfo(0, 0)))
+  .filter(function (w) { return (w.kCGWindowOwnerName === "RobloxStudio" || w.kCGWindowOwnerName === "Roblox Studio") && w.kCGWindowLayer === 0; })
+  .map(function (w) { return w.kCGWindowName || ""; }).join("\n");
+"""
+
+
+def mac_window_names() -> list[str]:
+    """Every Studio window title. They are blank without Screen Recording permission."""
+    out = subprocess.run(["osascript", "-l", "JavaScript", "-e", JXA_NAMES],
+                         capture_output=True, text=True, timeout=30)
+    return out.stdout.rstrip("\n").split("\n") if out.stdout else []
+
+
 def titles() -> list[str]:
+    if sys.platform == "darwin":
+        # Same format as Windows. The start page is a bare "Roblox Studio", which holds no place.
+        return [t for t in mac_window_names() if t.endswith(" - Roblox Studio")]
     out = subprocess.run(
         ["powershell", "-NoProfile", "-NonInteractive", "-Command", TITLE_PS],
         capture_output=True, text=True, timeout=90,
@@ -121,8 +139,12 @@ def resolve_place_id(cli_value: str | None) -> int:
 
 def state(place_id: int = 0) -> tuple[bool, str, list[dict]]:
     """(ok, one-line detail, per-window states). Shared with preflight.py."""
-    if sys.platform != "win32":
+    if sys.platform not in ("win32", "darwin"):
         return True, "cannot read Studio window titles on this OS - confirm the place is saved or published", []
+    if sys.platform == "darwin":
+        names = mac_window_names()
+        if names and not any(names):
+            return True, "cannot read Studio window titles - grant Screen Recording permission, or confirm the place is saved", []
     found = titles()
     if not found:
         return True, "Studio not running (nothing to check yet)", []
@@ -153,8 +175,8 @@ def main() -> int:
         return 0 if ok else 1
 
     if not states:
-        print(detail if sys.platform != "win32" else "Studio is not running.")
-        return 0 if sys.platform != "win32" else 1
+        print(detail)
+        return 0 if detail.startswith("cannot read") else 1
 
     if len(states) > 1:
         # More than one Studio is its own hazard: two MCP plugins long-polling is

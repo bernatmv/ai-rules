@@ -1,10 +1,10 @@
 # Editing (scripts/edit.py)
 
 ```bash
-python3 $SK/edit.py build --shots $T/shots.json --cut roblox --format landscape   # Roblox upload
-python3 $SK/edit.py build --shots $T/shots.json --cut social --format both        # YouTube 16:9 + Shorts/TikTok 9:16
-python3 $SK/edit.py card  --shots $T/shots.json --index 9                         # preview one card/text PNG
-python3 $SK/edit.py fonts                                                         # what each font name resolves to
+python "$SK/edit.py" build --shots $T/shots.json --cut roblox --format landscape   # Roblox upload
+python "$SK/edit.py" build --shots $T/shots.json --cut social --format both        # YouTube 16:9 + Shorts/TikTok 9:16
+python "$SK/edit.py" card  --shots $T/shots.json --index 9                         # preview one card/text PNG
+python "$SK/edit.py" fonts                                                         # what each font name resolves to
 ```
 Output: `$T/out/<game>_<cut>_<WxH>.mp4`. About 2.5 min per format on an Apple Silicon MacBook (each segment is rendered,
 then joined in one pass). Then run `qa.py final <file> [--roblox]` and look at the `_sheet.png`.

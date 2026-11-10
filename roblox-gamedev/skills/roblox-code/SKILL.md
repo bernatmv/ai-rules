@@ -94,11 +94,11 @@ of movement (scoring, elimination, rewards) must stay on the server.
 ## Start a project
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/new_project.py "Coin Dash" \
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/new_project.py" "Coin Dash" \
     --dir ~/Projects/CoinDash
 cd ~/Projects/CoinDash
 aftman install && wally install   # skip `aftman install` if the tools are already on PATH
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py"
 ```
 
 That last command must print **all gates green** before any game code is written.
@@ -117,9 +117,9 @@ headless runner, and a build stamp in both boot scripts.
 ## Check it
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py            # all gates
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py --fix      # let stylua rewrite
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py --skip-lint  # build + tests only
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py"            # all gates
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py" --fix      # let stylua rewrite
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py" --skip-lint  # build + tests only
 ```
 
 `rojo build` is the single highest-value command in Roblox development and it is

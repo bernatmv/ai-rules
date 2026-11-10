@@ -201,9 +201,9 @@ def main() -> int:
     print("  design/game.json   the contract - fill it in before any stage runs")
     print("  BUILD.md           the checklist, with an exit criterion per stage")
     print("\nnext:")
-    print(f"  cd {root} && {'aftman install && ' if shutil.which('aftman') else ''}wally install")
+    print(f"  cd \"{root}\" && {'aftman install && ' if shutil.which('aftman') else ''}wally install")
     print("  # design stage: replace every TODO in design/*.json")
-    print(f"  python {_SKILLS}/create-roblox-game/scripts/validate.py")
+    print(f"  python \"{_SKILLS.as_posix()}/create-roblox-game/scripts/validate.py\"")
     return 0
 
 

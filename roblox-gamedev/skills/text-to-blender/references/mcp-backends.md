@@ -6,6 +6,8 @@ The recipes use the original `mcp__blender__…` spelling as examples. Resolve t
 logical operations through the selected backend; do not call a legacy tool on an
 official server just because a recipe names it.
 
+Recipes show `/tmp/...` output paths. On Windows, build them from `tempfile.gettempdir()` or use a path in the project.
+
 ## Select once per task
 
 1. Honor an explicit backend choice. If unavailable or missing a required capability,

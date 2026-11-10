@@ -29,7 +29,7 @@ writes those files with the user, so nothing has to be edited by hand.
 ## Step 1: check the machine
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-skills-setup/scripts/check_setup.py
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-skills-setup/scripts/check_setup.py"
 ```
 
 Show the user the table. If the Studio MCP line says it is not in Claude
@@ -63,9 +63,11 @@ order for someone new:
 Tell them how, for their OS, and wait until they say it is done:
 
 - Windows (PowerShell): `setx ROBLOX_API_KEY "paste-here"` then restart the
-  terminal and Claude Code.
+  terminal and Claude Code. Also run `setx PYTHONUTF8 1`, because many scripts
+  read UTF-8 files and Windows Python otherwise uses the legacy code page.
 - macOS / Linux: add `export ROBLOX_API_KEY="paste-here"` to `~/.zshrc` or
-  `~/.bashrc`, then open a new terminal.
+  `~/.bashrc`, then open a new terminal. The skills call `python`, so make sure
+  that name resolves to Python 3.11+ (macOS only ships `python3` by default).
 
 Re-run `check_setup.py`; it reports "set" without showing the value.
 

@@ -1,0 +1,51 @@
+name: roblox-gamedev smoke
+
+on:
+  pull_request:
+    paths:
+      - "roblox-gamedev/**"
+      - "scripts/smoke-roblox-gamedev.py"
+      - ".github/workflows/roblox-gamedev-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            aftman: macos-aarch64
+          - os: windows-latest
+            aftman: windows-x86_64
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install numpy scipy Pillow
+      - name: Install ffmpeg
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then choco install ffmpeg -y --no-progress; else brew install ffmpeg; fi
+      - name: Install the Roblox toolchain
+        shell: bash
+        run: |
+          gh release download v0.3.0 -R LPGhatguy/aftman -p "aftman-0.3.0-${{ matrix.aftman }}.zip" -D "$RUNNER_TEMP"
+          unzip -q "$RUNNER_TEMP"/aftman-*.zip -d "$RUNNER_TEMP/aftman"
+          "$RUNNER_TEMP/aftman/aftman" self-install
+          printf 'github = "%s"\n' "$GH_TOKEN" > "$HOME/.aftman/auth.toml"
+          if [ "$RUNNER_OS" = "Windows" ]; then cygpath -w "$HOME/.aftman/bin" >> "$GITHUB_PATH"; else echo "$HOME/.aftman/bin" >> "$GITHUB_PATH"; fi
+          export PATH="$HOME/.aftman/bin:$PATH"
+          python roblox-gamedev/skills/roblox-code/scripts/new_project.py Toolchain --dir "$RUNNER_TEMP/toolchain"
+          cd "$RUNNER_TEMP/toolchain"
+          aftman install --no-trust-check
+          for t in rojo wally selene stylua lune; do aftman add --global "$(grep "^$t = " aftman.toml | cut -d'"' -f2)" || true; done
+      - run: python scripts/smoke-roblox-gamedev.py
