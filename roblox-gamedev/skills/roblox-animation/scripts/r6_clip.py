@@ -303,7 +303,10 @@ if a.no_render:
 
 # ---- render: plain clay, floor at y=0, orthographic, framed on the whole clip ----
 sc = bpy.context.scene
-sc.render.engine = "BLENDER_EEVEE_NEXT"
+try:
+    sc.render.engine = "BLENDER_EEVEE"       # Blender 5.0+
+except TypeError:
+    sc.render.engine = "BLENDER_EEVEE_NEXT"  # Blender 4.2 to 4.5
 sc.render.resolution_x = sc.render.resolution_y = a.size
 sc.view_settings.view_transform = "Standard"
 world = bpy.data.worlds.new("W")
