@@ -38,6 +38,8 @@ backend is a new task/preflight, not a hidden recovery step.
 | API documentation | Consult Blender documentation | `search_api_docs(query=...)` |
 | Provider assets | Advertised Poly Haven, Sketchfab, Hyper3D/Hunyuan tools, subject to provider setup | Not built in; download/import manually if legacy is unavailable |
 
+The current MCP for Blender server (`uvx mcp-for-blender`, the `blender` server in this setup) follows the ahujasid column with these renames: use `look` for screenshots, execute Python for object details, and `search_assets`, `import_asset` and `generate_3d` for provider assets. `get_addon_status` reports the version and which providers are on.
+
 Some clients expose tool names as `mcp__<server>__<tool>`; resolve the advertised
 name and schema rather than requiring this spelling in every host. A single-backend installation
 uses `blender`. A dual installation keeps the existing ahujasid server as `blender`

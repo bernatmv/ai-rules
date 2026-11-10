@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -200,7 +201,7 @@ def main() -> int:
     print("  design/game.json   the contract - fill it in before any stage runs")
     print("  BUILD.md           the checklist, with an exit criterion per stage")
     print("\nnext:")
-    print(f"  cd {root} && aftman install && wally install")
+    print(f"  cd {root} && {'aftman install && ' if shutil.which('aftman') else ''}wally install")
     print("  # design stage: replace every TODO in design/*.json")
     print(f"  python {_SKILLS}/create-roblox-game/scripts/validate.py")
     return 0

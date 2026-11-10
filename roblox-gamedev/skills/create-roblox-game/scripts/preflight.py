@@ -220,8 +220,8 @@ def main() -> int:
     local = Path.home() / ".config" / "roblox-gamedev" / "create-roblox-game" / "LOCAL.md"
     if not local.exists() or blocking or optional:
         print("\nsetup: your paths and tool locations live in ~/.config/roblox-gamedev/create-roblox-game/LOCAL.md")
-        print(" " + ("" if local.exists() else " (it does not exist yet)")
-              + ". Copy this skill's LOCAL.template.md there and fill it in, or run the")
+        print("  " + ("" if local.exists() else "It does not exist yet. ")
+              + "Copy this skill's LOCAL.template.md there and fill it in, or run the")
         print("  roblox-skills-setup skill, then re-run this check.")
     return 1 if blocking else 0
 

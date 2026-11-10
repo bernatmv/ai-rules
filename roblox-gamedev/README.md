@@ -13,6 +13,8 @@ claude mcp add --scope user blender -- uvx mcp-for-blender
 
 Enable the Studio server under **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. Keep one Studio connection at a time. Blender needs its add-on as well; see [`.claude/MCP.md`](../.claude/MCP.md).
 
+For Python, use 3.11+ with `numpy scipy Pillow requests opencv-python scikit-image gradio_client huggingface_hub`.
+
 Run `roblox-skills-setup` to check local tools (Rojo, Wally, Lune, Selene, StyLua, Blender, Python 3.11+). Per-skill settings live in `~/.config/roblox-gamedev/<skill>/LOCAL.md`, outside the plugin, so updates keep them.
 
 ## Skills
@@ -47,4 +49,6 @@ Re-apply these after refreshing from upstream:
 - `roblox-build-orchestrator` uses the plugin's `agents/` directly, and its duplicate `agents/` copy was removed.
 - The `roblox-code` scaffold's test runner uses a file-relative require and pins Lune 0.10.5, because newer Lune rejects the upstream path.
 - `calibrate_rig.py`, `anim_render.py` and `r6_clip.py` in `roblox-animation` also run on Blender 5, which removed `Action.fcurves` and renamed the EEVEE engine.
+- `create-roblox-game` Studio helpers no longer crash outside Windows, and `render_check.py` uses the Blender 5 EEVEE name.
+- Worker agents are told the plugin root, because a subagent reading a `SKILL.md` gets no variable substitution.
 - `manifest.json` comes from cc-blender-skill and is read by `blender-skill-harmonizer`.

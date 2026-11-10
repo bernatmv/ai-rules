@@ -3,7 +3,7 @@ name: create-roblox-game
 description: Take a Roblox game from a genre to something built, assembled, playable and published, ONE SECTION PER SESSION - research and plan, code, art, animation and sound, playtest, publish - with a HANDOFF.md between sessions so the chat can be cleared after each approved section. Drives the whole toolchain - market research, a design contract, the code project, map, meshes, textures, UI, animation, VFX and sound, then assembly in Studio, playtest and publish. This is the FRONT DOOR: it owns research, design and assembly itself and delegates each asset stage to the skill that already proves that stage. Use whenever the user wants a Roblox game made, built, started or prototyped, says "make me a game" or names a genre to build (incremental, battlegrounds, ...), asks to "complete the research and plan stage" or any other stage, says "continue with the development of the <genre> game", approves a finished stage ("approved", "looks good"), or asks what is still missing before a game can be built.
 ---
 
-> `<plugin-root>` in this skill's reference files is `${CLAUDE_PLUGIN_ROOT}`.
+> `<plugin-root>` in this skill's reference files and generated project files is `${CLAUDE_PLUGIN_ROOT}`.
 
 # Make a Roblox game, end to end
 
@@ -1368,7 +1368,7 @@ manifest lists *measured* bounds; sfx roles filled equals roles requested;
 
 **FAN OUT THE ASSET BLOCK. This is the default now, and it was earned.**
 
-Stages 4-9 run as parallel `roblox-asset-*` workers. Stages 0-2b and 10-12 stay
+Stages 4-9 run as parallel `roblox-asset-*` workers (agent types take the `roblox-gamedev:` prefix). Stages 0-2b and 10-12 stay
 on one thread. Wrap the run in the orchestrator's ledger either way:
 
 ```bash

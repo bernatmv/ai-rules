@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shutil
 from pathlib import Path
 
 AFTMAN = """# {title} - pinned toolchain (run `aftman install`)
@@ -467,7 +468,8 @@ def main() -> int:
 
     print(f"scaffolded {title} -> {root}")
     print("\nnext, from that directory:")
-    print("  aftman install")
+    if shutil.which("aftman"):
+        print("  aftman install")
     print("  wally install")
     print(f"  python {Path(__file__).resolve().parent / 'check.py'}")
     print("\nthe scaffold is green on all gates before you write a line of game code.")

@@ -42,6 +42,8 @@ MARKER = "robloxstudio-mcp"
 
 
 def ps(cmd: str) -> str:
+    if sys.platform != "win32":
+        sys.exit("recover_mcp.py is Windows-only; see references/recovery.md for the manual steps.")
     out = subprocess.run(
         ["powershell", "-NoProfile", "-NonInteractive", "-Command", cmd],
         capture_output=True, text=True, timeout=120,
