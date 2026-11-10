@@ -45,4 +45,5 @@ Re-apply these after refreshing from upstream:
 - Hardcoded `~/.claude/skills/<name>` paths became `${CLAUDE_PLUGIN_ROOT}/skills/<name>` in `SKILL.md`, `<plugin-root>/skills/<name>` in reference files and generated comments, and script-relative paths in Python output.
 - `LOCAL.md` moved to `~/.config/roblox-gamedev/<skill>/`, because the plugin cache is replaced on update.
 - `roblox-build-orchestrator` uses the plugin's `agents/` directly, and its duplicate `agents/` copy was removed.
+- The `roblox-code` scaffold's test runner uses a file-relative require and pins Lune 0.10.5, because newer Lune rejects the upstream path.
 - `manifest.json` comes from cc-blender-skill and is read by `blender-skill-harmonizer`.

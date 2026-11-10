@@ -23,7 +23,7 @@ rojo = "rojo-rbx/rojo@7.4.1"
 wally = "UpliftGames/wally@0.3.2"
 selene = "Kampfkarren/selene@0.28.0"
 stylua = "JohnnyMorganz/StyLua@0.20.0"
-lune = "lune-org/lune@0.8.9"
+lune = "lune-org/lune@0.10.5"
 """
 
 WALLY = """[package]
@@ -341,9 +341,8 @@ for _, fileName in fs.readDir(TESTS_DIR) do
 \t\tcontinue
 \tend
 \tlocal specPath = `{{TESTS_DIR}}/{{fileName}}`
-\t-- Lune's require appends .luau itself and resolves relative to the CWD,
-\t-- so this must be run from the project root.
-\tlocal requirePath = `{{TESTS_DIR}}/{{fileName:gsub("%.luau$", "")}}`
+\t-- Lune appends .luau itself and resolves require paths relative to this file.
+\tlocal requirePath = `../{{TESTS_DIR}}/{{fileName:gsub("%.luau$", "")}}`
 \tlocal ok, specOrErr = pcall(require, requirePath)
 \tif not ok then
 \t\tfailed += 1
