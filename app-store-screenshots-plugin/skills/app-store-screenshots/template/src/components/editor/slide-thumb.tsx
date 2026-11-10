@@ -4,11 +4,12 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Copy, GripVertical, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LAYOUT_LABEL } from "@/lib/constants";
+import { canvasSize } from "@/lib/devices";
+import { layoutLabel } from "@/lib/layouts";
 import { pickText } from "@/lib/locale";
-import type { Device, Orientation, Slide, Theme } from "@/lib/types";
+import type { Device, Orientation, Scene, Slide, Theme } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { DeckCanvas, SlideCanvas, getCanvas } from "./slide-canvas";
+import { DeckCanvas, SlideCanvas } from "./slide-canvas";
 
 type Props = {
   slide: Slide;
@@ -21,13 +22,14 @@ type Props = {
   locale: string;
   appName?: string;
   appIcon?: string;
+  fontFamily?: string;
   connectedCanvas: boolean;
+  scene?: Scene;
   onSelect: () => void;
   onDelete: () => void;
   onDuplicate: () => void;
 };
 
-// Thumb tile target width (pixels). Height is derived from device aspect.
 const THUMB_W = 60;
 
 export function SlideThumb({
@@ -41,7 +43,9 @@ export function SlideThumb({
   locale,
   appName,
   appIcon,
+  fontFamily,
   connectedCanvas,
+  scene,
   onSelect,
   onDelete,
   onDuplicate,
@@ -52,7 +56,7 @@ export function SlideThumb({
     id: slide.id,
   });
 
-  const { cW, cH } = getCanvas(device, orientation);
+  const { cW, cH } = canvasSize(device, orientation);
   const aspect = cW / cH;
   const tileH = Math.max(34, Math.min(120, Math.round(THUMB_W / aspect)));
   const scale = THUMB_W / cW;
@@ -116,8 +120,12 @@ export function SlideThumb({
                 locale={locale}
                 appName={appName}
                 appIcon={appIcon}
+                fontFamily={fontFamily}
                 connectedCanvas
                 editable={false}
+                scene={scene}
+                stripStart={start}
+                stripCount={slides.length}
               />
             ) : (
               <SlideCanvas
@@ -128,14 +136,18 @@ export function SlideThumb({
                 locale={locale}
                 appName={appName}
                 appIcon={appIcon}
+                fontFamily={fontFamily}
                 editable={false}
+                scene={scene}
+                stripIndex={index}
+                stripCount={slides.length}
               />
             )}
           </div>
         </div>
         <div className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-[10px] uppercase tracking-wide text-muted-foreground">
-            {`Screen ${index + 1} · ${LAYOUT_LABEL[slide.layout]}`}
+            {`Screen ${index + 1} · ${layoutLabel(slide.layout, device)}`}
           </span>
           <span className="truncate text-sm font-medium leading-tight">
             {headline.split("\n")[0] || (
@@ -150,8 +162,8 @@ export function SlideThumb({
         </div>
       </button>
 
-      {/* Always visible on touch (no hover); fades in on hover on desktop. */}
-      <div className="flex flex-col items-center justify-center gap-0.5 opacity-60 transition-opacity focus-within:opacity-100 group-hover:opacity-100 md:opacity-0">
+      {/* Keep actions discoverable on touch tablets as well as phones. */}
+      <div className="flex flex-col items-center justify-center gap-0.5 opacity-60 transition-opacity focus-within:opacity-100 group-hover:opacity-100">
         <Button
           type="button"
           size="icon"

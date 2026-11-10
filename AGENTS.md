@@ -67,25 +67,13 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 5. Model selection
 
-Do not run expensive models on cheap work. Stay at **High** effort. Follow only this harness's mapping.
+Starting points, not rules. An explicit choice from the user or project wins, and so does evidence from the task.
 
-If the session model does not match the task, switch before doing substantial work. When spawning subagents, set the matching model explicitly.
+- When unsure, start on Opus at `medium`. Use Sonnet for well-scoped work, Haiku for high-volume or cheap-to-check work, and Fable for the hardest technical work and long unattended runs.
+- Try effort before changing model. If a result falls short, first make sure the model can verify its own work, then raise effort one level, then move up a model at a lower effort.
+- In Codex, use Luna for routine coding and Sol for planning, hard or critical work, and design or visual work.
 
-### Codex
-
-- **Sol** (`gpt-5.6-sol`) at High — planning; implementation of complex or critical tasks; any design, creative, or visual work.
-- **Luna** (`gpt-5.6-luna`) at High — coding that is not critical or very complex.
-
-Switch with `/model gpt-5.6-sol` or `/model gpt-5.6-luna`.
-
-### Claude Code
-
-- **Fable 5** (`claude-fable-5`) at High — planning; implementation of complex or critical tasks; any design, creative, or visual work.
-- **Opus 5** (`claude-opus-5`) at High — coding that is not critical or very complex.
-
-Switch with `/model fable` or `/model opus`, and `/effort high`.
-
-When unsure: Sol / Fable 5 for planning, design, visual work, or complex/critical implementation; otherwise Luna / Opus 5. After a plan is settled, drop to Luna / Opus 5 for routine coding.
+For subagents, cost, and switching mid-session, see the `model-selection` skill in `core-plugin`.
 
 ---
 

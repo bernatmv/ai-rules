@@ -37,24 +37,9 @@
       "source": "./ai-video"
     },
     {
-      "name": "gamedev-core",
-      "description": "Engine-agnostic game development — game loop, patterns, ECS, AI, performance budgeting, and platform routing (2D/3D, web, mobile, PC, VR/AR), plus the Blender MCP server",
-      "source": "./gamedev-core"
-    },
-    {
-      "name": "gamedev-threejs",
-      "description": "Three.js and WebGPU 3D development skills — fundamentals through a browser-game suite (gameplay systems, AAA graphics, UI, debug/profiler, QA/release, asset generators)",
-      "source": "./gamedev-threejs"
-    },
-    {
-      "name": "gamedev-godot",
-      "description": "Godot 4.x development — GDScript, testing, exports, deployment, plus the godot-mcp server",
-      "source": "./gamedev-godot"
-    },
-    {
-      "name": "gamedev-roblox",
-      "description": "Roblox development via the MCP server built into Roblox Studio — scripts, mesh/material generation, data model inspection, Luau execution, and playtesting; requires Studio-side setup",
-      "source": "./gamedev-roblox"
+      "name": "roblox-gamedev",
+      "description": "Roblox game development — game creation pipeline, Luau code, UI, maps, 3D models, textures, VFX, SFX, animation, economy design, stud-style building, gameplay trailers, and a Blender skill stack",
+      "source": "./roblox-gamedev"
     },
     {
       "name": "fullstack-plugin",

@@ -1,6 +1,6 @@
 ---
 name: app-store-screenshots
-description: Use when building App Store or Google Play screenshot pages, generating exportable marketing screenshots for iOS and/or Android apps, or scaffolding a screenshot editor with Next.js. Triggers on app store, play store, screenshots, marketing assets, html-to-image, phone mockup, android screenshots, feature graphic.
+description: Use when building App Store or Google Play screenshot pages, generating exportable marketing screenshots for iOS, macOS, and/or Android apps, or scaffolding a screenshot editor with Next.js. Triggers on app store, mac app store, play store, screenshots, marketing assets, html-to-image, phone mockup, mac mockup, android screenshots, feature graphic.
 ---
 
 # App Store & Google Play Screenshots Generator
@@ -14,14 +14,24 @@ Scaffold a pre-built Next.js + ShadCN editor that lets the user design and expor
 - Cross-screen mockups: phone/device frames, captions, and layered elements can be moved across adjacent screens, then exported as clipped crops
 - Drop-target screenshot picker (file → saved to `public/screenshots/uploaded/<hash>.png`)
 - Auto-save to **`app-store-screenshots.json`** at the project root (git-trackable) + `localStorage` mirror
-- Easy iOS ↔ Android platform switch — separate slide decks live side by side
+- Easy iOS ↔ Mac ↔ Android platform switch — separate slide decks live side by side
 - One-click bulk PNG export at every Apple/Google-required resolution via `html-to-image`
-- Light/dark variant toggle per slide, theme presets, locale select
+- Light/dark variant toggle per slide, a toolbar theme picker (one palette preset per named style), locale select
+- A **Copy ideas** menu next to the headline field with formulas for hero, differentiator, feature, proof, and closer slides
+- Per-slide custom background colors (caption colours stay readable automatically), a live screenshot font menu, and importing licensed WOFF2/WOFF/TTF/OTF fonts
+- Image overlay elements (logos, badges, photos) with drag/resize/rotation/layering controls and directional edge fades
+- Toolbar Undo/Redo (`⌘Z` / `⇧⌘Z`) over the last 50 edits of the session
 - Guided in-place migration for older projects created by this skill; passive and explicit migrations keep legacy decks isolated until the user intentionally opts into connected canvas
 
 Supported devices out of the box:
 - **iPhone** (portrait) — Apple App Store
 - **iPad** (portrait) — Apple App Store
+- **iPhone Duo** outer and inner displays, each in portrait and landscape (four decks) — Apple App Store; see "iPhone Duo" under Step 5
+- **App Store creative assets**: universal 5244×2950, product page header 3840×1646, search results 3:2 — Apple App Store; see "App Store creative assets" under Step 5
+- **Apple TV** (landscape, 4K + HD) — Apple App Store
+- **Apple Watch** (portrait, every Ultra/Series size) — Apple App Store
+- **CarPlay** (landscape head unit) — uploaded into the **iPhone** slot; see "Apple TV, Apple Watch and CarPlay" under Step 5
+- **Mac** (16:10 landscape, own **Mac** tab) — Mac App Store (`2880×1800`, `2560×1600`, `1440×900`, `1280×800`); see "Mac" under Step 5
 - **Android Phone** (portrait) — Google Play
 - **Android Tablet 7"** (portrait + landscape) — Google Play
 - **Android Tablet 10"** (portrait + landscape) — Google Play
@@ -131,7 +141,7 @@ const path = require("path");
 
 const PROJECT_FILE = "app-store-screenshots.json";
 const DEFAULT_LOCALE = "en";
-const DEVICE_KEYS = ["iphone", "ipad", "android", "android-7", "android-10", "feature-graphic"];
+const DEVICE_KEYS = ["iphone", "ipad", "duo-outer", "duo-outer-landscape", "duo-inner", "duo-inner-landscape", "tvos", "watchos", "carplay", "mac", "android", "android-7", "android-10", "feature-graphic", "creative-universal", "creative-header", "creative-search"];
 const LAYOUTS = ["hero", "device-bottom", "device-top", "two-devices", "no-device", "split-landscape", "feature-graphic"];
 
 function readJson(file) {
@@ -149,7 +159,7 @@ const templateState =
 const existingState = readJson(PROJECT_FILE) || {};
 const hasExplicitConnectedCanvas = typeof existingState.connectedCanvas === "boolean";
 const existingDecks =
-  existingState.slidesByDevice && typeof existingState.slidesByDevice === "object"
+  existingState.slidesByDevice && typeof existingState.slidesByDevice === "object" && !Array.isArray(existingState.slidesByDevice)
     ? existingState.slidesByDevice
     : {};
 const hasExistingDecks = Object.keys(existingDecks).length > 0;
@@ -173,7 +183,9 @@ if (legacySlides && !hasExistingDecks) {
 
 function localized(value) {
   if (typeof value === "string") return { [DEFAULT_LOCALE]: value };
-  if (value && typeof value === "object") return value;
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return Object.fromEntries(Object.entries(value).filter(([, text]) => typeof text === "string"));
+  }
   return {};
 }
 
@@ -195,50 +207,93 @@ function firstString(...values) {
   return values.find((value) => typeof value === "string") || "";
 }
 
-function migrateSlide(slide) {
-  if (!slide || typeof slide !== "object") return null;
+// The editor refuses to load a deck with empty or repeated screen ids.
+function uniqueId(value, used) {
+  let id = typeof value === "string" && value.trim() ? value : "";
+  while (!id || used.has(id)) id = `migrated-${Math.random().toString(36).slice(2, 10)}`;
+  used.add(id);
+  return id;
+}
+
+function migrateSlide(slide, used) {
+  if (!slide || typeof slide !== "object" || Array.isArray(slide)) return null;
   const transforms = {};
   const rawTransforms = slide.transforms && typeof slide.transforms === "object" ? slide.transforms : {};
   for (const [id, transform] of Object.entries(rawTransforms)) {
     const cleaned = cleanTransform(transform);
-    if (cleaned) transforms[id] = cleaned;
+    if (["caption", "device", "deviceSecondary", "callout"].includes(id) && cleaned) transforms[id] = cleaned;
   }
+  const textIds = new Set();
   const textElements = Array.isArray(slide.textElements)
     ? slide.textElements
         .map((element) => {
+          if (!element || typeof element !== "object" || Array.isArray(element)) return null;
           const transform = cleanTransform(element.transform);
-          if (!element || typeof element.id !== "string" || !transform) return null;
+          if (!transform) return null;
           return {
             ...element,
+            id: uniqueId(element.id, textIds),
             text: localized(element.text),
             transform,
+            fontSize: Number.isFinite(element.fontSize) && element.fontSize > 0 ? element.fontSize : undefined,
+            fontWeight: Number.isFinite(element.fontWeight) && element.fontWeight > 0 ? element.fontWeight : undefined,
           };
         })
         .filter(Boolean)
     : undefined;
 
+  const imageIds = new Set();
+  const imageElements = Array.isArray(slide.imageElements)
+    ? slide.imageElements.map((element) => {
+        if (!element || typeof element !== "object" || Array.isArray(element) || typeof element.src !== "string") return null;
+        const transform = cleanTransform(element.transform);
+        return transform ? { ...element, id: uniqueId(element.id, imageIds), transform } : null;
+      }).filter(Boolean)
+    : undefined;
+
   return {
     ...slide,
-    id: typeof slide.id === "string" ? slide.id : `migrated-${Math.random().toString(36).slice(2, 10)}`,
+    id: uniqueId(slide.id, used),
     layout: LAYOUTS.includes(slide.layout) ? slide.layout : "device-bottom",
     label: localized(slide.label),
     headline: localized(slide.headline || slide.title || slide.caption || slide.copy),
     screenshot: firstString(slide.screenshot, slide.image, slide.src, slide.path),
+    screenshotSecondary: typeof slide.screenshotSecondary === "string" ? slide.screenshotSecondary : undefined,
+    inverted: typeof slide.inverted === "boolean" ? slide.inverted : undefined,
     ...(Object.keys(transforms).length ? { transforms } : { transforms: undefined }),
     ...(textElements && textElements.length ? { textElements } : { textElements: undefined }),
+    ...(imageElements && imageElements.length ? { imageElements } : { imageElements: undefined }),
+    // The editor clamps magnifier values on load; only a non-object would be rejected.
+    callout: slide.callout && typeof slide.callout === "object" && !Array.isArray(slide.callout) ? slide.callout : undefined,
   };
 }
 
 state.schemaVersion = 2;
 state.connectedCanvas = hasExplicitConnectedCanvas ? existingState.connectedCanvas : false;
-state.locales = Array.isArray(state.locales) && state.locales.length ? state.locales : [DEFAULT_LOCALE];
+// Unique codes like "en", "pt-BR", "zh_Hans"; anything else makes the editor refuse the file.
+const LOCALE_CODE = /^[a-zA-Z0-9]+(?:[-_][a-zA-Z0-9]+)*$/;
+state.locales = Array.isArray(state.locales)
+  ? [...new Set(state.locales.filter((locale) => typeof locale === "string" && LOCALE_CODE.test(locale)))]
+  : [];
+if (!state.locales.length) state.locales = [DEFAULT_LOCALE];
 state.locale = state.locales.includes(state.locale) ? state.locale : state.locales[0];
 state.device = DEVICE_KEYS.includes(state.device) ? state.device : "iphone";
+if (state.orientation !== "portrait" && state.orientation !== "landscape") delete state.orientation;
+for (const key of ["appName", "themeId", "appIcon"]) {
+  if (state[key] !== undefined && typeof state[key] !== "string") delete state[key];
+}
+// The feature graphic only shows an icon that `appIcon` points at.
+if (!state.appIcon && fs.existsSync(path.join("public", "app-icon.png"))) state.appIcon = "/app-icon.png";
 
 if (state.slidesByDevice && typeof state.slidesByDevice === "object") {
   for (const [device, slides] of Object.entries(state.slidesByDevice)) {
-    if (!DEVICE_KEYS.includes(device)) continue;
-    state.slidesByDevice[device] = Array.isArray(slides) ? slides.map(migrateSlide).filter(Boolean) : [];
+    // The editor only accepts known device decks; the backup keeps the original.
+    if (!DEVICE_KEYS.includes(device)) {
+      delete state.slidesByDevice[device];
+      continue;
+    }
+    const used = new Set();
+    state.slidesByDevice[device] = Array.isArray(slides) ? slides.map((slide) => migrateSlide(slide, used)).filter(Boolean) : [];
   }
 }
 
@@ -326,17 +381,20 @@ Ask the user these. Do not proceed until you have answers:
 2. **App icon** — "Where is your app icon PNG?"
 3. **App name** — "What's the app called?"
 4. **Feature list** — "List your app's features in priority order. What's the #1 thing your app does?"
-5. **Style direction** — "What style do you want? You can either (a) pick one of the named deep-spec styles, or (b) describe your own vibe in your own words (warm/organic, dark/moody, clean/minimal, bold/colorful, plus any reference apps you like) and I'll build a custom palette. The template also ships with `clean-light`, `dark-bold`, `warm-editorial`, `ocean-fresh`, and `bloom-roast` palette presets you can start from. The named deep specs live in `style-prompts/` — see `style-prompts.md` for the full index. Currently available: Retro Rubberhose Mascot, Moody Curated Dating, Paper Sticker Skeuomorphic, Dreamy Pastel Couples, Hand-Drawn Editorial Tasks, Glossy 3D K-Beauty Creator. If the user names one of these — or describes something that clearly matches one — read `style-prompts/_QUALITY_BAR.md` first, then the matching deep spec file, and apply its entire spec (palette, gradients, shadows, rotations, per-slide breakdown). If the user describes a fully custom style, fall back to the General Visual Design Principles below and pick the closest deep spec as a starting reference."
+5. **Style direction** — "What style do you want? You can either (a) pick one of the named deep-spec styles, or (b) describe your own vibe in your own words (warm/organic, dark/moody, clean/minimal, bold/colorful, plus any reference apps you like) and I'll build a custom palette. The template also ships with palette presets in the toolbar theme picker: the generic `clean-light`, `dark-bold`, `warm-editorial`, `ocean-fresh`, and `bloom-roast`, plus one preset per named style (same id as the style slug). The named deep specs live in `style-prompts/` — see `style-prompts.md` for the full index. Currently available: Retro Rubberhose Mascot, Moody Curated Dating, Paper Sticker Skeuomorphic, Dreamy Pastel Couples, Hand-Drawn Editorial Tasks, Glossy 3D K-Beauty Creator, Liquid Glass Aurora, Swiss Grid Bold, Neon Athletic Night, Magazine Cover Editorial, Candy Pop Social, Soft Clay Wellness, Midnight Glow Pro, Risograph Zine, Bento Keynote Grid, Toybox Primary, Quiet Japandi, Vintage Travel Poster. If the user names one of these — or describes something that clearly matches one — read `style-prompts/_QUALITY_BAR.md` first, then the matching deep spec file, and apply its entire spec (palette, gradients, shadows, rotations, per-slide breakdown). If the user describes a fully custom style, fall back to the General Visual Design Principles below and pick the closest deep spec as a starting reference."
 
 ### Optional
 
-6. **Target stores** — Apple App Store only, Google Play only, or both? Determines which platform decks to seed.
-7. **iPad / Android tablet screenshots** — If yes, what sizes and orientations?
-8. **Feature Graphic** — Want a 1024×500 Play Store banner too?
-9. **Localized screenshots** — Languages? (e.g. en, de, es, pt, ja, ar, he)
-10. **Number of slides** — Apple allows up to 10, Google Play up to 8.
-11. **Brand colors / font** — If they want a custom theme beyond the built-in presets.
-12. **Additional instructions** — Anything specific.
+6. **Target stores** — Apple App Store, Mac App Store, Google Play, or a mix? Determines which platform decks to seed.
+7. **iPad / Mac / Android tablet screenshots** — If yes, what sizes and orientations?
+8. **Apple TV / Apple Watch / CarPlay** — Does the app have a tvOS or watchOS app, or CarPlay support? Each gets its own deck.
+9. **iPhone Duo** — Does the app support iPhone Duo? If so, read `iphone-duo.md` before planning. Ask: what does the app do differently on the inner display (two panes, sidebar, wider grid)? Which displays and orientations have their own layout? Do they have simulator captures from each display at the exact sizes? Apple's bezels for iPhone, iPad, Watch, TV, Mac and iPhone Duo ship with the template (see Step 5); ask only whether they want a different finish.
+10. **App Store creative assets** — Do they want a product page header / search results asset? Default to one universal 5244×2950 asset; offer separate header and search assets only if they need different compositions. Ask for a short brand line for each; don't reuse a screenshot headline.
+11. **Feature Graphic** — Want a 1024×500 Play Store banner too?
+12. **Localized screenshots** — Languages? (e.g. en, de, es, pt, ja, ar, he)
+13. **Number of slides** — Apple allows up to 10, Google Play up to 8.
+14. **Brand colors / font** — If they want a custom theme beyond the built-in presets.
+15. **Additional instructions** — Anything specific.
 
 **IMPORTANT:** If the user gives instructions at any point, follow them. They override skill defaults.
 
@@ -375,10 +433,17 @@ Move the user's screenshots into the layout the template expects:
 public/
 ├── app-icon.png                      # ← user's app icon
 ├── mockup.png                        # ← already copied by the template (iPhone bezel)
+├── frames/                           # ← Apple's bezels, bundled; swap a file to change finish (Step 5)
 └── screenshots/
     ├── apple/
     │   ├── iphone/{locale}/01.png … N.png
-    │   └── ipad/{locale}/01.png   … N.png
+    │   ├── ipad/{locale}/01.png   … N.png
+    │   ├── duo-outer/{portrait|landscape}/{locale}/01.png … N.png  # iPhone Duo outer display
+    │   ├── duo-inner/{portrait|landscape}/{locale}/01.png … N.png  # iPhone Duo inner display
+    │   ├── tvos/{locale}/01.png   … N.png   # Apple TV, 16:9
+    │   ├── watchos/{locale}/01.png … N.png  # Apple Watch
+    │   ├── carplay/{locale}/01.png … N.png  # CarPlay head-unit captures
+    │   └── mac/{locale}/01.png    … N.png   # Mac, 16:10
     └── android/
         ├── phone/{locale}/01.png  … N.png
         ├── tablet-7/{portrait|landscape}/{locale}/...
@@ -391,9 +456,13 @@ The starter project state lives in `app-store-screenshots.json`, not `src/lib/de
 
 If the user provided headlines, edit `app-store-screenshots.json` to set:
 - `appName`
-- `themeId` (one of `"clean-light" | "dark-bold" | "warm-editorial" | "ocean-fresh" | "bloom-roast"`, or add a matching entry to `THEMES` in `src/lib/constants.ts`)
+- `themeId` (one of `"clean-light" | "dark-bold" | "warm-editorial" | "ocean-fresh" | "bloom-roast"`, a named style slug such as `"swiss-grid-bold"` when the user picked that style, or add a matching entry to `THEMES` in `src/lib/constants.ts`). Themes may set `accentAlt` for the label color on inverted slides.
+- `appIcon` — public path of the app icon (e.g. `"/app-icon.png"` after copying it to `public/app-icon.png`). The Play Store feature graphic shows it; blank uses the app's initial. The icon can also be picked in the feature-graphic inspector.
 - `connectedCanvas` (`true` for new connected decks; migrated legacy decks should stay `false` until the user opts in)
 - Starter slides per device with the user's `label` + `headline` + screenshot paths
+- Optional `scene` for the whole project: `{ backdrop: "gradient"|"solid"|"aurora"|"spotlight"|"grid"|"dots"|"lines", span: boolean, decoration: "blobs"|"rings"|"sparkles"|"none", shadow: 0–100, glow: 0–100, tilt: -30–30, headlineWeight: 300–900, headlineCase: "as-typed"|"upper", captionAlign: "auto"|"left"|"center" }`. Omit it for the classic gradient + blobs look. Pick values that match the chosen style (e.g. `spotlight` + glow for dark pro styles, `lines` + left-aligned serif for editorial); the user can refine it in the editor's **Scene** popover or compare whole looks in **Style Lab**.
+- Optional per-slide `callout: { focusX: 0–1, focusY: 0–1, zoom: 1.5–5, shape: "circle"|"rounded" }` to magnify one detail of the primary screenshot. It sits over the device's upper right unless `transforms.callout` places it.
+- Optional per-slide `typography: { labelScale, headlineScale, appNameScale }` (0.5–2, default 1) when one headline is much longer or shorter than the rest of the deck. `appNameScale` only applies to the feature graphic, where `headlineScale` sizes the tagline.
 
 Otherwise, leave the defaults — the user can rewrite copy in the editor.
 
@@ -408,6 +477,8 @@ Tell the user to open the URL and start editing. The editor auto-saves to **`app
 ## Step 3: Coach the User on Copy
 
 Inside the editor the user will write headlines themselves, but they often need guidance. Apply these rules when reviewing their copy or generating suggestions.
+
+**Read [`copy-ideas.md`](./copy-ideas.md) before drafting headlines.** It has formulas per deck slot (hero, differentiator, feature, proof, closer), ready lines for 13 app categories, eyebrow labels, a weak-to-better table, four deck arcs, and localization notes. When you propose copy, give three options per slide (paint a moment / state an outcome / kill a pain), then rewrite the chosen one in the selected style's voice. The editor's inspector has a matching **Copy ideas** menu next to the headline field (`src/lib/copy-ideas.ts`) so users can drop in a formula and replace the bracketed words themselves.
 
 ### The Iron Rules
 
@@ -453,10 +524,23 @@ Vary the `layout` field across slides. The editor exposes:
 - `device-top` — flipped, device above caption (good contrast slide)
 - `two-devices` — back + front phones layered
 - `no-device` — big standalone headline (use sparingly)
-- `split-landscape` — caption left + device right (tablet landscape only)
+- `split-landscape` — caption left + device right (tablet landscape and Mac)
 - `feature-graphic` — Play Store banner (1024×500)
 
 Never repeat the same layout twice in a row. Use 1-2 `inverted` (dark) slides for visual rhythm.
+
+On iPhone Duo decks, `two-devices` is **Folded + open**: the second device is the same phone in its other state, drawn in that display's frame. Its second capture comes from the other display.
+
+### iPhone Duo Decks
+
+Read `iphone-duo.md` before writing copy or seeding any Duo deck. It holds the research behind these rules, with sources. In short:
+
+- **Plan the decks.** Lead with the inner display in landscape when the app has a real two-pane or wide layout. Add an outer portrait deck next. Make inner portrait and outer landscape decks only if the app has a real layout for them.
+- **Show what only an open Duo can do.** At least one inner screenshot shows two panes, a sidebar or a wider grid. A screenshot that could have come from a normal iPhone wastes the Duo slot.
+- **Inner landscape:** a one-line headline (about 30 characters or fewer) across the top, with the device large below. Pick captures where one pane's action and the other pane's result sit in the same frame.
+- **Outer portrait:** a short, wide canvas. Use two short lines at most, large type, and one idea per screen. It can reuse the iPhone story.
+- **Folded + open** once per deck, for the moment that carries across states ("Close it for today. Open it for the week.").
+- **Write copy about what the user gets, not the hardware.** Localise every deck and check that each landscape line still fits on one line.
 
 ### Cross-Screen / Cross-Canvas Composition
 
@@ -570,11 +654,11 @@ The editor stores headlines and labels per-locale on each slide — switch to a 
 
 - Don't literally translate — rewrite for the target market.
 - Re-check line breaks per locale; German/French/Portuguese often need shorter claims.
-- For RTL (`ar`, `he`, `fa`, `ur`), the template handles direction inversion through CSS — let the user verify each slide looks intentional, not just flipped.
+- For RTL (`ar`, `he`, `fa`, `ur`), canvas text picks its direction from its own content (`dir="auto"`), so punctuation lands on the correct side and left-set captions align to the right edge. Layouts, devices and overlays are not mirrored — let the user verify each slide looks intentional.
 
 ## Step 5: Export Time
 
-Inside the editor, the user picks a device, then hits **Export bundle**. A single zip downloads with every required size × every project locale for that device, organized as `<platform>/<device>/<WxH>/<locale>/NN-<layout>.png`. Repeat per device.
+Inside the editor, the user picks a device, then hits **Export bundle**. A single zip downloads with every required size × every project locale for that device, organized as `<platform>/<device>/<WxH>/<locale>/NN-<layout>.png` (e.g. `ios/iphone/1320x2868/en/01-hero.png`, `macos/mac/2880x1800/en/01-hero.png`). Repeat per device.
 
 When `connectedCanvas` is enabled, exports are crops of the connected canvas, not isolated screen renders. If a mockup sits halfway across screen 2 and screen 3, screen 2's PNG contains its left crop and screen 3's PNG contains its right crop exactly as placed. Legacy decks should start with `connectedCanvas: false`, including Step 0 migrations, so old offscreen/clipped elements export as they did before. The user can turn on **Connected** after intentionally composing cross-screen elements.
 
@@ -582,10 +666,86 @@ Before export, zoom out to inspect the connected canvas as a strip, then inspect
 
 Project locales come from `app-store-screenshots.json` `locales` field — set during scaffolding (Step 4). Single-locale projects produce a flat per-size structure with just the one locale folder.
 
+Each slide is rendered once per locale at canvas resolution and scaled to every export size. The exporter waits until every visible screenshot has actually painted before it saves a PNG (Safari/WebKit decodes images inside the render asynchronously, which used to produce blank device screens), and shows a warning toast naming the screen if one never appears.
+
 If exports come out blank or with black screen rectangles:
+- Read the export toast: a "screenshots may be missing" warning names the affected screens. Export again, and check the source image opens.
 - Verify source screenshots are RGB (not RGBA). The template flattens via `objectFit: cover`, but truly transparent sources can still produce black regions.
 - Confirm the referenced screenshot paths exist under `public/`; export retries paths that were previously missing before it starts rendering.
-- Keep export scaling inside `html-to-image` via `canvasWidth`/`canvasHeight`; CSS `transform: scale(...)` can leave transparent gutters when App Store sizes differ slightly in aspect ratio.
+
+### Apple TV, Apple Watch and CarPlay
+
+Every Apple TV and Apple Watch size below was read from App Store Connect's own metadata (`asc screenshots sizes --all`). Re-derive it the same way if Apple changes the slots.
+
+| Device | Display type | Accepted sizes | Canvas |
+|---|---|---|---|
+| Apple TV | `APP_APPLE_TV` | 3840×2160, 1920×1080 (landscape only) | 3840×2160 |
+| Apple Watch | `APP_WATCH_ULTRA` | 422×514, 410×502 | 422×514 |
+| Apple Watch | `APP_WATCH_SERIES_10` | 416×496 | ↑ |
+| Apple Watch | `APP_WATCH_SERIES_7` | 396×484 | ↑ |
+| Apple Watch | `APP_WATCH_SERIES_4` | 368×448 | ↑ |
+| Apple Watch | `APP_WATCH_SERIES_3` | 312×390 | ↑ |
+| CarPlay | iPhone slots (landscape) | 2868×1320, 2778×1284, 2622×1206, 2436×1125 | 2868×1320 |
+
+- **Every export is a downscale of the canvas.** Where a slot's aspect differs slightly (Watch 422×514 → 312×390), the exporter scales to cover and trims a few edge pixels instead of stretching the frame. Keep text and the device away from the outermost ~3% on the watch.
+- **CarPlay has no App Store screenshot slot.** A CarPlay app ships inside its iPhone app, so a CarPlay shot is uploaded **into the iPhone slot**, in landscape (iPhone slots accept both orientations). The `carplay` device is a head-unit frame on a landscape 6.9" iPhone canvas for exactly that. Head units vary by vehicle; the frame uses Apple's CarPlay Simulator "Standard" 800×480 preset (5:3). Change `FRAME_ASPECT.carplay` in `src/lib/frame-assets.ts` for another preset (Minimum 748×456, Widescreen 1920×720, Portrait 900×1200, Video Playback 1920×1080).
+- **TV, Watch and CarPlay frames are contained.** Phones and tablets deliberately bleed off the canvas edge; a cropped TV, watch face or head unit reads as a mistake, so these devices always stay fully inside the canvas.
+- **Layouts:** `split-landscape` (caption left, device right) is the strongest layout for the wide TV and CarPlay canvases. On the watch, keep headlines to two or three short words per line — the canvas is only 422 px wide.
+- **Screenshots:** use real captures at native resolution — Apple TV 3840×2160 or 1920×1080 from the tvOS simulator, Apple Watch from the watchOS simulator, CarPlay from the CarPlay Simulator (or Xcode's I/O → External Displays → CarPlay).
+
+### iPhone Duo
+
+| Target (deck) | Accepted size | Export folder |
+|---|---|---|
+| Outer display portrait (`duo-outer`) | 1398×2034 | `ios/duo-outer/1398x2034/` |
+| Outer display landscape (`duo-outer-landscape`) | 2034×1398 | `ios/duo-outer-landscape/2034x1398/` |
+| Inner display portrait (`duo-inner`) | 2007×2853 | `ios/duo-inner/2007x2853/` |
+| Inner display landscape (`duo-inner-landscape`) | 2853×2007 | `ios/duo-inner-landscape/2853x2007/` |
+
+- Sizes are App Store Connect's exact pixel sizes. Never derive Duo sizes from aspect-ratio labels or other iPhone sizes. PNG/JPG, no alpha (the exporter writes opaque RGB PNG).
+- **Each display and orientation is its own deck.** In the editor, pick **iPhone Duo outer** or **inner** in the device menu and switch with **Orientation**; that opens the other deck rather than re-laying out this one, so portrait and landscape keep independent compositions. When seeding `app-store-screenshots.json`, write the four decks separately, and only the decks the app has real layouts for (see "iPhone Duo Decks" in Step 3 and `iphone-duo.md`).
+- **Duo placements.** Landscape decks put the caption across the top and make the device the hero, wide enough that the capture reads, bleeding off the bottom in `hero`. `two-devices` is **Folded + open**: set `screenshotSecondary` to a capture from the other display (outer portrait ↔ inner landscape, outer landscape ↔ inner portrait). The editor never falls back to the front capture there, and export warns when it is missing. Duo frames ignore the scene's tilt: Apple's guidelines ask for straight-on product images, so don't rotate Duo devices by hand either.
+- **Captures must come from the matching display and orientation.** A mismatched capture is letterboxed (never cropped or stretched) and the inspector and export toast flag it. Don't reuse iPhone captures for Duo, and don't mock up Duo UI by hand.
+  - **Capture real ones** with `scripts/capture-iphone-duo.sh`. It needs Xcode 27.1+, the iOS 27.1 simulator runtime, and Device Hub open with the iPhone Duo simulator selected.
+  - It sets Apple's 9:41 status bar, drives the Closed, Open, Book and turned poses, and writes `public/screenshots/apple/duo-{outer|inner}/{portrait|landscape}/<locale>/NN.png`. Run it after adding a debug-only launch argument that opens each screen, e.g. `-CapturePanel orders`.
+  - Turned poses turn the phone **left**, so the outer display's camera matches Apple's landscape bezel.
+  - Real captures keep the camera corner clear: iOS puts the time and status on a rail below the camera. A capture whose title sits under the camera is either hand-made or taken turned the wrong way.
+  - Portrait-only iPhone apps have no outer landscape: skip that deck.
+- **Apple's bezels ship with the template** in `public/frames/`, taken from Apple Design Resources → Product Bezels. Like fastlane frameit, the template bundles them.
+  - **Licence:** Apple licenses them for mock-ups of apps for Apple platforms only. Never use them in Android decks.
+  - **Bundled files:**
+    - `iphone-portrait` (iPhone 18 Pro Max, Black)
+    - `ipad-portrait` (iPad Pro 13", Space Black)
+    - `watch` (Ultra 3, Ocean Band)
+    - `tv` (Apple TV 4K)
+    - `mac` (MacBook Air 15", Midnight)
+    - `duo-outer-portrait`, `duo-outer-landscape`, `duo-inner-portrait` and `duo-inner-landscape` (Night Sky)
+  - **Another finish or model:** replace the file with another PNG from Apple's pack under the same name. The editor measures each file's transparent screen cutout per corner, and uses the bezel for that device; the App Store creatives use the iPhone bezel.
+  - **Without a file:** Duo uses a drawn frame and every other device keeps its built-in frame. Android and CarPlay never use Apple bezels.
+
+### App Store creative assets
+
+| Target (deck) | Export | Placement |
+|---|---|---|
+| `creative-universal` | 5244×2950 | Product page header **and** search results |
+| `creative-header` | 3840×1646 | Product page header |
+| `creative-search` | 3840×2560 and 1920×1280 | Search results (any 3:2 from 1920×1280 to 3840×2560) |
+
+- Recommend the universal asset first. Use separate header and search assets only when the universal crops don't give enough control.
+- Default layouts sit inside the **art safe area** measured from Apple's own templates (universal x 1921–3323, y 660–1622; header x 1097–2743, y 493–1154; search x 836–3004, y 765–1795). The backdrop fills the rest. Keep the message and focal art inside the green safe-area guide. For the universal asset, the dashed header and search crops and the bottom-left previews are **estimates** (Apple doesn't publish the crop): tell the user to confirm in App Store Connect's Preview tool. Guides never export.
+- Creatives share the deck's theme, font, scene, overlays and text elements. They are not the fixed Play Store feature graphic. Write one short brand line per creative; never paste a long screenshot headline.
+- Creative assets are optional. They are reviewed through App Store Connect, separate from screenshots and from editorial artwork. Don't promise instant swaps, and don't upload or submit anything for the user.
+
+### Mac
+
+| Device | Display type | Accepted sizes | Canvas |
+|---|---|---|---|
+| Mac | `APP_DESKTOP` | 2880×1800, 2560×1600, 1440×900, 1280×800 (16:10 landscape only) | 2880×1800 |
+
+- **Mac is its own toolbar tab** (iOS / Mac / Android), not a device under iOS: App Store Connect lists macOS as a separate platform with its own screenshot set, so the Mac bundle exports to `macos/mac/<WxH>/<locale>/` rather than inside `ios/`. Every Mac size is an exact 16:10 downscale of the canvas; nothing is trimmed.
+- **The Mac window is contained** like the TV and CarPlay frames, and its content area below the title bar is exactly 16:10, so a full-screen 16:10 capture fills it without cropping. Other aspects are cover-cropped from the bottom (the top of the window stays visible).
+- **Screenshots:** a full-screen capture (⌘⇧3) at a 16:10 resolution is the cleanest source. Notched MacBook Pros capture at ~1.54:1, which loses a few percent off the bottom (the Dock). A single-window capture (⌘⇧4, then Space) already has its own title bar, so the frame would draw a second one: crop the window's title bar off first, or use a full-screen capture.
+- **Layouts:** the starter deck is `hero` → `split-landscape` → `device-top` (inverted) → `two-devices` → `no-device`. Because the window is contained, `hero` and `device-bottom` look almost the same; prefer `split-landscape` or `two-devices` (two overlapping windows) for variety.
 
 ## Step 6: Final QA Gate
 
@@ -597,6 +757,7 @@ If exports come out blank or with black screen rectangles:
 ### Visual Quality
 - No two adjacent slides share the same layout
 - Landscape tablet slides use `split-landscape` — never two devices side-by-side
+- Apple TV, CarPlay and Mac decks lead with `split-landscape` or `hero`; Watch headlines fit on the 422 px canvas without wrapping mid-phrase
 - At least one contrast (`inverted: true`) slide when the deck is long enough
 - For decks with 5+ slides, either one cross-screen/cross-canvas moment exists or there is a clear reason to keep every screen isolated
 - Cross-screen moments are limited to adjacent screens and never split text, required info, faces, or critical UI
@@ -608,6 +769,8 @@ If exports come out blank or with black screen rectangles:
 - Screenshots correctly aligned inside every device frame
 - Filenames sort correctly (zero-padded numeric prefixes)
 - Feature Graphic exports cleanly at 1024×500 (no device frame)
+- iPhone Duo exports are exactly 1398×2034 / 2034×1398 (outer) and 2007×2853 / 2853×2007 (inner), with no "doesn't match" or placeholder warning; every Folded + open slide has a capture from the other display; inner landscape headlines sit on one line in every locale. Tell the user to check the sets in App Store Connect's iPhone Duo preview tool before submitting
+- Creative assets keep copy and focal art inside the safe-area guide, and a cleared label or headline exports empty (no editor hint text)
 
 ## Common Mistakes
 
@@ -618,12 +781,20 @@ If exports come out blank or with black screen rectangles:
 | Pasted screenshots into git directly | `public/screenshots/...` is fine to commit. Drop-target uploads are now also written to `public/screenshots/uploaded/<hash>.png` — commit both that folder **and** `app-store-screenshots.json` so collaborators reproduce your deck after `git clone`. |
 | Wrong directory layout for tablet screenshots | See Step 2 — `android/tablet-7/portrait/{locale}/...` etc. |
 | Reset wiped the deck | Reset clears in-memory state and re-saves defaults to `app-store-screenshots.json`. Recover by `git checkout app-store-screenshots.json` if it was committed, or export first before resetting. |
-| Export is blank | Source PNGs probably have alpha — flatten to RGB |
+| Export is blank | Check the export toast for a "may be missing" warning and re-export; otherwise the source PNG probably has alpha — flatten to RGB |
+| Looked for a CarPlay slot in App Store Connect | There isn't one — upload CarPlay shots into the iPhone slot |
+| Used an Apple bezel on an Android deck | Apple licenses its bezels for Apple platforms only; Android decks keep the built-in frames |
+| Turned a Duo portrait deck into landscape by editing transforms | Use the Orientation menu: landscape is a separate deck, so both compositions survive |
+| Resized iPhone captures to Duo sizes, or used the inner capture on the outer deck | Capture each display in Xcode 27.1's simulator at its exact size (`scripts/capture-iphone-duo.sh`); the editor letterboxes anything else |
+| The bezel's camera covers the clock or a title on an outer-display slide | The capture isn't real, or the phone was turned right. Real captures put the status rail under the camera; capture turned poses turned left |
+| Duo set looks like the iPhone set on a wider canvas | Lead the inner deck with a two-pane capture and a one-line headline; see `iphone-duo.md` |
+| Tilted, 3D or half-folded Duo mock-ups | Keep Duo frames straight-on and unmodified (Apple's marketing guidelines); never draw a crease |
+| Mac window shows two title bars | The source is a single-window capture with its own title bar — crop it off or use a full-screen 16:10 capture |
 | `bun dev` port collision | Template defaults to `next dev`; let Next pick the next free port (3001+) |
 
 ## Project Migration
 
-The current template writes `schemaVersion: 2`. Existing projects made by earlier versions of this skill usually have no `schemaVersion` and may still store string `label` / `headline` values. Do not hand-edit those projects unless the JSON is invalid. On load, `src/lib/storage.ts`:
+The current editor saves `schemaVersion: 3` (v3 adds the iPhone Duo and creative decks). The migration recipe above still writes `schemaVersion: 2`, which the editor accepts and upgrades to v3 on its next save, adding the new decks without touching existing ones. Existing projects made by earlier versions of this skill usually have no `schemaVersion` and may still store string `label` / `headline` values. Do not hand-edit those projects unless the JSON is invalid. On load, `src/lib/storage.ts` (through `src/lib/project-schema.ts`):
 
 1. Converts legacy string copy to localized `{ "en": "..." }` objects.
 2. Sanitizes existing element transforms.
@@ -631,6 +802,7 @@ The current template writes `schemaVersion: 2`. Existing projects made by earlie
 4. Keeps pre-v2 decks in isolated-screen mode by setting `connectedCanvas: false`, so already-clipped phones or captions do not suddenly appear in neighboring exports.
 5. Lets the user opt into connected crops with the toolbar's Connected/Isolated control when they are ready to use cross-screen placement.
 6. Saves the upgraded state back to `app-store-screenshots.json` and `localStorage` only after the file endpoint has loaded successfully, so stale browser cache cannot overwrite the canonical project file during dev-server restarts.
+7. Detects newer disk revisions before autosaving. If another tab or an agent edits the project, keep unsaved work open and export or copy it before reloading; do not force a stale save over the newer file.
 
 There are two migration modes:
 
@@ -654,6 +826,7 @@ project/
 ├── public/
 │   ├── mockup.png               # iPhone bezel (do NOT replace without re-measuring PHONE_SCREEN)
 │   ├── app-icon.png             # → user supplies
+│   ├── fonts/imported/          # Fonts imported from the toolbar (gitignored; uploaded screenshots are tracked in generated projects)
 │   └── screenshots/...
 └── src/
     ├── app/
@@ -663,21 +836,30 @@ project/
     ├── components/
     │   ├── editor/
     │   │   ├── screenshot-editor.tsx   # Top-level editor (state, autosave, export)
-    │   │   ├── toolbar.tsx             # Platform tabs, device select, theme, locale, export
+    │   │   ├── toolbar.tsx             # Platform tabs, device select, theme, font, locale, undo/redo, export
     │   │   ├── sidebar.tsx             # Screen list with @dnd-kit reordering
     │   │   ├── slide-thumb.tsx         # Draggable screen card
     │   │   ├── preview-stage.tsx       # ResizeObserver-scaled connected canvas
     │   │   ├── inspector.tsx           # Right-pane controls for active slide
     │   │   ├── screenshot-picker.tsx   # File drop + picker
+    │   │   ├── background-controls.tsx # Per-slide theme / alternate / custom background
+    │   │   ├── font-importer.tsx       # Hidden input behind the toolbar's "Import font…"
+    │   │   ├── image-element-canvas.tsx # Image overlay content (+ create-image-mask.ts edge fade)
     │   │   ├── slide-canvas.tsx        # Data-driven screen/deck renderer (all layouts)
-    │   │   └── device-frames.tsx       # Phone, AndroidPhone, IPad, tablets
+    │   │   └── device-frames.tsx       # Phone, IPad, AppleTV, AppleWatch, CarPlayScreen, MacWindow, Android
     │   └── ui/                         # Minimal ShadCN primitives (button, select, etc.)
     └── lib/
-        ├── constants.ts                # Canvas sizes, export sizes, themes, frame ratios
+        ├── constants.ts                # Themes and screenshot fonts
+        ├── devices.ts                  # Every target: canvas size, export sizes, platform, orientations
+        ├── frame-assets.ts             # Frame aspects and sizes, Apple bezel measurement
+        ├── layouts.ts                  # Layout names and default element placements
         ├── defaults.ts                 # Initial slide decks per device
         ├── types.ts                    # Slide / ProjectState / Theme types
-        ├── storage.ts                  # useProject() — localStorage autosave hook
+        ├── storage.ts                  # useProject() — autosave + undo/redo history
+        ├── project-schema.ts           # Project JSON validation and migration on load
         ├── image-cache.ts              # preloadImages + img() helper
+        ├── contrast.ts                 # Readable caption colours on custom backgrounds
+        ├── export-render.ts            # Slide → PNG; waits for every screenshot to paint
         └── utils.ts                    # cn() helper
 ```
 
@@ -692,7 +874,7 @@ When you finish scaffolding, **start the dev server** (`bun dev` / `pnpm dev` / 
    bun dev       # → http://localhost:3000
    ```
    Substitute `pnpm` / `yarn` / `npm run` as appropriate for what was detected in Step 2.
-3. Which platforms have starter decks seeded (iOS, Android, or both).
+3. Which platforms have starter decks seeded (iOS, Mac, Android, or a mix).
 4. Any user-supplied screenshots that didn't match the expected filenames (so they can rename or use the in-editor drop target).
 5. Point them at the **Export bundle** button once they're happy with the layouts.
 6. **Invite further edits:** say something like _"Feel free to ask me to make any changes you'd like to the screenshots — copy, layout, palette, anything. I can iterate with you."_
