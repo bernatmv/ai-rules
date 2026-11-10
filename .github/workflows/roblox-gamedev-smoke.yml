@@ -41,7 +41,8 @@ jobs:
           gh release download v0.3.0 -R LPGhatguy/aftman -p "aftman-0.3.0-${{ matrix.aftman }}.zip" -D "$RUNNER_TEMP"
           unzip -q "$RUNNER_TEMP"/aftman-*.zip -d "$RUNNER_TEMP/aftman"
           "$RUNNER_TEMP/aftman/aftman" self-install
-          echo "$HOME/.aftman/bin" >> "$GITHUB_PATH"
+          printf 'github = "%s"\n' "$GH_TOKEN" > "$HOME/.aftman/auth.toml"
+          if [ "$RUNNER_OS" = "Windows" ]; then cygpath -w "$HOME/.aftman/bin" >> "$GITHUB_PATH"; else echo "$HOME/.aftman/bin" >> "$GITHUB_PATH"; fi
           export PATH="$HOME/.aftman/bin:$PATH"
           python roblox-gamedev/skills/roblox-code/scripts/new_project.py Toolchain --dir "$RUNNER_TEMP/toolchain"
           cd "$RUNNER_TEMP/toolchain"
