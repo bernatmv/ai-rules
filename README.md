@@ -6,15 +6,12 @@ A curated **Claude Code** plugin marketplace: skills, bundled official and third
 
 | Plugin                                 | Description                                                                                     |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`. `gamedev-*` plugins are installed separately, per engine |
+| [fullstack-plugin](./fullstack-plugin) | **Recommended** — bundles `core-plugin`, `frontend-plugin`, and `devops-plugin`. `roblox-gamedev` is installed separately |
 | [core-plugin](./core-plugin)           | Core skills plus engineering workflows, GitHub/Jira/Notion, documents, and productivity plugins |
 | [frontend-plugin](./frontend-plugin)   | Frontend design and UI polish, Figma, HyperFrames, Remotion, agent-browser, Playwright, Chrome DevTools, web assets, Astro docs MCP |
 | [devops-plugin](./devops-plugin)       | Supabase and Vercel MCP integrations                                                            |
 | [ai-video](./ai-video)                 | AI video creation — storyboarding, single-clip and model-specific prompting (Seedance/Kling/Veo/Sora/Wan/LTX), TikTok/Reel hooks, image prompting, character sheets |
-| [gamedev-core](./gamedev-core)         | Engine-agnostic game dev — architecture, ECS, physics, AI, networking, plus per-platform skills (2D/3D, web, mobile, PC, VR/AR, design, art, audio, multiplayer), plus the [Blender MCP](https://github.com/ahujasid/blender-mcp) server ([sickn33](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan](https://github.com/Jeffallan/claude-skills)) |
-| [gamedev-threejs](./gamedev-threejs)   | Three.js and WebGPU 3D skills plus a game-building suite ([cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill), [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
-| [gamedev-godot](./gamedev-godot)       | Godot 4.x — GDScript, testing, exports, deployment, plus the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server ([Randroids-Dojo](https://github.com/Randroids-Dojo/skills)) |
-| [gamedev-roblox](./gamedev-roblox)     | Roblox — the MCP server [built into Roblox Studio](https://create.roblox.com/docs/studio/mcp); scripts, asset generation, Luau, playtesting; requires Studio-side setup |
+| [roblox-gamedev](./roblox-gamedev)     | Roblox — game creation pipeline, Luau, UI, maps, 3D models, VFX, SFX, animation, economy, stud-style building, trailers, plus a 30-skill Blender stack ([SyphoDev](https://www.youtube.com/@SyphoDev), [mvvthw](https://github.com/mvvthw/roblox-claude-skills), [zriptic](https://github.com/zriptic/roclicks-skills), [RobLe3](https://github.com/RobLe3/cc-blender-skill)) |
 | [marketing-plugin](./marketing-plugin) | Marketing & go-to-market skills — `first-100-customers`, a YC-style weekly GTM playbook across 7 acquisition channels with a bundled 56-platform launch playbook |
 
 See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md) for dependency details, and [`.claude/MCP.md`](.claude/MCP.md) for MCP setup.
@@ -23,7 +20,7 @@ See [Installation](#installation) below, [`.claude/PLUGIN.md`](.claude/PLUGIN.md
 
 ### fullstack-plugin
 
-Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` — one install for the full stack. The `gamedev-*` plugins are installed separately, per engine.
+Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` — one install for the full stack. `roblox-gamedev` is installed separately.
 
 ### core-plugin
 
@@ -32,7 +29,7 @@ Meta-plugin with no bundled skills. Depends on `core-plugin`, `frontend-plugin`,
 | Skill             | Purpose                                                              |
 | ----------------- | -------------------------------------------------------------------- |
 | `babysit-pr`      | Keep a PR merge-ready: triage comments, resolve conflicts, fix CI    |
-| `model-selection` | Route Codex/Claude Code to Sol/Fable 5 or Luna/Opus 5 at High effort |
+| `model-selection` | Starting points for choosing a model and effort by task; guidance, not hard rules |
 
 Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all come from the `mattpocock-skills` dependency — not duplicated in this repo. PDF and skill authoring come from `document-skills` and `skill-creator`.
 
@@ -82,7 +79,7 @@ Bundled skill: [`ui-character-and-polish`](frontend-plugin/skills/ui-character-a
 | `web-asset-generator`          | Favicons, app icons, Open Graph images                  |
 | `agent-browser`                | Browser automation CLI ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) |
 | `hyperframes`                  | HTML-to-video, GSAP/Lottie/Three.js animations, Remotion bridge ([heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)) |
-| `remotion-plugin`              | Programmatic video creation — 12 Remotion skills (ai-rules) |
+| `remotion-plugin`              | Programmatic video creation — 13 Remotion skills (ai-rules) |
 | `app-store-screenshots-plugin` | App Store marketing screenshots (ai-rules)              |
 
 [`agent-browser`](https://claudemarketplaces.com/skills/vercel-labs/agent-browser/agent-browser) is the default CLI for browser automation. Complements `playwright` MCP and `chrome-devtools-mcp` — replaces the former `browser-use-plugin`.
@@ -118,84 +115,16 @@ AI video creation — plan, prompt, and hook short-form and cinematic AI video, 
 | `ai-video-prompt-enhancer` | Turn a rough idea into one detailed, cinematic single-clip prompt |
 | `tiktok-reel-hook-generator` | Scroll-stopping 1–3s visual hooks with ready-to-copy prompts for TikTok / Reels / Shorts |
 | `video-prompting` | Model-specific prompts — Seedance 2.0, Kling, Ovi, Sora, Veo 3, Wan 2.2, LTX-2/2.3 |
-| `visual-image` | Image prompting for Nano Banana (NBP/NB2) and GPT Image 2 — storyboards, character sheets, product/UI shots |
+| `visual-image` | Image prompting for Nano Banana (NBP/NB2) and GPT Image 2.5 — storyboards, character sheets, product/UI shots |
 | `character-design-sheet` | Character consistency across AI images — turnarounds, expression sheets, palettes, LoRA techniques |
 
-Sources: [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) (no upstream LICENSE); [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0); [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT — its generic `image` skill is vendored as `visual-image`; its Kling reference lives in `video-prompting`); [inference-sh/skills](https://github.com/inference-sh/skills) (MIT). **Caveat:** `character-design-sheet` declares `allowed-tools: Bash(belt *)` and its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`); as a reference guide it works without it. Complements `frontend-plugin` video tooling and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
+Sources: [aicontentskills/ai-video-storyboard-skill](https://github.com/aicontentskills/ai-video-storyboard-skill), [aicontentskills/ai-video-prompt-enhancer](https://github.com/aicontentskills/ai-video-prompt-enhancer), [aicontentskills/tiktok-reel-hook-generator](https://github.com/aicontentskills/tiktok-reel-hook-generator) (no upstream LICENSE); [Square-Zero-Labs/video-prompting-skill](https://github.com/Square-Zero-Labs/video-prompting-skill) (Apache-2.0); [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT — its generic `image` skill is vendored as `visual-image`; its Kling reference lives in `video-prompting`); [inference-sh/skills](https://github.com/inference-sh/skills) (MIT). **Caveat:** `character-design-sheet` declares `allowed-tools: Bash(belt *)` and its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`); as a reference guide it works without it. Complements `frontend-plugin` video tooling. Standalone — not bundled into `fullstack-plugin`.
 
-### gamedev-core
+### roblox-gamedev
 
-#### Bundled skills (11)
+44 skills and 7 worker agents for Roblox development, vendored from four upstreams. See [`roblox-gamedev/README.md`](./roblox-gamedev/README.md) for the skill list, setup, licenses, and local adaptations. Start with `/roblox-gamedev:roblox-skills-setup`, then `/roblox-gamedev:create-roblox-game`.
 
-Engine-agnostic game development — the transferable fundamentals that apply before you pick an engine.
-
-| Skill | Purpose |
-| ----- | ------- |
-| `game-developer` | Engine-agnostic implementation patterns — ECS, physics/colliders, multiplayer netcode, 60+ FPS optimization, object pooling, state machines |
-| `2d-games` / `3d-games` | Sprites and tilemaps; meshes and shaders |
-| `web-games` / `mobile-games` / `pc-games` / `vr-ar` | Per-platform framework choice, input, distribution |
-| `game-design` / `game-art` / `game-audio` / `multiplayer` | GDD and balancing; asset pipeline; sound design; netcode |
-
-Vendored from [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) and [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) (both MIT). The upstream `game-development` orchestrator was dropped — it duplicated `game-developer` (game loop, patterns, AI, collision, performance budget) and its ten platform docs are now top-level skills the agent picks directly.
-
-`.mcp.json` wires up the community [MCP for Blender](https://github.com/ahujasid/blender-mcp) server (via `uvx mcp-for-blender`, formerly `blender-mcp`; MIT) — scene inspection and editing, Python execution, Poly Haven / Sketchfab assets, and optional Hyper3D/Hunyuan3D generation. Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`). macOS and Windows notes (Homebrew `uvx` path, add-on folder, old-uv `pywin32` failure): [`gamedev-core/README.md`](./gamedev-core/README.md#mcp-server).
-
-> The server runs LLM-generated Python inside Blender with no sandbox by default. Set `BLENDER_MCP_SAFE_MODE=1` to block file, subprocess, and network access (this also blocks exporting to disk).
-
-### gamedev-threejs
-
-#### Bundled skills (19)
-
-**Low-level primitives (11)** — from [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills) ([claudemarketplaces catalog](https://claudemarketplaces.com/skills/cloudai-x/threejs-skills)) and [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill):
-
-| Skill | Purpose |
-| ----- | ------- |
-| `threejs-fundamentals` | Scene, camera, renderer, Object3D hierarchy |
-| `threejs-geometry` | Shapes, BufferGeometry, instancing |
-| `threejs-materials` | PBR, standard/phong materials, shaders |
-| `threejs-lighting` | Lights, shadows, environment lighting |
-| `threejs-textures` | Textures, UV mapping, render targets |
-| `threejs-animation` | Keyframe, skeletal, morph target animation |
-| `threejs-loaders` | GLTF/GLB, async loading, caching |
-| `threejs-shaders` | GLSL, ShaderMaterial, custom effects |
-| `threejs-postprocessing` | EffectComposer, bloom, DOF, custom passes |
-| `threejs-interaction` | Raycasting, controls, user input |
-| `webgpu-threejs-tsl` | WebGPU renderer, TSL node materials, compute shaders |
-
-**Game-building suite (8)** — from [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills) (the upstream `threejs-game-director` orchestrator was dropped — `threejs-gameplay-systems` is the entry point):
-
-| Skill | Purpose |
-| ----- | ------- |
-| `threejs-gameplay-systems` | Playable slices, Vite/TS scaffold, loop, entities, input, physics, game feel |
-| `threejs-aaa-graphics-builder` | Prototype→AAA visuals, models, materials, lighting, VFX, visual scorecard |
-| `threejs-game-ui-designer` | HUDs, menus, overlays, responsive layout, safe areas, touch UI |
-| `threejs-debug-profiler` | Runtime/loading/resize/mobile bugs, draw calls, triangles, memory, perf |
-| `threejs-qa-release` | Production builds, browser/mobile verification, canvas pixels, release reports |
-| `threejs-3d-generator` | Tripo text/image→3D, GLB/FBX, rigging, animation (optional `TRIPO_API_KEY`) |
-| `threejs-image-generator` | Gemini concepts, textures, skies, decals, icons, GUI art (optional `GEMINI_API_KEY`) |
-| `threejs-audio-generator` | ElevenLabs SFX, ambience, UI sounds, voice/TTS (optional `ELEVENLABS_API_KEY`) |
-
-The core game skills work without API keys. **Plugin caveat:** the generators reference helper scripts via hardcoded `~/.claude/skills/<skill>/scripts/...` paths (upstream assumes a global `npx skills add -g` install); bundled as a plugin those resolve only if also installed globally, otherwise invoke the scripts from the plugin's skill folders (the shared credential probe lives in `threejs-3d-generator/scripts/`).
-
-Use `/gamedev-threejs:threejs-fundamentals` or `/gamedev-threejs:threejs-gameplay-systems` (and other skill names). Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts). `webgpu-threejs-tsl` complements `threejs-shaders` (WebGPU/TSL vs GLSL).
-
-### gamedev-godot
-
-#### Bundled skill (1)
-
-| Skill | Purpose |
-| ----- | ------- |
-| `godot` | Develop, test, build, and deploy Godot 4.x games — GDScript, GdUnit4 unit testing, PlayGodot automation, web/desktop exports, CI/CD, deployment to Vercel/GitHub Pages/itch.io |
-
-Also ships the `/gamedev-godot:godot` command and Python helper scripts. `.mcp.json` wires up the [godot-mcp](https://github.com/Coding-Solo/godot-mcp) server (via `npx @coding-solo/godot-mcp`) — set `GODOT_PATH` to your Godot executable. Vendored from [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills) and [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) (both MIT).
-
-### gamedev-roblox
-
-MCP-only — no bundled skills. `.mcp.json` wires up the MCP server **built into Roblox Studio**: `script_read` / `multi_edit` / `script_grep`, `generate_mesh` / `generate_material` / `insert_asset`, `search_game_tree` / `inspect_instance`, `execute_luau`, and playtest drivers (`start_stop_play`, `screen_capture`, `user_keyboard_input`).
-
-This needs editor-side setup: in Studio, **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. The config defaults to the macOS binary (`/Applications/RobloxStudio.app/Contents/MacOS/StudioMCP`); set `ROBLOX_STUDIO_MCP` to override on Windows (`%LOCALAPPDATA%\Roblox\mcp.bat`) or for a non-default install.
-
-> Roblox's standalone [studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) was **archived in April 2026** in favour of the built-in server — this plugin targets the built-in one. See [`gamedev-roblox/README.md`](./gamedev-roblox/README.md).
+The plugin ships no MCP config. Add the `Roblox_Studio` and `blender` servers yourself, as described in [`.claude/MCP.md`](./.claude/MCP.md).
 
 ### marketing-plugin
 
@@ -327,10 +256,7 @@ Install only what you need:
 | PR workflows, GitHub, Notion, documents, Google         | `core-plugin@ai-rules`      |
 | UI design, Figma, browser testing, DevTools, web assets | `frontend-plugin@ai-rules`  |
 | Supabase, Vercel                                        | `devops-plugin@ai-rules`    |
-| Engine-agnostic game dev fundamentals                   | `gamedev-core@ai-rules`     |
-| Three.js game and 3D development                        | `gamedev-threejs@ai-rules`  |
-| Godot 4.x development + godot-mcp                        | `gamedev-godot@ai-rules`    |
-| Roblox Studio MCP (needs Studio-side setup)             | `gamedev-roblox@ai-rules`   |
+| Roblox game development and Blender asset work          | `roblox-gamedev@ai-rules`   |
 | First 100 customers / GTM + 56-platform launch playbook | `marketing-plugin@ai-rules` |
 
 ### Project / local install
@@ -372,7 +298,7 @@ claude plugin list
 In Claude Code:
 
 1. `/plugin` → **Installed** — confirm enabled plugins:
-   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops/gamedev plugins)
+   - `fullstack-plugin@ai-rules` (or individual core/frontend/devops/roblox-gamedev plugins)
 2. Confirm key dependencies, for example:
    - `figma@claude-plugins-official` (frontend)
    - `vercel@claude-plugins-official` (devops)
@@ -395,7 +321,7 @@ Spot-check skills:
 - Grilling / spec flow: `/grill-me`, `/to-spec`, `/to-tickets`, `/implement`
 - TDD: `/tdd` — routing help: `/ask-matt`
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
-- Gamedev: `/gamedev-core:game-developer`, `/gamedev-threejs:threejs-fundamentals`, or `/gamedev-godot:godot`
+- Roblox: `/roblox-gamedev:create-roblox-game` or `/roblox-gamedev:roblox-economy`
 - Marketing: `/marketing-plugin:first-100-customers`
 - Ponytail: `/ponytail-review`, `/ponytail-audit`, or `/ponytail-debt`
 
@@ -412,10 +338,7 @@ To uninstall individual plugins instead of the bundle:
 claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
-claude plugin uninstall gamedev-core@ai-rules --prune
-claude plugin uninstall gamedev-threejs@ai-rules --prune
-claude plugin uninstall gamedev-godot@ai-rules --prune
-claude plugin uninstall gamedev-roblox@ai-rules --prune
+claude plugin uninstall roblox-gamedev@ai-rules --prune
 claude plugin uninstall marketing-plugin@ai-rules --prune
 ```
 

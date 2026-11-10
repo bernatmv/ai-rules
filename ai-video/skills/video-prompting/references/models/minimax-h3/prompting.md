@@ -47,11 +47,53 @@ Replace `N` with the actual final shot number and `S.SS` with the effective dura
 - Express camera movement naturally in the shot. Choose a motion type such as push/pull, zoom, pan, truck, tilt, pedestal, arc, tracking, static, shake, POV, or roll; add `with small/large amplitude` and `at slow/fast speed` only when meaningful.
 - Keep every visual and audio event observable and chronological. Establish identities, positions, environment, lighting, actions, reactions, state changes, and synchronized diegetic sounds.
 
+### Match action complexity to duration
+
+Keep prompts visually detailed, but ensure the number of
+requested actions is achievable within the video duration.
+
+- Allow enough time for actions, transitions, and reactions
+  to be clearly shown.
+- Distinguish useful descriptive detail from additional
+  actions the model must perform.
+- Prioritize essential actions over secondary gestures,
+  unnecessary cuts, and decorative movement.
+- When the timeline is overloaded, simplify the action
+  sequence or recommend separate clips rather than
+  compressing everything into the available time.
+- If a generation misses actions or becomes confused,
+  first consider reducing competing actions before
+  adding more instructions.
+
+For silent scenes, avoid quoted character thoughts or
+imagined dialogue, which MiniMax may turn into speech.
+Describe expressions through observable movements instead.
+
+Clarify who performs important physical actions and
+what objects or environmental details must remain unchanged.
+
+The goal is precise, executable direction—not maximum
+prompt length or minimum prompt length.
+
 ### Handle keyframes
 
 - **I2VA**: Preserve Picture 1's identity, clothing, colors, objects, composition, and spatial relationships. Write the path as first-frame anchor → action onset → continuous development → result/reaction.
 - **FL2VA**: Prefer one continuous shot unless the user specifies cuts. Describe observable intermediate changes that close the gap between Picture 1 and Picture 2; land exactly on Picture 2 at the end.
 - **L2VA**: Infer a compatible preceding state, then explicitly converge character pose, objects, camera, lighting, and composition on Picture 1 in the final shot.
+
+## Motion graphics trailers
+
+For fast motion-graphics trailers, treat the prompt as a compact audiovisual style bible followed by a precisely timed edit:
+
+- Establish the global design system at the start of `[Shot 1]`: animation medium, line and shape language, rendering treatment, palette (including exact color values when supplied), tonal qualities, and exclusions. Keep those rules active across every shot instead of restating the whole style block.
+- Define the hero, product, mascot, or brand device with stable identifying traits before the action. Reassert only the traits at risk during silhouettes, duplicates, transformations, extreme poses, or rapid cuts.
+- Give each shot one legible graphic beat, such as an entrance, transformation, panel montage, emblem reveal, kinetic-type composition, or final lockup. Describe the incoming composition, the subject action, the graphic response, and the camera behavior in that order.
+- Timestamp every cut and synchronize shape snaps, wipes, typography, impacts, lens or logo reveals, and musical accents to the visual action. A regular cut cadence is acceptable when it is an intentional part of the trailer's rhythm.
+- Treat visible typography as a whitelist. Quote the exact allowed letters or words and explicitly forbid all other readable text when brand fidelity requires it.
+- Describe potentially ambiguous motifs by their unmistakable visual construction. For example, define a photographic lens through curved glass, concentric optics, and aperture blades, then exclude reticles or targeting marks when those would create the wrong reading.
+- Keep `overall_soundscape` focused on shot-synchronized whooshes, impacts, mechanical cues, character sounds, and transition effects. Use `non_diegetic_music` to define the trailer's rhythmic engine, instrumentation, build, and final hit.
+
+Use the complete T2VA example at `references/models/minimax-h3/example_prompts/motion_graphics_trailer.md` as a pattern for a tightly art-directed, high-shot-count character trailer. Adapt its structure and level of control; do not copy its character, palette, branding, timings, or sound design unless the user requests them.
 
 ## Dialogue, singing, and visible text
 
@@ -133,7 +175,7 @@ Give each separately tracked item one definition line and keep labels stable acr
 
 ### Summarize task relationships
 
-Begin `summary` with one bracketed combination of applicable fixed task types, joined by ` + ` without repetition:
+Begin `summary` with one bracketed combination of applicable fixed task types, joined by `+` without repetition:
 
 - `keyframe completion`
 - `reference generation`
@@ -154,9 +196,104 @@ Write one line per reference label. For visible references, including motion or 
 - Follow all base shot, camera, dialogue, visible-text, and sound rules.
 - Cite reference labels naturally at first appearance and wherever their role takes effect. For a motion/choreography subject, cite its `<Subject N>` label where the referenced movement takes effect and let the reference video supply the movement's actual timing, sequence, rhythm, body mechanics, spatial path, and performer interactions. Describe only intentional adaptations, target-subject mapping, or synchronization constraints; do not redundantly reconstruct the choreography beat by beat unless the user requests explicit changes. Describe other referenced traits, frame relationships, source-video states, or audio relationships at the moment they take effect.
 - For camera movement supplied by `<Video N>`, cite the video where the move takes effect and let it supply the actual path, speed, amplitude, and timing. Describe the target subject, scene, composition, and intentional adaptations; do not redundantly restate the camera move unless the user requests a change to it.
-- For generation tasks, normally write 350–500 English words, while prioritizing a complete dialogue timeline and appropriate detail over mechanically meeting the range. Scale editing descriptions to source complexity.
+- For generation tasks, provide sufficient detail to clearly control subjects, actions, camera, style, and continuity. Do not target a fixed word count. Scale action complexity to the available duration, while keeping descriptions as detailed as the scene requires. Avoid adding actions or instructions merely to increase prompt length.
 - Use `<Subject N> (Sx)` when a referenced subject physically vocalizes. Use `<Audio N>` without a speaker ID for words heard only inside a directly reused soundtrack/BGM. Write `[unclear]` rather than guessing unintelligible source speech.
 - State copied or referenced audio relationships in the matching audible layer: ambience/effects in `overall_soundscape`, audience-only score in `non_diegetic_music`, and dialogue/shot-synchronized audio in `detailed_description`.
+
+### Exact performer and facial-performance transfer
+
+Use these rules when the user's goal is for one or more target subjects to follow reference-video performers as exactly as practical, especially for dialogue, singing, lip sync, facial acting, reactions, or subtle upper-body performance.
+
+#### Treat the reference video as performance, not identity
+
+- Represent each source performer's reusable performance as a `<Subject N>` sourced from the reference video.
+- Treat that performance subject as authoritative for timing, sequence, rhythm, intensity, lip articulation, jaw movement, facial expression, eye and eyelid behavior, gaze, blinking, eyebrow motion, breathing-related facial movement, head motion, and requested body micro-gestures.
+- Transfer performance attributes only. Do not inherit the source performer's identity, clothing, hairstyle, body appearance, environment, or rendering style unless the user explicitly requests those attributes.
+- Keep the target subject's visual identity in its own `<Subject N>` sourced from the target picture or other visual reference.
+- Do not reconstruct the source performance beat by beat when the reference video already supplies it. Describe the mapping, adaptation, synchronization constraints, and intentional exclusions instead.
+
+#### Lock performer ownership
+
+For multi-performer transfer, define one stable source-performer → performance-subject → target-subject mapping and keep it invariant for the entire target video.
+
+Prefer stable performer identifiers when available. Use screen position such as left/right only when the source and target compositions remain fixed enough that the mapping is unambiguous.
+
+A useful invariant is:
+
+```text
+SOURCE PERFORMER A → <performance Subject A> → <target Subject A> (S1)
+SOURCE PERFORMER B → <performance Subject B> → <target Subject B> (S2)
+```
+
+When position is the intentional stable discriminator:
+
+```text
+LEFT source performer → <Subject 3> → LEFT target <Subject 1> (S1)
+RIGHT source performer → <Subject 4> → RIGHT target <Subject 2> (S2)
+```
+
+- Treat performer ownership as unchanged across speaking turns, pauses, listening reactions, interruptions, head turns, expression changes, and overlapping dialogue.
+- When mapped source performer A speaks, only mapped target A should lip-sync that speech. Target B should reproduce only B's concurrent listening/reaction performance.
+- When mapped source performer B speaks, only mapped target B should lip-sync that speech.
+- Allow both targets to vocalize simultaneously only when their mapped source performers actually overlap.
+- When a mapped source performer is silent, prevent speech-like mouth animation while retaining that performer's nonverbal reactions and micro-gestures.
+- Explicitly prohibit cross-mapping, speaker swapping, and one target mirroring another target's speech animation when identity confusion is a material risk.
+
+#### Map audio ownership explicitly
+
+When source audio must be preserved, define copied audio separately from visual performance.
+
+- For a single performer, map the copied singing or dialogue audio directly to that target speaker ID.
+- For multiple performers, use separately tracked audio references when the workflow can distinguish the speakers, for example `<Audio 1>` for S1 and `<Audio 2>` for S2.
+- State that each audio reference belongs exclusively to its mapped target speaker.
+- Preserve source timing, pauses, breaths, overlaps, cadence, pronunciation, pitch or melody for singing, and vocal inflection when those qualities are intended to be copied.
+- Do not invent dialogue from a referenced recording. If exact words are not supplied as text, refer to the copied source audio rather than guessing a transcript.
+
+#### Preserve stylized target media
+
+When the target image is illustrated, animated, painted, graphic, or otherwise strongly stylized but the performance reference uses a different visual medium, treat the target image's artistic medium as a separately preserved visual attribute or `<Subject N>`.
+
+- Define the target visual style concretely: medium, line treatment, stylized facial construction, shading method, texture abstraction, hair rendering, palette, materials, lighting treatment, and environment rendering that are visibly established by the target reference.
+- Mark that style `fully_preserved` in `retention_analysis` when the user wants it carried through the entire video.
+- State that the reference video supplies performance only and must not transfer its source-performer appearance or rendering style.
+- When style drift is likely, explicitly exclude incompatible traits such as photorealistic skin, pores, photographic hair strands, realistic human reconstruction, live-action lighting, or other source-medium characteristics.
+- Require transferred facial motion to remain native to the target style. For example, an illustrated face should animate through stable illustrated mouth shapes, eyes, contours, and shading rather than gradually becoming photorealistic.
+- Reassert the style before `[Shot 1]` and once inside the shot description when cross-style transfer is central to the request; avoid repeating a long style block throughout the prompt.
+
+A useful style-lock pattern is:
+
+```text
+<Subject N> is the visual style established by <Picture 1>, including its medium, line treatment, stylized facial construction, shading method, palette, material treatment, and environmental rendering.
+
+<Subject N>: fully_preserved — Preserve this visual language in every frame. <Video 1> supplies performance only and must not transfer its photographic rendering, source-performer appearance, skin treatment, hair treatment, lighting style, or other source-medium traits.
+```
+
+#### Restrict who may vocalize
+
+If the target frame contains extra characters who are not intended performers:
+
+- Identify the subjects that are allowed to vocalize.
+- State that all other visible characters remain non-vocal unless they have their own mapped reference performer.
+- Background subjects must not inherit the primary performer's lip sync, facial-performance track, or singing motion.
+- For a single singer, say explicitly that the singer is the only visible source of the referenced vocal performance.
+
+#### Prioritize exact micro-performance transfer
+
+For dialogue and singing, include the micro-performance attributes that matter instead of using generic "lip sync" wording:
+
+- phoneme-driven mouth shapes and coarticulation
+- jaw motion and mouth opening/closure
+- lip compression, rounding, spreading, and sustained vowel shapes
+- teeth or tongue visibility only when naturally present in the source
+- gaze shifts, eyelid motion, full and partial blinks
+- eyebrow motion and cheek tension
+- tiny smiles, grimaces, or expression transitions
+- breath-linked facial and posture changes
+- small head tilts, nods, rotations, and restrained upper-body adjustments
+
+For singing, preserve note timing, phrasing, breath placement, sustained-note mouth shapes, vibrato-related facial performance when visible, and expressive eye behavior. Do not convert sustained notes into repeated generic talking cycles.
+
+Use the complete full-reference example at `references/models/minimax-h3/example_prompts/full_reference_performance_transfer.md` as a pattern for strict multi-performer ownership and cross-style performance transfer. Adapt its labels, number of performers, style-lock detail, and audio mapping to the user's references.
 
 ## Final compliance check
 
@@ -167,4 +304,6 @@ Write one line per reference label. For visible references, including motion or 
 - Ensure keyframe paths actually begin from, connect to, or land on the supplied frame as the selected mode requires.
 - Ensure every separately tracked reference label has exactly one definition, one `retention_analysis` entry, and at least one use where its role takes effect. Remove inactive labels and resolve conflicting roles without changing a label's meaning between sections.
 - Allow a source-only picture or video citation to appear inside another item's definition without its own standalone definition or retention entry; do not mistake that compact source citation for an unresolved label.
+- For exact performer transfer, verify that each source performer has one stable target mapping, that speaker ownership never swaps, and that silent targets do not perform speech-like mouth motion unless their mapped source performer is actually speaking.
+- For cross-style transfer, verify that the target medium is explicitly preserved and that the source video contributes performance rather than unintended identity or rendering traits.
 - Preserve dialogue, lyrics, and visible text exactly in their original language; write all other content in English.

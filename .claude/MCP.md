@@ -61,13 +61,11 @@ External integrations are split across marketplace plugins. Install `fullstack-p
 After installing plugins, authenticate MCP servers with `/mcp`. Google Workspace uses
 separate OAuth via `jean-claude` (see PLUGIN.md).
 
-## gamedev-core
+## roblox-gamedev
 
-**`.mcp.json`**:
+The plugin ships no `.mcp.json`. Its skills call these servers by name, so add them at user scope.
 
-| Server    | Transport | Notes                                               |
-| --------- | --------- | --------------------------------------------------- |
-| `blender` | stdio     | `uvx mcp-for-blender` — needs `uv` + Blender add-on |
+### Blender
 
 Community [MCP for Blender](https://github.com/ahujasid/blender-mcp) (renamed from `blender-mcp` in Sept 2026; the old name still works). Blender's side needs one-time setup: install [`uv`](https://docs.astral.sh/uv/), run `uvx mcp-for-blender install-addon`, restart Blender, enable **Interface: MCP for Blender** in **Edit → Preferences → Add-ons**, then in the 3D viewport press `N` → **MCP for Blender** tab → **Start MCP Server**. It connects on `localhost:9876` (override with `BLENDER_HOST` / `BLENDER_PORT`). Manual add:
 
@@ -79,21 +77,15 @@ codex mcp add blender -- uvx mcp-for-blender
 - **macOS:** `brew install uv`. Dock-launched apps don't inherit your shell `PATH`; if `uvx` isn't found, use the absolute path from `which uvx` (e.g. `/opt/homebrew/bin/uvx`). Open Blender once before `install-addon` so its `~/Library/Application Support/Blender/<version>` folder exists.
 - **Windows:** uv 0.11.x can fail installing `pywin32` (`os error 32`) — `uv self update` first.
 
-## gamedev-roblox
-
-**`.mcp.json`**:
-
-| Server          | Transport | Notes                                       |
-| --------------- | --------- | ------------------------------------------- |
-| `roblox-studio` | stdio     | Binary shipped inside Roblox Studio         |
+### Roblox Studio
 
 Roblox's standalone [studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) was archived in April 2026; this targets the [MCP server built into Studio](https://create.roblox.com/docs/studio/mcp). Enable it in Studio: **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. Manual add:
 
 ```sh
-claude mcp add roblox-studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP
+claude mcp add --scope user Roblox_Studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP
 ```
 
-Set `ROBLOX_STUDIO_MCP` to override the default macOS path (Windows: `%LOCALAPPDATA%\Roblox\mcp.bat`).
+On Windows the binary is `%LOCALAPPDATA%\Roblox\mcp.bat`.
 
 ## Convex
 

@@ -1,6 +1,6 @@
 {
   "name": "app-store-screenshots-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build App Store screenshot pages and exportable marketing screenshots for iOS apps",
   "author": {
     "name": "bernatmv"

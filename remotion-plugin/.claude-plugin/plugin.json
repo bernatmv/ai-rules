@@ -1,7 +1,7 @@
 {
   "name": "remotion-plugin",
-  "version": "1.0.0",
-  "description": "Remotion video creation — 12 upstream skills: router, create, render, studio, captions, markup, maps, multimedia, interactivity, saas, docs, upgrade",
+  "version": "1.1.0",
+  "description": "Remotion video creation — 13 upstream skills: router, create, render, studio, captions, markup, maps, multimedia, interactivity, saas, docs, upgrade, license",
   "author": {
     "name": "bernatmv"
   },

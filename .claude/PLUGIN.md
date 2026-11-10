@@ -44,10 +44,7 @@ Or install individual plugins:
 /plugin install core-plugin@ai-rules
 /plugin install frontend-plugin@ai-rules
 /plugin install devops-plugin@ai-rules
-/plugin install gamedev-core@ai-rules
-/plugin install gamedev-threejs@ai-rules
-/plugin install gamedev-godot@ai-rules
-/plugin install gamedev-roblox@ai-rules
+/plugin install roblox-gamedev@ai-rules
 /plugin install marketing-plugin@ai-rules
 /reload-plugins
 /mcp
@@ -61,7 +58,7 @@ Authenticate MCP-backed plugins after install:
 
 ## fullstack-plugin
 
-Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` from this marketplace. The `gamedev-*` plugins are installed separately, per engine.
+Recommended one-install bundle. No bundled skills — depends on `core-plugin`, `frontend-plugin`, and `devops-plugin` from this marketplace. `roblox-gamedev` is installed separately.
 
 ```sh
 /plugin install fullstack-plugin@ai-rules
@@ -142,7 +139,7 @@ Frontend design, browser testing, Figma, and UI debugging.
 | `web-asset-generator`          | `web-asset-generator-marketplace` | `/plugin marketplace add alonw0/web-asset-generator` |
 | `agent-browser`                | `agent-browser`                   | `/plugin marketplace add vercel-labs/agent-browser`  |
 | `hyperframes`                  | `hyperframes`                     | `/plugin marketplace add heygen-com/hyperframes`     |
-| `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin` (12 Remotion skills)  |
+| `remotion-plugin`              | `ai-rules`                        | bundled with `frontend-plugin` (13 Remotion skills)  |
 | `app-store-screenshots-plugin` | `ai-rules`                        | bundled with `frontend-plugin`                       |
 
 `agent-browser` ([vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser)) is the default CLI for browser automation — compact accessibility-tree snapshots with `@eN` refs. Load runtime instructions via `agent-browser skills get core`. Complements `playwright` MCP (tool-calling) and `chrome-devtools-mcp` (debugging). Replaces the former `browser-use-plugin` dependency.
@@ -183,22 +180,11 @@ AI video creation — storyboarding, prompting, hooks, image prompting, and char
 | `visual-image` | [smixs/visual-skills](https://github.com/smixs/visual-skills) (MIT) — vendored from upstream `image` under a clearer name |
 | `character-design-sheet` | [inference-sh/skills](https://github.com/inference-sh/skills) (MIT) |
 
-`character-design-sheet` declares `allowed-tools: Bash(belt *)`; its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`), but it works as a reference guide without it. Use `/ai-video:<skill>`. Complements `frontend-plugin` video tooling and `gamedev-threejs` generators. Standalone — not bundled into `fullstack-plugin`.
+`character-design-sheet` declares `allowed-tools: Bash(belt *)`; its runnable examples need the inference.sh `belt` CLI (`npx skills add belt-sh/cli`), but it works as a reference guide without it. Use `/ai-video:<skill>`. Complements `frontend-plugin` video tooling. Standalone — not bundled into `fullstack-plugin`.
 
-## gamedev-* (core / threejs / godot / roblox)
+## roblox-gamedev
 
-Game development split by engine: an engine-agnostic core plus three engine-specific plugins. Install only the engines you use.
-
-### ai-rules bundled
-
-| Plugin            | Provides                                                                 |
-| ----------------- | ------------------------------------------------------------------------ |
-| `gamedev-core`    | 11 engine-agnostic skills — `game-developer` (ECS, physics, netcode, optimization, patterns) plus per-platform skills `2d-games`, `3d-games`, `web-games`, `mobile-games`, `pc-games`, `vr-ar`, `game-design`, `game-art`, `game-audio`, `multiplayer`; [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills), [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills). The upstream `game-development` orchestrator was dropped — it duplicated `game-developer`, and its platform docs are now top-level skills. Also ships the `blender` MCP server (`.mcp.json`, needs `uv` + Blender add-on) |
-| `gamedev-threejs` | 20 Three.js skills — 11 low-level primitives (fundamentals, geometry, materials, GLSL/TSL shaders, animation, interaction; [cloudai-x/threejs-skills](https://github.com/cloudai-x/threejs-skills), [webgpu-threejs-tsl](https://github.com/dgreenheck/webgpu-claude-skill)) + an 8-skill game-building suite (gameplay, AAA graphics, UI, debug, QA, 3D/image/audio generators; [majidmanzarpour/threejs-game-skills](https://github.com/majidmanzarpour/threejs-game-skills)) |
-| `gamedev-godot`   | `godot` skill + `/godot` command + `godot-mcp` server (`.mcp.json`, needs `GODOT_PATH`); [Randroids-Dojo/skills](https://github.com/Randroids-Dojo/skills), [Coding-Solo/godot-mcp](https://github.com/Coding-Solo/godot-mcp) |
-| `gamedev-roblox`  | MCP-only — `roblox-studio` server built into Roblox Studio (scripts, asset generation, Luau, playtesting); requires Studio-side setup |
-
-Install per engine, e.g. `/gamedev-core:game-developer`, `/gamedev-threejs:threejs-fundamentals`, `/gamedev-godot:godot`. Complements `frontend-plugin` → `hyperframes` (`/hyperframes:three` for HyperFrames video contexts).
+44 Roblox and Blender skills plus 7 worker agents. See [`roblox-gamedev/README.md`](../roblox-gamedev/README.md). The `Roblox_Studio` and `blender` MCP servers are added separately; see [`.claude/MCP.md`](./MCP.md).
 
 See [`.claude/SKILLS.md`](./SKILLS.md) for skill → plugin mapping.
 
@@ -307,8 +293,5 @@ claude plugin uninstall fullstack-plugin@ai-rules --prune
 claude plugin uninstall core-plugin@ai-rules --prune
 claude plugin uninstall frontend-plugin@ai-rules --prune
 claude plugin uninstall devops-plugin@ai-rules --prune
-claude plugin uninstall gamedev-core@ai-rules --prune
-claude plugin uninstall gamedev-threejs@ai-rules --prune
-claude plugin uninstall gamedev-godot@ai-rules --prune
-claude plugin uninstall gamedev-roblox@ai-rules --prune
+claude plugin uninstall roblox-gamedev@ai-rules --prune
 ```
