@@ -3,7 +3,7 @@ name: create-roblox-game
 description: Take a Roblox game from a genre to something built, assembled, playable and published, ONE SECTION PER SESSION - research and plan, code, art, animation and sound, playtest, publish - with a HANDOFF.md between sessions so the chat can be cleared after each approved section. Drives the whole toolchain - market research, a design contract, the code project, map, meshes, textures, UI, animation, VFX and sound, then assembly in Studio, playtest and publish. This is the FRONT DOOR: it owns research, design and assembly itself and delegates each asset stage to the skill that already proves that stage. Use whenever the user wants a Roblox game made, built, started or prototyped, says "make me a game" or names a genre to build (incremental, battlegrounds, ...), asks to "complete the research and plan stage" or any other stage, says "continue with the development of the <genre> game", approves a finished stage ("approved", "looks good"), or asks what is still missing before a game can be built.
 ---
 
-> `<plugin-root>` in this skill's reference files and generated project files is `${CLAUDE_PLUGIN_ROOT}`.
+> `<plugin-root>` in this skill's reference files and generated project files is `${CLAUDE_PLUGIN_ROOT}`. Quote it in shell commands.
 
 # Make a Roblox game, end to end
 
@@ -30,7 +30,7 @@ map the prompt to a command and run it:
 | "continue with the development of the incremental game" | `section.py resume --game "continue with the development of the incremental game"` |
 | "approved" / "looks good" (after a section closed) | `section.py approve N --dir <game>`, then say it is safe to clear the chat |
 
-`S=${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/section.py`. `resume` finds the
+`S="${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/section.py"`. `resume` finds the
 game from the words alone (genre, title, folder name), reads out `HANDOFF.md`,
 and prints the next section's scope, exit gate and rules. **Read `HANDOFF.md` in
 full before any work.** Do one section, pass `section.py close N`, stop, and ask
@@ -110,13 +110,13 @@ the full map rides with the other visual assets; VFX rides with motion and sound
 **Everything is in one script, so none of it depends on this paragraph being read:**
 
 ```bash
-S=${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/section.py
-python $S brief "research and plan"    # a number or the stage's words: scope, exit gate, rules
-python $S resume --game "<prompt words>"   # FIRST command of every later session
-python $S resume --game "<words>" --expect N   # refuses if N is not the next section
-python $S handoff N --dir <game> [--ledger <run dir>]   # HANDOFF.md skeleton
-python $S close N --dir <game>         # the gate. Stop only after it passes
-python $S approve N --dir <game>       # you approved: safe to clear the chat
+S="${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/section.py"
+python "$S" brief "research and plan"    # a number or the stage's words: scope, exit gate, rules
+python "$S" resume --game "<prompt words>"   # FIRST command of every later session
+python "$S" resume --game "<words>" --expect N   # refuses if N is not the next section
+python "$S" handoff N --dir <game> [--ledger <run dir>]   # HANDOFF.md skeleton
+python "$S" close N --dir <game>         # the gate. Stop only after it passes
+python "$S" approve N --dir <game>       # you approved: safe to clear the chat
 ```
 
 Every game that has had a handoff is recorded in
@@ -286,7 +286,7 @@ game's own DataModels instead with `scripts/studio_mcp.py luau --dm Server` (or
 Run the check rather than trusting this table, because the table ages:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/preflight.py
+python "${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/preflight.py"
 ```
 
 ---
@@ -294,7 +294,7 @@ python ${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/preflight.py
 ## The contract is the whole design
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/new_game.py "My Game" --dir <your games folder>/MyGame
+python "${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/new_game.py" "My Game" --dir <your games folder>/MyGame
 ```
 
 That lays down the `roblox-code` scaffold (by calling that skill's own
@@ -310,7 +310,7 @@ disagree with what ships - lifted up to the whole build.
 `game.json` ships full of `TODO` markers on purpose:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/validate.py
+python "${CLAUDE_PLUGIN_ROOT}/skills/create-roblox-game/scripts/validate.py"
 ```
 
 fails while any survive. Every asset skill in this toolchain does something
@@ -1372,7 +1372,7 @@ Stages 4-9 run as parallel `roblox-asset-*` workers (agent types take the `roblo
 on one thread. Wrap the run in the orchestrator's ledger either way:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-build-orchestrator/scripts/run_log.py init --run my-game --mode fanout
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-build-orchestrator/scripts/run_log.py" init --run my-game --mode fanout
 ```
 
 | Stage | Worker | Model |

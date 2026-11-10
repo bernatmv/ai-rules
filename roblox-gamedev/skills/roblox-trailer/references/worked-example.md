@@ -53,7 +53,7 @@ Roblox cut: about 29.6 s (checked by building it from placeholder clips). Social
 ```bash
 SK=<path to roblox-trailer>/scripts; G=<game>; T=$G/trailer
 mkdir -p $T && cp <path to roblox-trailer>/references/example.shots.json $T/shots.json
-python3 $SK/build_kit.py rbxmx --shots $T/shots.json        # import_rbxm -> ReplicatedStorage (edit mode)
+python "$SK/build_kit.py" rbxmx --shots $T/shots.json        # import_rbxm -> ReplicatedStorage (edit mode)
 ```
 1. Tell the user: keep Studio up front and uncovered, mouse off the viewport, hands off until done.
 2. `solo_playtest start mode=play` → calibrate (`call --calibrate 10` + `record.py calibrate --out $T`).

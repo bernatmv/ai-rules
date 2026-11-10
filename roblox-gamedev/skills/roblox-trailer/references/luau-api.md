@@ -6,7 +6,7 @@ Validate after any edit with `scripts/check_luau.sh scripts/*.luau`.
 ## Getting them into a playtest
 
 Recommended: the kit, which is imported once and never pasted.
-1. `python3 scripts/build_kit.py rbxmx --shots <game>/trailer/shots.json` writes `trailer/TrailerKit.rbxmx`
+1. `python scripts/build_kit.py rbxmx --shots <game>/trailer/shots.json` writes `trailer/TrailerKit.rbxmx`
    (ModuleScripts TrailerDriver, CameraRig and Shots, the last being shots.json embedded).
 2. In EDIT mode, destroy any old `ReplicatedStorage.TrailerKit`, then `import_rbxm` the file into ReplicatedStorage.
 3. Start the playtest (`solo_playtest start mode=play`, or `multiplayer_playtest start numPlayers=2` for social shots).

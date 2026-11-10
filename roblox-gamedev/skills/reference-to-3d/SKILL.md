@@ -77,7 +77,7 @@ Classify each provided asset:
 Use `scripts/template_analyzer.py` for first-pass component extraction:
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/template_analyzer.py   --image /path/to/front_reference.png   --out /tmp/front_analysis.json   --mode edges  # use bright_on_dark/dark_on_bright/alpha when cleaner
+python "${CLAUDE_SKILL_DIR}/scripts/template_analyzer.py"   --image /path/to/front_reference.png   --out /tmp/front_analysis.json   --mode edges  # use bright_on_dark/dark_on_bright/alpha when cleaner
 ```
 
 The analyzer returns components with area, perimeter-derived score, bbox, centroid, contour, and approximate class hints. Use `--mode edges` for faint grey wireframes and Otsu modes for clean masks/atlases. Treat this as measurement input, not final authority.
@@ -131,7 +131,7 @@ Always produce:
 Use `scripts/silhouette_validator.py`:
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/silhouette_validator.py   --reference /tmp/reference_mask.png   --render /tmp/render_mask.png   --out /tmp/validation.json
+python "${CLAUDE_SKILL_DIR}/scripts/silhouette_validator.py"   --reference /tmp/reference_mask.png   --render /tmp/render_mask.png   --out /tmp/validation.json
 ```
 
 Refuse final export if:

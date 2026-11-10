@@ -82,7 +82,8 @@ codex mcp add blender -- uvx mcp-for-blender
 Roblox's standalone [studio-rust-mcp-server](https://github.com/Roblox/studio-rust-mcp-server) was archived in April 2026; this targets the [MCP server built into Studio](https://create.roblox.com/docs/studio/mcp). Enable it in Studio: **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. Manual add:
 
 ```sh
-claude mcp add --scope user Roblox_Studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP
+claude mcp add --scope user Roblox_Studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP   # macOS
+claude mcp add --scope user Roblox_Studio "%LOCALAPPDATA%\Roblox\mcp.bat"                            # Windows
 ```
 
 On Windows the binary is `%LOCALAPPDATA%\Roblox\mcp.bat`.

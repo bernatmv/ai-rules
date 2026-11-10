@@ -21,6 +21,7 @@ Output: DIR/<game>_<cut>_<WxH>.mp4 (H.264 high, yuv420p, 60 fps, AAC 48 kHz, +fa
 import argparse
 import json
 import math
+import os
 import re
 import shutil
 import subprocess
@@ -30,14 +31,16 @@ from pathlib import Path
 try:
     from PIL import Image, ImageDraw, ImageFilter, ImageFont
 except ImportError:  # pragma: no cover
-    sys.exit("Pillow is required (python3 -m pip install pillow)")
+    sys.exit("Pillow is required (python -m pip install pillow)")
 
 SKILL = Path(__file__).resolve().parent.parent
-EMOJI_FONT = "/System/Library/Fonts/Apple Color Emoji.ttc"
+WIN_FONTS = Path(os.environ.get("WINDIR", "C:/Windows")) / "Fonts"
+EMOJI_FONT = str(WIN_FONTS / "seguiemj.ttf") if sys.platform == "win32" else "/System/Library/Fonts/Apple Color Emoji.ttc"
 FONT_DIRS = [SKILL / "assets" / "fonts", Path.home() / "Library/Fonts", Path("/Library/Fonts"),
-             Path("/System/Library/Fonts/Supplemental"), Path("/System/Library/Fonts")]
+             Path("/System/Library/Fonts/Supplemental"), Path("/System/Library/Fonts"),
+             Path.home() / "AppData/Local/Microsoft/Windows/Fonts", WIN_FONTS]
 FALLBACK_FONTS = ["FredokaOne-Regular.ttf", "Fredoka", "LuckiestGuy-Regular.ttf", "Arial Rounded Bold.ttf",
-                  "SFNSRounded.ttf", "Helvetica.ttc"]
+                  "SFNSRounded.ttf", "Helvetica.ttc", "ARLRDBD.TTF", "segoeuib.ttf", "arialbd.ttf"]
 XFADE = {"cut": "fade", "fade": "fade", "whip": "slideleft", "whipright": "slideright", "whipblur": "hblur",
          "dip": "fadeblack", "flash": "fadewhite", "zoom": "zoomin"}
 ROBLOX_MAX_SECS = 30.0
@@ -98,7 +101,7 @@ def runs(text):
 
 
 def render_line(text, font_path, size, color="#ffffff", stroke=None, stroke_w=None):
-    """RGBA image of one line; emoji come from Apple Color Emoji (rendered at 160 px, then scaled)."""
+    """RGBA image of one line; emoji come from the system colour emoji font (rendered at 160 px, then scaled)."""
     font = ImageFont.truetype(font_path, size)
     sw = stroke_w if stroke_w is not None else max(2, size // 12)
     pieces = []

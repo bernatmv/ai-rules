@@ -581,6 +581,8 @@ color."* The message blames the viewport colour. It cost three wrong hypotheses
 `IsIconic == false` is **not sufficient** — a restored-but-background window
 still times out. What reliably works is maximise plus foreground:
 
+On macOS, bring Studio to the front by hand. On Windows:
+
 ```powershell
 [W]::ShowWindow($h, 3)          # SW_MAXIMIZE
 [W]::SetForegroundWindow($h)

@@ -1,4 +1,6 @@
-# Recording (macOS screencapture)
+# Recording
+
+macOS uses `screencapture`. Windows uses ffmpeg's `gdigrab` with `-draw_mouse 0`, needs no permission prompt, and ignores `--display` and `--full-crop` because every monitor shares one coordinate space. The steps below are the same on both. On Windows, the region is in physical pixels and `scale` is 1.
 
 `screencapture -v` records the user's **real screen** (verified on a MacBook: 60 fps, 2940x1912 Retina,
 Screen Recording permission granted). That brings three duties:
@@ -19,21 +21,21 @@ No cursor: `screencapture` only shows the cursor with `-C`, which the script nev
 ```bash
 SK=<path to roblox-trailer>/scripts
 T=<game>/trailer          # holds shots.json, clips/, out/
-python3 $SK/record.py windows                      # Studio must show as [front]/[visible]
+python "$SK/record.py" windows                      # Studio must show as [front]/[visible]
 ```
 1. **Calibrate once per window layout** (and again whenever Studio is moved or resized):
    - in the playtest client, run `build_kit.py call --calibrate 10` (send the snippet with eval_client_runtime);
-   - straight away: `python3 $SK/record.py calibrate --out $T`, which finds the cyan viewport and writes `$T/region.json` (points).
+   - straight away: `python "$SK/record.py" calibrate --out $T`, which finds the cyan viewport and writes `$T/region.json` (points).
    It warns if the viewport isn't about 16:9; edit.py crops to 16:9 anyway, but a near-16:9 viewport wastes the least.
    Tip: hide Studio's Explorer and Properties (or use View > Full Screen) so the viewport is big. More source pixels give a sharper 1080p.
 2. **Per shot**:
    1. `build_kit.py server --shot ID` and run the output (if any) with eval_server_runtime.
    2. Send `build_kit.py call --shot ID --delay 6` with eval_client_runtime and note `startsAtMs` and `dur` in the result.
-   3. Immediately run `python3 $SK/record.py shot ID --out $T --start-ms <startsAtMs> --dur <dur>` (foreground).
+   3. Immediately run `python "$SK/record.py" shot ID --out $T --start-ms <startsAtMs> --dur <dur>` (foreground).
       It sleeps until `startsAtMs - preroll`, records `preroll + dur + tail`, and writes `clips/ID.mov` + `clips/ID.json`.
       If the tool round trip took longer than the delay, it exits "too late": rerun with a larger `--delay`.
    4. `build_kit.py server --shot ID --after` if the shot has `server_after`.
-   5. `python3 $SK/qa.py clips --shots $T/shots.json` and look at `clips/ID_sheet.png`. Retake or adjust offsets.
+   5. `python "$SK/qa.py" clips --shots $T/shots.json` and look at `clips/ID_sheet.png`. Retake or adjust offsets.
 3. **Two-player shots**: start `multiplayer_playtest` with 2 players. Each client gets its own Studio window, so
    calibrate with `--window <part of the client window's title>` and pass the same `--window` to `shot`.
    Start client-2 first (`call --shot ID --actor client-2`, sent with `eval_client_runtime target=client-2`),

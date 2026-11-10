@@ -34,6 +34,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import signal
 import subprocess
 import sys
 import time
@@ -41,9 +43,28 @@ import time
 MARKER = "robloxstudio-mcp"
 
 
+WINDOWS = sys.platform == "win32"
+
+
+def sh(*cmd: str) -> str:
+    return subprocess.run(cmd, capture_output=True, text=True, timeout=60).stdout.strip()
+
+
+def unix_ports(pid: int) -> list[int]:
+    out = sh("lsof", "-nP", "-a", "-p", str(pid), "-iTCP", "-sTCP:LISTEN", "-Fn")
+    return sorted({int(line.rsplit(":", 1)[1]) for line in out.splitlines() if line.startswith("n") and ":" in line})
+
+
+def unix_servers() -> list[dict]:
+    procs = []
+    for line in sh("ps", "-axo", "pid=,command=").splitlines():
+        pid, _, command = line.strip().partition(" ")
+        if MARKER in command and command.split()[0].rsplit("/", 1)[-1] == "node":
+            procs.append({"pid": int(pid), "ports": unix_ports(int(pid))})
+    return procs
+
+
 def ps(cmd: str) -> str:
-    if sys.platform != "win32":
-        sys.exit("recover_mcp.py is Windows-only; see references/recovery.md for the manual steps.")
     out = subprocess.run(
         ["powershell", "-NoProfile", "-NonInteractive", "-Command", cmd],
         capture_output=True, text=True, timeout=120,
@@ -53,6 +74,8 @@ def ps(cmd: str) -> str:
 
 def servers() -> list[dict]:
     """Every node process that is a robloxstudio-mcp server, with its ports."""
+    if not WINDOWS:
+        return unix_servers()
     raw = ps(
         "Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | "
         f"Where-Object {{ $_.CommandLine -like '*{MARKER}*' }} | "
@@ -81,6 +104,9 @@ def servers() -> list[dict]:
 
 
 def listening(port: int) -> int | None:
+    if not WINDOWS:
+        out = sh("lsof", "-nP", f"-iTCP:{port}", "-sTCP:LISTEN", "-t")
+        return int(out.split()[0]) if out else None
     raw = ps(
         f"Get-NetTCPConnection -State Listen -LocalPort {port} -ErrorAction SilentlyContinue | "
         "Select-Object -ExpandProperty OwningProcess | ConvertTo-Json -Compress"
@@ -140,7 +166,14 @@ def main() -> int:
 
     pids = " ,".join(str(p["pid"]) for p in procs)
     print(f"\nkilling all {len(procs)} server process(es) so exactly one comes back...")
-    ps(f"Stop-Process -Id {pids} -Force -ErrorAction SilentlyContinue")
+    if WINDOWS:
+        ps(f"Stop-Process -Id {pids} -Force -ErrorAction SilentlyContinue")
+    else:
+        for p in procs:
+            try:
+                os.kill(p["pid"], signal.SIGKILL)
+            except ProcessLookupError:
+                pass
     time.sleep(3)
 
     left = servers()

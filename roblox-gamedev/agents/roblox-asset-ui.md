@@ -11,7 +11,7 @@ effort: medium
 color: blue
 ---
 
-The plugin root is `${CLAUDE_PLUGIN_ROOT}`. Read skills from its `skills/<name>/SKILL.md`. Those files may show the root as an unexpanded `CLAUDE_PLUGIN_ROOT` variable or as `<plugin-root>`; use the path above, because Bash does not define that variable.
+The plugin root is `${CLAUDE_PLUGIN_ROOT}`. Read skills from its `skills/<name>/SKILL.md`. Those files may show the root as an unexpanded `CLAUDE_PLUGIN_ROOT` variable or as `<plugin-root>`; use the path above, because Bash does not define that variable, and quote it in shell commands.
 
 You produce UI files. You have no Studio tools by design; one thread writes to the
 DataModel and it is not you.

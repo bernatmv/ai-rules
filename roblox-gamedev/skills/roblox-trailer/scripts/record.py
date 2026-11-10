@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record trailer shots from Roblox Studio with macOS `screencapture` (records the REAL screen).
+"""Record trailer shots from Roblox Studio: macOS `screencapture`, Windows ffmpeg gdigrab (records the REAL screen).
 
 Before any recording: tell the user to keep the Studio window visible and uncovered, park the mouse
 outside it, and not use the computer until the shot finishes. Recordings never include the cursor
@@ -32,6 +32,55 @@ import tempfile
 import time
 from pathlib import Path
 
+WINDOWS = sys.platform == "win32"
+
+PS_WINDOWS = r'''
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+Add-Type @"
+using System; using System.Text; using System.Runtime.InteropServices;
+public static class W {
+  public delegate bool Cb(IntPtr h, IntPtr l);
+  [StructLayout(LayoutKind.Sequential)] public struct Rc { public int L, T, R, B; }
+  [DllImport("user32.dll")] public static extern bool EnumWindows(Cb c, IntPtr l);
+  [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr h);
+  [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr h);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr h, StringBuilder s, int n);
+  [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr h, out uint p);
+  [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h, out Rc r);
+  [DllImport("user32.dll")] public static extern int GetSystemMetrics(int i);
+  [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
+  [DllImport("dwmapi.dll")] public static extern int DwmGetWindowAttribute(IntPtr h, int a, out int v, int s);
+}
+"@
+[void][W]::SetProcessDPIAware()
+$script:list = New-Object System.Collections.ArrayList
+$script:z = 0
+$cb = [W+Cb]{ param($h, $l)
+  if ([W]::IsWindowVisible($h)) {
+    $cloaked = 0
+    [void][W]::DwmGetWindowAttribute($h, 14, [ref]$cloaked, 4)
+    $sb = New-Object System.Text.StringBuilder 1024
+    [void][W]::GetWindowText($h, $sb, 1024)
+    if ($cloaked -eq 0 -and $sb.Length -gt 0) {
+      $p = [uint32]0
+      [void][W]::GetWindowThreadProcessId($h, [ref]$p)
+      $r = New-Object W+Rc
+      [void][W]::GetWindowRect($h, [ref]$r)
+      $iconic = [W]::IsIconic($h)
+      $owner = (Get-Process -Id $p -ErrorAction SilentlyContinue).ProcessName
+      [void]$script:list.Add(@{ id = $h.ToInt64(); owner = "$owner"; name = $sb.ToString(); layer = 0;
+        bounds = @{ X = $r.L; Y = $r.T; Width = $r.R - $r.L; Height = $r.B - $r.T };
+        onscreen = (-not $iconic); z = $(if ($iconic) { -1 } else { $script:z }) })
+      if (-not $iconic) { $script:z++ }
+    }
+  }
+  return $true
+}
+[void][W]::EnumWindows($cb, [IntPtr]::Zero)
+@{ screen = @([W]::GetSystemMetrics(0), [W]::GetSystemMetrics(1)); scale = 1; windows = @($script:list) } |
+  ConvertTo-Json -Depth 5 -Compress
+'''
+
 JXA_WINDOWS = r'''
 ObjC.import("CoreGraphics"); ObjC.import("AppKit");
 var all = ObjC.deepUnwrap(ObjC.castRefToObject($.CGWindowListCopyWindowInfo(0, 0)));
@@ -54,7 +103,11 @@ def run(cmd, **kw):
 
 
 def window_info():
-    r = run(["osascript", "-l", "JavaScript", "-e", JXA_WINDOWS])
+    if WINDOWS:
+        r = subprocess.run(["powershell", "-NoProfile", "-NonInteractive", "-Command", PS_WINDOWS],
+                           capture_output=True, text=True, encoding="utf-8")
+    else:
+        r = run(["osascript", "-l", "JavaScript", "-e", JXA_WINDOWS])
     if r.returncode != 0:
         sys.exit(f"window lookup failed: {r.stderr.strip()}")
     return json.loads(r.stdout)
@@ -63,7 +116,7 @@ def window_info():
 def studio_windows(info, title=None):
     out = []
     for w in info["windows"]:
-        if w["owner"] not in ("Roblox Studio", "RobloxStudio") or w["layer"] != 0:
+        if w["owner"] not in ("Roblox Studio", "RobloxStudio", "RobloxStudioBeta") or w["layer"] != 0:
             continue
         b = w["bounds"]
         if b["Width"] < 300 or b["Height"] < 200:
@@ -119,6 +172,33 @@ def ffprobe_duration(path):
         return None
 
 
+def even(v):
+    v = round(v)
+    return v - v % 2
+
+
+def capture_still(x, y, w, h, png):
+    if WINDOWS:
+        return run(["ffmpeg", "-v", "error", "-y", "-f", "gdigrab", "-offset_x", str(round(x)), "-offset_y", str(round(y)),
+                    "-video_size", f"{even(w)}x{even(h)}", "-i", "desktop", "-frames:v", "1", str(png)])
+    return run(["screencapture", "-x", "-R", f"{x},{y},{w},{h}", str(png)])
+
+
+def record_command(secs, region, dest, display=None, full_crop=False):
+    if WINDOWS:  # one coordinate space across monitors, so --display and --full-crop don't apply
+        x, y, w, h = region
+        return ["ffmpeg", "-v", "error", "-y", "-f", "gdigrab", "-framerate", "60", "-draw_mouse", "0",
+                "-offset_x", str(round(x)), "-offset_y", str(round(y)), "-video_size", f"{even(w)}x{even(h)}",
+                "-i", "desktop", "-t", f"{secs:.2f}", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "12",
+                "-pix_fmt", "yuv420p", str(dest)]
+    cmd = ["screencapture", "-v", "-x", "-V", f"{secs:.2f}"]
+    if display:
+        cmd += ["-D", str(display)]
+    if not full_crop:
+        cmd += ["-R", ",".join(str(round(v)) for v in region)]
+    return cmd + [str(dest)]
+
+
 # ---------------------------------------------------------------- windows
 
 def cmd_windows(a):
@@ -167,9 +247,9 @@ def cmd_calibrate(a):
     scale = info["scale"]
     x, y, ww, hh = rect(w["bounds"])
     png = out / "calibrate.png"
-    r = run(["screencapture", "-x", "-R", f"{x},{y},{ww},{hh}", str(png)])
+    r = capture_still(x, y, ww, hh, png)
     if r.returncode != 0 or not png.exists():
-        sys.exit(f"screencapture failed: {r.stderr.strip()} (Screen Recording permission?)")
+        sys.exit(f"screen capture failed: {r.stderr.strip()} (on macOS, check Screen Recording permission)")
     rgb = tuple(int(v) for v in a.rgb.split(","))
     box, (W, H) = find_colour_box(png, rgb)
     if not box:
@@ -229,20 +309,16 @@ def cmd_shot(a):
     full = clips / f"{a.id}_full.mov"
     for f in (mov, full):
         f.unlink(missing_ok=True)
-    cmd = ["screencapture", "-v", "-x", "-V", f"{secs:.2f}"]
-    if a.display:
-        cmd += ["-D", str(a.display)]
-    if not a.full_crop:
-        cmd += ["-R", ",".join(str(round(v)) for v in region)]
-    cmd.append(str(full if a.full_crop else mov))
+    full_crop = a.full_crop and not WINDOWS
+    cmd = record_command(secs, region, full if full_crop else mov, a.display, full_crop)
     print(f"REC {a.id}: {secs:.1f}s of the real screen. Hands off the computer.", flush=True)
     t_launch = time.time()
     r = subprocess.run(cmd, capture_output=True, text=True)
     t_end = time.time()
-    src = full if a.full_crop else mov
+    src = full if full_crop else mov
     if r.returncode != 0 or not src.exists():
-        sys.exit(f"screencapture failed ({r.returncode}): {r.stderr.strip()}")
-    if a.full_crop:
+        sys.exit(f"recording failed ({r.returncode}): {r.stderr.strip()}")
+    if full_crop:
         scale = info["scale"]
         x, y, w, h = [round(v * scale) for v in region]
         w -= w % 2; h -= h % 2
@@ -278,7 +354,7 @@ def cmd_stitch(a):
     tmp = Path(tempfile.mkdtemp(prefix="stitch_"))
     try:
         for i, f in enumerate(frames):
-            os.symlink(f.resolve(), tmp / f"f{i:05d}{f.suffix.lower()}")
+            shutil.copy2(f, tmp / f"f{i:05d}{f.suffix.lower()}")  # symlinks need admin on Windows
         ext = frames[0].suffix.lower()
         vf = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
         vf += ",minterpolate=fps=60:mi_mode=mci" if a.interp else ",fps=60"

@@ -471,7 +471,7 @@ def main() -> int:
     if shutil.which("aftman"):
         print("  aftman install")
     print("  wally install")
-    print(f"  python {Path(__file__).resolve().parent / 'check.py'}")
+    print(f"  python \"{(Path(__file__).resolve().parent / 'check.py').as_posix()}\"")
     print("\nthe scaffold is green on all gates before you write a line of game code.")
     print("if it is not, the toolchain is broken and nothing after this is trustworthy.")
     return 0

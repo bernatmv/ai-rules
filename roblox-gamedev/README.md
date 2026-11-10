@@ -7,11 +7,17 @@ Roblox game development: 44 skills and 7 worker agents, from a one-line game ide
 The plugin ships no MCP config, because the skills expect the server names below and plugin-registered servers get a prefixed name.
 
 ```sh
+# macOS
 claude mcp add --scope user Roblox_Studio /Applications/RobloxStudio.app/Contents/MacOS/StudioMCP
+# Windows
+claude mcp add --scope user Roblox_Studio "%LOCALAPPDATA%\Roblox\mcp.bat"
+# Both
 claude mcp add --scope user blender -- uvx mcp-for-blender
 ```
 
 Enable the Studio server under **Assistant** → **…** → **Manage MCP Servers** → **Enable Studio as MCP server**. Keep one Studio connection at a time. Blender needs its add-on as well; see [`.claude/MCP.md`](../.claude/MCP.md).
+
+The plugin runs on macOS and Windows, and `scripts/smoke-roblox-gamedev.py` checks both in CI. On Windows, set `PYTHONUTF8=1`. Both platforms need `python` on PATH.
 
 For Python, use 3.11+ with `numpy scipy Pillow requests opencv-python scikit-image gradio_client huggingface_hub`.
 
@@ -51,4 +57,5 @@ Re-apply these after refreshing from upstream:
 - `calibrate_rig.py`, `anim_render.py` and `r6_clip.py` in `roblox-animation` also run on Blender 5, which removed `Action.fcurves` and renamed the EEVEE engine.
 - `create-roblox-game` Studio helpers no longer crash outside Windows, and `render_check.py` uses the Blender 5 EEVEE name.
 - Worker agents are told the plugin root, because a subagent reading a `SKILL.md` gets no variable substitution.
+- `roblox-trailer` records on Windows through ffmpeg `gdigrab` and finds Windows fonts, `recover_mcp.py` runs on macOS, and shell commands quote plugin paths.
 - `manifest.json` comes from cc-blender-skill and is read by `blender-skill-harmonizer`.

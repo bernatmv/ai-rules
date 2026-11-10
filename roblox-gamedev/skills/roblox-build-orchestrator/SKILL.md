@@ -72,7 +72,7 @@ something outside the moment to enforce it.
 Start every run, including a practice run, with:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-build-orchestrator/scripts/run_log.py init --run <name> --mode fanout
+python "${CLAUDE_PLUGIN_ROOT}/skills/roblox-build-orchestrator/scripts/run_log.py" init --run <name> --mode fanout
 ```
 
 Then bracket each stage and log every event as it happens, not afterwards:

@@ -20,7 +20,7 @@ for f in "$@"; do
   out=$(cd "$tmpd" && luau-analyze "$base" 2>&1)
   if [ -n "$out" ]; then
     rc=1
-    echo "$out" | python3 -c '
+    echo "$out" | python -c '
 import re,sys
 s=int(sys.argv[1]); real=sys.argv[2]
 for line in sys.stdin:

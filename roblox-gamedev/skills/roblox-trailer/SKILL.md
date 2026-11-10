@@ -1,6 +1,6 @@
 ---
 name: roblox-trailer
-description: Make gameplay trailers for Roblox games, end to end. It plans a shot list from the game's GAME.md, drives the character in a Studio playtest so it looks hand-played (TrailerDriver.luau handles waypoints, prompts, remotes and a drifting third-person camera), adds cinematic camera moves (CameraRig.luau dolly, orbit, crane, push-in and whip, synced to game events), records only the Studio viewport with macOS screencapture, and edits with ffmpeg (speed ramps, whips, crossfades, title cards with emoji, a music bed with ducking and loudnorm). It exports the 30 s 1920x1080 Roblox video thumbnail cut and a 9:16 Shorts/TikTok cut, and runs QA with a contact sheet. Use whenever the user asks for a trailer, promo video, gameplay video, video thumbnail, teaser, TikTok or YouTube Short of a Roblox game, to "record it", "make it look like I'm playing", "edit a video of the game", or to film or capture gameplay or a cinematic flythrough in Studio.
+description: Make gameplay trailers for Roblox games, end to end. It plans a shot list from the game's GAME.md, drives the character in a Studio playtest so it looks hand-played (TrailerDriver.luau handles waypoints, prompts, remotes and a drifting third-person camera), adds cinematic camera moves (CameraRig.luau dolly, orbit, crane, push-in and whip, synced to game events), records only the Studio viewport with macOS screencapture or Windows ffmpeg gdigrab, and edits with ffmpeg (speed ramps, whips, crossfades, title cards with emoji, a music bed with ducking and loudnorm). It exports the 30 s 1920x1080 Roblox video thumbnail cut and a 9:16 Shorts/TikTok cut, and runs QA with a contact sheet. Use whenever the user asks for a trailer, promo video, gameplay video, video thumbnail, teaser, TikTok or YouTube Short of a Roblox game, to "record it", "make it look like I'm playing", "edit a video of the game", or to film or capture gameplay or a cinematic flythrough in Studio.
 ---
 
 # Roblox trailer
@@ -29,7 +29,7 @@ Read `references/shot-list-template.md`. From the game's GAME.md, FINISHED.md an
 (hook in the first 2-3 s, core loop, rare moment, social, base/progression, an extra system, title card, a CTA for
 social only) and show it to the user before recording. Then write `<game>/trailer/shots.json` (schema in
 `references/luau-api.md`; start from `assets/shots.template.json`, or `references/example.shots.json` for a full example).
-`python3 $SK/scripts/build_kit.py list --shots <shots.json>` sums the raw footage.
+`python "$SK/scripts/build_kit.py" list --shots <shots.json>` sums the raw footage.
 
 ### 2. Gameplay-POV and cinematic shots (Luau)
 - `scripts/TrailerDriver.luau` runs one shot on a playtest client: teleports to the start pose, disables the
@@ -86,7 +86,7 @@ and remove `<trailer>/build/`. Keep `clips/` (the source footage) and `out/`.
 | `scripts/qa.py` | clip and final checks, contact sheets |
 | `scripts/check_luau.sh` | luau-analyze with a Roblox-globals prelude (works without Roblox type definitions installed) |
 
-Validate after changing scripts: `python3 -m py_compile $SK/scripts/*.py` and `$SK/scripts/check_luau.sh $SK/scripts/*.luau`.
+Validate after changing scripts: `python -m py_compile $SK/scripts/*.py` and `$SK/scripts/check_luau.sh $SK/scripts/*.luau`.
 
 ## Known gaps (fix them here when you hit them)
 - The driver can't click GUI buttons. Use the remote the button calls (`invoke`), as the hatch shot does.
