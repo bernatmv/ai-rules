@@ -97,7 +97,7 @@ of movement (scoring, elimination, rewards) must stay on the server.
 python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/new_project.py "Coin Dash" \
     --dir ~/Projects/CoinDash
 cd ~/Projects/CoinDash
-aftman install && wally install
+aftman install && wally install   # skip `aftman install` if the tools are already on PATH
 python ${CLAUDE_PLUGIN_ROOT}/skills/roblox-code/scripts/check.py
 ```
 
@@ -108,7 +108,7 @@ noise, so step 0 of every build order is "the gates are green with nothing in
 the game yet".
 
 What the scaffold gives you: pinned toolchain (rojo 7.4.1, wally 0.3.2, selene
-0.28.0, stylua 0.20.0, lune 0.8.9), Knit + Promise + Signal + Trove, the boot
+0.28.0, stylua 0.20.0, lune 0.10.5), Knit + Promise + Signal + Trove, the boot
 pair, `Net.luau`, `GameConfig`, one worked Core module with its spec, the
 headless runner, and a build stamp in both boot scripts.
 

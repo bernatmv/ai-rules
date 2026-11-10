@@ -30,7 +30,7 @@ The `haiku` alias resolves to Haiku 5.5 on the Anthropic API from Claude Code v2
 
 - Keep one model per step type and let code route when routing is simple.
 - `opusplan` puts code edits on Sonnet, which is the reverse of the usual advice. Measure before making it a default.
-- The advisor tool (beta) pairs a cheaper executor with a stronger advisor. Most published pairings did not clearly beat the executor alone.
+- The advisor tool (beta) pairs a cheaper executor with a stronger advisor. None of the four published pairings clearly beat the executor alone.
 - For work larger than one context window, an Opus lead over parallel Sonnet workers cost about a third less than Opus alone at about the same score. Skip it for one dependent chain or work that fits one window.
 
 ## API compatibility

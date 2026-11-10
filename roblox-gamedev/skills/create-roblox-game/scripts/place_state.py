@@ -121,6 +121,8 @@ def resolve_place_id(cli_value: str | None) -> int:
 
 def state(place_id: int = 0) -> tuple[bool, str, list[dict]]:
     """(ok, one-line detail, per-window states). Shared with preflight.py."""
+    if sys.platform != "win32":
+        return True, "cannot read Studio window titles on this OS - confirm the place is saved or published", []
     found = titles()
     if not found:
         return True, "Studio not running (nothing to check yet)", []
@@ -151,8 +153,8 @@ def main() -> int:
         return 0 if ok else 1
 
     if not states:
-        print("Studio is not running.")
-        return 1
+        print(detail if sys.platform != "win32" else "Studio is not running.")
+        return 0 if sys.platform != "win32" else 1
 
     if len(states) > 1:
         # More than one Studio is its own hazard: two MCP plugins long-polling is

@@ -32,6 +32,8 @@ import sys
 
 
 def find_exe() -> str:
+    if sys.platform == "darwin":
+        return "/Applications/RobloxStudio.app/Contents/MacOS/StudioMCP"
     base = os.path.expandvars(r"%LOCALAPPDATA%\Roblox\Versions")
     hits = sorted(glob.glob(os.path.join(base, "*", "StudioMCP.exe")), key=os.path.getmtime)
     if not hits:

@@ -11,6 +11,8 @@ effort: medium
 color: yellow
 ---
 
+The plugin root is `${CLAUDE_PLUGIN_ROOT}`. Read skills from its `skills/<name>/SKILL.md`. Those files may show the root as an unexpanded `CLAUDE_PLUGIN_ROOT` variable or as `<plugin-root>`; use the path above, because Bash does not define that variable.
+
 You produce animation data and the renders that prove it. You have no Studio
 tools; the assembly thread registers the KeyframeSequence.
 

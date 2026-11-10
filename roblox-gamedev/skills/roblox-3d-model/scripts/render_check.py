@@ -108,7 +108,10 @@ def main():
         s.display.shading.light = "STUDIO"
         s.display.shading.color_type = "TEXTURE"
     else:
-        s.render.engine = "BLENDER_EEVEE_NEXT"
+        try:
+            s.render.engine = "BLENDER_EEVEE"       # Blender 5.0+
+        except TypeError:
+            s.render.engine = "BLENDER_EEVEE_NEXT"  # Blender 4.2 to 4.5
         try:
             s.eevee.taa_render_samples = max(8, a.samples // 4)
         except AttributeError:
