@@ -24,7 +24,6 @@ as a project. For a global install outside this repo, add those marketplaces onc
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
-/plugin marketplace add DietrichGebert/ponytail
 /plugin marketplace add mattpocock/skills
 /plugin marketplace add warpdotdev/claude-code-warp
 ```
@@ -91,7 +90,6 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | `claude-mem`        | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`                          |
 | `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
-| `ponytail`          | `ponytail`                     | `/plugin marketplace add DietrichGebert/ponytail`                        |
 | `mattpocock-skills` | `mattpocock`                   | `/plugin marketplace add mattpocock/skills`                              |
 | `warp`              | `claude-code-warp`             | `/plugin marketplace add warpdotdev/claude-code-warp`                    |
 | `excalidraw-plugin` | `ai-rules`                     | `/plugin marketplace add bernatmv/ai-rules` (bundled with `core-plugin`) |
@@ -100,9 +98,7 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 
 [`mattpocock-skills`](https://www.aihero.dev/skills) ([mattpocock/skills](https://github.com/mattpocock/skills)) ships 25 engineering and productivity skills. Run `/setup-matt-pocock-skills` once per repo to choose an issue tracker (GitHub, Linear, or local files), triage labels, and a docs location. Main flow: `/grill-me` or `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`; `/ask-matt` routes to the right one.
 
-Code simplification comes from `ponytail` (`/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`); correctness review is Claude Code's built-in `/code-review`. The `superpowers`, `code-review`, and `code-simplifier` dependencies were removed to keep one entry point per job — `superpowers` in particular duplicated `mattpocock-skills` on TDD, debugging, planning, brainstorming, code review, and skill authoring.
-
-[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) is a ruleset that guides the agent through a decision ladder (existing patterns → stdlib → native features → installed deps → one-liners → minimal new code) before writing code, aiming to avoid speculative/unnecessary code. Ships `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt` in lite/full/ultra intensity modes.
+Correctness review is Claude Code's built-in `/code-review`. The `superpowers`, `code-review`, and `code-simplifier` dependencies were removed to keep one entry point per job — `superpowers` in particular duplicated `mattpocock-skills` on TDD, debugging, planning, brainstorming, code review, and skill authoring.
 
 ### MCP in core-plugin
 

@@ -26,7 +26,6 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 /plugin marketplace add coreyhaines31/marketingskills
 /plugin marketplace add vercel-labs/agent-browser
 /plugin marketplace add heygen-com/hyperframes
-/plugin marketplace add DietrichGebert/ponytail
 /plugin marketplace add mattpocock/skills
 /plugin marketplace add warpdotdev/claude-code-warp
 

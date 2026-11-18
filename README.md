@@ -47,7 +47,6 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 | `claude-mem`         | Persistent memory across sessions                             |
 | `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
-| `ponytail`           | Minimal-code ruleset — decision ladder before writing code ([ponytail.dev](https://ponytail.dev/)) |
 | `mattpocock-skills`  | 25 engineering/productivity skills — grilling, spec→tickets, TDD, code review, domain modelling ([aihero.dev/skills](https://www.aihero.dev/skills)) |
 | `warp`               | Native Warp terminal notifications when Claude finishes or needs input ([warpdotdev/claude-code-warp](https://github.com/warpdotdev/claude-code-warp)) |
 | `excalidraw-plugin`  | Excalidraw diagram JSON (ai-rules)                            |
@@ -56,7 +55,7 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 
 [`mattpocock-skills`](https://www.aihero.dev/skills) ([mattpocock/skills](https://github.com/mattpocock/skills)) installs via `mattpocock-skills@mattpocock`. Run `/setup-matt-pocock-skills` once per repo to pick an issue tracker (GitHub/Linear/local files), triage labels, and a docs location. Its main flow is `/grill-me` or `/grill-with-docs` → `/to-spec` → `/to-tickets` → `/implement`, with `/ask-matt` as a router over the set.
 
-[`ponytail`](https://ponytail.dev/) ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)) installs via `ponytail@ponytail` and adds `/ponytail-review`, `/ponytail-audit`, and `/ponytail-debt` — code simplification and minimal-code auditing, a different axis from correctness review. Correctness review is Claude Code's built-in `/code-review`; `superpowers`, `code-review`, and `code-simplifier` were all dropped to keep one entry point per job.
+Correctness review is Claude Code's built-in `/code-review`; `superpowers`, `code-review`, and `code-simplifier` were all dropped to keep one entry point per job.
 
 #### MCP in core-plugin
 
@@ -208,7 +207,6 @@ Run once from any directory:
 ```
 
 ```sh
-/plugin marketplace add DietrichGebert/ponytail
 /plugin marketplace add mattpocock/skills
 /plugin marketplace add warpdotdev/claude-code-warp
 ```
@@ -241,7 +239,6 @@ claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add coreyhaines31/marketingskills
 claude plugin marketplace add vercel-labs/agent-browser
 claude plugin marketplace add heygen-com/hyperframes
-claude plugin marketplace add DietrichGebert/ponytail
 claude plugin marketplace add mattpocock/skills
 claude plugin marketplace add warpdotdev/claude-code-warp
 claude plugin marketplace add bernatmv/ai-rules
@@ -302,7 +299,6 @@ In Claude Code:
 2. Confirm key dependencies, for example:
    - `figma@claude-plugins-official` (frontend)
    - `vercel@claude-plugins-official` (devops)
-   - `ponytail@ponytail` (core)
    - `mattpocock-skills@mattpocock` (core)
 3. `/plugin` → **Errors** — should be empty. If you see `dependency-unsatisfied`, add the missing marketplace and reinstall.
 4. `/reload-plugins` — check skill and MCP server counts.
@@ -323,7 +319,6 @@ Spot-check skills:
 - Figma: open a Figma URL or ask Claude to use Figma MCP (after `/mcp` auth)
 - Roblox: `/roblox-gamedev:create-roblox-game` or `/roblox-gamedev:roblox-economy`
 - Marketing: `/marketing-plugin:first-100-customers`
-- Ponytail: `/ponytail-review`, `/ponytail-audit`, or `/ponytail-debt`
 
 ### Uninstall / cleanup
 
