@@ -1,6 +1,6 @@
 {
   "name": "core-plugin",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Core skills plus bundled plugin dependencies for everyday engineering workflows",
   "author": {
     "name": "bernatmv"
@@ -16,7 +16,6 @@
     { "name": "claude-mem", "marketplace": "thedotmack" },
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
     { "name": "jean-claude", "marketplace": "jean-claude" },
-    { "name": "ponytail", "marketplace": "ponytail" },
     { "name": "mattpocock-skills", "marketplace": "mattpocock" },
     { "name": "warp", "marketplace": "claude-code-warp" },
     "excalidraw-plugin"
