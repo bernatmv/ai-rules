@@ -27,15 +27,3 @@ https://gist.github.com/mberman84/cd6924c7058ba5251a773dac177ae756
 ## Prompts
 
 https://gist.github.com/mberman84/885c972f4216747abfb421bfbddb4eba
-
-# Plugins
-
-## Claude MEM
-
-```sh
-curl -fsSL https://install.cmem.ai/openclaw.sh | bash
-```
-
-Located in:
-
-`~/.claude-mem`

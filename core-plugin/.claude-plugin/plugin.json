@@ -1,6 +1,6 @@
 {
   "name": "core-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Core skills plus bundled plugin dependencies for everyday engineering workflows",
   "author": {
     "name": "bernatmv"
@@ -13,7 +13,6 @@
     { "name": "skill-creator", "marketplace": "claude-plugins-official" },
     { "name": "notion", "marketplace": "claude-plugins-official" },
     { "name": "document-skills", "marketplace": "anthropic-agent-skills" },
-    { "name": "claude-mem", "marketplace": "thedotmack" },
     { "name": "visual-explainer", "marketplace": "visual-explainer-marketplace" },
     { "name": "jean-claude", "marketplace": "jean-claude" },
     { "name": "mattpocock-skills", "marketplace": "mattpocock" },

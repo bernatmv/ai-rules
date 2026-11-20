@@ -20,7 +20,6 @@ One-install bundle for the full `ai-rules` stack. Installing `fullstack-plugin@a
 # heygen-com/hyperframes needs Git LFS: brew install git-lfs && git lfs install
 /plugin marketplace add alonw0/web-asset-generator
 /plugin marketplace add anthropics/skills
-/plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
 /plugin marketplace add coreyhaines31/marketingskills
