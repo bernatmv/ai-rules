@@ -44,7 +44,6 @@ Grilling, specs, tickets, TDD, debugging, code review, and domain modelling all 
 | `skill-creator`      | Create and improve agent skills ([claudemarketplaces](https://claudemarketplaces.com/skills/anthropics/skills/skill-creator)) |
 | `notion`             | Notion MCP                                                    |
 | `document-skills`    | Excel, Word, PowerPoint, PDF processing                       |
-| `claude-mem`         | Persistent memory across sessions                             |
 | `visual-explainer`   | HTML diagrams, diff reviews, plan reviews                     |
 | `jean-claude`        | Gmail, Google Drive, and Google Calendar (OAuth)              |
 | `mattpocock-skills`  | 25 engineering/productivity skills — grilling, spec→tickets, TDD, code review, domain modelling ([aihero.dev/skills](https://www.aihero.dev/skills)) |
@@ -180,10 +179,6 @@ Run once from any directory:
 ```
 
 ```sh
-/plugin marketplace add thedotmack/claude-mem
-```
-
-```sh
 /plugin marketplace add nicobailon/visual-explainer
 ```
 
@@ -233,7 +228,6 @@ Equivalent CLI:
 claude plugin marketplace add anthropics/claude-plugins-official
 claude plugin marketplace add alonw0/web-asset-generator
 claude plugin marketplace add anthropics/skills
-claude plugin marketplace add thedotmack/claude-mem
 claude plugin marketplace add nicobailon/visual-explainer
 claude plugin marketplace add max-sixty/jean-claude
 claude plugin marketplace add coreyhaines31/marketingskills

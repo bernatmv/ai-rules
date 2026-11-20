@@ -18,7 +18,6 @@ as a project. For a global install outside this repo, add those marketplaces onc
 /plugin marketplace add anthropics/claude-plugins-official
 /plugin marketplace add alonw0/web-asset-generator
 /plugin marketplace add anthropics/skills
-/plugin marketplace add thedotmack/claude-mem
 /plugin marketplace add nicobailon/visual-explainer
 /plugin marketplace add max-sixty/jean-claude
 /plugin marketplace add coreyhaines31/marketingskills
@@ -87,7 +86,6 @@ Everyday engineering workflows, PR tooling, documents, and third-party productiv
 | Plugin              | Marketplace                    | Add marketplace                                                          |
 | ------------------- | ------------------------------ | ------------------------------------------------------------------------ |
 | `document-skills`   | `anthropic-agent-skills`       | `/plugin marketplace add anthropics/skills`                              |
-| `claude-mem`        | `thedotmack`                   | `/plugin marketplace add thedotmack/claude-mem`                          |
 | `visual-explainer`  | `visual-explainer-marketplace` | `/plugin marketplace add nicobailon/visual-explainer`                    |
 | `jean-claude`       | `jean-claude`                  | `/plugin marketplace add max-sixty/jean-claude`                          |
 | `mattpocock-skills` | `mattpocock`                   | `/plugin marketplace add mattpocock/skills`                              |
@@ -197,16 +195,6 @@ Favicons, app icons, and social sharing images (via `frontend-plugin` → `web-a
 ### Document skills
 
 Excel, Word, PowerPoint, and PDF processing (via `core-plugin` → `document-skills`; includes the `pdf` skill).
-
-### Claude MEM
-
-Persistent memory across sessions (via `core-plugin` → `claude-mem`). Data lives in `~/.claude-mem`.
-
-Alternative install:
-
-```sh
-npx claude-mem install
-```
 
 ### Visual explainer
 
